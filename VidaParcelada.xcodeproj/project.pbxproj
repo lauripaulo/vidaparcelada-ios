@@ -7,107 +7,228 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		799C07C115535A66001AB1D1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799C07C015535A66001AB1D1 /* UIKit.framework */; };
-		799C07C315535A66001AB1D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799C07C215535A66001AB1D1 /* Foundation.framework */; };
-		799C07C515535A66001AB1D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799C07C415535A66001AB1D1 /* CoreGraphics.framework */; };
-		799C07CB15535A66001AB1D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 799C07C915535A66001AB1D1 /* InfoPlist.strings */; };
-		799C07CD15535A66001AB1D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 799C07CC15535A66001AB1D1 /* main.m */; };
-		799C07D115535A66001AB1D1 /* VidaParceladaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 799C07D015535A66001AB1D1 /* VidaParceladaAppDelegate.m */; };
-		799C07D415535A66001AB1D1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799C07D215535A66001AB1D1 /* MainStoryboard.storyboard */; };
-		799C07D715535A66001AB1D1 /* VidaParceladaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799C07D615535A66001AB1D1 /* VidaParceladaViewController.m */; };
+		7900B301155232C80050C652 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7900B2FF155232C80050C652 /* MainStoryboard.storyboard */; };
+		79362F83153D122E005459E8 /* Conta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F82153D122E005459E8 /* Conta+AddOn.m */; };
+		79362F87153D18AD005459E8 /* Conta.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F86153D18AD005459E8 /* Conta.m */; };
+		79362F8A153D18AD005459E8 /* TipoConta.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F89153D18AD005459E8 /* TipoConta.m */; };
+		79362F8D153D18AD005459E8 /* Compra.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F8C153D18AD005459E8 /* Compra.m */; };
+		79362F90153D18AD005459E8 /* Parcela.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F8F153D18AD005459E8 /* Parcela.m */; };
+		796CE1E0153B13E300B6AE11 /* TipoConta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */; };
+		797D9D3115463C9000D3B067 /* Compra+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D3015463C9000D3B067 /* Compra+AddOn.m */; };
+		797D9D341546458800D3B067 /* Parcela+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D331546458800D3B067 /* Parcela+AddOn.m */; };
+		798FF4021533B4B200385C5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4011533B4B200385C5E /* UIKit.framework */; };
+		798FF4041533B4B200385C5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4031533B4B200385C5E /* Foundation.framework */; };
+		798FF4061533B4B200385C5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4051533B4B200385C5E /* CoreGraphics.framework */; };
+		798FF40E1533B4B200385C5E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 798FF40D1533B4B200385C5E /* main.m */; };
+		798FF4121533B4B200385C5E /* VidaParceladaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 798FF4111533B4B200385C5E /* VidaParceladaAppDelegate.m */; };
+		798FF41F1533B4E000385C5E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF41E1533B4E000385C5E /* CoreData.framework */; };
+		798FF4221533B61F00385C5E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */; };
+		798FF4291533C22300385C5E /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798FF4281533C22300385C5E /* CoreDataTableViewController.m */; };
+		799C54AF15430522009A235D /* VidaParceladaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 799C54AE15430522009A235D /* VidaParceladaHelper.m */; };
+		79A56C5D154486E9005B94C2 /* CadastroDeCompraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */; };
+		79F92E1E1539F15D0031A919 /* CadastroDaContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */; };
+		79F92E221539F19C0031A919 /* TipoDaContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F92E211539F19C0031A919 /* TipoDaContaViewController.m */; };
+		79FEE572153917BC00DE35F5 /* ListaDeContasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FEE571153917BC00DE35F5 /* ListaDeContasViewController.m */; };
+		79FEE59015391FB400DE35F5 /* ListaDeComprasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FEE58F15391FB400DE35F5 /* ListaDeComprasViewController.m */; };
+		79FEE593153925F900DE35F5 /* ListaDeParcelasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FEE592153925F900DE35F5 /* ListaDeParcelasViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		799C07BC15535A66001AB1D1 /* VidaParcelada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VidaParcelada.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		799C07C015535A66001AB1D1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		799C07C215535A66001AB1D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		799C07C415535A66001AB1D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		799C07C815535A66001AB1D1 /* VidaParcelada-Info.plist */ = {isa = PBXFileReference; path = "VidaParcelada-Info.plist"; sourceTree = "<group>"; };
-		799C07CA15535A66001AB1D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		799C07CC15535A66001AB1D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		799C07CE15535A66001AB1D1 /* VidaParcelada-Prefix.pch */ = {isa = PBXFileReference; path = "VidaParcelada-Prefix.pch"; sourceTree = "<group>"; };
-		799C07CF15535A66001AB1D1 /* VidaParceladaAppDelegate.h */ = {isa = PBXFileReference; path = VidaParceladaAppDelegate.h; sourceTree = "<group>"; };
-		799C07D015535A66001AB1D1 /* VidaParceladaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VidaParceladaAppDelegate.m; sourceTree = "<group>"; };
-		799C07D315535A66001AB1D1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		799C07D515535A66001AB1D1 /* VidaParceladaViewController.h */ = {isa = PBXFileReference; path = VidaParceladaViewController.h; sourceTree = "<group>"; };
-		799C07D615535A66001AB1D1 /* VidaParceladaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VidaParceladaViewController.m; sourceTree = "<group>"; };
+		7900B300155232C80050C652 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = VidaParcelada/en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		7900B3021552331A0050C652 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = /Users/Junior/Developer/VidaParcelada/pt.lproj/MainStoryboard.storyboard; sourceTree = "<absolute>"; };
+		79362F81153D122E005459E8 /* Conta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Conta+AddOn.h"; sourceTree = "<group>"; };
+		79362F82153D122E005459E8 /* Conta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Conta+AddOn.m"; sourceTree = "<group>"; };
+		79362F85153D18AD005459E8 /* Conta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conta.h; sourceTree = "<group>"; };
+		79362F86153D18AD005459E8 /* Conta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conta.m; sourceTree = "<group>"; };
+		79362F88153D18AD005459E8 /* TipoConta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoConta.h; sourceTree = "<group>"; };
+		79362F89153D18AD005459E8 /* TipoConta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoConta.m; sourceTree = "<group>"; };
+		79362F8B153D18AD005459E8 /* Compra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compra.h; sourceTree = "<group>"; };
+		79362F8C153D18AD005459E8 /* Compra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Compra.m; sourceTree = "<group>"; };
+		79362F8E153D18AD005459E8 /* Parcela.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parcela.h; sourceTree = "<group>"; };
+		79362F8F153D18AD005459E8 /* Parcela.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parcela.m; sourceTree = "<group>"; };
+		796CE1DE153B13E300B6AE11 /* TipoConta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TipoConta+AddOn.h"; sourceTree = "<group>"; };
+		796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TipoConta+AddOn.m"; sourceTree = "<group>"; };
+		797D9D2F15463C9000D3B067 /* Compra+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Compra+AddOn.h"; sourceTree = "<group>"; };
+		797D9D3015463C9000D3B067 /* Compra+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Compra+AddOn.m"; sourceTree = "<group>"; };
+		797D9D321546458800D3B067 /* Parcela+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parcela+AddOn.h"; sourceTree = "<group>"; };
+		797D9D331546458800D3B067 /* Parcela+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Parcela+AddOn.m"; sourceTree = "<group>"; };
+		798FF3FD1533B4B200385C5E /* VidaParcelada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VidaParcelada.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		798FF4011533B4B200385C5E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		798FF4031533B4B200385C5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		798FF4051533B4B200385C5E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		798FF4091533B4B200385C5E /* VidaParcelada-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VidaParcelada-Info.plist"; sourceTree = "<group>"; };
+		798FF40D1533B4B200385C5E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		798FF40F1533B4B200385C5E /* VidaParcelada-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VidaParcelada-Prefix.pch"; sourceTree = "<group>"; };
+		798FF4101533B4B200385C5E /* VidaParceladaAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VidaParceladaAppDelegate.h; sourceTree = "<group>"; };
+		798FF4111533B4B200385C5E /* VidaParceladaAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VidaParceladaAppDelegate.m; sourceTree = "<group>"; };
+		798FF41E1533B4E000385C5E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		798FF4211533B61F00385C5E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		798FF4271533C22300385C5E /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
+		798FF4281533C22300385C5E /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
+		799C54AD15430522009A235D /* VidaParceladaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VidaParceladaHelper.h; sourceTree = "<group>"; };
+		799C54AE15430522009A235D /* VidaParceladaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VidaParceladaHelper.m; sourceTree = "<group>"; };
+		79A56C5B154486E9005B94C2 /* CadastroDeCompraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDeCompraViewController.h; sourceTree = "<group>"; };
+		79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDeCompraViewController.m; sourceTree = "<group>"; };
+		79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDaContaViewController.h; sourceTree = "<group>"; };
+		79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDaContaViewController.m; sourceTree = "<group>"; };
+		79F92E201539F19C0031A919 /* TipoDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoDaContaViewController.h; sourceTree = "<group>"; };
+		79F92E211539F19C0031A919 /* TipoDaContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoDaContaViewController.m; sourceTree = "<group>"; };
+		79FEE570153917BC00DE35F5 /* ListaDeContasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListaDeContasViewController.h; sourceTree = "<group>"; };
+		79FEE571153917BC00DE35F5 /* ListaDeContasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListaDeContasViewController.m; sourceTree = "<group>"; };
+		79FEE58E15391FB400DE35F5 /* ListaDeComprasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListaDeComprasViewController.h; sourceTree = "<group>"; };
+		79FEE58F15391FB400DE35F5 /* ListaDeComprasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListaDeComprasViewController.m; sourceTree = "<group>"; };
+		79FEE591153925F900DE35F5 /* ListaDeParcelasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListaDeParcelasViewController.h; sourceTree = "<group>"; };
+		79FEE592153925F900DE35F5 /* ListaDeParcelasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListaDeParcelasViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		799C07B915535A66001AB1D1 /* Frameworks */ = {
+		798FF3FA1533B4B200385C5E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				799C07C115535A66001AB1D1 /* UIKit.framework in Frameworks */,
-				799C07C315535A66001AB1D1 /* Foundation.framework in Frameworks */,
-				799C07C515535A66001AB1D1 /* CoreGraphics.framework in Frameworks */,
+				798FF41F1533B4E000385C5E /* CoreData.framework in Frameworks */,
+				798FF4021533B4B200385C5E /* UIKit.framework in Frameworks */,
+				798FF4041533B4B200385C5E /* Foundation.framework in Frameworks */,
+				798FF4061533B4B200385C5E /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		799C07B115535A66001AB1D1 = {
+		7924ECD11537C32C00D47F92 /* db */ = {
 			isa = PBXGroup;
 			children = (
-				799C07C615535A66001AB1D1 /* VidaParcelada */,
-				799C07BF15535A66001AB1D1 /* Frameworks */,
-				799C07BD15535A66001AB1D1 /* Products */,
+				79362F8E153D18AD005459E8 /* Parcela.h */,
+				79362F8F153D18AD005459E8 /* Parcela.m */,
+				79362F8B153D18AD005459E8 /* Compra.h */,
+				79362F8C153D18AD005459E8 /* Compra.m */,
+				79362F88153D18AD005459E8 /* TipoConta.h */,
+				79362F89153D18AD005459E8 /* TipoConta.m */,
+				79362F85153D18AD005459E8 /* Conta.h */,
+				79362F86153D18AD005459E8 /* Conta.m */,
+				79362F81153D122E005459E8 /* Conta+AddOn.h */,
+				79362F82153D122E005459E8 /* Conta+AddOn.m */,
+				796CE1DE153B13E300B6AE11 /* TipoConta+AddOn.h */,
+				796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */,
+				797D9D2F15463C9000D3B067 /* Compra+AddOn.h */,
+				797D9D3015463C9000D3B067 /* Compra+AddOn.m */,
+				797D9D321546458800D3B067 /* Parcela+AddOn.h */,
+				797D9D331546458800D3B067 /* Parcela+AddOn.m */,
+			);
+			name = db;
+			sourceTree = "<group>";
+		};
+		798FF3F21533B4B200385C5E = {
+			isa = PBXGroup;
+			children = (
+				798FF4071533B4B200385C5E /* VidaParcelada */,
+				798FF4001533B4B200385C5E /* Frameworks */,
+				798FF3FE1533B4B200385C5E /* Products */,
+				798FF4081533B4B200385C5E /* Supporting Files */,
 			);
 			sourceTree = "<group>";
 		};
-		799C07BD15535A66001AB1D1 /* Products */ = {
+		798FF3FE1533B4B200385C5E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				799C07BC15535A66001AB1D1 /* VidaParcelada.app */,
+				798FF3FD1533B4B200385C5E /* VidaParcelada.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		799C07BF15535A66001AB1D1 /* Frameworks */ = {
+		798FF4001533B4B200385C5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				799C07C015535A66001AB1D1 /* UIKit.framework */,
-				799C07C215535A66001AB1D1 /* Foundation.framework */,
-				799C07C415535A66001AB1D1 /* CoreGraphics.framework */,
+				798FF41E1533B4E000385C5E /* CoreData.framework */,
+				798FF4011533B4B200385C5E /* UIKit.framework */,
+				798FF4031533B4B200385C5E /* Foundation.framework */,
+				798FF4051533B4B200385C5E /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		799C07C615535A66001AB1D1 /* VidaParcelada */ = {
+		798FF4071533B4B200385C5E /* VidaParcelada */ = {
 			isa = PBXGroup;
 			children = (
-				799C07CF15535A66001AB1D1 /* VidaParceladaAppDelegate.h */,
-				799C07D015535A66001AB1D1 /* VidaParceladaAppDelegate.m */,
-				799C07D215535A66001AB1D1 /* MainStoryboard.storyboard */,
-				799C07D515535A66001AB1D1 /* VidaParceladaViewController.h */,
-				799C07D615535A66001AB1D1 /* VidaParceladaViewController.m */,
-				799C07C715535A66001AB1D1 /* Supporting Files */,
+				799C54A815430347009A235D /* TableViews */,
+				799C54AA15430383009A235D /* Cadastros */,
+				799C54AB154303B9009A235D /* Storyboards/Data Model */,
+				799C54AC154303EB009A235D /* Objetos Comuns */,
+				7924ECD11537C32C00D47F92 /* db */,
 			);
 			path = VidaParcelada;
 			sourceTree = "<group>";
 		};
-		799C07C715535A66001AB1D1 /* Supporting Files */ = {
+		798FF4081533B4B200385C5E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				799C07C815535A66001AB1D1 /* VidaParcelada-Info.plist */,
-				799C07C915535A66001AB1D1 /* InfoPlist.strings */,
-				799C07CC15535A66001AB1D1 /* main.m */,
-				799C07CE15535A66001AB1D1 /* VidaParcelada-Prefix.pch */,
+				798FF4091533B4B200385C5E /* VidaParcelada-Info.plist */,
+				798FF40D1533B4B200385C5E /* main.m */,
+				798FF40F1533B4B200385C5E /* VidaParcelada-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = VidaParcelada;
+			sourceTree = "<group>";
+		};
+		799C54A815430347009A235D /* TableViews */ = {
+			isa = PBXGroup;
+			children = (
+				79FEE58E15391FB400DE35F5 /* ListaDeComprasViewController.h */,
+				79FEE58F15391FB400DE35F5 /* ListaDeComprasViewController.m */,
+				79FEE570153917BC00DE35F5 /* ListaDeContasViewController.h */,
+				79FEE571153917BC00DE35F5 /* ListaDeContasViewController.m */,
+				79FEE591153925F900DE35F5 /* ListaDeParcelasViewController.h */,
+				79FEE592153925F900DE35F5 /* ListaDeParcelasViewController.m */,
+				79F92E201539F19C0031A919 /* TipoDaContaViewController.h */,
+				79F92E211539F19C0031A919 /* TipoDaContaViewController.m */,
+			);
+			name = TableViews;
+			sourceTree = "<group>";
+		};
+		799C54AA15430383009A235D /* Cadastros */ = {
+			isa = PBXGroup;
+			children = (
+				79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */,
+				79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */,
+				79A56C5B154486E9005B94C2 /* CadastroDeCompraViewController.h */,
+				79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */,
+			);
+			name = Cadastros;
+			sourceTree = "<group>";
+		};
+		799C54AB154303B9009A235D /* Storyboards/Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				7900B2FF155232C80050C652 /* MainStoryboard.storyboard */,
+				798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */,
+			);
+			name = "Storyboards/Data Model";
+			sourceTree = "<group>";
+		};
+		799C54AC154303EB009A235D /* Objetos Comuns */ = {
+			isa = PBXGroup;
+			children = (
+				798FF4101533B4B200385C5E /* VidaParceladaAppDelegate.h */,
+				798FF4111533B4B200385C5E /* VidaParceladaAppDelegate.m */,
+				798FF4271533C22300385C5E /* CoreDataTableViewController.h */,
+				798FF4281533C22300385C5E /* CoreDataTableViewController.m */,
+				799C54AD15430522009A235D /* VidaParceladaHelper.h */,
+				799C54AE15430522009A235D /* VidaParceladaHelper.m */,
+			);
+			name = "Objetos Comuns";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		799C07BB15535A66001AB1D1 /* VidaParcelada */ = {
+		798FF3FC1533B4B200385C5E /* VidaParcelada */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 799C07DA15535A66001AB1D1 /* Build configuration list for PBXNativeTarget "VidaParcelada" */;
+			buildConfigurationList = 798FF41B1533B4B200385C5E /* Build configuration list for PBXNativeTarget "VidaParcelada" */;
 			buildPhases = (
-				799C07B815535A66001AB1D1 /* Sources */,
-				799C07B915535A66001AB1D1 /* Frameworks */,
-				799C07BA15535A66001AB1D1 /* Resources */,
+				798FF3F91533B4B200385C5E /* Sources */,
+				798FF3FA1533B4B200385C5E /* Frameworks */,
+				798FF3FB1533B4B200385C5E /* Resources */,
 			);
 			buildRules = (
 			);
@@ -115,81 +236,91 @@
 			);
 			name = VidaParcelada;
 			productName = VidaParcelada;
-			productReference = 799C07BC15535A66001AB1D1 /* VidaParcelada.app */;
+			productReference = 798FF3FD1533B4B200385C5E /* VidaParcelada.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		799C07B315535A66001AB1D1 /* Project object */ = {
+		798FF3F41533B4B200385C5E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = VidaParcelada;
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = 799C07B615535A66001AB1D1 /* Build configuration list for PBXProject "VidaParcelada" */;
+			buildConfigurationList = 798FF3F71533B4B200385C5E /* Build configuration list for PBXProject "VidaParcelada" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				pt,
 			);
-			mainGroup = 799C07B115535A66001AB1D1;
-			productRefGroup = 799C07BD15535A66001AB1D1 /* Products */;
+			mainGroup = 798FF3F21533B4B200385C5E;
+			productRefGroup = 798FF3FE1533B4B200385C5E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				799C07BB15535A66001AB1D1 /* VidaParcelada */,
+				798FF3FC1533B4B200385C5E /* VidaParcelada */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		799C07BA15535A66001AB1D1 /* Resources */ = {
+		798FF3FB1533B4B200385C5E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				799C07CB15535A66001AB1D1 /* InfoPlist.strings in Resources */,
-				799C07D415535A66001AB1D1 /* MainStoryboard.storyboard in Resources */,
+				7900B301155232C80050C652 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		799C07B815535A66001AB1D1 /* Sources */ = {
+		798FF3F91533B4B200385C5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				799C07CD15535A66001AB1D1 /* main.m in Sources */,
-				799C07D115535A66001AB1D1 /* VidaParceladaAppDelegate.m in Sources */,
-				799C07D715535A66001AB1D1 /* VidaParceladaViewController.m in Sources */,
+				798FF40E1533B4B200385C5E /* main.m in Sources */,
+				798FF4121533B4B200385C5E /* VidaParceladaAppDelegate.m in Sources */,
+				798FF4221533B61F00385C5E /* DataModel.xcdatamodeld in Sources */,
+				798FF4291533C22300385C5E /* CoreDataTableViewController.m in Sources */,
+				79FEE572153917BC00DE35F5 /* ListaDeContasViewController.m in Sources */,
+				79FEE59015391FB400DE35F5 /* ListaDeComprasViewController.m in Sources */,
+				79FEE593153925F900DE35F5 /* ListaDeParcelasViewController.m in Sources */,
+				79F92E1E1539F15D0031A919 /* CadastroDaContaViewController.m in Sources */,
+				79F92E221539F19C0031A919 /* TipoDaContaViewController.m in Sources */,
+				796CE1E0153B13E300B6AE11 /* TipoConta+AddOn.m in Sources */,
+				79362F83153D122E005459E8 /* Conta+AddOn.m in Sources */,
+				79362F87153D18AD005459E8 /* Conta.m in Sources */,
+				79362F8A153D18AD005459E8 /* TipoConta.m in Sources */,
+				79362F8D153D18AD005459E8 /* Compra.m in Sources */,
+				79362F90153D18AD005459E8 /* Parcela.m in Sources */,
+				799C54AF15430522009A235D /* VidaParceladaHelper.m in Sources */,
+				79A56C5D154486E9005B94C2 /* CadastroDeCompraViewController.m in Sources */,
+				797D9D3115463C9000D3B067 /* Compra+AddOn.m in Sources */,
+				797D9D341546458800D3B067 /* Parcela+AddOn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		799C07C915535A66001AB1D1 /* InfoPlist.strings */ = {
+		7900B2FF155232C80050C652 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				799C07CA15535A66001AB1D1 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		799C07D215535A66001AB1D1 /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				799C07D315535A66001AB1D1 /* en */,
+				7900B300155232C80050C652 /* en */,
+				7900B3021552331A0050C652 /* pt */,
 			);
 			name = MainStoryboard.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		799C07D815535A66001AB1D1 /* Debug */ = {
+		798FF4191533B4B200385C5E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -214,7 +345,7 @@
 			};
 			name = Debug;
 		};
-		799C07D915535A66001AB1D1 /* Release */ = {
+		798FF41A1533B4B200385C5E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -234,24 +365,26 @@
 			};
 			name = Release;
 		};
-		799C07DB15535A66001AB1D1 /* Debug */ = {
+		798FF41C1533B4B200385C5E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VidaParcelada/VidaParcelada-Prefix.pch";
 				INFOPLIST_FILE = "VidaParcelada/VidaParcelada-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
-		799C07DC15535A66001AB1D1 /* Release */ = {
+		798FF41D1533B4B200385C5E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VidaParcelada/VidaParcelada-Prefix.pch";
 				INFOPLIST_FILE = "VidaParcelada/VidaParcelada-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -259,24 +392,38 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		799C07B615535A66001AB1D1 /* Build configuration list for PBXProject "VidaParcelada" */ = {
+		798FF3F71533B4B200385C5E /* Build configuration list for PBXProject "VidaParcelada" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				799C07D815535A66001AB1D1 /* Debug */,
-				799C07D915535A66001AB1D1 /* Release */,
+				798FF4191533B4B200385C5E /* Debug */,
+				798FF41A1533B4B200385C5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		799C07DA15535A66001AB1D1 /* Build configuration list for PBXNativeTarget "VidaParcelada" */ = {
+		798FF41B1533B4B200385C5E /* Build configuration list for PBXNativeTarget "VidaParcelada" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				799C07DB15535A66001AB1D1 /* Debug */,
-				799C07DC15535A66001AB1D1 /* Release */,
+				798FF41C1533B4B200385C5E /* Debug */,
+				798FF41D1533B4B200385C5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				798FF4211533B61F00385C5E /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 798FF4211533B61F00385C5E /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
-	rootObject = 799C07B315535A66001AB1D1 /* Project object */;
+	rootObject = 798FF3F41533B4B200385C5E /* Project object */;
 }
