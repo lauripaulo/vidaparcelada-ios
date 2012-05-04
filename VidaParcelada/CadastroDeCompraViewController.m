@@ -57,7 +57,7 @@
         self.cellConta.detailTextLabel.text = self.compraSelecionada.origem.tipo.descricao;
     }
 
-//    self.cellDataDaCompra.textLabel.text = @"";
+    self.cellDataDaCompra.textLabel.text = @"Data da compra";
     self.cellDataDaCompra.detailTextLabel.text = [self.dateFormatter stringFromDate:self.compraSelecionada.dataDaCompra];
     
     // Stepper de parcela
@@ -70,7 +70,7 @@
 - (void)criarNovaCompra
 {
     NSDate *hoje = [[NSDate alloc] init];
-    self.compraSelecionada = [Compra compraComDescricao:@"Nova compra" 
+    self.compraSelecionada = [Compra compraComDescricao:@"" 
                                            dataDaCompra:hoje 
                                               comEstado:COMPRA_PENDENTE_PAGAMENTO 
                                          qtdeDeParcelas:[NSNumber numberWithInt:3] 
@@ -126,7 +126,51 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+// Temos que passar o banco de dados que abrimos aqui
+// no primeiro controller do app para todos
+// os outros controllers. Dessa forma todos terao um atributo
+// UIManagedDocument *vpDatabase implementado.
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Tipo da Conta"]) {
+        if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
+            [segue.destinationViewController setVpDatabase:self.vpDatabase];
+        }
+    }
+}
+
 #pragma mark - Eventos
+
+//
+// Codigo de gerenciamento do teclado
+//
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+//This method comes from UITextFieldDelegate 
+//and this is the most important piece of mask
+//functionality.
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BOOL result = YES;
+    
+    if (textField == self.tfValorTotal) {
+        
+        [VidaParceladaHelper formataValor:textField 
+                               novoDigito:string 
+                                 comRange:range 
+                          usandoFormatter:self.valorFormatter
+                           eQtdeDeDigitos:8];
+        result = NO;
+        
+    } 
+    
+    return result;
+}
 
 - (IBAction)stepperQtdeDeParcelasValueChanged:(UIStepper *)sender {
     self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f",sender.value];
@@ -137,6 +181,26 @@
     NSLog(@"self.compraSelecionada.qtdeTotalDeParcelas - valor: %@", self.compraSelecionada.qtdeTotalDeParcelas);
 }
 
+- (IBAction)tfDescricaoEditingDidEnd:(UITextField *)sender {
+    self.compraSelecionada.descricao = self.tfDescricao.text;
+    // Notifica o delegate da alteração
+    [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
+     // Log da operação
+    NSLog(@" self.compraSelecionada.descricao - valor: %@",  self.compraSelecionada.descricao);
+
+}
+
+- (IBAction)tfValorTotalEditingDidEnd:(UITextField *)sender {
+    if ([sender.text length] > 0) {
+        NSNumber *valor;
+        valor = [self.valorFormatter numberFromString:sender.text];
+        self.compraSelecionada.valorTotal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
+    }
+    // Notifica o delegate da alteração
+    [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
+    // Log da operação  
+    NSLog(@"self.contaSelecionada.limiteUsuario - valor: %@", self.compraSelecionada.valorTotal);
+}
 
 #pragma mark - Table view data source
 

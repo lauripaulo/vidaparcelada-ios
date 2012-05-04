@@ -10,7 +10,9 @@
 #import "Conta+AddOn.h"
 #import "TipoConta+AddOn.h"
 #import "Compra+AddOn.h"
-#import "Conta+AddOn.m"
+#import "Conta+AddOn.h"
+#import "TipoConta+AddOn.h"
+#import "VidaParceladaHelper.h"
 
 @interface CadastroDeCompraViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
