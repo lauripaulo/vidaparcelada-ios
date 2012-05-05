@@ -2,8 +2,8 @@
 //  ContasViewController.m
 //  VidaParcelada
 //
-//  Created by Lauri Paulo Laux Junior Laux on 13/04/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Lauri Paulo Laux Junior on 13/04/12.
+//  Copyright (c) 2012 Oriba Apps. All rights reserved.
 //
 
 #import "ListaDeContasViewController.h"
@@ -91,13 +91,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self setupFetchedResultsController];
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setupFetchedResultsController];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -126,6 +127,8 @@
 // define a query que irá popular a tabela atual
 -(void)setupFetchedResultsController
 {
+    self.debug = YES;
+    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
     request.sortDescriptors = [NSArray arrayWithObject:
                                [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 

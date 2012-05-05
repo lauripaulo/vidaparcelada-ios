@@ -43,6 +43,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setupFetchedResultsController];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -77,15 +80,6 @@
 //    return 0;
 //}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    
-    return cell;
-}
 
 /*
 // Override to support conditional editing of the table view.
@@ -138,5 +132,46 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+#pragma mark - Table view data source
+
+
+// define a query que irá popular a tabela atual
+-(void)setupFetchedResultsController
+{
+    self.debug = YES;
+
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
+    request.sortDescriptors = [NSArray arrayWithObject:
+                               [NSSortDescriptor sortDescriptorWithKey:@"numeroDaParcela" ascending:YES 
+                                                              selector:nil]];
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
+                                                                        managedObjectContext:self.vpDatabase.managedObjectContext 
+                                                                          sectionNameKeyPath:nil 
+                                                                                   cacheName:nil]; 
+}
+
+// Popula a tabela com os dados do CoreData
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Parcela Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    Parcela *parcela = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    NSString *detail = [NSString stringWithFormat:@"Valor: %@", parcela.valor];
+    
+    cell.textLabel.text = parcela.descricao;
+    cell.detailTextLabel.text = detail;
+    
+    return cell;
+    
+}
+
 
 @end

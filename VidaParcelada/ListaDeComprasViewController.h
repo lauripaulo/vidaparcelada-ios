@@ -2,8 +2,8 @@
 //  ListaDeComprasViewController.h
 //  VidaParcelada
 //
-//  Created by Lauri Paulo Laux Junior Laux on 14/04/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Lauri Paulo Laux Junior on 14/04/12.
+//  Copyright (c) 2012 Oriba Apps. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

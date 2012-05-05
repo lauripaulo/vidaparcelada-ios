@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CoreDataTableViewController.h"
+#import "Parcela+AddOn.h"
+#import "Compra+AddOn.h"
+#import "Conta+AddOn.h"
+#import "TipoConta+AddOn.h"
 
 @interface ListaDeParcelasViewController : CoreDataTableViewController
 

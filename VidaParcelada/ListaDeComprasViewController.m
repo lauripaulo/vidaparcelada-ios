@@ -2,8 +2,8 @@
 //  ListaDeComprasViewController.m
 //  VidaParcelada
 //
-//  Created by Lauri Paulo Laux Junior Laux on 14/04/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Lauri Paulo Laux Junior on 14/04/12.
+//  Copyright (c) 2012 Oriba Apps. All rights reserved.
 //
 
 #import "ListaDeComprasViewController.h"
@@ -76,6 +76,8 @@
 
 -(void)openDatabase
 {
+    self.debug = YES;
+    
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self.vpDatabase.fileURL path]]){
         // O banco de dados não existe.
         NSLog(@"Banco de dados não encontrado. Criando...");
@@ -121,7 +123,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-
+    self.compraSelecionada = nil;
 }
 
 - (void)viewDidLoad
