@@ -33,6 +33,9 @@
 @property (nonatomic, strong) NSNumberFormatter *valorFormatter;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
+@property (nonatomic, strong) Conta *contaSelecionada;
+@property (nonatomic, strong) NSDate *dataSelecionada;
+
 // Delegate que recebe notificação quando uma conta é alterada
 @property (assign) id <AlteracaoDeCompraDelegate> compraDelegate;
 

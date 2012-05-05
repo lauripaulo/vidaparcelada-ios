@@ -25,6 +25,7 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
                     comEstado:(NSString *)estado
                qtdeDeParcelas:(NSNumber *)parcelas
                    valorTotal:(NSDecimalNumber *)valorTotal
+                     comConta:(Conta *)conta
                     inContext:(NSManagedObjectContext *)context;
 
 //
@@ -33,6 +34,9 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
 //
 +(NSSet *)criarParcelasDaCompra:(Compra *)compra
                       inContext:(NSManagedObjectContext *)context;
+
+// Escolhe a primeira conta disponivel para uso
++(Conta *)retornaContaDefaultNoContexto:(NSManagedObjectContext *)context;
 
 //
 // Apaga todas as parcelas da compra passada como parametro

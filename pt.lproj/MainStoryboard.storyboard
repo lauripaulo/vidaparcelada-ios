@@ -59,7 +59,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="CLE-3R-huK"/>
                         <barButtonItem title="Nova compra" id="U00-W3-fqB">
                             <connections>
-                                <segue destination="KDO-cB-7qR" kind="modal" modalTransitionStyle="coverVertical" id="w8m-AQ-IOM"/>
+                                <segue destination="KDO-cB-7qR" kind="push" id="w8m-AQ-IOM"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -182,7 +182,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oap-aT-ryD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="KDO-cB-7qR" customClass="CadastroDeCompraViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="HPC-6z-F2b">
-                        <rect key="frame" x="0.0" y="20" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -255,7 +255,8 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="KDO-cB-7qR" id="Zmw-Hq-bIB"/>
+                                                        <action selector="tfDescricaoEditingDidEnd:" destination="KDO-cB-7qR" eventType="editingDidEnd" id="dAI-sl-CnO"/>
+                                                        <outlet property="delegate" destination="KDO-cB-7qR" id="HLZ-P7-fhM"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -273,7 +274,7 @@
                                                     <rect key="frame" x="186" y="8" width="94" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                                     <connections>
-                                                        <action selector="stepperQtdeDeParcelasValueChanged:" destination="KDO-cB-7qR" eventType="valueChanged" id="qQb-iZ-LZT"/>
+                                                        <action selector="stepperQtdeDeParcelasValueChanged:" destination="KDO-cB-7qR" eventType="valueChanged" id="jjP-4Z-doI"/>
                                                     </connections>
                                                 </stepper>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0" textAlignment="center" minimumFontSize="17" id="o02-UN-73w">
@@ -314,7 +315,8 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="KDO-cB-7qR" id="34h-5R-KKV"/>
+                                                        <action selector="tfValorTotalEditingDidEnd:" destination="KDO-cB-7qR" eventType="editingDidEnd" id="E24-69-xhO"/>
+                                                        <outlet property="delegate" destination="KDO-cB-7qR" id="JLO-tc-s8F"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -330,7 +332,11 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="save" id="ZhS-Kf-unN"/>
+                        <barButtonItem systemItem="save" id="ZhS-Kf-unN">
+                            <connections>
+                                <action selector="btnSalvarPressionado:" destination="KDO-cB-7qR" id="wKQ-VK-dve"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Compra" id="7Or-JR-m1q"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

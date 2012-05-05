@@ -28,6 +28,8 @@
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize compraSelecionada = _compraSelecionada;
+@synthesize contaSelecionada = _contaSelecionada;
+@synthesize dataSelecionada = _dataSelecionada;
 
 #pragma mark - AlteracaoDeContaDelegate
 
@@ -67,16 +69,19 @@
     self.tfValorTotal = _tfValorTotal;
 }
 
-- (void)criarNovaCompra
+- (void)inicializarTela
 {
     NSDate *hoje = [[NSDate alloc] init];
-    self.compraSelecionada = [Compra compraComDescricao:@"" 
-                                           dataDaCompra:hoje 
-                                              comEstado:COMPRA_PENDENTE_PAGAMENTO 
-                                         qtdeDeParcelas:[NSNumber numberWithInt:3] 
-                                             valorTotal:[NSDecimalNumber decimalNumberWithString:@"0.00"]
-                                              inContext:self.vpDatabase.managedObjectContext];
-    [self atualizarCamposNaTela];
+
+    self.dataSelecionada = hoje;
+    self.contaSelecionada = [Compra retornaContaDefaultNoContexto:self.vpDatabase.managedObjectContext];
+    
+    self.tfDescricao.text = @"";
+    self.stepperQtdeDeParcelas.value = 3;
+    self.tfQtdeDeParcelas.text = @"3";
+    self.tfValorTotal.text = @"";
+    self.cellDataDaCompra.textLabel.text = @"Data da compra";
+    self.cellDataDaCompra.detailTextLabel.text = [self.dateFormatter stringFromDate:self.dataSelecionada];
 }
 
 - (void)viewDidLoad
@@ -95,7 +100,7 @@
     if (self.compraSelecionada) {
         [self atualizarCamposNaTela];
     } else {
-        [self criarNovaCompra];
+        [self inicializarTela];
     }
 
     
@@ -141,6 +146,25 @@
 
 #pragma mark - Eventos
 
+- (IBAction)btnSalvarPressionado:(id)sender {
+    
+    NSNumber *qtdeParcelas = [NSNumber numberWithDouble:self.stepperQtdeDeParcelas.value];
+    NSNumber *valor;
+    valor = [self.valorFormatter numberFromString:self.tfValorTotal.text];
+    
+    // cria apenas se não existir
+    if (!self.compraSelecionada) {
+        self.compraSelecionada = [Compra compraComDescricao:self.tfDescricao.text
+                                               dataDaCompra:self.dataSelecionada 
+                                                  comEstado:COMPRA_PENDENTE_PAGAMENTO 
+                                             qtdeDeParcelas:qtdeParcelas
+                                                 valorTotal:[NSDecimalNumber decimalNumberWithString:[valor stringValue]]
+                                                   comConta:self.contaSelecionada
+                                                  inContext:self.vpDatabase.managedObjectContext];
+        NSLog(@"Criado nova compra: %@", self.compraSelecionada);
+    }
+}
+
 //
 // Codigo de gerenciamento do teclado
 //
@@ -174,32 +198,40 @@
 
 - (IBAction)stepperQtdeDeParcelasValueChanged:(UIStepper *)sender {
     self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f",sender.value];
-    self.compraSelecionada.qtdeTotalDeParcelas = [NSNumber numberWithDouble:sender.value];
-    // Notifica o delegate que a compra mudou
-    [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
-    // Log da Operação
-    NSLog(@"self.compraSelecionada.qtdeTotalDeParcelas - valor: %@", self.compraSelecionada.qtdeTotalDeParcelas);
+    // somente atualiza se a conta já tiver sido criada.
+    if (self.compraSelecionada) {
+        self.compraSelecionada.qtdeTotalDeParcelas = [NSNumber numberWithDouble:sender.value];
+        // Notifica o delegate que a compra mudou
+        [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
+        // Log da Operação
+        NSLog(@"self.compraSelecionada.qtdeTotalDeParcelas - valor: %@", self.compraSelecionada.qtdeTotalDeParcelas);
+    }
 }
 
 - (IBAction)tfDescricaoEditingDidEnd:(UITextField *)sender {
     self.compraSelecionada.descricao = self.tfDescricao.text;
-    // Notifica o delegate da alteração
-    [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
-     // Log da operação
-    NSLog(@" self.compraSelecionada.descricao - valor: %@",  self.compraSelecionada.descricao);
-
+    // somente atualiza se a conta já tiver sido criada.
+    if (self.compraSelecionada) {
+        // Notifica o delegate da alteração
+        [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
+        // Log da operação
+        NSLog(@" self.compraSelecionada.descricao - valor: %@",  self.compraSelecionada.descricao);
+    }
 }
 
 - (IBAction)tfValorTotalEditingDidEnd:(UITextField *)sender {
-    if ([sender.text length] > 0) {
-        NSNumber *valor;
-        valor = [self.valorFormatter numberFromString:sender.text];
-        self.compraSelecionada.valorTotal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
+    // somente atualiza se a conta já tiver sido criada.
+    if (self.compraSelecionada) {
+        if ([sender.text length] > 0) {
+            NSNumber *valor;
+            valor = [self.valorFormatter numberFromString:sender.text];
+            self.compraSelecionada.valorTotal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
+        }
+        // Notifica o delegate da alteração
+        [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
+        // Log da operação  
+        NSLog(@"self.contaSelecionada.limiteUsuario - valor: %@", self.compraSelecionada.valorTotal);
     }
-    // Notifica o delegate da alteração
-    [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
-    // Log da operação  
-    NSLog(@"self.contaSelecionada.limiteUsuario - valor: %@", self.compraSelecionada.valorTotal);
 }
 
 #pragma mark - Table view data source

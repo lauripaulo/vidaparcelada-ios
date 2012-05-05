@@ -24,6 +24,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
                     comEstado:(NSString *)estado
                qtdeDeParcelas:(NSNumber *)parcelas
                    valorTotal:(NSDecimalNumber *)valorTotal
+                     comConta:(Conta *)conta
                     inContext:(NSManagedObjectContext *)context
 {
     Compra *novaCompra = nil;
@@ -49,18 +50,9 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         novaCompra.estado = estado;
         novaCompra.valorTotal = valorTotal;
         novaCompra.qtdeTotalDeParcelas = parcelas;
+        novaCompra.origem = conta;
         [self criarParcelasDaCompra:novaCompra inContext:context];
         
-        // para a conta vamos selecionar o primeiro objeto da tabela conta
-        // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
-        request.sortDescriptors = [NSArray arrayWithObject:
-                                   [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
-                                                                  selector:@selector(localizedCaseInsensitiveCompare:)]];
-        NSArray *tipos = [context executeFetchRequest:request error:&error];
-        if (tipos && [tipos count] > 0) {
-            novaCompra.origem = [tipos objectAtIndex:0];
-        }
     } else {
         NSLog(@"Descricao já existe no banco de dados, retornando o objeto.");
         novaCompra = [matches lastObject];
@@ -68,6 +60,25 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 
     
     return novaCompra;
+}
+
++(Conta *)retornaContaDefaultNoContexto:(NSManagedObjectContext *)context
+{
+    Conta *conta = nil;
+    
+    // para a conta vamos selecionar o primeiro objeto da tabela conta
+    // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
+    request.sortDescriptors = [NSArray arrayWithObject:
+                               [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
+                                                              selector:@selector(localizedCaseInsensitiveCompare:)]];
+    NSError *error = nil;
+    NSArray *tipos = [context executeFetchRequest:request error:&error];
+    if (tipos && [tipos count] > 0) {
+       conta = [tipos objectAtIndex:0];
+    }
+    
+    return conta;
 }
 
 //
