@@ -25,6 +25,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
                            comEstado:(NSString *)estado
                     eNumeroDaParcela:(NSNumber *)numeroDaParcela
                             comValor:(NSDecimalNumber *)valor
+                     pertenceACompra:(Compra *)compra
                            inContext:(NSManagedObjectContext *)context
 {
     Parcela *novaParcela = nil;
@@ -49,6 +50,8 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         novaParcela.dataVencimento = dataDeVencimento;
         novaParcela.estado = estado;
         novaParcela.numeroDaParcela = numeroDaParcela;
+        novaParcela.compra = compra;
+        novaParcela.valor = valor;
     } else {
         NSLog(@"Descricao já existe no banco de dados, retornando o objeto.");
         novaParcela = [matches lastObject];

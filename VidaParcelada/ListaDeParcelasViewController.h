@@ -19,4 +19,8 @@
 // prepareForSegue do controler que abre o banco de dados.
 @property (nonatomic, strong) UIManagedDocument *vpDatabase;
 
+@property (nonatomic, strong) NSNumberFormatter *valorFormatter;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+
+
 @end

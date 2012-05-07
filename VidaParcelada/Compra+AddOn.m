@@ -58,7 +58,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         novaCompra = [matches lastObject];
     }
 
-    
+    [context save:nil];
     return novaCompra;
 }
 
@@ -112,12 +112,13 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         NSDate *vencimento = [calendario dateFromComponents:dataDeVencimentoComps];
         
         // Vamos criar a parcela
-        NSString *descricaoParcela = [@"Parcela " stringByAppendingFormat:@" %i de %i", i, [compra.qtdeTotalDeParcelas intValue]];
+        NSString *descricaoParcela = [@"Parcela " stringByAppendingFormat:@" %i de %i", i+1, [compra.qtdeTotalDeParcelas intValue]];
         Parcela *p = [Parcela novaParcelaComDescricao:descricaoParcela 
                                     eDataDeVencimento:vencimento 
                                             comEstado:PARCELA_PENDENTE_PAGAMENTO 
-                                     eNumeroDaParcela:[NSNumber numberWithInt:i] 
+                                     eNumeroDaParcela:[NSNumber numberWithInt:i+1] 
                                              comValor:valorParcela 
+                                      pertenceACompra:compra
                                             inContext:context];
 
         [parcelas addObject:p];

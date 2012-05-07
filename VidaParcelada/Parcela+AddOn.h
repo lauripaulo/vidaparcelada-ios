@@ -25,6 +25,7 @@ extern NSString * const PARCELA_VENCIDA; // Todas as parcela pagas
                            comEstado:(NSString *)estado
                     eNumeroDaParcela:(NSNumber *)numeroDaParcela
                             comValor:(NSDecimalNumber *)valor
+                     pertenceACompra:(Compra *)compra
                            inContext:(NSManagedObjectContext *)context;
 
 @end

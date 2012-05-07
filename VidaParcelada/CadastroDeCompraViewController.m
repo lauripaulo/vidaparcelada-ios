@@ -2,8 +2,8 @@
 //  CadastroDeCompraViewController.m
 //  VidaParcelada
 //
-//  Created by Lauri Paulo Laux Junior Laux on 22/04/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Lauri Paulo Laux Junior on 22/04/12.
+//  Copyright (c) 2012 Oriba Apps. All rights reserved.
 //
 
 #import "CadastroDeCompraViewController.h"

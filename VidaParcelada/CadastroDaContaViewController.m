@@ -174,9 +174,9 @@
         NSNumber *valor;
         valor = [self.valorFormatter numberFromString:sender.text];
         self.contaSelecionada.limite = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
+        // Notifica o delegate da alteração
+        [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
     }
-    // Notifica o delegate da alteração
-    [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
     // Log da operação
     NSLog(@"self.contaSelecionada.limite - valor: %@", self.contaSelecionada.limite);
 }
@@ -193,9 +193,9 @@
         NSNumber *valor;
         valor = [self.valorFormatter numberFromString:sender.text];
         self.contaSelecionada.limiteUsuario = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
+        // Notifica o delegate da alteração
+        [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
     }
-    // Notifica o delegate da alteração
-    [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
     // Log da operação
     NSLog(@"self.contaSelecionada.limiteUsuario - valor: %@", self.contaSelecionada.limiteUsuario);
 }
@@ -209,9 +209,9 @@
 - (IBAction)tfJurosEditingDidEnd:(UITextField *)sender {
     if ([sender.text length] > 0) {
         self.contaSelecionada.jurosMes = [NSDecimalNumber decimalNumberWithString:sender.text];;
+        // Notifica o delegate da alteração
+        [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
     } 
-    // Notifica o delegate da alteração
-    [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
     // Log da operação
     NSLog(@"self.contaSelecionada.jurosMes - valor: %@", self.contaSelecionada.jurosMes);
 }

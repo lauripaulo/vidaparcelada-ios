@@ -9,6 +9,7 @@
 #import "ListaDeComprasViewController.h"
 #import "TipoConta+AddOn.h"
 #import "Conta+AddOn.h"
+#import "CadastroDeCompraViewController.h"
 
 @interface ListaDeComprasViewController ()
 
@@ -192,6 +193,20 @@
     
     return cell;
 
+}
+
+
+// quando você aperta o botão de detalhes, aquele botão azul, na célula da tabela
+// ele dispara esse método. Basta pegar o que foi escolhido e pedir para o navigation
+// controller realizar o 'segue' que você precisa.
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    Compra *compra = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    self.compraSelecionada = compra;
+
+    [self performSegueWithIdentifier:@"NovaCompra" sender:self];
+        
 }
 
 #pragma mark - Table view delegate
