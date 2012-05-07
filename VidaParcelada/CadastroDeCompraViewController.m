@@ -66,7 +66,7 @@
     self.stepperQtdeDeParcelas.value = [self.compraSelecionada.qtdeTotalDeParcelas doubleValue];
     self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f", [self.compraSelecionada.qtdeTotalDeParcelas doubleValue]];
 
-    self.tfValorTotal = _tfValorTotal;
+    self.tfValorTotal.text = [self.valorFormatter stringFromNumber:self.compraSelecionada.valorTotal];
 }
 
 - (void)inicializarTela
@@ -162,7 +162,8 @@
                                                    comConta:self.contaSelecionada
                                                   inContext:self.vpDatabase.managedObjectContext];
         NSLog(@"Criado nova compra: %@", self.compraSelecionada);
-    }
+    } 
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //

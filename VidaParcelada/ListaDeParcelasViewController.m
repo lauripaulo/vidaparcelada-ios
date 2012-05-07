@@ -17,7 +17,7 @@
 @synthesize vpDatabase = _vpDatabase;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
-
+@synthesize compraSelecionada = _compraSelecionada;
 
 
 
@@ -95,9 +95,10 @@
     self.debug = YES;
 
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
+    request.predicate = [NSPredicate predicateWithFormat:@"compra = %@", self.compraSelecionada];
     request.sortDescriptors = [NSArray arrayWithObject:
                                [NSSortDescriptor sortDescriptorWithKey:@"numeroDaParcela" ascending:YES 
-                                                              selector:nil]];
+                                                              selector:@selector(compare:)]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
                                                                         managedObjectContext:self.vpDatabase.managedObjectContext 

@@ -105,6 +105,15 @@
 // UIManagedDocument *vpDatabase implementado.
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // ATENÇÃO: Quando utilizamos Segues a celula que dispara o segue
+    // é passada como sender, e a única maneira de sabermos qual objeto
+    // do fetchedResultsController foi selecionado é passando a cell
+    // para a tabela e pedido no indexPath.
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        self.compraSelecionada = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+
     if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
         [segue.destinationViewController setVpDatabase:self.vpDatabase];
     }
@@ -186,7 +195,10 @@
     
     Compra *compra = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    NSString *subTitulo = [NSString stringWithFormat:@"%@ / %@ parcelas", [self.dateFormatter stringFromDate:compra.dataDaCompra], compra.qtdeTotalDeParcelas];
+    NSString *data = [self.dateFormatter stringFromDate:compra.dataDaCompra];
+    NSString *valor = [self.valorFormatter stringFromNumber:compra.valorTotal];
+    
+    NSString *subTitulo = [NSString stringWithFormat:@"%@   %@ parcelas   %@", data, compra.qtdeTotalDeParcelas, valor];
 
     cell.textLabel.text = compra.descricao;
     cell.detailTextLabel.text = subTitulo;
@@ -213,7 +225,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.compraSelecionada = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    Compra *selecionada = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (self.compraSelecionada != selecionada) {
+        self.compraSelecionada = selecionada;
+    }
 }
 
 

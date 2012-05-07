@@ -22,5 +22,8 @@
 @property (nonatomic, strong) NSNumberFormatter *valorFormatter;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
+// Compra atualmente selecionada na table
+@property (nonatomic) Compra *compraSelecionada;
+
 
 @end
