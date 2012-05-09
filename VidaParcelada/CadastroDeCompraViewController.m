@@ -86,6 +86,7 @@
 
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
 
     self.valorFormatter = [[NSNumberFormatter alloc] init];
@@ -111,6 +112,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidUnload
 {
     [self setCellConta:nil];
@@ -121,6 +127,11 @@
     [self setStepperQtdeDeParcelas:nil];
     [self setTfValorTotal:nil];
     [self setBtSave:nil];
+    [self setValorFormatter:nil];
+    [self setDateFormatter:nil];
+    [self setCompraSelecionada:nil];
+    [self setContaSelecionada:nil];
+    [self setDataSelecionada:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -146,7 +157,7 @@
 
 #pragma mark - Eventos
 
-- (IBAction)btnSalvarPressionado:(id)sender {
+- (IBAction)onSalvarPressionado:(id)sender {
     
     NSNumber *qtdeParcelas = [NSNumber numberWithDouble:self.stepperQtdeDeParcelas.value];
     NSNumber *valor;
@@ -163,7 +174,11 @@
                                                   inContext:self.vpDatabase.managedObjectContext];
         NSLog(@"Criado nova compra: %@", self.compraSelecionada);
     } 
-    [self.navigationController popViewControllerAnimated:YES];
+    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)onCancelarPressionado:(id)sender {
+    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }
 
 //
@@ -215,6 +230,7 @@
     if (self.compraSelecionada) {
         // Notifica o delegate da alteração
         [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
+        [sender resignFirstResponder];
         // Log da operação
         NSLog(@" self.compraSelecionada.descricao - valor: %@",  self.compraSelecionada.descricao);
     }
@@ -227,11 +243,12 @@
             NSNumber *valor;
             valor = [self.valorFormatter numberFromString:sender.text];
             self.compraSelecionada.valorTotal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
+            // Notifica o delegate da alteração
+            [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
+            [sender resignFirstResponder];
+            // Log da operação  
+            NSLog(@"self.contaSelecionada.limiteUsuario - valor: %@", self.compraSelecionada.valorTotal);
         }
-        // Notifica o delegate da alteração
-        [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
-        // Log da operação  
-        NSLog(@"self.contaSelecionada.limiteUsuario - valor: %@", self.compraSelecionada.valorTotal);
     }
 }
 
