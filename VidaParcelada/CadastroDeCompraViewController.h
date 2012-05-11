@@ -35,6 +35,7 @@
 
 @property (nonatomic, strong) Conta *contaSelecionada;
 @property (nonatomic, strong) NSDate *dataSelecionada;
+@property (nonatomic) BOOL algumCampoFoiAlterado;
 
 // Delegate que recebe notificação quando uma conta é alterada
 @property (assign) id <AlteracaoDeCompraDelegate> compraDelegate;

@@ -30,6 +30,14 @@
 @synthesize compraSelecionada = _compraSelecionada;
 @synthesize contaSelecionada = _contaSelecionada;
 @synthesize dataSelecionada = _dataSelecionada;
+@synthesize algumCampoFoiAlterado = _algumCampoFoiAlterado;
+
+- (void)algumCampoFoiAlterado:(BOOL)val
+{
+    if (_algumCampoFoiAlterado != val) {
+        _algumCampoFoiAlterado = val;
+    }
+}
 
 #pragma mark - AlteracaoDeContaDelegate
 
@@ -79,7 +87,7 @@
     self.tfDescricao.text = @"";
     self.stepperQtdeDeParcelas.value = 3;
     self.tfQtdeDeParcelas.text = @"3";
-    self.tfValorTotal.text = @"";
+    self.tfValorTotal.text = [self.valorFormatter stringFromNumber:0];
     self.cellDataDaCompra.textLabel.text = @"Data da compra";
     self.cellDataDaCompra.detailTextLabel.text = [self.dateFormatter stringFromDate:self.dataSelecionada];
 }
@@ -157,23 +165,47 @@
 
 #pragma mark - Eventos
 
-- (IBAction)onSalvarPressionado:(id)sender {
-    
+- (void)criarNovaCompra {
+    // Qual o numero de parcelas que foi escolhido pelo usuario?
     NSNumber *qtdeParcelas = [NSNumber numberWithDouble:self.stepperQtdeDeParcelas.value];
     NSNumber *valor;
-    valor = [self.valorFormatter numberFromString:self.tfValorTotal.text];
+    
+    // Se o usuário não informar o valor da campra vamos
+    // assumir que é zero nesse primeiro momento para evitar erros
+    if (self.tfValorTotal.text) {
+        valor = [self.valorFormatter numberFromString:self.tfValorTotal.text];
+    } else {
+        valor = [NSNumber numberWithInt:0];
+    }
+    
+    self.compraSelecionada = [Compra compraComDescricao:self.tfDescricao.text
+                                           dataDaCompra:self.dataSelecionada 
+                                              comEstado:COMPRA_PENDENTE_PAGAMENTO 
+                                         qtdeDeParcelas:qtdeParcelas
+                                             valorTotal:[NSDecimalNumber decimalNumberWithString:[valor stringValue]]
+                                               comConta:self.contaSelecionada
+                                              inContext:self.vpDatabase.managedObjectContext];
+    NSLog(@"Criado nova compra: %@", self.compraSelecionada);
+}
+
+- (void)atualizarCompraAtual {
+    // Se a compra existir temos que recriar as parcelas, isso significa apagar as atuais
+    // e recriar
+    [Compra apagarParcelasDaCompra:self.compraSelecionada inContext:self.vpDatabase.managedObjectContext];
+    
+    // recriar parcelas
+    [Compra criarParcelasDaCompra:self.compraSelecionada inContext:self.vpDatabase.managedObjectContext];
+}
+
+- (IBAction)onSalvarPressionado:(id)sender {
+    
     
     // cria apenas se não existir
     if (!self.compraSelecionada) {
-        self.compraSelecionada = [Compra compraComDescricao:self.tfDescricao.text
-                                               dataDaCompra:self.dataSelecionada 
-                                                  comEstado:COMPRA_PENDENTE_PAGAMENTO 
-                                             qtdeDeParcelas:qtdeParcelas
-                                                 valorTotal:[NSDecimalNumber decimalNumberWithString:[valor stringValue]]
-                                                   comConta:self.contaSelecionada
-                                                  inContext:self.vpDatabase.managedObjectContext];
-        NSLog(@"Criado nova compra: %@", self.compraSelecionada);
-    } 
+        [self criarNovaCompra];
+    } else {
+        [self atualizarCompraAtual];
+    }
     [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }
 
@@ -200,6 +232,8 @@
     
     if (textField == self.tfValorTotal) {
         
+        self.algumCampoFoiAlterado = YES;
+        
         [VidaParceladaHelper formataValor:textField 
                                novoDigito:string 
                                  comRange:range 
@@ -213,6 +247,7 @@
 }
 
 - (IBAction)stepperQtdeDeParcelasValueChanged:(UIStepper *)sender {
+    self.algumCampoFoiAlterado = YES;
     self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f",sender.value];
     // somente atualiza se a conta já tiver sido criada.
     if (self.compraSelecionada) {
@@ -225,6 +260,7 @@
 }
 
 - (IBAction)tfDescricaoEditingDidEnd:(UITextField *)sender {
+    self.algumCampoFoiAlterado = YES;
     self.compraSelecionada.descricao = self.tfDescricao.text;
     // somente atualiza se a conta já tiver sido criada.
     if (self.compraSelecionada) {
@@ -237,6 +273,7 @@
 }
 
 - (IBAction)tfValorTotalEditingDidEnd:(UITextField *)sender {
+    self.algumCampoFoiAlterado = YES;
     // somente atualiza se a conta já tiver sido criada.
     if (self.compraSelecionada) {
         if ([sender.text length] > 0) {

@@ -41,7 +41,8 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
 //
 // Apaga todas as parcelas da compra passada como parametro
 //
-+(void)apagarParcelasDaCompra:(Compra *)compra;
++(void)apagarParcelasDaCompra:(Compra *)compra 
+                    inContext:(NSManagedObjectContext *)context;
 
 @end
 

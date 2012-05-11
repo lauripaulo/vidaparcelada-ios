@@ -99,6 +99,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     NSLog(@"Criando parcelas da compra(%@)", compra);
     
     // Vamos criar as parcelas de acordo com o número passado.
+    NSLog (@"compra.valorTotal = %@ / compra.qtdeTotalDeParcelas = %@", compra.valorTotal, compra.qtdeTotalDeParcelas);
     NSDecimalNumber *qtdeDecimal = [NSDecimalNumber decimalNumberWithDecimal:[compra.qtdeTotalDeParcelas decimalValue]];
     NSDecimalNumber *valorParcela = [compra.valorTotal decimalNumberByDividingBy:qtdeDecimal];
   
@@ -133,9 +134,15 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 //
 // Apaga todas as parcelas da compra passada como parametro
 //
-+(void)apagarParcelasDaCompra:(Compra *)compra
++(void)apagarParcelasDaCompra:(Compra *)compra inContext:(NSManagedObjectContext *)context
 {
     NSLog(@"Apagando parcelas da compra(%@)", compra);
+    
+    for (Parcela *p in compra.parcelas) {
+        NSLog(@"Parcela encontrada %@", p);
+        [context deleteObject:p];
+        NSLog(@"Parcela apagada!");
+    } 
 
 }
 
