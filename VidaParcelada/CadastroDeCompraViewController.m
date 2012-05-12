@@ -10,6 +10,8 @@
 
 @interface CadastroDeCompraViewController ()
 
+- (void)animateDataPicker:(NSDate *)date;
+
 @end
 
 @implementation CadastroDeCompraViewController
@@ -25,18 +27,24 @@
 @synthesize stepperQtdeDeParcelas = _stepperQtdeDeParcelas;
 @synthesize tfValorTotal = _tfValorTotal;
 @synthesize btSave = _btSave;
+@synthesize datePicker = _datePicker;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize compraSelecionada = _compraSelecionada;
 @synthesize contaSelecionada = _contaSelecionada;
 @synthesize dataSelecionada = _dataSelecionada;
 @synthesize algumCampoFoiAlterado = _algumCampoFoiAlterado;
+@synthesize topBar = _topBar;
+@synthesize doneButton = _doneButton;
 
-- (void)algumCampoFoiAlterado:(BOOL)val
+- (UIDatePicker *)datePicker
 {
-    if (_algumCampoFoiAlterado != val) {
-        _algumCampoFoiAlterado = val;
+    if (_datePicker == nil) {
+        _datePicker = [[UIDatePicker alloc] init];
+        [_datePicker setDatePickerMode:UIDatePickerModeDate];
+        [_datePicker addTarget:self action:@selector(dateAction:) forControlEvents:UIControlEventValueChanged];
     }
+    return _datePicker;
 }
 
 #pragma mark - AlteracaoDeContaDelegate
@@ -140,6 +148,9 @@
     [self setCompraSelecionada:nil];
     [self setContaSelecionada:nil];
     [self setDataSelecionada:nil];
+    [self setTopBar:nil];
+    [self setDoneButton:nil];
+    [self setDatePicker:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -354,17 +365,99 @@
 }
 */
 
-//#pragma mark - Table view delegate
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // Navigation logic may go here. Create and push another view controller.
-//    /*
-//     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-//     // ...
-//     // Pass the selected object to the new view controller.
-//     [self.navigationController pushViewController:detailViewController animated:YES];
-//     */
-//}
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSLog(@"indexPath=%@", indexPath);
+
+    // Verifica se é a cell que tem a data para trazer o date picker
+    if (indexPath.section == 1 && indexPath.row == 1) {
+        NSDate *date = [self.dateFormatter dateFromString:cell.detailTextLabel.text];
+        [self animateDataPicker:date];
+    } else {
+        [self doneAction:nil];
+    }
+    
+}
+
+- (void)animateDataPicker:(NSDate *)date
+{
+    self.datePicker.date = date;
+	
+	// check if our date picker is already on screen
+	if (self.datePicker.superview == nil)
+	{
+		[self.view.window addSubview: self.datePicker];
+		
+		// size up the picker view to our screen and compute the start/end frame origin for our slide up animation
+		//
+		// compute the start frame
+		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+		CGSize pickerSize = [self.datePicker sizeThatFits:CGSizeZero];
+		CGRect startRect = CGRectMake(0.0,
+									  screenRect.origin.y + screenRect.size.height,
+									  pickerSize.width, pickerSize.height);
+		self.datePicker.frame = startRect;
+		
+		// compute the end frame
+		CGRect pickerRect = CGRectMake(0.0,
+									   screenRect.origin.y + screenRect.size.height - pickerSize.height,
+									   pickerSize.width,
+									   pickerSize.height);
+        
+        // Animação retirada do curso da Stanford
+        [UIView animateWithDuration:0.3 animations:^{
+            self.datePicker.frame = pickerRect;
+            
+            // shrink the table vertical size to make room for the date picker
+            CGRect newFrame = self.tableView.frame;
+            newFrame.size.height -= self.datePicker.frame.size.height;
+            self.tableView.frame = newFrame;
+        }completion:^(BOOL finished) {
+            // Anima a celula selecionada até ser possivel visualizar
+            [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForSelectedRow] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }];
+		
+		// add the "Done" button to the nav bar
+        self.topBar.rightBarButtonItem = self.doneButton;
+	}
+}
+
+- (IBAction)dateAction:(id)sender
+{
+	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+	cell.detailTextLabel.text = [self.dateFormatter stringFromDate:self.datePicker.date];
+}
+
+
+- (IBAction)doneAction:(id)sender
+{
+	CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+	CGRect endFrame = self.datePicker.frame;
+	endFrame.origin.y = screenRect.origin.y + screenRect.size.height;
+		
+    // Animação retirada do curso da Stanford
+    [UIView animateWithDuration:0.3 animations:^{
+        self.datePicker.frame = endFrame;
+        // grow the table back again in vertical size to make room for the date picker
+        CGRect newFrame = self.tableView.frame;
+        newFrame.size.height += self.datePicker.frame.size.height;
+        self.tableView.frame = newFrame;
+    }completion:^(BOOL finished) {
+        // the date picker has finished sliding downwards, so remove it
+        [self.datePicker removeFromSuperview];
+        // Anima a celula selecionada até ser possivel visualizar
+        [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForSelectedRow] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }];
+	// remove the "Done" button in the nav bar
+	self.topBar.rightBarButtonItem = self.btSave;    
+	
+	// deselect the current table row
+	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 @end
