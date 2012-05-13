@@ -250,6 +250,9 @@
 }
 
 - (void)exitThisController {
+    // Se alguma das view estiver na tela remove
+    [self removeAllPickers];
+    
     // Volta o toolbar com uma animação massa.
     [UIView animateWithDuration:0.3 animations:^{
         self.navigationController.toolbarHidden = NO;
@@ -361,15 +364,15 @@
     NSLog(@"indexPath=%@", indexPath);
 
     // Verifica se é a cell que tem a data para trazer o date picker
-    if (indexPath.section == 1 && indexPath.row == 1) {
+    if (indexPath.section == 0 && indexPath.row == 1) {
         // Data selecionada
         NSDate *date = [self.dateFormatter dateFromString:cell.detailTextLabel.text];
         [self animateDataPicker:date];
-    } else if (indexPath.section == 1 && indexPath.row == 0) {
+    } else if (indexPath.section == 0 && indexPath.row == 0) {
         // Conta selecionada
         [self animateContaPicker];
     } else {
-        [self removeDataPickerAnimaed:nil];
+        [self removeAllPickers];
     }
     
 }
@@ -390,9 +393,7 @@
 		
 		// size up the picker view to our screen and compute the start/end frame origin for our slide up animation
 		//
-		// compute the start frame
-//        CGRect topBarSize = self.navigationController.navigationBar.bounds;
-        
+		// compute the start frame        
 		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
 		CGSize pickerSize = [self.datePicker sizeThatFits:CGSizeZero];
 		CGRect startRect = CGRectMake(0.0,
@@ -406,9 +407,6 @@
 									   pickerSize.width,
 									   pickerSize.height);
         
-        // Remover botões e adicionar o "pronto"
-        self.topBar.leftBarButtonItem = self.btDataOk;
-        self.topBar.rightBarButtonItem = nil;
         // Animação retirada do curso da Stanford
         [UIView animateWithDuration:0.3 animations:^{
             self.datePicker.frame = pickerRect;
@@ -418,6 +416,9 @@
             newFrame.size.height -= self.datePicker.frame.size.height ;
             self.tableView.frame = newFrame;
         } completion:^(BOOL finished) {
+            // Remover botões e adicionar o "pronto"
+            self.topBar.leftBarButtonItem = self.btDataOk;
+            self.topBar.rightBarButtonItem = nil;
             // Anima a celula selecionada até ser possivel visualizar
             [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForSelectedRow] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }];
@@ -456,9 +457,6 @@
 									   pickerSize.width,
 									   pickerSize.height);
         
-        // Remover botões e adicionar o "pronto"
-        self.topBar.leftBarButtonItem = self.btContaOk;
-        self.topBar.rightBarButtonItem = nil;
         // Animação retirada do curso da Stanford
         [UIView animateWithDuration:0.3 animations:^{
             self.contasPickerView.frame = pickerRect;
@@ -468,6 +466,9 @@
             newFrame.size.height -= self.contasPickerView.frame.size.height;
             self.tableView.frame = newFrame;
         }completion:^(BOOL finished) {
+            // Remover botões e adicionar o "pronto"
+            self.topBar.leftBarButtonItem = self.btContaOk;
+            self.topBar.rightBarButtonItem = nil;
             // Anima a celula selecionada até ser possivel visualizar
             [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForSelectedRow] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }];
@@ -488,6 +489,17 @@
 }
 
 
+- (void)putSaveAndCancelButtonsBack
+{
+    // devolve os botões ao nav bar
+    if (self.topBar.rightBarButtonItem != self.btCancelar) {
+        self.topBar.rightBarButtonItem = self.btCancelar;
+    }
+    if (self.topBar.leftBarButtonItem != self.btSave) {
+        self.topBar.leftBarButtonItem = self.btSave;        
+    }
+}
+
 - (IBAction)removeDataPickerAnimaed:(id)sender
 {
 	CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
@@ -496,24 +508,20 @@
 		
     // Animação retirada do curso da Stanford
     [UIView animateWithDuration:0.3 animations:^{
-        self.datePicker.frame = endFrame;
+        // deselect the current table row
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         // grow the table back again in vertical size to make room for the date picker
+        self.datePicker.frame = endFrame;
         CGRect newFrame = self.tableView.frame;
         newFrame.size.height += self.datePicker.frame.size.height;
         self.tableView.frame = newFrame;
-    }completion:^(BOOL finished) {
+    } completion:^(BOOL finished) {
         // the date picker has finished sliding downwards, so remove it
         [self.datePicker removeFromSuperview];
-        // devolve os botões ao nav bar
-        self.topBar.rightBarButtonItem = self.btCancelar;    
-        self.topBar.leftBarButtonItem = self.btSave;
-        // Anima a celula selecionada até ser possivel visualizar
-        [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForSelectedRow] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self putSaveAndCancelButtonsBack];
     }];
 	
-	// deselect the current table row
-	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (IBAction)removeContasPickerAnimated:(id)sender;
@@ -524,24 +532,20 @@
     
     // Animação retirada do curso da Stanford
     [UIView animateWithDuration:0.3 animations:^{
-        self.contasPickerView.frame = endFrame;
+        // deselect the current table row
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         // grow the table back again in vertical size to make room for the date picker
+        self.contasPickerView.frame = endFrame;
         CGRect newFrame = self.tableView.frame;
         newFrame.size.height += self.contasPickerView.frame.size.height;
         self.tableView.frame = newFrame;
-    }completion:^(BOOL finished) {
-        // devolve os botões ao nav bar
-        self.topBar.rightBarButtonItem = self.btCancelar;    
-        self.topBar.leftBarButtonItem = self.btSave;
+    } completion:^(BOOL finished) {
         // the date picker has finished sliding downwards, so remove it
         [self.contasPickerView removeFromSuperview];
-        // Anima a celula selecionada até ser possivel visualizar
-        [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForSelectedRow] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self putSaveAndCancelButtonsBack];
     }];
 	
-	// deselect the current table row
-	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - UIPickerViewDelegate & DataSource
@@ -582,13 +586,18 @@
 
 - (void)removeAllPickers {
     // check if our date picker is already on screen
-    if (self.contasPickerView.superview != nil)
-	{
-        [self removeContasPickerAnimated:self];
-    }
-    if (self.datePicker.superview != nil) {
-        [self removeDataPickerAnimaed:self];
-    }
+    [UIView animateWithDuration:.3 animations:^{
+        if (self.contasPickerView.superview != nil)
+        {
+            [self removeContasPickerAnimated:self];
+        }
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.3 animations:^{
+            if (self.datePicker.superview != nil) {
+                [self removeDataPickerAnimaed:self];
+            }
+        }];
+    }];
 }
 
 
