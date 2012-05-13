@@ -63,7 +63,7 @@
 		799C54AE15430522009A235D /* VidaParceladaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VidaParceladaHelper.m; sourceTree = "<group>"; };
 		79A56C5B154486E9005B94C2 /* CadastroDeCompraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDeCompraViewController.h; sourceTree = "<group>"; };
 		79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDeCompraViewController.m; sourceTree = "<group>"; };
-		79B097A315606E9A0057DCBB /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		79B097A615607B820057DCBB /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		79B8C9D7155F50A400132BD5 /* PonteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonteViewController.h; sourceTree = "<group>"; };
 		79B8C9D8155F50A400132BD5 /* PonteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonteViewController.m; sourceTree = "<group>"; };
 		79E4BD70155CB06F00A2E1D7 /* Compra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compra.h; sourceTree = "<group>"; };
@@ -321,7 +321,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7900B300155232C80050C652 /* en */,
-				79B097A315606E9A0057DCBB /* pt */,
+				79B097A615607B820057DCBB /* pt */,
 			);
 			name = MainStoryboard.storyboard;
 			path = ..;

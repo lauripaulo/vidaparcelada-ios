@@ -37,6 +37,7 @@
 @property (strong, nonatomic) IBOutlet UINavigationItem *topBar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btDataOk;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btContaOk;
+@property (weak, nonatomic) IBOutlet UILabel *labelValorParcela;
 
 @property (nonatomic, retain) Compra *compraSelecionada;
 

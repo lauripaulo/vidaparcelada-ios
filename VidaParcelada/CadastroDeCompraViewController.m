@@ -42,6 +42,7 @@
 @synthesize topBar = _topBar;
 @synthesize btDataOk = _doneButton;
 @synthesize btContaOk = _btContaOk;
+@synthesize labelValorParcela = _labelValorParcela;
 @synthesize listaDeContas = _listaDeContas;
 
 - (NSArray *)listaDeContas
@@ -106,6 +107,7 @@
     self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f", [self.compraSelecionada.qtdeTotalDeParcelas doubleValue]];
 
     self.tfValorTotal.text = [self.valorFormatter stringFromNumber:self.compraSelecionada.valorTotal];
+    [self calculaValorDaParcela];
 }
 
 - (void)inicializarTela
@@ -128,6 +130,7 @@
         self.cellConta.textLabel.text = self.contaSelecionada.tipo.nome;
         self.cellConta.detailTextLabel.text = self.contaSelecionada.tipo.descricao;
     }
+    [self calculaValorDaParcela];
 }
 
 - (void)viewDidLoad
@@ -192,6 +195,7 @@
     [self setBtCancelar:nil];
     [self setContasPickerView:nil];
     [self setBtContaOk:nil];
+    [self setLabelValorParcela:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -310,9 +314,24 @@
     return result;
 }
 
+- (void)calculaValorDaParcela {
+    // calcula o valor das parcelas dessa compra
+    NSNumber *valorTmp;
+    valorTmp = [self.valorFormatter numberFromString:self.tfValorTotal.text];
+    if ([valorTmp intValue] > 0 && self.stepperQtdeDeParcelas.value > 0.0) {
+        NSDecimalNumber *valorTotal = [NSDecimalNumber decimalNumberWithString:[valorTmp stringValue]];
+        NSDecimalNumber *qtdeDecimal = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:self.stepperQtdeDeParcelas.value] decimalValue]];
+        NSDecimalNumber *valorParcela = [valorTotal decimalNumberByDividingBy:qtdeDecimal];
+        self.labelValorParcela.text = [self.valorFormatter stringFromNumber:valorParcela];
+    } else {
+        self.labelValorParcela.text = [self.valorFormatter stringFromNumber:[NSNumber numberWithInt:0]];        
+    }
+}
+
 - (IBAction)stepperQtdeDeParcelasValueChanged:(UIStepper *)sender {
     self.algumCampoFoiAlterado = YES;
-    self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f",sender.value];
+    self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f",sender.value];    
+    [self calculaValorDaParcela];
     // somente atualiza se a conta já tiver sido criada.
     if (self.compraSelecionada) {
         self.compraSelecionada.qtdeTotalDeParcelas = [NSNumber numberWithDouble:sender.value];
@@ -351,6 +370,7 @@
             NSLog(@"self.contaSelecionada.limiteUsuario - valor: %@", self.compraSelecionada.valorTotal);
         }
     }
+    [self calculaValorDaParcela];
 }
 
 #pragma mark - Table view data source
@@ -419,8 +439,6 @@
             // Remover botões e adicionar o "pronto"
             self.topBar.leftBarButtonItem = self.btDataOk;
             self.topBar.rightBarButtonItem = nil;
-            // Anima a celula selecionada até ser possivel visualizar
-            [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForSelectedRow] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }];
 		
 	}
@@ -469,8 +487,6 @@
             // Remover botões e adicionar o "pronto"
             self.topBar.leftBarButtonItem = self.btContaOk;
             self.topBar.rightBarButtonItem = nil;
-            // Anima a celula selecionada até ser possivel visualizar
-            [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForSelectedRow] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }];
 		
 	}

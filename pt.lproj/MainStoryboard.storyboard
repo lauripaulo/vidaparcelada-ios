@@ -325,6 +325,35 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="M6S-4r-ErE">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9LR-jk-g4o">
+                                        <rect key="frame" x="0.0" y="336" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Valor da parcela:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="gQU-fM-3Qn">
+                                                    <rect key="frame" x="20" y="11" width="114" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" highlighted="YES" id="g9g-fM-7zg">
+                                                    <rect key="frame" x="142" y="11" width="138" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="KDO-cB-7qR" id="k2T-Bd-pfh"/>
@@ -355,6 +384,7 @@
                         <outlet property="cellDataDaCompra" destination="oZp-hM-bmd" id="yyQ-5X-6DG"/>
                         <outlet property="contasPickerView" destination="kS5-Jl-cia" id="b4n-Yp-1O3"/>
                         <outlet property="datePicker" destination="xYF-Iy-eDm" id="hDM-BC-mdD"/>
+                        <outlet property="labelValorParcela" destination="g9g-fM-7zg" id="bFQ-Xd-y9P"/>
                         <outlet property="stepperQtdeDeParcelas" destination="Kns-wk-tdz" id="51b-p1-AFp"/>
                         <outlet property="tfDescricao" destination="Wmt-5x-t8q" id="RYk-uL-Smt"/>
                         <outlet property="tfQtdeDeParcelas" destination="o02-UN-73w" id="WVS-t6-KfS"/>
@@ -753,6 +783,62 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="-529" y="-512"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CadastroDaContaViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDaContaViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="cellTipoConta" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="stepperMelhorDia" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="stepperVencimento" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="tfDescricaoDaConta" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfDiaVencimento" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfEmpresa" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfJuros" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfLimiteTotal" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfMelhorDia" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfObjetivoMensal" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="CadastroDeCompraViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDeCompraViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="removeContasPickerAnimated:"/>
+                <relationship kind="action" name="removeDataPickerAnimaed:"/>
+                <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="btContaOk" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="btDataOk" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="btSave" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="cellConta" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellDataDaCompra" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="contasPickerView" candidateClass="UIPickerView"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="labelValorParcela" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="stepperQtdeDeParcelas" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfQtdeDeParcelas" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfValorTotal" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="topBar" candidateClass="UINavigationItem"/>
+            </relationships>
+        </class>
+        <class className="CoreDataTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
+        </class>
+        <class className="ListaDeComprasViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeComprasViewController.h"/>
+        </class>
+        <class className="ListaDeContasViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeContasViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btnAdicionarConta" candidateClass="UIBarButtonItem"/>
+            </relationships>
+        </class>
+        <class className="ListaDeParcelasViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeParcelasViewController.h"/>
+        </class>
+        <class className="TipoDaContaViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TipoDaContaViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
