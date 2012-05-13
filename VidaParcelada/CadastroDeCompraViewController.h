@@ -14,7 +14,7 @@
 #import "TipoConta+AddOn.h"
 #import "VidaParceladaHelper.h"
 
-@interface CadastroDeCompraViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate>
+@interface CadastroDeCompraViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIPickerViewDelegate>
 
 // aqui definimos nosso banco de dados global
 // que todos os controllers irão utilizar
@@ -27,18 +27,22 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfQtdeDeParcelas;
 @property (weak, nonatomic) IBOutlet UIStepper *stepperQtdeDeParcelas;
 @property (weak, nonatomic) IBOutlet UITextField *tfValorTotal;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *btSave;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btSave;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btCancelar;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIPickerView *contasPickerView;
 @property (nonatomic, retain) NSNumberFormatter *valorFormatter;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) IBOutlet UINavigationItem *topBar;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btDataOk;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btContaOk;
 
 @property (nonatomic, retain) Compra *compraSelecionada;
 
 @property (nonatomic, retain) Conta *contaSelecionada;
 @property (nonatomic, retain) NSDate *dataSelecionada;
+@property (nonatomic, retain) NSArray *listaDeContas;
 @property (nonatomic) BOOL algumCampoFoiAlterado;
 
 

@@ -22,6 +22,10 @@
      comMelhorDiaDeCompra:(NSNumber *) melhorDiaDeCompra
                 inContext:(NSManagedObjectContext *)context;
 
+// Retorna todas as contas atualmente cadastradas para usar em
+// um UIPickerView, por exemplo.
++ (NSArray *)contasCadastradasUsandoContext:(NSManagedObjectContext *)context;
+
 @end
 
 // Delegate para avisar a TableView cliente que os dados da conta foram atualizados

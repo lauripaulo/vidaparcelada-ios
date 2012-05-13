@@ -64,11 +64,22 @@
     [context save:(&error)];
     
     return conta;
-    
-    //@property (nonatomic, retain) NSSet *compras;
-    //@property (nonatomic, retain) TipoConta *tipo;
+}
 
++ (NSArray *)contasCadastradasUsandoContext:(NSManagedObjectContext *)context
+{    
+    // Query no banco de dados
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
+    request.sortDescriptors = [NSArray arrayWithObject:
+                               [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
+                                                              selector:@selector(localizedCaseInsensitiveCompare:)]];
     
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    NSLog(@"Trazendo todas as contas cadastradas no momento:(%@)", matches);
+
+    return matches;
 }
 
 
