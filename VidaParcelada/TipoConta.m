@@ -2,7 +2,7 @@
 //  TipoConta.m
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 10/05/12.
+//  Created by Lauri Laux on 15/05/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -14,6 +14,7 @@
 
 @dynamic descricao;
 @dynamic nome;
+@dynamic tipo;
 @dynamic conta;
 
 @end

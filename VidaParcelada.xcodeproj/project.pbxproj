@@ -11,6 +11,7 @@
 		79362F83153D122E005459E8 /* Conta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F82153D122E005459E8 /* Conta+AddOn.m */; };
 		79424C491554C7BF0019594B /* iphone_delete_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 79424C481554C7BF0019594B /* iphone_delete_button.png */; };
 		796CE1E0153B13E300B6AE11 /* TipoConta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */; };
+		79770BFE15633E0C000263CD /* TipoConta.m in Sources */ = {isa = PBXBuildFile; fileRef = 79770BFD15633E0C000263CD /* TipoConta.m */; };
 		797D9D3115463C9000D3B067 /* Compra+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D3015463C9000D3B067 /* Compra+AddOn.m */; };
 		797D9D341546458800D3B067 /* Parcela+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D331546458800D3B067 /* Parcela+AddOn.m */; };
 		798FF4021533B4B200385C5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4011533B4B200385C5E /* UIKit.framework */; };
@@ -27,7 +28,6 @@
 		79E4BD72155CB06F00A2E1D7 /* Compra.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E4BD71155CB06F00A2E1D7 /* Compra.m */; };
 		79E4BD76155CB06F00A2E1D7 /* Conta.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E4BD75155CB06F00A2E1D7 /* Conta.m */; };
 		79E4BD79155CB06F00A2E1D7 /* Parcela.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E4BD78155CB06F00A2E1D7 /* Parcela.m */; };
-		79E4BD7C155CB06F00A2E1D7 /* TipoConta.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E4BD7B155CB06F00A2E1D7 /* TipoConta.m */; };
 		79F92E1E1539F15D0031A919 /* CadastroDaContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */; };
 		79F92E221539F19C0031A919 /* TipoDaContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F92E211539F19C0031A919 /* TipoDaContaViewController.m */; };
 		79FEE572153917BC00DE35F5 /* ListaDeContasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FEE571153917BC00DE35F5 /* ListaDeContasViewController.m */; };
@@ -42,6 +42,9 @@
 		79424C481554C7BF0019594B /* iphone_delete_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone_delete_button.png; sourceTree = "<group>"; };
 		796CE1DE153B13E300B6AE11 /* TipoConta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TipoConta+AddOn.h"; sourceTree = "<group>"; };
 		796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TipoConta+AddOn.m"; sourceTree = "<group>"; };
+		79770BFC15633E0C000263CD /* TipoConta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoConta.h; sourceTree = "<group>"; };
+		79770BFD15633E0C000263CD /* TipoConta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoConta.m; sourceTree = "<group>"; };
+		79770BFF15634320000263CD /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		797D9D2F15463C9000D3B067 /* Compra+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Compra+AddOn.h"; sourceTree = "<group>"; };
 		797D9D3015463C9000D3B067 /* Compra+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Compra+AddOn.m"; sourceTree = "<group>"; };
 		797D9D321546458800D3B067 /* Parcela+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parcela+AddOn.h"; sourceTree = "<group>"; };
@@ -63,7 +66,6 @@
 		799C54AE15430522009A235D /* VidaParceladaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VidaParceladaHelper.m; sourceTree = "<group>"; };
 		79A56C5B154486E9005B94C2 /* CadastroDeCompraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDeCompraViewController.h; sourceTree = "<group>"; };
 		79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDeCompraViewController.m; sourceTree = "<group>"; };
-		79B097A615607B820057DCBB /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		79B8C9D7155F50A400132BD5 /* PonteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PonteViewController.h; sourceTree = "<group>"; };
 		79B8C9D8155F50A400132BD5 /* PonteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PonteViewController.m; sourceTree = "<group>"; };
 		79E4BD70155CB06F00A2E1D7 /* Compra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compra.h; sourceTree = "<group>"; };
@@ -72,8 +74,6 @@
 		79E4BD75155CB06F00A2E1D7 /* Conta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conta.m; sourceTree = "<group>"; };
 		79E4BD77155CB06F00A2E1D7 /* Parcela.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parcela.h; sourceTree = "<group>"; };
 		79E4BD78155CB06F00A2E1D7 /* Parcela.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parcela.m; sourceTree = "<group>"; };
-		79E4BD7A155CB06F00A2E1D7 /* TipoConta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoConta.h; sourceTree = "<group>"; };
-		79E4BD7B155CB06F00A2E1D7 /* TipoConta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoConta.m; sourceTree = "<group>"; };
 		79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDaContaViewController.h; sourceTree = "<group>"; };
 		79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDaContaViewController.m; sourceTree = "<group>"; };
 		79F92E201539F19C0031A919 /* TipoDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoDaContaViewController.h; sourceTree = "<group>"; };
@@ -104,8 +104,8 @@
 		7924ECD11537C32C00D47F92 /* db */ = {
 			isa = PBXGroup;
 			children = (
-				79E4BD7A155CB06F00A2E1D7 /* TipoConta.h */,
-				79E4BD7B155CB06F00A2E1D7 /* TipoConta.m */,
+				79770BFC15633E0C000263CD /* TipoConta.h */,
+				79770BFD15633E0C000263CD /* TipoConta.m */,
 				79E4BD77155CB06F00A2E1D7 /* Parcela.h */,
 				79E4BD78155CB06F00A2E1D7 /* Parcela.m */,
 				79E4BD74155CB06F00A2E1D7 /* Conta.h */,
@@ -309,8 +309,8 @@
 				79E4BD72155CB06F00A2E1D7 /* Compra.m in Sources */,
 				79E4BD76155CB06F00A2E1D7 /* Conta.m in Sources */,
 				79E4BD79155CB06F00A2E1D7 /* Parcela.m in Sources */,
-				79E4BD7C155CB06F00A2E1D7 /* TipoConta.m in Sources */,
 				79B8C9D9155F50A400132BD5 /* PonteViewController.m in Sources */,
+				79770BFE15633E0C000263CD /* TipoConta.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +321,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7900B300155232C80050C652 /* en */,
-				79B097A615607B820057DCBB /* pt */,
+				79770BFF15634320000263CD /* pt */,
 			);
 			name = MainStoryboard.storyboard;
 			path = ..;

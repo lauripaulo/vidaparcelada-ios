@@ -31,12 +31,13 @@
     <entity name="TipoConta" representedClassName="TipoConta" syncable="YES">
         <attribute name="descricao" optional="YES" attributeType="String" minValueString="0" maxValueString="100" syncable="YES"/>
         <attribute name="nome" optional="YES" attributeType="String" minValueString="1" maxValueString="100" syncable="YES"/>
+        <attribute name="tipo" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="conta" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conta" inverseName="tipo" inverseEntity="Conta" syncable="YES"/>
     </entity>
     <elements>
         <element name="Compra" positionX="160" positionY="9" width="128" height="150"/>
         <element name="Conta" positionX="412" positionY="99" width="128" height="180"/>
         <element name="Parcela" positionX="153" positionY="243" width="128" height="120"/>
-        <element name="TipoConta" positionX="403" positionY="342" width="128" height="90"/>
+        <element name="TipoConta" positionX="403" positionY="342" width="128" height="105"/>
     </elements>
 </model>

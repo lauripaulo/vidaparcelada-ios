@@ -2,7 +2,7 @@
 //  TipoConta.h
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 10/05/12.
+//  Created by Lauri Laux on 15/05/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * descricao;
 @property (nonatomic, retain) NSString * nome;
+@property (nonatomic, retain) NSNumber * tipo;
 @property (nonatomic, retain) NSSet *conta;
 @end
 

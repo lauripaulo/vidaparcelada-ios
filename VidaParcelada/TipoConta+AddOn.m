@@ -10,9 +10,11 @@
 
 @implementation TipoConta (AddOn)
 
-+(TipoConta *)contaComNome:(NSString *)nome eDescricao:(NSString *)descricao inContext:(NSManagedObjectContext *)context 
++(TipoConta *)contaComNome:(NSString *)nome eDescricao:(NSString *)descricao 
+       identificadorDeTipo:(int)tipo
+                 inContext:(NSManagedObjectContext *)context 
 {
-    TipoConta *tipo = nil;
+    TipoConta *tipoConta = nil;
     
     NSLog(@"Criando TipoConta: nome(%@) descricao:(%@)", nome, descricao);
     
@@ -29,15 +31,16 @@
         NSLog(@"Erro! Encontrado %i linhas com o nome(%@). Apagar todos e recriar...", [matches count], nome);
     } else if ([matches count] == 0) {
         NSLog(@"Não encontrado nenum registro para esse nome, criando..."); 
-        tipo = [NSEntityDescription insertNewObjectForEntityForName:@"TipoConta" inManagedObjectContext:context];
-        tipo.nome = nome;
-        tipo.descricao = descricao;
+        tipoConta = [NSEntityDescription insertNewObjectForEntityForName:@"TipoConta" inManagedObjectContext:context];
+        tipoConta.nome = nome;
+        tipoConta.descricao = descricao;
+        tipoConta.tipo = [NSNumber numberWithInt:tipo];
     } else {
         NSLog(@"Nome já existe no banco de dados, retornando o objeto.");
-        tipo = [matches lastObject];
+        tipoConta = [matches lastObject];
     }
     
-    return tipo;
+    return tipoConta;
 }
 
 - (void)prepareForDeletion

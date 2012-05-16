@@ -67,7 +67,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="-106" y="-512"/>
+            <point key="canvasLocation" x="474" y="-64"/>
         </scene>
         <!--Lista De Contas View Controller - Contas-->
         <scene sceneID="Dc5-C8-4A1">
@@ -128,7 +128,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="474" y="248"/>
+            <point key="canvasLocation" x="1196" y="350"/>
         </scene>
         <!--Lista De Parcelas View Controller - Parcelas-->
         <scene sceneID="pKB-ro-CRZ">
@@ -174,7 +174,7 @@
                     <navigationItem key="navigationItem" title="Parcelas" id="A0B-wT-873"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="474" y="-1152"/>
+            <point key="canvasLocation" x="1196" y="-992"/>
         </scene>
         <!--Cadastro De Compra View Controller - Compra-->
         <scene sceneID="PrK-nZ-j2h">
@@ -443,7 +443,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="474" y="-512"/>
+            <point key="canvasLocation" x="1196" y="-324"/>
         </scene>
         <!--Cadastro Da Conta View Controller - Conta-->
         <scene sceneID="Zgr-B0-KWP">
@@ -715,7 +715,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1035" y="248"/>
+            <point key="canvasLocation" x="1743" y="392"/>
         </scene>
         <!--Tipo Da Conta View Controller - Escolha a Conta-->
         <scene sceneID="XaO-dl-TDU">
@@ -762,7 +762,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="Escolha a Conta" id="ff3-aI-s01"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1564" y="248"/>
+            <point key="canvasLocation" x="2272" y="392"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="k8n-3u-7MO">
@@ -845,6 +845,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="FSk-VH-Uh1"/>
+        <segue reference="B1a-xj-kNY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,6 +12,7 @@
 
 +(TipoConta *)contaComNome:(NSString *)nome 
                 eDescricao:(NSString *)descricao 
+       identificadorDeTipo:(int)tipo
                  inContext:(NSManagedObjectContext *)context;
 
 @end

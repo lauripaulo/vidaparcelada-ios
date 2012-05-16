@@ -50,8 +50,7 @@
         // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
         request.sortDescriptors = [NSArray arrayWithObject:
-                                   [NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES 
-                                                                  selector:@selector(localizedCaseInsensitiveCompare:)]];
+                                   [NSSortDescriptor sortDescriptorWithKey:@"tipo" ascending:YES]];
         NSArray *tipos = [context executeFetchRequest:request error:&error];
         if (tipos && [tipos count] > 0) {
             conta.tipo = [tipos objectAtIndex:0];

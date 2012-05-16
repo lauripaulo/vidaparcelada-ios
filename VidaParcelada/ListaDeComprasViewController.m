@@ -51,10 +51,14 @@
 {
     // Temos que inserir os tipos de conta padrão, o usuário
     // na versão 1.0 não podera incluir tipos de conta.
-    TipoConta *cartao = [TipoConta contaComNome:@"Cartão de crédito" eDescricao:@"Cartão com data de vencimento" inContext:document.managedObjectContext];
+    TipoConta *cartao = [TipoConta contaComNome:@"Cartão de crédito" eDescricao:@"Cartão com data de vencimento" identificadorDeTipo:1 inContext:document.managedObjectContext];
     NSLog(@"Criado cartao: %@", cartao);
-    TipoConta *cheque = [TipoConta contaComNome:@"Cheque" eDescricao:@"Cheque pré-datado" inContext:document.managedObjectContext];
+    TipoConta *cheque = [TipoConta contaComNome:@"Cheque pré-datado" eDescricao:@"Cheques para pagamento de uma compra." identificadorDeTipo:2 inContext:document.managedObjectContext];
     NSLog(@"Criado cheque: %@", cheque);
+    TipoConta *carnes = [TipoConta contaComNome:@"Carnê de Pagamento" eDescricao:@"Parcelas para pagamento de uma compra" identificadorDeTipo:3 inContext:document.managedObjectContext];
+    NSLog(@"Criado Carnê de Pagamento %@", carnes);
+    TipoConta *crediario = [TipoConta contaComNome:@"Crediário" eDescricao:@"Parcelamento diretamente com a loja" identificadorDeTipo:4 inContext:document.managedObjectContext];
+    NSLog(@"Criado Crediário: %@", crediario);
     
     Conta *conta = [Conta contaComDescricao:@"Yahoo VISA" 
                                   daEmpresa:@"Credicard" 
@@ -65,10 +69,6 @@
                        comMelhorDiaDeCompra:[NSNumber numberWithInt:4] 
                                   inContext:document.managedObjectContext];
     NSLog(@"Criada conta: %@", conta);
-
-    // Não deve inserir, deve retornar
-    TipoConta *cheque2 = [TipoConta contaComNome:@"Cheque" eDescricao:@"Cheque pré-datado" inContext:document.managedObjectContext];
-    NSLog(@"Criado cheque: %@", cheque2);
 
     // Depois de tudo criado temos que continuar inicializado nossa 
     // interface inicial.
@@ -161,6 +161,10 @@
     }
     [self openDatabase];
     
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // Habilita o botão de edição
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
     // Do any additional setup after loading the view.
     [self.navigationController setToolbarHidden:NO];
     
@@ -230,6 +234,20 @@
     if (self.compraSelecionada != selecionada) {
         self.compraSelecionada = selecionada;
     }
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {  
+        // Delete the row from the data source
+        NSError *error;
+        self.debug = YES;
+        Compra *compra = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [self.fetchedResultsController.managedObjectContext deleteObject:compra];
+        [self.fetchedResultsController.managedObjectContext save:&error];
+        [self.fetchedResultsController performFetch:&error];
+    }   
 }
 
 
