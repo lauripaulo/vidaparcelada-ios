@@ -26,6 +26,7 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
                qtdeDeParcelas:(NSNumber *)parcelas
                    valorTotal:(NSDecimalNumber *)valorTotal
                      comConta:(Conta *)conta
+   assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas
                     inContext:(NSManagedObjectContext *)context;
 
 //
@@ -33,6 +34,7 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
 // ou não as parcelas já existentes
 //
 +(NSSet *)criarParcelasDaCompra:(Compra *)compra
+     assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas
                       inContext:(NSManagedObjectContext *)context;
 
 // Escolhe a primeira conta disponivel para uso
@@ -43,6 +45,17 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
 //
 +(void)apagarParcelasDaCompra:(Compra *)compra 
                     inContext:(NSManagedObjectContext *)context;
+
+// Calcula o melhor dia de compra do mes passado como parametro.
++ (NSDate *)melhorDiaDeCompraDoMes:(Conta *)conta dataAtual:(NSDate *)data;
+
+// Calcula o vencimento da parcela a partir do melhor dia de comopra
+// e a data da compra e o numero de meses a partir de hoje.
+// Para calcula a uma data de vencimento que já passou basta passar
+// uma quantidade negativa de meses no parametro i.
++ (NSDate *)calculaVencimentoDaParcela:(Conta *)conta 
+                          dataDaCompra:(NSDate *)data 
+                                 numDaParcela:(int)i;
 
 @end
 

@@ -236,6 +236,17 @@
     NSLog(@"Criada conta: %@", self.contaSelecionada);
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    // Esconde a toolbar com uma animação massa!
+    [UIView animateWithDuration:0.1 animations:^{
+        self.navigationController.toolbarHidden = YES;
+    } completion:^(BOOL finished) {    
+    }];
+
+}
+
 
 # pragma mark TableView
 
@@ -258,7 +269,6 @@
     [textField resignFirstResponder];
     return YES;
 }
-
 
 - (void)viewDidLoad
 {

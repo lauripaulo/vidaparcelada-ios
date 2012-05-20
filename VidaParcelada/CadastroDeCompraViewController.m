@@ -14,6 +14,7 @@
 - (void)animateContaPicker;
 - (IBAction)removeDataPickerAnimaed:(id)sender;
 - (IBAction)removeContasPickerAnimated:(id)sender;
+- (BOOL)verificaDataDaCompraAvisaUsuario;
 
 @end
 
@@ -44,6 +45,7 @@
 @synthesize btContaOk = _btContaOk;
 @synthesize labelValorParcela = _labelValorParcela;
 @synthesize listaDeContas = _listaDeContas;
+@synthesize considerarParcelasAnterioresPagas = _considerarParcelasAnterioresPagas;
 
 - (NSArray *)listaDeContas
 {
@@ -88,6 +90,8 @@
 - (void)atualizarCamposNaTela
 {
     self.tfDescricao.text = self.compraSelecionada.descricao;
+    self.contaSelecionada = self.compraSelecionada.origem;
+    self.dataSelecionada = self.compraSelecionada.dataDaCompra;
 
     // Mostra os dados da conta. Se a conta não tem descriçao usa os dados
     // do tipo da conta no seu lugar.
@@ -240,6 +244,7 @@
                                          qtdeDeParcelas:qtdeParcelas
                                              valorTotal:[NSDecimalNumber decimalNumberWithString:[valor stringValue]]
                                                comConta:self.contaSelecionada
+                             assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas
                                               inContext:self.vpDatabase.managedObjectContext];
     NSLog(@"Criado nova compra: %@", self.compraSelecionada);
 }
@@ -250,8 +255,42 @@
     [Compra apagarParcelasDaCompra:self.compraSelecionada inContext:self.vpDatabase.managedObjectContext];
     
     // recriar parcelas
-    [Compra criarParcelasDaCompra:self.compraSelecionada inContext:self.vpDatabase.managedObjectContext];
+    [Compra criarParcelasDaCompra:self.compraSelecionada assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas inContext:self.vpDatabase.managedObjectContext];
 }
+
+- (BOOL)verificaDataDaCompraAvisaUsuario
+{
+    BOOL resposta = NO;
+    NSDate *vencimento = [Compra calculaVencimentoDaParcela:self.contaSelecionada dataDaCompra:self.dataSelecionada numDaParcela:1];
+    // A parcela deveria já ter sido paga se o vencimento da primeira parcela
+    // for menor que a data atual
+    NSDate *dataAtual = [[NSDate alloc] init];
+    if ([[vencimento earlierDate:dataAtual] isEqualToDate:vencimento]) {
+        
+        // Perguntamos ao usuário o que ele quer fazer
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Como ficam as parcelas anteriores vencidas? Devem ser marcadas como..."
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Parcelas já pagas"
+                                                   destructiveButtonTitle:@"Pendente pagamento"
+                                                        otherButtonTitles:nil];
+        [actionSheet showInView:self.view];
+        resposta = YES;
+    }
+    return resposta;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == [actionSheet destructiveButtonIndex]) {
+        // Considerar parcelas anteriores pagas.
+        self.considerarParcelasAnterioresPagas = YES;
+	} else if (buttonIndex == [actionSheet cancelButtonIndex]) {
+        // Considerar parcelas anteriores pendentes de pagamento
+        self.considerarParcelasAnterioresPagas = NO;
+	}
+    [self salvarDados];
+}
+
 
 - (void)exitThisController {
     // Se alguma das view estiver na tela remove
@@ -265,16 +304,22 @@
     }];
 }
 
-- (IBAction)onSalvarPressionado:(id)sender {
-    
-    
+- (void)salvarDados {
     // cria apenas se não existir
     if (!self.compraSelecionada) {
         [self criarNovaCompra];
     } else {
         [self atualizarCompraAtual];
     }    
-    [self exitThisController];    
+    [self exitThisController];
+}
+
+- (IBAction)onSalvarPressionado:(id)sender {
+    
+    if (![self verificaDataDaCompraAvisaUsuario]) {
+        [self salvarDados];    
+    }
+    
 }
 
 - (IBAction)onCancelarPressionado:(id)sender {   

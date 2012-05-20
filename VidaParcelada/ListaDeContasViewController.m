@@ -76,9 +76,16 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setContaSelecionada:)]){
         [segue.destinationViewController setContaSelecionada:self.contaSelecionada];
     }
-
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    // Esconde a toolbar com uma animação massa!
+    [UIView animateWithDuration:0.3 animations:^{
+        self.navigationController.toolbarHidden = NO;
+    } completion:^(BOOL finished) {    
+        [super viewDidAppear:animated];
+    }];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

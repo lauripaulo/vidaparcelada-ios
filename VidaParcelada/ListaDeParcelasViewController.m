@@ -97,7 +97,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
     request.predicate = [NSPredicate predicateWithFormat:@"compra = %@", self.compraSelecionada];
     request.sortDescriptors = [NSArray arrayWithObject:
-                               [NSSortDescriptor sortDescriptorWithKey:@"numeroDaParcela" ascending:YES 
+                               [NSSortDescriptor sortDescriptorWithKey:@"dataVencimento" ascending:YES 
                                                               selector:@selector(compare:)]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
@@ -121,7 +121,7 @@
     NSString *valor = [self.valorFormatter stringFromNumber:parcela.valor];
     NSString *vencimento = [self.dateFormatter stringFromDate:parcela.dataVencimento];
     
-    NSString *detail = [NSString stringWithFormat:@"Valor: %@ - Vencimento: %@", valor, vencimento];
+    NSString *detail = [NSString stringWithFormat:@"%@  %@  %@", valor, vencimento, parcela.estado];
     
     cell.textLabel.text = parcela.descricao;
     cell.detailTextLabel.text = detail;

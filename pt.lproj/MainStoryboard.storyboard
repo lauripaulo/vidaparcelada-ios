@@ -51,13 +51,13 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Contas" id="xon-hO-Bgg">
+                        <barButtonItem systemItem="compose" id="xon-hO-Bgg">
                             <connections>
                                 <segue destination="1gU-OF-qUp" kind="push" identifier="Lista de Contas" id="Sh4-dt-dh0"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="CLE-3R-huK"/>
-                        <barButtonItem title="Nova compra" id="U00-W3-fqB">
+                        <barButtonItem systemItem="add" id="U00-W3-fqB">
                             <connections>
                                 <segue destination="KDO-cB-7qR" kind="push" identifier="NovaCompra" id="BqP-LO-qh3"/>
                             </connections>
@@ -67,7 +67,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="474" y="-64"/>
+            <point key="canvasLocation" x="520" y="-210"/>
         </scene>
         <!--Lista De Contas View Controller - Contas-->
         <scene sceneID="Dc5-C8-4A1">
@@ -114,12 +114,12 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem title="Adicionar conta" id="AAB-5h-wX7">
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="xKc-Ba-jX8"/>
+                        <barButtonItem systemItem="add" id="AAB-5h-wX7">
                             <connections>
                                 <segue destination="VSo-TW-Q2V" kind="push" identifier="Adicionar Conta" id="FSk-VH-Uh1"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="xKc-Ba-jX8"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Contas" id="cRk-D7-gvm"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -174,7 +174,7 @@
                     <navigationItem key="navigationItem" title="Parcelas" id="A0B-wT-873"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1196" y="-992"/>
+            <point key="canvasLocation" x="1196" y="-769"/>
         </scene>
         <!--Cadastro De Compra View Controller - Compra-->
         <scene sceneID="PrK-nZ-j2h">
@@ -253,7 +253,7 @@
                                                     <rect key="frame" x="20" y="6" width="275" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <connections>
                                                         <action selector="tfDescricaoEditingDidEnd:" destination="KDO-cB-7qR" eventType="editingDidEnd" id="dAI-sl-CnO"/>
                                                         <outlet property="delegate" destination="KDO-cB-7qR" id="HLZ-P7-fhM"/>
@@ -443,7 +443,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="1196" y="-324"/>
+            <point key="canvasLocation" x="1196" y="-210"/>
         </scene>
         <!--Cadastro Da Conta View Controller - Conta-->
         <scene sceneID="Zgr-B0-KWP">
@@ -780,7 +780,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </navigationController>
             </objects>
-            <point key="canvasLocation" x="-529" y="-512"/>
+            <point key="canvasLocation" x="-3" y="-210"/>
         </scene>
     </scenes>
     <classes>

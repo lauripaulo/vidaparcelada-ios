@@ -14,7 +14,7 @@
 #import "TipoConta+AddOn.h"
 #import "VidaParceladaHelper.h"
 
-@interface CadastroDeCompraViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIPickerViewDelegate>
+@interface CadastroDeCompraViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIPickerViewDelegate, UIActionSheetDelegate>
 
 // aqui definimos nosso banco de dados global
 // que todos os controllers irão utilizar
@@ -45,6 +45,7 @@
 @property (nonatomic, retain) NSDate *dataSelecionada;
 @property (nonatomic, retain) NSArray *listaDeContas;
 @property (nonatomic) BOOL algumCampoFoiAlterado;
+@property (nonatomic) BOOL considerarParcelasAnterioresPagas;
 
 
 // Delegate que recebe notificação quando uma conta é alterada

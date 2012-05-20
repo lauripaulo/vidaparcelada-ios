@@ -25,6 +25,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
                qtdeDeParcelas:(NSNumber *)parcelas
                    valorTotal:(NSDecimalNumber *)valorTotal
                      comConta:(Conta *)conta
+   assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas
                     inContext:(NSManagedObjectContext *)context
 {
     Compra *novaCompra = nil;
@@ -51,7 +52,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         novaCompra.valorTotal = valorTotal;
         novaCompra.qtdeTotalDeParcelas = parcelas;
         novaCompra.origem = conta;
-        [self criarParcelasDaCompra:novaCompra inContext:context];
+        [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:YES inContext:context];
         
     } else {
         NSLog(@"Descricao já existe no banco de dados, retornando o objeto.");
@@ -81,20 +82,71 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     return conta;
 }
 
++ (NSDate *)melhorDiaDeCompraDoMes:(Conta *)conta dataAtual:(NSDate *)data
+{
+    // para calcular os vencimentos das parcelas
+    NSCalendar *calendario = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSDateComponents *dataBase = [calendario components:unitFlags fromDate:data];
+
+    // Calculando o melhor dia
+    NSDateComponents *melhorDiaComps = [[NSDateComponents alloc] init];
+    [melhorDiaComps setDay:[conta.melhorDiaDeCompra intValue]];
+    [melhorDiaComps setMonth:(dataBase.month)];
+    [melhorDiaComps setYear:dataBase.year];
+    
+    NSDate *melhorDia = [calendario dateFromComponents:melhorDiaComps];
+   
+    NSLog(@"Melhor dia para compra para a data %@ é a o dia  %@", data, melhorDia);
+    
+    return melhorDia;
+   
+}
+
++ (NSDate *)calculaVencimentoDaParcela:(Conta *)conta 
+                          dataDaCompra:(NSDate *)data 
+                                 numDaParcela:(int)i
+{
+    // Vamos precisar de um calendário
+    // para calcular os vencimentos das parcelas
+    NSCalendar *calendario = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+    NSDateComponents *dataDaCompraComps = [calendario components:unitFlags fromDate:data];
+    // Calculando o vencimento...
+    NSDateComponents *dataDeVencimentoComps = [[NSDateComponents alloc] init];
+    NSDate *melhorDiaDesteMes = [Compra melhorDiaDeCompraDoMes:conta dataAtual:data];
+    
+    if ([[data laterDate:melhorDiaDesteMes] isEqualToDate:data] || [data isEqualToDate:melhorDiaDesteMes]) {
+        // Se a compra for *durante* OU *depois* do melhor dia do mes
+        // o vencimento será no próximo mês
+        [dataDeVencimentoComps setDay:[conta.diaDeVencimento intValue]];
+        [dataDeVencimentoComps setMonth:(dataDaCompraComps.month +i)];
+        [dataDeVencimentoComps setYear:dataDaCompraComps.year];        
+    } else {
+        // Se for antes do melhor dia a data de vencimento é durante o 
+        // mês atual
+        [dataDeVencimentoComps setDay:[conta.diaDeVencimento intValue]];
+        [dataDeVencimentoComps setMonth:(dataDaCompraComps.month)];
+        [dataDeVencimentoComps setYear:dataDaCompraComps.year];        
+    }
+    
+    NSDate *vencimento = [calendario dateFromComponents:dataDeVencimentoComps];
+    
+    NSLog(@"Vencimento calculado em %@ para a conta %@, data da compra %@, meses %d", vencimento, conta, data, i);
+    
+    return vencimento;
+}
+
 //
 // Cria as parcelas da compra passada como parametro com a opção de apagar
 // ou não as parcelas já existentes
 //
 +(NSSet *)criarParcelasDaCompra:(Compra *)compra
+     assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas
                       inContext:(NSManagedObjectContext *)context
 {
     NSMutableSet *parcelas = [[ NSMutableSet alloc] initWithCapacity:[compra.qtdeTotalDeParcelas intValue]];
     
-    // Vamos precisar de um calendário
-    // para calcular os vencimentos das parcelas
-    NSCalendar *calendario = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-    NSDateComponents *dataDaCompraComps = [calendario components:unitFlags fromDate:compra.dataDaCompra];
 
     NSLog(@"Criando parcelas da compra(%@)", compra);
     
@@ -105,18 +157,28 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
   
     for (int i=0; i < [compra.qtdeTotalDeParcelas intValue]; i++) {
                 
-        // Calculando o vencimento adicionando 1 mes
-        NSDateComponents *dataDeVencimentoComps = [[NSDateComponents alloc] init];
-        [dataDeVencimentoComps setDay:[compra.origem.diaDeVencimento intValue]];
-        [dataDeVencimentoComps setMonth:(dataDaCompraComps.month +i +1)];
-        [dataDeVencimentoComps setYear:dataDaCompraComps.year];
-        NSDate *vencimento = [calendario dateFromComponents:dataDeVencimentoComps];
+        NSDate *vencimento;
+        vencimento = [self calculaVencimentoDaParcela:compra.origem dataDaCompra:compra.dataDaCompra numDaParcela:i+1];
+        
+        // Avalia a a data da compra e assume parcelas anteriores como pagas
+        NSString *estado = PARCELA_PENDENTE_PAGAMENTO;
+        NSDate *hoje = [[NSDate alloc] init];
+        // Se o vencimento é anterior a data de hoje...
+        if ([[hoje earlierDate:vencimento] isEqualToDate:vencimento]) {
+            if (parcelasAntigasPagas == YES) {
+                // Vamos assumir a parcela como paga.
+                estado = PARCELA_PAGA;
+            } else {
+                // De outro modo elas estão vencidas.
+                estado = PARCELA_VENCIDA;
+            }
+        }
         
         // Vamos criar a parcela
         NSString *descricaoParcela = [@"Parcela " stringByAppendingFormat:@" %i de %i", i+1, [compra.qtdeTotalDeParcelas intValue]];
         Parcela *p = [Parcela novaParcelaComDescricao:descricaoParcela 
                                     eDataDeVencimento:vencimento 
-                                            comEstado:PARCELA_PENDENTE_PAGAMENTO 
+                                            comEstado:estado 
                                      eNumeroDaParcela:[NSNumber numberWithInt:i+1] 
                                              comValor:valorParcela 
                                       pertenceACompra:compra
