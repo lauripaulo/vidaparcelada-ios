@@ -46,6 +46,8 @@
 @property (nonatomic, retain) NSArray *listaDeContas;
 @property (nonatomic) BOOL algumCampoFoiAlterado;
 @property (nonatomic) BOOL considerarParcelasAnterioresPagas;
+@property (strong, nonatomic) UIActionSheet *actionSheetVencimento;
+@property (strong, nonatomic) UIActionSheet *actionSheetApagarParcelas;
 
 
 // Delegate que recebe notificação quando uma conta é alterada

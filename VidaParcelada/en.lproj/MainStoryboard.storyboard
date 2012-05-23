@@ -715,7 +715,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1743" y="392"/>
+            <point key="canvasLocation" x="1728" y="350"/>
         </scene>
         <!--Tipo Da Conta View Controller - Escolha a Conta-->
         <scene sceneID="XaO-dl-TDU">
@@ -762,7 +762,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="Escolha a Conta" id="ff3-aI-s01"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2272" y="392"/>
+            <point key="canvasLocation" x="2210" y="350"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="k8n-3u-7MO">

@@ -46,6 +46,33 @@
 @synthesize labelValorParcela = _labelValorParcela;
 @synthesize listaDeContas = _listaDeContas;
 @synthesize considerarParcelasAnterioresPagas = _considerarParcelasAnterioresPagas;
+@synthesize actionSheetVencimento = _actionSheetVencimento;
+@synthesize actionSheetApagarParcelas = _actionSheetApagarParcelas;
+
+- (UIActionSheet *)actionSheetVencimento
+{
+    if (_actionSheetVencimento == nil) {
+        _actionSheetVencimento = [[UIActionSheet alloc] initWithTitle:@"Como ficam as parcelas anteriores vencidas? Devem ser marcadas como..."
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Parcelas já pagas"
+                                               destructiveButtonTitle:@"Pendente pagamento"
+                                                    otherButtonTitles:nil];
+    }
+    return _actionSheetVencimento;
+}
+
+- (UIActionSheet *)actionSheetApagarParcelas
+{
+    if (_actionSheetApagarParcelas == nil) {
+        _actionSheetApagarParcelas = [[UIActionSheet alloc] initWithTitle:@"Os dados das parcelas mudaram. Será necessário apagar as parcelas atuais e criar novas parcelas."
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancelar atualização"
+                                                   destructiveButtonTitle:@"Recriar parcelas"
+                                                        otherButtonTitles:nil];
+    }
+    return _actionSheetApagarParcelas;
+}
+
 
 - (NSArray *)listaDeContas
 {
@@ -200,7 +227,10 @@
     [self setContasPickerView:nil];
     [self setBtContaOk:nil];
     [self setLabelValorParcela:nil];
+    [self setActionSheetVencimento:nil];
+    [self setActionSheetApagarParcelas:nil];
     [super viewDidUnload];
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -267,13 +297,7 @@
     NSDate *dataAtual = [[NSDate alloc] init];
     if ([[vencimento earlierDate:dataAtual] isEqualToDate:vencimento]) {
         
-        // Perguntamos ao usuário o que ele quer fazer
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Como ficam as parcelas anteriores vencidas? Devem ser marcadas como..."
-                                                                 delegate:self
-                                                        cancelButtonTitle:@"Parcelas já pagas"
-                                                   destructiveButtonTitle:@"Pendente pagamento"
-                                                        otherButtonTitles:nil];
-        [actionSheet showInView:self.view];
+        [self.actionSheetVencimento showInView:self.view];
         resposta = YES;
     }
     return resposta;
@@ -281,14 +305,26 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if (buttonIndex == [actionSheet destructiveButtonIndex]) {
-        // Considerar parcelas anteriores pagas.
-        self.considerarParcelasAnterioresPagas = YES;
-	} else if (buttonIndex == [actionSheet cancelButtonIndex]) {
-        // Considerar parcelas anteriores pendentes de pagamento
-        self.considerarParcelasAnterioresPagas = NO;
-	}
-    [self salvarDados];
+    // Verifica qual action sheet foi chamado
+    if (actionSheet == self.actionSheetVencimento) {
+        // Action sheet do estado das parcelas
+        if (buttonIndex == [actionSheet destructiveButtonIndex]) {
+            // Considerar parcelas anteriores pagas.
+            self.considerarParcelasAnterioresPagas = YES;
+        } else if (buttonIndex == [actionSheet cancelButtonIndex]) {
+            // Considerar parcelas anteriores pendentes de pagamento
+            self.considerarParcelasAnterioresPagas = NO;
+        }
+        [self salvarDados];
+    } else if (actionSheet == self.actionSheetApagarParcelas) {
+        // Action sheet informando que as parcelas precisam ser recriadas.
+        if (buttonIndex == [actionSheet destructiveButtonIndex]) {
+            // Apagar Parcelas.
+        } else if (buttonIndex == [actionSheet cancelButtonIndex]) {
+            // Considerar parcelas anteriores pendentes de pagamento
+        }
+        [self salvarDados];
+    }
 }
 
 
@@ -388,7 +424,6 @@
 }
 
 - (IBAction)tfDescricaoEditingDidEnd:(UITextField *)sender {
-    self.algumCampoFoiAlterado = YES;
     self.compraSelecionada.descricao = self.tfDescricao.text;
     // somente atualiza se a conta já tiver sido criada.
     if (self.compraSelecionada) {
