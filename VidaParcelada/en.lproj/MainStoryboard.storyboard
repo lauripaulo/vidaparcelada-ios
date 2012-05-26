@@ -56,7 +56,8 @@
                                 <segue destination="1gU-OF-qUp" kind="push" identifier="Lista de Contas" id="Sh4-dt-dh0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="CLE-3R-huK"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="27q-Mt-YvX"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="LiY-85-z4i"/>
                         <barButtonItem systemItem="add" id="U00-W3-fqB">
                             <connections>
                                 <segue destination="KDO-cB-7qR" kind="push" identifier="NovaCompra" id="BqP-LO-qh3"/>
