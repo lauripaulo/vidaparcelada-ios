@@ -17,6 +17,23 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 
 @implementation Parcela (AddOn)
 
+// gera o mes e ano atual para uso na tela de agrupamento.
+- (NSString *)tMesAno
+{
+    NSString *mesAno = nil;
+    [self willAccessValueForKey:@"dataVencimento"];
+    NSDate *dataReal = [self dataVencimento];
+    [self didAccessValueForKey:@"dataVencimento"];
+    if (mesAno == nil)
+    {
+        NSDateFormatter *dateFormatter;
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        mesAno = [dateFormatter stringFromDate:dataReal];
+    }
+    return mesAno;
+}
+
 //
 // Cria uma nova parcela
 //

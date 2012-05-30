@@ -2,7 +2,7 @@
 //  Parcela.m
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 10/05/12.
+//  Created by Lauri Laux on 29/05/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 @dynamic estado;
 @dynamic numeroDaParcela;
 @dynamic valor;
+@dynamic tMesAno;
 @dynamic compra;
 
 @end

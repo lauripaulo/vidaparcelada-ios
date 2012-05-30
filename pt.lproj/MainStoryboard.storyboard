@@ -57,6 +57,11 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="27q-Mt-YvX"/>
+                        <barButtonItem systemItem="organize" id="SNA-5l-z2l">
+                            <connections>
+                                <segue destination="NnP-yq-o4n" kind="push" id="P1u-o8-vgN"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="LiY-85-z4i"/>
                         <barButtonItem systemItem="add" id="U00-W3-fqB">
                             <connections>
@@ -69,6 +74,52 @@
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="520" y="-210"/>
+        </scene>
+        <!--Visao Mensal View Controller - Previsão-->
+        <scene sceneID="Xj9-3l-L6c">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X4c-O1-5u3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="NnP-yq-o4n" customClass="VisaoMensalViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uCY-W8-04g">
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ParcelaAgrupadaCell" textLabel="BdG-5B-e5E" detailTextLabel="j8j-u0-bhn" style="IBUITableViewCellStyleSubtitle" id="mG4-vG-Qal">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BdG-5B-e5E">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j8j-u0-bhn">
+                                            <rect key="frame" x="10" y="24" width="36" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="NnP-yq-o4n" id="0BP-Xi-g8w"/>
+                            <outlet property="delegate" destination="NnP-yq-o4n" id="x4f-Co-nuX"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Previsão" id="ckh-Pz-esJ"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="520" y="444"/>
         </scene>
         <!--Lista De Contas View Controller - Contas-->
         <scene sceneID="Dc5-C8-4A1">
@@ -784,62 +835,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="-3" y="-210"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CadastroDaContaViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDaContaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cellTipoConta" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="stepperMelhorDia" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="stepperVencimento" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfDescricaoDaConta" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfDiaVencimento" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfEmpresa" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfJuros" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfLimiteTotal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfMelhorDia" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfObjetivoMensal" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="CadastroDeCompraViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDeCompraViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="removeContasPickerAnimated:"/>
-                <relationship kind="action" name="removeDataPickerAnimaed:"/>
-                <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btContaOk" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btDataOk" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btSave" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="cellConta" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellDataDaCompra" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="contasPickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="labelValorParcela" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="stepperQtdeDeParcelas" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfQtdeDeParcelas" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfValorTotal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="topBar" candidateClass="UINavigationItem"/>
-            </relationships>
-        </class>
-        <class className="CoreDataTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
-        </class>
-        <class className="ListaDeComprasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeComprasViewController.h"/>
-        </class>
-        <class className="ListaDeContasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeContasViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnAdicionarConta" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="ListaDeParcelasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeParcelasViewController.h"/>
-        </class>
-        <class className="TipoDaContaViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TipoDaContaViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
