@@ -28,7 +28,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     {
         NSDateFormatter *dateFormatter;
         dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MMM/yyyy"];
+        [dateFormatter setDateFormat:@"MMMM/yyyy"];
         mesAno = [dateFormatter stringFromDate:dataReal];
     }
     return mesAno;
