@@ -51,7 +51,7 @@
     [self.valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

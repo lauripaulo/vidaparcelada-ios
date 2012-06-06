@@ -144,7 +144,7 @@
     [self.valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     
     // Nosso banco de dados está aberto???
     if (!self.vpDatabase) {

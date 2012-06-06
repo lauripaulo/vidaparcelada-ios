@@ -173,7 +173,7 @@
     [self.valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         
     // Se o controller receber uma conta selecionada temos que atualizar os campos
     // com os dados dessa conta.
