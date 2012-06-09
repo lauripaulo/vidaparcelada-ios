@@ -51,25 +51,25 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="compose" id="xon-hO-Bgg">
-                            <connections>
-                                <segue destination="1gU-OF-qUp" kind="push" identifier="Lista de Contas" id="Sh4-dt-dh0"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="27q-Mt-YvX"/>
-                        <barButtonItem systemItem="organize" id="SNA-5l-z2l">
+                        <barButtonItem title="Projeção" id="SNA-5l-z2l">
                             <connections>
                                 <segue destination="NnP-yq-o4n" kind="push" id="P1u-o8-vgN"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="LiY-85-z4i"/>
-                        <barButtonItem systemItem="add" id="U00-W3-fqB">
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="27q-Mt-YvX"/>
+                        <barButtonItem title="Nova compra" id="U00-W3-fqB">
                             <connections>
                                 <segue destination="KDO-cB-7qR" kind="push" identifier="NovaCompra" id="BqP-LO-qh3"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Compras" id="F0A-gd-Ky7"/>
+                    <navigationItem key="navigationItem" title="Compras" id="F0A-gd-Ky7">
+                        <barButtonItem key="leftBarButtonItem" title="Contas" id="xon-hO-Bgg">
+                            <connections>
+                                <segue destination="1gU-OF-qUp" kind="push" identifier="Lista de Contas" id="Sh4-dt-dh0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
@@ -167,7 +167,7 @@
                     </tableView>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="xKc-Ba-jX8"/>
-                        <barButtonItem systemItem="add" id="AAB-5h-wX7">
+                        <barButtonItem title="Nova conta" id="AAB-5h-wX7">
                             <connections>
                                 <segue destination="VSo-TW-Q2V" kind="push" identifier="Adicionar Conta" id="FSk-VH-Uh1"/>
                             </connections>

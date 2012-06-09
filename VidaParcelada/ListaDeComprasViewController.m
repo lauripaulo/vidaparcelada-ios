@@ -89,7 +89,12 @@
         // O banco de dados existe, vamos abri-lo
         NSLog(@"Banco de dados encontrado como estao FECHADO. Abrindo...");
         [self.vpDatabase openWithCompletionHandler:^(BOOL sucess) {
-            [self setupFetchedResultsController];
+            if (sucess) {
+                [self setupFetchedResultsController];
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"Erro fatal abrindo BD!!!");
+            }
         }];
     } else if (self.vpDatabase.documentState == UIDocumentStateNormal) {
         // o banco de dados já está aberto
