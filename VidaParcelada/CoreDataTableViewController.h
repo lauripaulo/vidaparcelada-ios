@@ -19,10 +19,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-// Constante com o nome do banco de dados que o VP ira
-// utizar em todos os controllers
-extern NSString * const NOME_VP_DB;
-
 @interface CoreDataTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 // The controller (this class fetches nothing if this is not set).

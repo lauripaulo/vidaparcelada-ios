@@ -20,6 +20,17 @@
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 
+// sobrescreve o setter para o BD do VP
+// e inicializa o fetchResultsController
+- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
+{
+    if (_vpDatabase != mangedDocument) {
+        _vpDatabase = mangedDocument;
+        [self setupFetchedResultsController];
+    }
+}
+
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -43,9 +54,7 @@
 
 // define a query que irá popular a tabela atual
 -(void)setupFetchedResultsController
-{
-    self.debug = YES;
-    
+{   
     // mostrar as compras que vão vencer apenas a partir do dia primeiro 
     // do mês atual.
     NSDate *hoje = [[NSDate alloc] init];
@@ -142,7 +151,6 @@
 {
     [super viewDidLoad];
     
-    [self setupFetchedResultsController];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.valorFormatter = [[NSNumberFormatter alloc] init];
@@ -168,22 +176,10 @@
     return [sectionInfo name];
 } 
 
-- (void)viewDidAppear:(BOOL)animated{
-    // Esconde a toolbar com uma animação massa!
-    [UIView animateWithDuration:0.3 animations:^{
-        self.navigationController.toolbarHidden = YES;
-    } completion:^(BOOL finished) {    
-    }];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    // Volta o toolbar com uma animação massa.
-    [UIView animateWithDuration:0.3 animations:^{
-        self.navigationController.toolbarHidden = NO;
-    } completion:^(BOOL finished) {    
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-    [super viewWillDisappear:animated];
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[self tableView] reloadData];
 }
 
 @end

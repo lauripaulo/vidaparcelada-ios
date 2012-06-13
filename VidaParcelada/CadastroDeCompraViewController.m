@@ -192,14 +192,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    // Esconde a toolbar com uma animação massa!
-    [UIView animateWithDuration:0.3 animations:^{
-        self.navigationController.toolbarHidden = YES;
-    } completion:^(BOOL finished) {    
-    }];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -332,12 +324,7 @@
     // Se alguma das view estiver na tela remove
     [self removeAllPickers];
     
-    // Volta o toolbar com uma animação massa.
-    [UIView animateWithDuration:0.3 animations:^{
-        self.navigationController.toolbarHidden = NO;
-    } completion:^(BOOL finished) {    
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)salvarDados {

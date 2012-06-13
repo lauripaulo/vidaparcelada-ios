@@ -10,6 +10,7 @@
 #import "TipoConta+AddOn.h"
 #import "Conta+AddOn.h"
 #import "CadastroDeCompraViewController.h"
+#import "RootTabBarController.h"
 
 @interface ListaDeComprasViewController ()
 
@@ -23,6 +24,16 @@
 @synthesize compraSelecionada = _compraSelecionada;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
+
+// sobrescreve o setter para o BD do VP
+// e inicializa o fetchResultsController
+- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
+{
+    if (_vpDatabase != mangedDocument) {
+        _vpDatabase = mangedDocument;
+        [self setupFetchedResultsController];
+    }
+}
 
 #pragma mark - AlteracaoDeCompraDelegate
 
@@ -44,64 +55,6 @@
                                                                                    cacheName:nil]; 
 }
 
-// Caso o banco de dados esteja sendo criado agora temos que
-// inserir os dados iniciais para que o app esteja com um 
-// estado satisfatório para o primeiro uso.
--(void)insertDefaultDbData:(UIManagedDocument *)document
-{
-    // Temos que inserir os tipos de conta padrão, o usuário
-    // na versão 1.0 não podera incluir tipos de conta.
-    TipoConta *cartao = [TipoConta contaComNome:@"Cartão de crédito" eDescricao:@"Cartão com data de vencimento" identificadorDeTipo:1 inContext:document.managedObjectContext];
-    NSLog(@"Criado cartao: %@", cartao);
-    TipoConta *cheque = [TipoConta contaComNome:@"Cheque pré-datado" eDescricao:@"Cheques para pagamento de uma compra." identificadorDeTipo:2 inContext:document.managedObjectContext];
-    NSLog(@"Criado cheque: %@", cheque);
-    TipoConta *carnes = [TipoConta contaComNome:@"Carnê de Pagamento" eDescricao:@"Parcelas para pagamento de uma compra" identificadorDeTipo:3 inContext:document.managedObjectContext];
-    NSLog(@"Criado Carnê de Pagamento %@", carnes);
-    TipoConta *crediario = [TipoConta contaComNome:@"Crediário" eDescricao:@"Parcelamento diretamente com a loja" identificadorDeTipo:4 inContext:document.managedObjectContext];
-    NSLog(@"Criado Crediário: %@", crediario);
-    
-    Conta *conta = [Conta contaComDescricao:@"Yahoo VISA" 
-                                  daEmpresa:@"Credicard" 
-                         comVencimentoNoDia:[NSNumber numberWithInt:17]
-                                  eJurosMes:[NSDecimalNumber decimalNumberWithString:@"8.5"]
-                             comLimiteTotal:[NSDecimalNumber decimalNumberWithString:@"3000"]
-                           eLimiteDoUsuario:[NSDecimalNumber decimalNumberWithString:@"1500"] 
-                       comMelhorDiaDeCompra:[NSNumber numberWithInt:4] 
-                                  inContext:document.managedObjectContext];
-    NSLog(@"Criada conta: %@", conta);
-
-    // Depois de tudo criado temos que continuar inicializado nossa 
-    // interface inicial.
-    [self setupFetchedResultsController];
-}
-
--(void)openDatabase
-{
-    self.debug = YES;
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[self.vpDatabase.fileURL path]]){
-        // O banco de dados não existe.
-        NSLog(@"Banco de dados não encontrado. Criando...");
-        [self.vpDatabase saveToURL:self.vpDatabase.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-            [self insertDefaultDbData:self.vpDatabase];
-        }];
-    } else if (self.vpDatabase.documentState == UIDocumentStateClosed) {
-        // O banco de dados existe, vamos abri-lo
-        NSLog(@"Banco de dados encontrado como estao FECHADO. Abrindo...");
-        [self.vpDatabase openWithCompletionHandler:^(BOOL sucess) {
-            if (sucess) {
-                [self setupFetchedResultsController];
-                [self.tableView reloadData];
-            } else {
-                NSLog(@"Erro fatal abrindo BD!!!");
-            }
-        }];
-    } else if (self.vpDatabase.documentState == UIDocumentStateNormal) {
-        // o banco de dados já está aberto
-        NSLog(@"Banco de dados encontrado e aberto!");
-        [self setupFetchedResultsController];
-    }
-}
 
 
 // Temos que passar o banco de dados que abrimos aqui
@@ -150,29 +103,11 @@
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    
-    // Nosso banco de dados está aberto???
-    if (!self.vpDatabase) {
         
-        // Para abrir/criar o banco de dados do VP temos que pegar a pasta do usuário
-        // que o app pode escrever.
-        NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        
-        // depois de termos o diretorio vamos colocar o nome do bd na url
-        url = [url URLByAppendingPathComponent:NOME_VP_DB];
-        
-        // inicializando o DB
-        self.vpDatabase = [[UIManagedDocument alloc] initWithFileURL:url];
-    }
-    [self openDatabase];
-    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // Habilita o botão de edição
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
-    // Do any additional setup after loading the view.
-    [self.navigationController setToolbarHidden:NO];
-    
+        
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

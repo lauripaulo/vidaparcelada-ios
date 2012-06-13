@@ -19,15 +19,15 @@
 @synthesize dateFormatter = _dateFormatter;
 @synthesize compraSelecionada = _compraSelecionada;
 
-
-
-
-
-
-
-
-
-
+// sobrescreve o setter para o BD do VP
+// e inicializa o fetchResultsController
+- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
+{
+    if (_vpDatabase != mangedDocument) {
+        _vpDatabase = mangedDocument;
+        [self setupFetchedResultsController];
+    }
+}
 
 
 
@@ -44,7 +44,6 @@
 {
     [super viewDidLoad];
     
-    [self setupFetchedResultsController];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     self.valorFormatter = [[NSNumberFormatter alloc] init];

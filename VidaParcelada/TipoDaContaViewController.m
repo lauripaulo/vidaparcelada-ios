@@ -17,6 +17,17 @@
 @synthesize tipoSelecionado = _tipoSelecionado;
 @synthesize tipoContaDelegate = _tipoContaDelegate;
 
+// sobrescreve o setter para o BD do VP
+// e inicializa o fetchResultsController
+- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
+{
+    if (_vpDatabase != mangedDocument) {
+        _vpDatabase = mangedDocument;
+        [self setupFetchedResultsController];
+    }
+}
+
+
 #pragma mark TableView
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -33,9 +44,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self setupFetchedResultsController];
-    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

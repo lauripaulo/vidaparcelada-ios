@@ -7,9 +7,6 @@
 
 #import "CoreDataTableViewController.h"
 
-// Constante com o nome do banco de dados
-NSString * const NOME_VP_DB = @"Vida Parcelada DB";
-
 @interface CoreDataTableViewController()
 @property (nonatomic) BOOL beganUpdates;
 @end
