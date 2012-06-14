@@ -72,11 +72,14 @@
         self.compraSelecionada = [self.fetchedResultsController objectAtIndexPath:indexPath];
     }
 
-    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
-        [segue.destinationViewController setVpDatabase:self.vpDatabase];
-    }
+    // primeiro informa a compra porque a pesquisa das parcelas precisa da compra.
     if ([segue.destinationViewController respondsToSelector:@selector(setCompraSelecionada:)]){
         [segue.destinationViewController setCompraSelecionada:self.compraSelecionada];
+    }
+
+    // Por último passa o managedDocument
+    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
+        [segue.destinationViewController setVpDatabase:self.vpDatabase];
     }
 }
 

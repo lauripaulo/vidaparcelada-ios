@@ -29,7 +29,13 @@
     }
 }
 
-
+- (void) setCompraSelecionada:(Compra *)novaCompra
+{
+    if (_compraSelecionada != novaCompra) {
+        _compraSelecionada = novaCompra;
+    }
+    [self.tableView reloadData];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -44,13 +50,16 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
     self.valorFormatter = [[NSNumberFormatter alloc] init];
     [self.valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+
+    // Remove o botão editar
+    UINavigationBar *morenavbar = self.navigationController.navigationBar;
+    UINavigationItem *morenavitem = morenavbar.topItem;
+    morenavitem.rightBarButtonItem = nil;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -127,6 +136,11 @@
     
     return cell;
     
+}
+
+// Não permite edição das celulas
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleNone;
 }
 
 #pragma mark - Table view data source

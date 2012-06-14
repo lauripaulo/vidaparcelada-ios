@@ -55,6 +55,8 @@
 // define a query que irá popular a tabela atual
 -(void)setupFetchedResultsController
 {   
+    self.debug = YES;
+    
     // mostrar as compras que vão vencer apenas a partir do dia primeiro 
     // do mês atual.
     NSDate *hoje = [[NSDate alloc] init];
@@ -71,7 +73,7 @@
     
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
-    request.predicate = [NSPredicate predicateWithFormat:@"dataVencimento = %@", vencimento];
+    request.predicate = [NSPredicate predicateWithFormat:@"dataVencimento >= %@", vencimento];
     request.sortDescriptors = [NSArray arrayWithObject:
                                [NSSortDescriptor sortDescriptorWithKey:@"dataVencimento" ascending:YES 
                                                               selector:@selector(compare:)]];
@@ -129,11 +131,11 @@
     if (qtdeDeParcelas > 1) {
         descricaoDaParcela = @"compras";
     }
-    NSString *footer = [NSString stringWithFormat:@"%d %@ no total de %@", qtdeDeParcelas, descricaoDaParcela, valor];
+    NSString *footer = [NSString stringWithFormat:@" %d %@ no total de %@ ", qtdeDeParcelas, descricaoDaParcela, valor];
     
     // Para customizar o footer da tabela com os dados da soma
     // parcelas e o numero de parcelas
-    UIColor *fundo = [UIColor whiteColor];
+    UIColor *fundo = [UIColor lightGrayColor];
     UIColor *letra = [UIColor darkGrayColor];
     UIView *myHeader = [[UIView alloc] initWithFrame:CGRectMake(0,60,320,20)];
     myHeader.backgroundColor = fundo;
@@ -147,17 +149,27 @@
     return myHeader;
 }
 
+// Não quero que as letras de indice apareçam do lado direito da table
+// portanto vamos retornar sempre vazio.
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+	NSMutableArray *index = [[NSMutableArray alloc] init];
+	return index;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.valorFormatter = [[NSNumberFormatter alloc] init];
     [self.valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    // Remove o botão editar
+    UINavigationBar *morenavbar = self.navigationController.navigationBar;
+    UINavigationItem *morenavitem = morenavbar.topItem;
+    morenavitem.rightBarButtonItem = nil;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -180,6 +192,11 @@
 {
     [super viewWillAppear:animated];
     [[self tableView] reloadData];
+}
+
+// Não permite edição das celulas
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleNone;
 }
 
 @end

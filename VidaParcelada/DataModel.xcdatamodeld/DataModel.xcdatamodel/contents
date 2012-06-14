@@ -2,7 +2,7 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Compra" representedClassName="Compra" syncable="YES">
         <attribute name="dataDaCompra" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="descricao" optional="YES" attributeType="String" minValueString="1" maxValueString="128" syncable="YES"/>
+        <attribute name="descricao" optional="YES" attributeType="String" minValueString="1" maxValueString="128" indexed="YES" syncable="YES"/>
         <attribute name="estado" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="qtdeTotalDeParcelas" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="1" syncable="YES"/>
         <attribute name="valorTotal" optional="YES" attributeType="Decimal" minValueString="0" defaultValueString="0.0" syncable="YES"/>
@@ -25,7 +25,7 @@
         <attribute name="descricao" optional="YES" attributeType="String" minValueString="1" maxValueString="100" syncable="YES"/>
         <attribute name="estado" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numeroDaParcela" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="1" syncable="YES"/>
-        <attribute name="tMesAno" transient="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="tMesAno" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="valor" optional="YES" attributeType="Decimal" minValueString="0" defaultValueString="0.0" syncable="YES"/>
         <relationship name="compra" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Compra" inverseName="parcelas" inverseEntity="Compra" syncable="YES"/>
     </entity>

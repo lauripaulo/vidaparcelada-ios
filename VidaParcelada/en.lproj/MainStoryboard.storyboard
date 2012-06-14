@@ -877,6 +877,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="sHx-wu-yyq">
+                        <rect key="frame" x="0.0" y="416" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="NnP-yq-o4n" kind="relationship" relationship="rootViewController" id="cY6-zB-v63"/>
                     </connections>
@@ -885,68 +889,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="520" y="1004"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CadastroDaContaViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDaContaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cellTipoConta" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="stepperMelhorDia" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="stepperVencimento" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfDescricaoDaConta" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfDiaVencimento" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfEmpresa" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfJuros" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfLimiteTotal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfMelhorDia" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfObjetivoMensal" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="CadastroDeCompraViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDeCompraViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="removeContasPickerAnimated:"/>
-                <relationship kind="action" name="removeDataPickerAnimaed:"/>
-                <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btContaOk" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btDataOk" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btSave" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="cellConta" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellDataDaCompra" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="contasPickerView" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="labelValorParcela" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="stepperQtdeDeParcelas" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfQtdeDeParcelas" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfValorTotal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="topBar" candidateClass="UINavigationItem"/>
-            </relationships>
-        </class>
-        <class className="CoreDataTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
-        </class>
-        <class className="ListaDeComprasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeComprasViewController.h"/>
-        </class>
-        <class className="ListaDeContasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeContasViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnAdicionarConta" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="ListaDeParcelasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeParcelasViewController.h"/>
-        </class>
-        <class className="RootTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RootTabBarController.h"/>
-        </class>
-        <class className="TipoDaContaViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TipoDaContaViewController.h"/>
-        </class>
-        <class className="VisaoMensalViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VisaoMensalViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

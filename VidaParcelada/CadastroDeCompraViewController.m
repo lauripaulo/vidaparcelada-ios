@@ -260,7 +260,7 @@
         valor = [NSNumber numberWithInt:0];
     }
     
-    self.compraSelecionada = [Compra compraComDescricao:self.tfDescricao.text
+    Compra *novaCompra = [Compra compraComDescricao:self.tfDescricao.text
                                            dataDaCompra:self.dataSelecionada 
                                               comEstado:COMPRA_PENDENTE_PAGAMENTO 
                                          qtdeDeParcelas:qtdeParcelas
@@ -268,6 +268,15 @@
                                                comConta:self.contaSelecionada
                              assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas
                                               inContext:self.vpDatabase.managedObjectContext];
+
+    // salva o contexto do core data para evitar perda de dados
+    NSError *error = nil;
+    [self.vpDatabase.managedObjectContext save:&error];
+
+    // Notifica o delegate que a compra mudou
+    self.compraSelecionada = novaCompra;
+    [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
+
     NSLog(@"Criado nova compra: %@", self.compraSelecionada);
 }
 

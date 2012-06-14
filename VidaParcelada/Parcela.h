@@ -2,7 +2,7 @@
 //  Parcela.h
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 29/05/12.
+//  Created by Lauri Laux on 13/06/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -17,8 +17,8 @@
 @property (nonatomic, retain) NSString * descricao;
 @property (nonatomic, retain) NSString * estado;
 @property (nonatomic, retain) NSNumber * numeroDaParcela;
-@property (nonatomic, retain) NSDecimalNumber * valor;
 @property (nonatomic, retain) NSString * tMesAno;
+@property (nonatomic, retain) NSDecimalNumber * valor;
 @property (nonatomic, retain) Compra *compra;
 
 @end
