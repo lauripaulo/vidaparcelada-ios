@@ -31,7 +31,6 @@
 @synthesize tfDescricaoDaConta = _tfDescricaoDaConta;
 @synthesize tfEmpresa = _tfEmpresa;
 @synthesize tfLimiteTotal = _tfLimiteTotal;
-@synthesize tfObjetivoMensal = _tfObjetivoMensal;
 @synthesize tfJuros = _tfJuros;
 @synthesize tfDiaVencimento = _tfDiaVencimento;
 @synthesize tfMelhorDia = _tfMelhorDia;
@@ -63,16 +62,7 @@
                           usandoFormatter:self.valorFormatter
                                  eQtdeDeDigitos:8];
         result = NO;
-        
-    } else if (textField == self.tfObjetivoMensal) {
-        
-        [VidaParceladaHelper formataValor:textField 
-                               novoDigito:string 
-                                 comRange:range 
-                          usandoFormatter:self.valorFormatter
-                                 eQtdeDeDigitos:8];
-        result = NO;
-        
+                
     } else if (textField == self.tfJuros) {
         
         [VidaParceladaHelper formataValor:textField 
@@ -96,7 +86,6 @@
     self.tfDescricaoDaConta.text = self.contaSelecionada.descricao;
     self.tfEmpresa.text = self.contaSelecionada.empresa;
     self.tfLimiteTotal.text = [self.valorFormatter stringFromNumber:self.contaSelecionada.limite];
-    self.tfObjetivoMensal.text = [self.valorFormatter stringFromNumber:self.contaSelecionada.limiteUsuario];
     self.tfJuros.text = [self.contaSelecionada.jurosMes stringValue];
     self.tfDiaVencimento.text = [self.contaSelecionada.diaDeVencimento stringValue];
     self.tfMelhorDia.text = [self.contaSelecionada.melhorDiaDeCompra stringValue];
@@ -181,25 +170,6 @@
     NSLog(@"self.contaSelecionada.limite - valor: %@", self.contaSelecionada.limite);
 }
 
-// Chamado quando a edição no campo limite total inicia
-- (IBAction)tfObjetivoMensalDidBegin:(UITextField *)sender {
-    NSLog(@"tfObjetivoMensalDidBegin - valor: %@", sender.text);
-    
-}
-
-// Chamado quando a edição no campo objetivo mensal termina
-- (IBAction)tfObjetivoMensalEditingDidEnd:(UITextField *)sender {    
-    if ([sender.text length] > 0) {
-        NSNumber *valor;
-        valor = [self.valorFormatter numberFromString:sender.text];
-        self.contaSelecionada.limiteUsuario = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
-        // Notifica o delegate da alteração
-        [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
-    }
-    // Log da operação
-    NSLog(@"self.contaSelecionada.limiteUsuario - valor: %@", self.contaSelecionada.limiteUsuario);
-}
-
 // Chamado quando a edição no campo juros inicia
 - (IBAction)tfJurosEditingDidBegin:(UITextField *)sender {
     NSLog(@"tfJurosEditingDidBegin - valor: %@", sender.text);
@@ -225,7 +195,6 @@
                                   comVencimentoNoDia:[NSNumber numberWithInt:1]
                                            eJurosMes:[NSDecimalNumber decimalNumberWithString:@"0"]
                                       comLimiteTotal:[NSDecimalNumber decimalNumberWithString:@"0"]
-                                    eLimiteDoUsuario:[NSDecimalNumber decimalNumberWithString:@"0"] 
                                 comMelhorDiaDeCompra:[NSNumber numberWithInt:1] 
                                            inContext:self.vpDatabase.managedObjectContext];
     
@@ -338,7 +307,6 @@
     [self setTfDescricaoDaConta:nil];
     [self setTfEmpresa:nil];
     [self setTfLimiteTotal:nil];
-    [self setTfObjetivoMensal:nil];
     [self setTfJuros:nil];
     [self setTfDiaVencimento:nil];
     [self setTfMelhorDia:nil];

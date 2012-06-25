@@ -30,4 +30,17 @@
      usandoFormatter:(NSNumberFormatter *)formatter
       eQtdeDeDigitos:(int)qtdeDigitos;
 
+// Retorna o objetivo de gasto global do NSUserDefaults
+// em formato de string (que é nativamente suportado)
+// e retorna convertido para NSDecimalNumber para quem chamou a função.
++ (NSDecimalNumber *) retornaLimiteDeGastoGlobal;
+
+// Retorna o objetivo de gasto global do NSUserDefaults
+// em formato de string (que é nativamente suportado)
++ (NSString *) retornaLimiteDeGastoGlobalStr;
+
+// Salva o limite de gasto global em formato de string
+// no NSUserDefaults para uso posterior
++ (void) salvaLimiteDeGastoGlobalStr:(NSString *)total;
+
 @end

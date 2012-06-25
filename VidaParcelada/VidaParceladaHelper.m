@@ -209,4 +209,42 @@
 
 }
 
++ (NSDecimalNumber *) retornaLimiteDeGastoGlobal
+{
+    NSDecimalNumber *valorFinal = [[NSDecimalNumber alloc] initWithInt:0];
+    
+    NSString *currentStringVal = [VidaParceladaHelper retornaLimiteDeGastoGlobalStr];
+ 
+    NSNumberFormatter *valorFormatter;
+    valorFormatter = [[NSNumberFormatter alloc] init];
+    [valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
+    NSNumber *valor;
+    valor = [valorFormatter numberFromString:currentStringVal];
+    valorFinal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
+    NSLog (@"retornaLimiteDeGastoGlobal - objetivo=%@(DecimalNumber)", valorFinal);
+
+    return valorFinal;
+}
+
+
++ (NSString *) retornaLimiteDeGastoGlobalStr
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *currentStringVal = [defaults objectForKey:@"objetivo"];
+    NSLog (@"retornaLimiteDeGastoGlobalStr - objetivo=%@(str)", currentStringVal);
+    
+    return currentStringVal;
+}
+
+
++ (void) salvaLimiteDeGastoGlobalStr:(NSString *)total
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:total forKey:@"objetivo"];
+    [defaults synchronize];
+    NSLog (@"salvaLimiteDeGastoGlobal - objetivo=%@", total);
+}
+
 @end

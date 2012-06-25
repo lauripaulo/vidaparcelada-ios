@@ -16,7 +16,6 @@
           comVencimentoNoDia:(NSNumber *) diaDeVencimento
                    eJurosMes:(NSDecimalNumber *) jurosMes
               comLimiteTotal:(NSDecimalNumber *) limite
-            eLimiteDoUsuario:(NSDecimalNumber *) limiteUsuario
         comMelhorDiaDeCompra:(NSNumber *) melhorDiaDeCompra
                    inContext:(NSManagedObjectContext *)context
 {
@@ -43,7 +42,6 @@
         conta.diaDeVencimento = diaDeVencimento;
         conta.jurosMes = jurosMes;
         conta.limite = limite;
-        conta.limiteUsuario = limiteUsuario;
         conta.melhorDiaDeCompra = melhorDiaDeCompra;
         conta.compras = nil; // conta nova não tem compras...
         

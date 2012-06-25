@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfDescricaoDaConta;
 @property (weak, nonatomic) IBOutlet UITextField *tfEmpresa;
 @property (weak, nonatomic) IBOutlet UITextField *tfLimiteTotal;
-@property (weak, nonatomic) IBOutlet UITextField *tfObjetivoMensal;
 @property (weak, nonatomic) IBOutlet UITextField *tfJuros;
 @property (weak, nonatomic) IBOutlet UITextField *tfDiaVencimento;
 @property (weak, nonatomic) IBOutlet UITextField *tfMelhorDia;

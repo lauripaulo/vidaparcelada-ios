@@ -13,6 +13,8 @@
 		7935EF961585555F00C916E0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D33354156F116600D034D3 /* Icon.png */; };
 		7935EF971585556600C916E0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D33355156F116600D034D3 /* Icon@2x.png */; };
 		79362F83153D122E005459E8 /* Conta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F82153D122E005459E8 /* Conta+AddOn.m */; };
+		794FF62F15975D8A0009D1DD /* Conta.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FF62E15975D8A0009D1DD /* Conta.m */; };
+		794FF634159761360009D1DD /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FF633159761360009D1DD /* OptionsTableViewController.m */; };
 		796CE1E0153B13E300B6AE11 /* TipoConta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */; };
 		797D9D3115463C9000D3B067 /* Compra+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D3015463C9000D3B067 /* Compra+AddOn.m */; };
 		797D9D341546458800D3B067 /* Parcela+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D331546458800D3B067 /* Parcela+AddOn.m */; };
@@ -27,7 +29,6 @@
 		799C54AF15430522009A235D /* VidaParceladaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 799C54AE15430522009A235D /* VidaParceladaHelper.m */; };
 		79A56C5D154486E9005B94C2 /* CadastroDeCompraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */; };
 		79BC16F51589881800D234AF /* Parcela.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC16F41589881800D234AF /* Parcela.m */; };
-		79BC16F81589881800D234AF /* Conta.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC16F71589881800D234AF /* Conta.m */; };
 		79BC16FB1589881800D234AF /* TipoConta.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC16FA1589881800D234AF /* TipoConta.m */; };
 		79BC16FE1589881900D234AF /* Compra.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BC16FD1589881900D234AF /* Compra.m */; };
 		79D33359156F119F00D034D3 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D33358156F119F00D034D3 /* Icon-72.png */; };
@@ -55,6 +56,11 @@
 		7935EF901585340500C916E0 /* RootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarController.m; sourceTree = "<group>"; };
 		79362F81153D122E005459E8 /* Conta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Conta+AddOn.h"; sourceTree = "<group>"; };
 		79362F82153D122E005459E8 /* Conta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Conta+AddOn.m"; sourceTree = "<group>"; };
+		794FF62D15975D8A0009D1DD /* Conta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conta.h; sourceTree = "<group>"; };
+		794FF62E15975D8A0009D1DD /* Conta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conta.m; sourceTree = "<group>"; };
+		794FF632159761360009D1DD /* OptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
+		794FF633159761360009D1DD /* OptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsTableViewController.m; sourceTree = "<group>"; };
+		794FF63B159801D90009D1DD /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		796CE1DE153B13E300B6AE11 /* TipoConta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TipoConta+AddOn.h"; sourceTree = "<group>"; };
 		796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TipoConta+AddOn.m"; sourceTree = "<group>"; };
 		797D9D2F15463C9000D3B067 /* Compra+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Compra+AddOn.h"; sourceTree = "<group>"; };
@@ -80,13 +86,10 @@
 		79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDeCompraViewController.m; sourceTree = "<group>"; };
 		79BC16F31589881800D234AF /* Parcela.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parcela.h; sourceTree = "<group>"; };
 		79BC16F41589881800D234AF /* Parcela.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parcela.m; sourceTree = "<group>"; };
-		79BC16F61589881800D234AF /* Conta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conta.h; sourceTree = "<group>"; };
-		79BC16F71589881800D234AF /* Conta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conta.m; sourceTree = "<group>"; };
 		79BC16F91589881800D234AF /* TipoConta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoConta.h; sourceTree = "<group>"; };
 		79BC16FA1589881800D234AF /* TipoConta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoConta.m; sourceTree = "<group>"; };
 		79BC16FC1589881800D234AF /* Compra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compra.h; sourceTree = "<group>"; };
 		79BC16FD1589881900D234AF /* Compra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Compra.m; sourceTree = "<group>"; };
-		79CFFAFB15883709004FBEA2 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		79D33354156F116600D034D3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		79D33355156F116600D034D3 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		79D33358156F119F00D034D3 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -129,12 +132,12 @@
 		7924ECD11537C32C00D47F92 /* db */ = {
 			isa = PBXGroup;
 			children = (
+				794FF62D15975D8A0009D1DD /* Conta.h */,
+				794FF62E15975D8A0009D1DD /* Conta.m */,
 				79BC16FC1589881800D234AF /* Compra.h */,
 				79BC16FD1589881900D234AF /* Compra.m */,
 				79BC16F91589881800D234AF /* TipoConta.h */,
 				79BC16FA1589881800D234AF /* TipoConta.m */,
-				79BC16F61589881800D234AF /* Conta.h */,
-				79BC16F71589881800D234AF /* Conta.m */,
 				79BC16F31589881800D234AF /* Parcela.h */,
 				79BC16F41589881800D234AF /* Parcela.m */,
 				79362F81153D122E005459E8 /* Conta+AddOn.h */,
@@ -247,6 +250,8 @@
 				79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */,
 				79A56C5B154486E9005B94C2 /* CadastroDeCompraViewController.h */,
 				79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */,
+				794FF632159761360009D1DD /* OptionsTableViewController.h */,
+				794FF633159761360009D1DD /* OptionsTableViewController.m */,
 			);
 			name = Cadastros;
 			sourceTree = "<group>";
@@ -366,9 +371,10 @@
 				790B519815742FD3006877CF /* VisaoMensalViewController.m in Sources */,
 				7935EF911585340500C916E0 /* RootTabBarController.m in Sources */,
 				79BC16F51589881800D234AF /* Parcela.m in Sources */,
-				79BC16F81589881800D234AF /* Conta.m in Sources */,
 				79BC16FB1589881800D234AF /* TipoConta.m in Sources */,
 				79BC16FE1589881900D234AF /* Compra.m in Sources */,
+				794FF62F15975D8A0009D1DD /* Conta.m in Sources */,
+				794FF634159761360009D1DD /* OptionsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,7 +385,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7900B300155232C80050C652 /* en */,
-				79CFFAFB15883709004FBEA2 /* pt */,
+				794FF63B159801D90009D1DD /* pt */,
 			);
 			name = MainStoryboard.storyboard;
 			path = ..;

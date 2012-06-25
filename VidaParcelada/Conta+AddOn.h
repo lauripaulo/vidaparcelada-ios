@@ -18,7 +18,6 @@
        comVencimentoNoDia:(NSNumber *) diaDeVencimento
                 eJurosMes:(NSDecimalNumber *) jurosMes
            comLimiteTotal:(NSDecimalNumber *) limite
-         eLimiteDoUsuario:(NSDecimalNumber *) limiteUsuario
      comMelhorDiaDeCompra:(NSNumber *) melhorDiaDeCompra
                 inContext:(NSManagedObjectContext *)context;
 

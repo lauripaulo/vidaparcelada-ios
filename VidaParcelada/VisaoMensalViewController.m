@@ -9,6 +9,7 @@
 #import "VisaoMensalViewController.h"
 #import "Parcela+AddOn.h"
 #import "Compra+AddOn.h"
+#import "VidaParceladaHelper.h"
 
 @interface VisaoMensalViewController ()
 
@@ -133,11 +134,26 @@
     }
     NSString *footer = [NSString stringWithFormat:@" %d %@ no total de %@ ", qtdeDeParcelas, descricaoDaParcela, valor];
     
+    
     // Para customizar o footer da tabela com os dados da soma
     // parcelas e o numero de parcelas
     UIColor *fundo = [UIColor lightGrayColor];
     UIColor *letra = [UIColor darkGrayColor];
-    UIView *myHeader = [[UIView alloc] initWithFrame:CGRectMake(0,60,320,20)];
+    
+    // Verifica se o valor do mês ultrapassa o objetivo mensal estabelecido pelo usuário
+    NSDecimalNumber *objetivo = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
+    if ([valorMes compare:objetivo] == NSOrderedDescending) {
+        // A comparação acima mostsa que o valorMes é maior que o
+        // objetivo mensal. Sintaxe estranha, mas descrita melhore em:
+        // http://www.innerexception.com/2011/02/how-to-compare-nsdecimalnumbers-in.html
+        //
+        fundo = [UIColor redColor];
+        letra = [UIColor blackColor];
+        footer = [NSString stringWithFormat:@"(Atenção) %d %@ no total de %@ ", qtdeDeParcelas, descricaoDaParcela, valor];
+    }
+    
+    
+    UIView *myHeader = [[UIView alloc] initWithFrame:CGRectMake(0,60,320,40)];
     myHeader.backgroundColor = fundo;
     UILabel *myLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(0,0,320,20)] ;
     myLabel1.font = [UIFont boldSystemFontOfSize:14.0];

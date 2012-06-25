@@ -2,7 +2,7 @@
 //  Conta.m
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 13/06/12.
+//  Created by Lauri Laux on 24/06/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -18,7 +18,6 @@
 @dynamic empresa;
 @dynamic jurosMes;
 @dynamic limite;
-@dynamic limiteUsuario;
 @dynamic melhorDiaDeCompra;
 @dynamic compras;
 @dynamic tipo;

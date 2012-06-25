@@ -2,7 +2,7 @@
 //  Conta.h
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 13/06/12.
+//  Created by Lauri Laux on 24/06/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -18,7 +18,6 @@
 @property (nonatomic, retain) NSString * empresa;
 @property (nonatomic, retain) NSDecimalNumber * jurosMes;
 @property (nonatomic, retain) NSDecimalNumber * limite;
-@property (nonatomic, retain) NSDecimalNumber * limiteUsuario;
 @property (nonatomic, retain) NSNumber * melhorDiaDeCompra;
 @property (nonatomic, retain) NSSet *compras;
 @property (nonatomic, retain) TipoConta *tipo;

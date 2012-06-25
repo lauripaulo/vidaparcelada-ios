@@ -15,7 +15,6 @@
         <attribute name="empresa" optional="YES" attributeType="String" minValueString="1" maxValueString="100" syncable="YES"/>
         <attribute name="jurosMes" optional="YES" attributeType="Decimal" minValueString="0" defaultValueString="0.0" syncable="YES"/>
         <attribute name="limite" optional="YES" attributeType="Decimal" minValueString="0" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="limiteUsuario" optional="YES" attributeType="Decimal" minValueString="0" defaultValueString="0.0" syncable="YES"/>
         <attribute name="melhorDiaDeCompra" optional="YES" attributeType="Integer 16" minValueString="1" maxValueString="31" defaultValueString="1" syncable="YES"/>
         <relationship name="compras" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Compra" inverseName="origem" inverseEntity="Compra" syncable="YES"/>
         <relationship name="tipo" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TipoConta" inverseName="conta" inverseEntity="TipoConta" syncable="YES"/>
@@ -37,7 +36,7 @@
     </entity>
     <elements>
         <element name="Compra" positionX="160" positionY="9" width="128" height="150"/>
-        <element name="Conta" positionX="412" positionY="99" width="128" height="180"/>
+        <element name="Conta" positionX="412" positionY="99" width="128" height="165"/>
         <element name="Parcela" positionX="153" positionY="243" width="128" height="150"/>
         <element name="TipoConta" positionX="403" positionY="342" width="128" height="105"/>
     </elements>

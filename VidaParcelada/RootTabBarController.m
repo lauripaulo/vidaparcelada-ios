@@ -12,6 +12,7 @@
 #import "VisaoMensalViewController.h"
 #import "ListaDeComprasViewController.h"
 #import "ListaDeContasViewController.h"
+#import "OptionsTableViewController.h"
 
 @interface RootTabBarController ()
 
@@ -43,7 +44,6 @@
                          comVencimentoNoDia:[NSNumber numberWithInt:17]
                                   eJurosMes:[NSDecimalNumber decimalNumberWithString:@"8.5"]
                              comLimiteTotal:[NSDecimalNumber decimalNumberWithString:@"3000"]
-                           eLimiteDoUsuario:[NSDecimalNumber decimalNumberWithString:@"1500"] 
                        comMelhorDiaDeCompra:[NSNumber numberWithInt:4] 
                                   inContext:document.managedObjectContext];
     NSLog(@"Criada conta: %@", conta);
@@ -95,6 +95,11 @@
         ListaDeContasViewController *contas = (ListaDeContasViewController *) [[nvContas viewControllers] objectAtIndex:0];
         contas.vpDatabase = self.managedDocument;
         
+        // O quarto TAB é o de Opções
+        UINavigationController *nvOptions = (UINavigationController *) [viewController objectAtIndex:3];
+        OptionsTableViewController *options = (OptionsTableViewController *) [[nvOptions viewControllers] objectAtIndex:0];
+        options.vpDatabase = self.managedDocument;
+
         // Qualquer outro tab entraria aqui...
     } else {
         // Algo de muito errado aconteceu...
