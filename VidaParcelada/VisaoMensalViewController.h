@@ -17,5 +17,5 @@
 
 @property (nonatomic, strong) NSNumberFormatter *valorFormatter;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
-
+@property (nonatomic, strong) NSDecimalNumber *objetivoMensal;
 @end

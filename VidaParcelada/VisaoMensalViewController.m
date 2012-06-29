@@ -20,6 +20,7 @@
 @synthesize vpDatabase = _vpDatabase;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
+@synthesize objetivoMensal = _objetivoMensal;
 
 // sobrescreve o setter para o BD do VP
 // e inicializa o fetchResultsController
@@ -126,42 +127,52 @@
             valorMes = [valorMes decimalNumberByAdding:p.valor];
         }
     }
-    NSString *descricaoDaParcela = @"compra";
+    NSString *descricaoDaParcela = @"parcela";
     NSString *valor = [self.valorFormatter stringFromNumber:valorMes];
     int qtdeDeParcelas = [sectionInfo numberOfObjects];
     if (qtdeDeParcelas > 1) {
-        descricaoDaParcela = @"compras";
+        descricaoDaParcela = @"parcelas";
     }
-    NSString *footer = [NSString stringWithFormat:@" %d %@ no total de %@ ", qtdeDeParcelas, descricaoDaParcela, valor];
-    
+    NSString *textoInformativo = [NSString stringWithFormat:@" Compras no período "];
+    NSString *textoValorTotal = [NSString stringWithFormat:@" %d %@ no total de %@ ", qtdeDeParcelas, descricaoDaParcela, valor];
     
     // Para customizar o footer da tabela com os dados da soma
     // parcelas e o numero de parcelas
-    UIColor *fundo = [UIColor lightGrayColor];
+    UIColor *fundo = [UIColor colorWithRed:0.71 green:0.71 blue:0.71 alpha:0.8]; /*#b5b5b5*/
     UIColor *letra = [UIColor darkGrayColor];
     
     // Verifica se o valor do mês ultrapassa o objetivo mensal estabelecido pelo usuário
-    NSDecimalNumber *objetivo = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
-    if ([valorMes compare:objetivo] == NSOrderedDescending) {
+    if ([valorMes compare:self.objetivoMensal] == NSOrderedDescending) {
         // A comparação acima mostsa que o valorMes é maior que o
         // objetivo mensal. Sintaxe estranha, mas descrita melhore em:
         // http://www.innerexception.com/2011/02/how-to-compare-nsdecimalnumbers-in.html
         //
-        fundo = [UIColor redColor];
-        letra = [UIColor blackColor];
-        footer = [NSString stringWithFormat:@"(Atenção) %d %@ no total de %@ ", qtdeDeParcelas, descricaoDaParcela, valor];
+        letra = [UIColor colorWithRed:0.545 green:0 blue:0 alpha:1]; /*#8b0000*/
+        textoInformativo = [NSString stringWithFormat:@" Atenção! Você ultrapassou seu objetivo mensal "];      
     }
     
     
     UIView *myHeader = [[UIView alloc] initWithFrame:CGRectMake(0,60,320,40)];
     myHeader.backgroundColor = fundo;
-    UILabel *myLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(0,0,320,20)] ;
-    myLabel1.font = [UIFont boldSystemFontOfSize:14.0];
-    myLabel1.textColor = letra;
-    myLabel1.backgroundColor = fundo;
-    myLabel1.text = footer;
-    myLabel1.textAlignment = UITextAlignmentRight;
-    [myHeader addSubview:myLabel1];
+    
+    // Label superior
+    UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,320,20)] ;
+    firstLabel.font = [UIFont systemFontOfSize:13.0];
+    firstLabel.textColor = letra;
+    firstLabel.backgroundColor = fundo;
+    firstLabel.text = textoInformativo;
+    firstLabel.textAlignment = UITextAlignmentRight;
+    
+    // Label inferior
+    UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,20,320,20)] ;
+    secondLabel.font = [UIFont boldSystemFontOfSize:13.0];
+    secondLabel.textColor = letra;
+    secondLabel.backgroundColor = fundo;
+    secondLabel.text = textoValorTotal;
+    secondLabel.textAlignment = UITextAlignmentRight;
+    
+    [myHeader addSubview:firstLabel];
+    [myHeader addSubview:secondLabel];
     return myHeader;
 }
 
@@ -220,6 +231,8 @@
 {
     [super viewWillAppear:animated];
     [[self tableView] reloadData];
+    self.objetivoMensal = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
+
 }
 
 // Não permite edição das celulas

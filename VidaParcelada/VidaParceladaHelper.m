@@ -13,6 +13,8 @@
 
 + (NSString *)removeCharsNaoNumericos:(NSString *)stringAtual
 {
+    NSLog (@"(>) removeCharsNaoNumericos: %@", stringAtual);
+    
     // regex para aceitar apenas numeros
     NSString *regex = @"[0-9]*";
     NSPredicate *regextest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
@@ -28,11 +30,18 @@
             buffer = [buffer stringByAppendingString:digit];
         }
     }
+    
+    NSLog (@"(<) removeCharsNaoNumericos: return = %@", buffer);
+    
     return buffer;
 }
 
-+ (void)executarBackspaceNoCampo:(UITextField *)aTextField range:(NSRange)range novoDigito:(NSString *)novoDigito
++ (void)executarBackspaceNoCampo:(UITextField *)aTextField 
+                           range:(NSRange)range 
+                      novoDigito:(NSString *)novoDigito
 {
+    NSLog (@"(>) executarBackspaceNoCampo: %@, %@, %@", aTextField.text, NSStringFromRange(range), novoDigito);
+
     // Backspace
     if ([novoDigito length] == 0 && [aTextField.text length] > 0) {
         int textLen = [aTextField.text length] - 1;
@@ -52,12 +61,16 @@
             aTextField.text = [parte1 stringByAppendingString:parte2];
         }
         
-        NSLog(@"aTextField.text +backspace=%@", aTextField.text);
+        NSLog (@"(<) executarBackspaceNoCampo:");
     }
 }
 
-+ (void)inserirDigitoNoCampo:(UITextField *)aTextField range:(NSRange)range novoDigito:(NSString *)novoDigito
++ (void)inserirDigitoNoCampo:(UITextField *)aTextField 
+                       range:(NSRange)range 
+                  novoDigito:(NSString *)novoDigito
 {
+    NSLog (@"(>) inserirDigitoNoCampo: %@, %@, %@", aTextField.text, NSStringFromRange(range), novoDigito);
+
     // regex para aceitar apenas numeros
     NSString *regex = @"[0-9]*";
     NSPredicate *regextest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
@@ -84,11 +97,12 @@
             NSString *parte2 = [aTextField.text substringWithRange:rangeFinal];
             aTextField.text = [parte1 stringByAppendingString:novoDigito];
             aTextField.text = [aTextField.text stringByAppendingString:parte2];
-
+       
+            NSLog (@"(!) inserirDigitoNoCampo: aTextField.text = '%@'", aTextField.text);
         }
         
-        NSLog(@"aTextField.text +backspace=%@", aTextField.text);
     }
+    NSLog (@"(<) inserirDigitoNoCampo: ");
 }
 
 
@@ -98,7 +112,7 @@
      usandoFormatter:(NSNumberFormatter *)formatter
       eQtdeDeDigitos:(int)qtdeDigitos
 {
-    NSLog(@"formatInput: aTextField=%@ novoDigito=%@, range=[Location=%i, Lenght:%i]", aTextField.text, novoDigito, range.location, range.length);
+    NSLog (@"(>) formataValor: %@, %@, %@, %@", aTextField.text, novoDigito, NSStringFromRange(range), formatter);
 
     [self executarBackspaceNoCampo:aTextField range:range novoDigito:novoDigito];
     [self inserirDigitoNoCampo:aTextField range:range novoDigito:novoDigito];
@@ -113,13 +127,13 @@
     // OK, agora verificamos se o valor adicionado é um numero, adicionamos ao final
     // do buffer para que ele seja formatado corretamente depois.
     
-    NSLog(@"buffer:%@", buffer);
+    NSLog (@"(!) formataValor: buffer = %@", buffer);
         
     // Campo cheio, consome o novo digito
     if ([buffer length] == qtdeDigitos) { // Se o campo já tem o tamanho da mascara o caracter é ignorado.
-        NSLog(@"Campo cheio.");
+        NSLog (@"(!) formataValor: qtdeDigitos = %d", qtdeDigitos);
     } else if (![regextest evaluateWithObject:novoDigito]) {
-        NSLog(@"Digito invalido.");
+        NSLog (@"(!) formataValor: digito invalido = '%@'", novoDigito);
     } else {
         buffer = [buffer stringByAppendingString:novoDigito];
         NSString *decimalString = @"";
@@ -138,19 +152,21 @@
         NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:decimalString];
         aTextField.text = [formatter stringFromNumber:number];
         
+        NSLog (@"(!) formataValor: aTextField.text = '%@'", aTextField.text);
+  
     }
+    NSLog (@"(<) formataValor: ");
 
 }
 
 
 //This method is responsible for add mask characters properly
-+ (void)formatInput:(UITextField*)aTextField string:(NSString*)aString range:(NSRange)aRange withMask:(NSString *)mask
++ (void)formatInput:(UITextField*)aTextField 
+           string:(NSString*)aString 
+           range:(NSRange)aRange 
+           withMask:(NSString *)mask
 {
-    
-    NSLog(@"");
-    NSLog(@"formatInput: aString=%@, aRange=[Location=%i, Lenght:%i]", aString, aRange.location, aRange.length);
-    NSLog(@"mask=%@", mask);
-    NSLog(@"textfield.text=%@", aTextField.text);
+    NSLog (@"(>) formatInput: %@, %@, %@, %@", aTextField.text, aString, NSStringFromRange(aRange), mask);
 
     int maskLength = [mask length];
     
@@ -200,17 +216,20 @@
                 int textLen = [aTextField.text length] - 1;
                 NSString *text = [aTextField.text substringToIndex:textLen];
                 aTextField.text = text;
+                
+                NSLog (@"(!) formatInput: aTextField.text = '%@'", aTextField.text);
             }
         }
     }
     
-    NSLog(@"textfield.text(final)=%@", aTextField.text);
-    NSLog(@"----------------------------------------------------------------------------------");
+    NSLog (@"(<) formatInput: ");
 
 }
 
 + (NSDecimalNumber *) retornaLimiteDeGastoGlobal
 {
+    NSLog (@"(>) retornaLimiteDeGastoGlobal: ");
+
     NSDecimalNumber *valorFinal = [[NSDecimalNumber alloc] initWithInt:0];
     
     NSString *currentStringVal = [VidaParceladaHelper retornaLimiteDeGastoGlobalStr];
@@ -222,7 +241,8 @@
     NSNumber *valor;
     valor = [valorFormatter numberFromString:currentStringVal];
     valorFinal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
-    NSLog (@"retornaLimiteDeGastoGlobal - objetivo=%@(DecimalNumber)", valorFinal);
+
+    NSLog (@"(<) retornaLimiteDeGastoGlobal: return = %@", valorFinal);
 
     return valorFinal;
 }
@@ -230,21 +250,27 @@
 
 + (NSString *) retornaLimiteDeGastoGlobalStr
 {
+    NSLog (@"(>) retornaLimiteDeGastoGlobalStr: ");
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSString *currentStringVal = [defaults objectForKey:@"objetivo"];
-    NSLog (@"retornaLimiteDeGastoGlobalStr - objetivo=%@(str)", currentStringVal);
-    
+   
+    NSLog (@"(<) retornaLimiteDeGastoGlobalStr: return = %@", currentStringVal);
+
     return currentStringVal;
 }
 
 
 + (void) salvaLimiteDeGastoGlobalStr:(NSString *)total
 {
+    NSLog (@"(>) salvaLimiteDeGastoGlobalStr: %@", total);
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:total forKey:@"objetivo"];
     [defaults synchronize];
-    NSLog (@"salvaLimiteDeGastoGlobal - objetivo=%@", total);
+    
+    NSLog (@"(<) salvaLimiteDeGastoGlobalStr: ");
 }
 
 + (void) trataErro:(NSError *)error
@@ -259,8 +285,6 @@
         
         // tratamento específico para cada tipo de erro
                
-    } else {
-        NSLog (@"(_) Ok");
     }
 }
 
