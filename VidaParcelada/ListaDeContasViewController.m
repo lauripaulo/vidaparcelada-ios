@@ -9,6 +9,7 @@
 #import "ListaDeContasViewController.h"
 #import "Conta+AddOn.h"
 #import "TipoConta+AddOn.h"
+#import "VidaParceladaHelper.h"
 
 @interface ListaDeContasViewController ()
 
@@ -157,8 +158,14 @@
         self.debug = YES;
         Conta *conta = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self.fetchedResultsController.managedObjectContext deleteObject:conta];
+        
         [self.fetchedResultsController.managedObjectContext save:&error];
+        // Tratamento de errors
+        [VidaParceladaHelper trataErro:error];
+
         [self.fetchedResultsController performFetch:&error];
+        // Tratamento de errors
+        [VidaParceladaHelper trataErro:error];
     }   
 }
 

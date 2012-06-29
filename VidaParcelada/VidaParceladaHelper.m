@@ -247,4 +247,21 @@
     NSLog (@"salvaLimiteDeGastoGlobal - objetivo=%@", total);
 }
 
++ (void) trataErro:(NSError *)error
+{
+    if (error) {
+        // Loga informações do erro
+        NSLog (@"(!) Erro encontrado - NSError code: %d", error.code);
+        NSLog (@"(!) - Description .......: %@", error.localizedDescription);
+        NSLog (@"(!) - FailureReason .....: %@", error.localizedFailureReason);
+        NSLog (@"(!) - RecoveryOptions ...: %@", error.localizedRecoveryOptions);
+        NSLog (@"(!) - RecoverySuggestion : %@", error.localizedRecoverySuggestion);
+        
+        // tratamento específico para cada tipo de erro
+               
+    } else {
+        NSLog (@"(_) Ok");
+    }
+}
+
 @end

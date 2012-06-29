@@ -15,7 +15,15 @@
 		79362F83153D122E005459E8 /* Conta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F82153D122E005459E8 /* Conta+AddOn.m */; };
 		794FF62F15975D8A0009D1DD /* Conta.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FF62E15975D8A0009D1DD /* Conta.m */; };
 		794FF634159761360009D1DD /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FF633159761360009D1DD /* OptionsTableViewController.m */; };
+		796A824E159D475F0072E99B /* compras.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824A159D475F0072E99B /* compras.png */; };
+		796A824F159D475F0072E99B /* contas.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824B159D475F0072E99B /* contas.png */; };
+		796A8250159D475F0072E99B /* opcao.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824C159D475F0072E99B /* opcao.png */; };
+		796A8251159D475F0072E99B /* previsao.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824D159D475F0072E99B /* previsao.png */; };
 		796CE1E0153B13E300B6AE11 /* TipoConta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */; };
+		79702CF4159D37F60010CE10 /* compras@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CEC159D37F60010CE10 /* compras@2x.png */; };
+		79702CF6159D37F60010CE10 /* contas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CEE159D37F60010CE10 /* contas@2x.png */; };
+		79702CF8159D37F60010CE10 /* opcao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CF0159D37F60010CE10 /* opcao@2x.png */; };
+		79702CFA159D37F60010CE10 /* previsao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CF2159D37F60010CE10 /* previsao@2x.png */; };
 		797D9D3115463C9000D3B067 /* Compra+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D3015463C9000D3B067 /* Compra+AddOn.m */; };
 		797D9D341546458800D3B067 /* Parcela+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D331546458800D3B067 /* Parcela+AddOn.m */; };
 		798FF4021533B4B200385C5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4011533B4B200385C5E /* UIKit.framework */; };
@@ -60,9 +68,17 @@
 		794FF62E15975D8A0009D1DD /* Conta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conta.m; sourceTree = "<group>"; };
 		794FF632159761360009D1DD /* OptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
 		794FF633159761360009D1DD /* OptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsTableViewController.m; sourceTree = "<group>"; };
-		794FF63B159801D90009D1DD /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		796A824A159D475F0072E99B /* compras.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compras.png; sourceTree = "<group>"; };
+		796A824B159D475F0072E99B /* contas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contas.png; sourceTree = "<group>"; };
+		796A824C159D475F0072E99B /* opcao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opcao.png; sourceTree = "<group>"; };
+		796A824D159D475F0072E99B /* previsao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = previsao.png; sourceTree = "<group>"; };
+		796A8253159D4A8F0072E99B /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		796CE1DE153B13E300B6AE11 /* TipoConta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TipoConta+AddOn.h"; sourceTree = "<group>"; };
 		796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TipoConta+AddOn.m"; sourceTree = "<group>"; };
+		79702CEC159D37F60010CE10 /* compras@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compras@2x.png"; sourceTree = "<group>"; };
+		79702CEE159D37F60010CE10 /* contas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contas@2x.png"; sourceTree = "<group>"; };
+		79702CF0159D37F60010CE10 /* opcao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opcao@2x.png"; sourceTree = "<group>"; };
+		79702CF2159D37F60010CE10 /* previsao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "previsao@2x.png"; sourceTree = "<group>"; };
 		797D9D2F15463C9000D3B067 /* Compra+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Compra+AddOn.h"; sourceTree = "<group>"; };
 		797D9D3015463C9000D3B067 /* Compra+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Compra+AddOn.m"; sourceTree = "<group>"; };
 		797D9D321546458800D3B067 /* Parcela+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parcela+AddOn.h"; sourceTree = "<group>"; };
@@ -161,6 +177,40 @@
 			name = TabBarRootView;
 			sourceTree = "<group>";
 		};
+		79702CFE159D39640010CE10 /* TabIcons */ = {
+			isa = PBXGroup;
+			children = (
+				796A824A159D475F0072E99B /* compras.png */,
+				796A824B159D475F0072E99B /* contas.png */,
+				796A824C159D475F0072E99B /* opcao.png */,
+				796A824D159D475F0072E99B /* previsao.png */,
+				79702CEC159D37F60010CE10 /* compras@2x.png */,
+				79702CEE159D37F60010CE10 /* contas@2x.png */,
+				79702CF0159D37F60010CE10 /* opcao@2x.png */,
+				79702CF2159D37F60010CE10 /* previsao@2x.png */,
+			);
+			name = TabIcons;
+			sourceTree = "<group>";
+		};
+		79702CFF159D397A0010CE10 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				79D33370157057B900D034D3 /* 4.png */,
+				79D3336C156F1A3D00D034D3 /* LogoBarra.png */,
+				79D3336A156F19F800D034D3 /* iTunesArtwork */,
+				79D33364156F132100D034D3 /* Default@2x.png */,
+				79D33362156F12E600D034D3 /* Default.png */,
+				79D3335E156F125800D034D3 /* Icon-Small@2x.png */,
+				79D33360156F12D800D034D3 /* SplashNormal.png */,
+				79D3335C156F121900D034D3 /* Icon-Small.png */,
+				79D3335A156F11CB00D034D3 /* Icon-Small-50.png */,
+				79D33358156F119F00D034D3 /* Icon-72.png */,
+				79D33354156F116600D034D3 /* Icon.png */,
+				79D33355156F116600D034D3 /* Icon@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		798FF3F21533B4B200385C5E = {
 			isa = PBXGroup;
 			children = (
@@ -206,18 +256,8 @@
 		798FF4081533B4B200385C5E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				79D33370157057B900D034D3 /* 4.png */,
-				79D3336C156F1A3D00D034D3 /* LogoBarra.png */,
-				79D3336A156F19F800D034D3 /* iTunesArtwork */,
-				79D33364156F132100D034D3 /* Default@2x.png */,
-				79D33362156F12E600D034D3 /* Default.png */,
-				79D3335E156F125800D034D3 /* Icon-Small@2x.png */,
-				79D33360156F12D800D034D3 /* SplashNormal.png */,
-				79D3335C156F121900D034D3 /* Icon-Small.png */,
-				79D3335A156F11CB00D034D3 /* Icon-Small-50.png */,
-				79D33358156F119F00D034D3 /* Icon-72.png */,
-				79D33354156F116600D034D3 /* Icon.png */,
-				79D33355156F116600D034D3 /* Icon@2x.png */,
+				79702CFE159D39640010CE10 /* TabIcons */,
+				79702CFF159D397A0010CE10 /* Images */,
 				798FF4091533B4B200385C5E /* VidaParcelada-Info.plist */,
 				798FF40D1533B4B200385C5E /* main.m */,
 				798FF40F1533B4B200385C5E /* VidaParcelada-Prefix.pch */,
@@ -343,6 +383,14 @@
 				79D33371157057B900D034D3 /* 4.png in Resources */,
 				7935EF961585555F00C916E0 /* Icon.png in Resources */,
 				7935EF971585556600C916E0 /* Icon@2x.png in Resources */,
+				79702CF4159D37F60010CE10 /* compras@2x.png in Resources */,
+				79702CF6159D37F60010CE10 /* contas@2x.png in Resources */,
+				79702CF8159D37F60010CE10 /* opcao@2x.png in Resources */,
+				79702CFA159D37F60010CE10 /* previsao@2x.png in Resources */,
+				796A824E159D475F0072E99B /* compras.png in Resources */,
+				796A824F159D475F0072E99B /* contas.png in Resources */,
+				796A8250159D475F0072E99B /* opcao.png in Resources */,
+				796A8251159D475F0072E99B /* previsao.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +433,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7900B300155232C80050C652 /* en */,
-				794FF63B159801D90009D1DD /* pt */,
+				796A8253159D4A8F0072E99B /* pt */,
 			);
 			name = MainStoryboard.storyboard;
 			path = ..;

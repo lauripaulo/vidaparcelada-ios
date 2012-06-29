@@ -188,8 +188,14 @@
         self.debug = YES;
         Compra *compra = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self.fetchedResultsController.managedObjectContext deleteObject:compra];
-        [self.fetchedResultsController.managedObjectContext save:&error];
+        
+        [self.fetchedResultsController.managedObjectContext save:&error];        
+        // Tratamento de errors
+        [VidaParceladaHelper trataErro:error];
+
         [self.fetchedResultsController performFetch:&error];
+        // Tratamento de errors
+        [VidaParceladaHelper trataErro:error];
     }   
 }
 

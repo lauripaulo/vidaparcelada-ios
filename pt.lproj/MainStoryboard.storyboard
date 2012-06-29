@@ -800,7 +800,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mPt-IA-5AS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="jhL-yx-Ljd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Compras" id="gRA-7Y-UgO"/>
+                    <tabBarItem key="tabBarItem" title="Compras" image="compras.png" id="gRA-7Y-UgO"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="wSN-4I-VyN">
@@ -820,7 +820,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x39-Yf-aOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="4Ih-Pb-zFP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Contas" id="vP5-Vx-Ijn"/>
+                    <tabBarItem key="tabBarItem" title="Contas" image="contas.png" id="vP5-Vx-Ijn"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="gwM-RA-84X">
@@ -840,7 +840,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XtB-1f-c2t" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="km8-hy-lJn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Previsão" id="Z8y-Ip-jUX"/>
+                    <tabBarItem key="tabBarItem" title="Previsão" image="previsao.png" id="Z8y-Ip-jUX"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="2kP-Ez-Aoy">
@@ -920,7 +920,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ycf-NL-Rl5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="988-OI-Xgw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Opções" id="lvb-sX-Tgo"/>
+                    <tabBarItem key="tabBarItem" title="Opções" image="opcao.png" id="lvb-sX-Tgo"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackOpaque" id="hK3-rB-YLN">
@@ -936,6 +936,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="520" y="1626"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="compras.png" width="30" height="28"/>
+        <image name="contas.png" width="30" height="20"/>
+        <image name="opcao.png" width="30" height="30"/>
+        <image name="previsao.png" width="30" height="17"/>
+    </resources>
     <classes>
         <class className="CadastroDaContaViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDaContaViewController.h"/>

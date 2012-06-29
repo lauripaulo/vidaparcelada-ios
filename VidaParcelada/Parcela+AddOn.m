@@ -7,7 +7,7 @@
 //
 
 #import "Parcela+AddOn.h"
-
+#import "VidaParceladaHelper.h"
 //
 // Estados possíveis da compra
 //
@@ -47,7 +47,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 {
     Parcela *novaParcela = nil;
     
-    NSLog(@"Criando Parcela: descricao(%@) dataDeVencimento:(%@) estado:(%@) numeroDaParcela:(%@) valor:(%@)",  descricao, dataDeVencimento, estado, numeroDaParcela, valor);
+    NSLog(@"(>) novaParcelaComDescricao: %@, %@, %@, %@, %@, %@, %@", descricao, dataDeVencimento, estado, numeroDaParcela, valor, compra, context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
@@ -57,11 +57,33 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
     
-    if (!matches || ([matches count] > 1)) {
-        NSLog(@"Erro! Encontrado %i linhas com o nome(%@). Apagar todos e recriar...", [matches count], descricao);
-    } else if ([matches count] == 0) {
-        NSLog(@"Não encontrado nenum registro para essa descricao, criando..."); 
+    if (!matches || ([matches count] > 0)) {
+        NSLog(@"(!) novaParcelaComDescricao: [matches count] = %d", [matches count]);
+        //
+        // Apaga todos os itens errados...
+        //
+        for (Parcela *parcela in matches) {
+            [context deleteObject:parcela];
+            NSLog(@"(!) novaParcelaComDescricao: deleted = %@", parcela);
+        }
+        
+        // ...e chama novamente de forma recursiva
+        // este metodo de criação.
+        novaParcela = [self novaParcelaComDescricao:descricao 
+                                  eDataDeVencimento:dataDeVencimento 
+                                          comEstado:estado 
+                                   eNumeroDaParcela:numeroDaParcela 
+                                           comValor:valor 
+                                    pertenceACompra:compra 
+                                          inContext:context];
+        
+    } else {
+        //
+        // Cria o novo objeto
+        //
         novaParcela = [NSEntityDescription insertNewObjectForEntityForName:@"Parcela" inManagedObjectContext:context];
         novaParcela.descricao = descricao;
         novaParcela.dataVencimento = dataDeVencimento;
@@ -69,12 +91,43 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         novaParcela.numeroDaParcela = numeroDaParcela;
         novaParcela.compra = compra;
         novaParcela.valor = valor;
-    } else {
-        NSLog(@"Descricao já existe no banco de dados, retornando o objeto.");
-        novaParcela = [matches lastObject];
     }
     
+    [context save:(&error)];
+    
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
+    
+    NSLog(@"(<) novaParcelaComDescricao: return = %@", novaParcela);
+
     return novaParcela;
 }
+
+
+- (NSArray *) parcelasPendentesDoMes:(NSDate *)data
+                           inContext:(NSManagedObjectContext *)context
+{
+    NSLog(@"(>) parcelasPendentesDoMes: %@, %@", data, context);
+
+    // Vamos listar todas as parcelas
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
+    
+    // Uma parcela pendente tem o vencimento menor que a data passada
+    // como parametro e está com seu pagamento pendente
+    request.predicate = [NSPredicate predicateWithFormat:@"dataVencimento <= %@ AND estado = %@", data, PARCELA_PENDENTE_PAGAMENTO];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
+ 
+    NSLog(@"(<) parcelasPendentesDoMes: return = %@", matches);
+
+    return matches;
+}
+
 
 @end

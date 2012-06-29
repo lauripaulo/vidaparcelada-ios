@@ -7,6 +7,7 @@
 //
 
 #import "CadastroDeCompraViewController.h"
+#import "VidaParceladaHelper.h"
 
 @interface CadastroDeCompraViewController ()
 
@@ -272,12 +273,14 @@
     // salva o contexto do core data para evitar perda de dados
     NSError *error = nil;
     [self.vpDatabase.managedObjectContext save:&error];
+    
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
 
     // Notifica o delegate que a compra mudou
     self.compraSelecionada = novaCompra;
     [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
 
-    NSLog(@"Criado nova compra: %@", self.compraSelecionada);
 }
 
 - (void)atualizarCompraAtual {
@@ -414,8 +417,6 @@
         self.compraSelecionada.qtdeTotalDeParcelas = [NSNumber numberWithDouble:sender.value];
         // Notifica o delegate que a compra mudou
         [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
-        // Log da Operação
-        NSLog(@"self.compraSelecionada.qtdeTotalDeParcelas - valor: %@", self.compraSelecionada.qtdeTotalDeParcelas);
     }
 }
 
@@ -426,8 +427,6 @@
         // Notifica o delegate da alteração
         [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
         [sender resignFirstResponder];
-        // Log da operação
-        NSLog(@" self.compraSelecionada.descricao - valor: %@",  self.compraSelecionada.descricao);
     }
 }
 
@@ -442,8 +441,6 @@
             // Notifica o delegate da alteração
             [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
             [sender resignFirstResponder];
-            // Log da operação  
-            NSLog(@"self.contaSelecionada.limiteUsuario - valor: %@", self.compraSelecionada.valorTotal);
         }
     }
     [self calculaValorDaParcela];
@@ -457,7 +454,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    NSLog(@"indexPath=%@", indexPath);
 
     // Verifica se é a cell que tem a data para trazer o date picker
     if (indexPath.section == 0 && indexPath.row == 1) {

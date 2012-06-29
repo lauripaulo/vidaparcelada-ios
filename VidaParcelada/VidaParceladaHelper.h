@@ -43,4 +43,7 @@
 // no NSUserDefaults para uso posterior
 + (void) salvaLimiteDeGastoGlobalStr:(NSString *)total;
 
+// Função que recebe um NSError e loga as informações se for pertinente
++ (void) trataErro:(NSError *)error;
+
 @end

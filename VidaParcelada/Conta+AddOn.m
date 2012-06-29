@@ -7,6 +7,7 @@
 //
 
 #import "Conta+AddOn.h"
+#import "VidaParceladaHelper.h"
 
 @implementation Conta (AddOn)
 
@@ -21,7 +22,7 @@
 {
     Conta *conta = nil;
     
-    NSLog(@"Criando conta: descricao(%@) empresa:(%@)", descricao, empresa);
+    NSLog(@"(>) contaComDescricao: %@, %@, %@, %@, %@, %@, %@", descricao, empresa, diaDeVencimento, jurosMes, limite, melhorDiaDeCompra, context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
@@ -32,10 +33,33 @@
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
-    if (!matches || ([matches count] > 1)) {
-        NSLog(@"Erro! Encontrado %i linhas com a descricao(%@). Apagar todos e recriar...", [matches count], descricao);
-    } else if ([matches count] == 0) {
-        NSLog(@"Não encontrado nenhum registro para a descrição, criando..."); 
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
+
+    if (!matches || ([matches count] > 0)) {
+        NSLog(@"(!) contaComDescricao: [matches count] = %d", [matches count]);
+        //
+        // Apaga todos os itens errados...
+        //
+        for (Conta *conta in matches) {
+            [context deleteObject:conta];
+            NSLog(@"(!) contaComDescricao: deleted = %@", conta);
+        }
+    
+        // ...e chama novamente de forma recursiva
+        // este metodo de criação.
+        conta = [self contaComDescricao:descricao 
+                              daEmpresa:empresa 
+                     comVencimentoNoDia:diaDeVencimento 
+                              eJurosMes:jurosMes 
+                         comLimiteTotal:limite 
+                   comMelhorDiaDeCompra:melhorDiaDeCompra 
+                              inContext:context];
+    
+    } else  {
+        //
+        // Cria o novo objeto
+        //
         conta = [NSEntityDescription insertNewObjectForEntityForName:@"Conta" inManagedObjectContext:context];
         conta.descricao = descricao;
         conta.empresa = empresa;
@@ -50,21 +74,29 @@
         request.sortDescriptors = [NSArray arrayWithObject:
                                    [NSSortDescriptor sortDescriptorWithKey:@"tipo" ascending:YES]];
         NSArray *tipos = [context executeFetchRequest:request error:&error];
+
+        // Tratamento de errors
+        [VidaParceladaHelper trataErro:error];
+        
         if (tipos && [tipos count] > 0) {
             conta.tipo = [tipos objectAtIndex:0];
         }
-    } else {
-        NSLog(@"Nome já existe no banco de dados, retornando o objeto.");
-        conta = [matches lastObject];
-    }
+    } 
     
     [context save:(&error)];
+
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
     
+    NSLog(@"(<) contaComDescricao: return = %@", conta);
+
     return conta;
 }
 
 + (NSArray *)contasCadastradasUsandoContext:(NSManagedObjectContext *)context
 {    
+    NSLog(@"(>) contasCadastradasUsandoContext: %@", context);
+
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
     request.sortDescriptors = [NSArray arrayWithObject:
@@ -74,7 +106,10 @@
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
-    NSLog(@"Trazendo todas as contas cadastradas no momento:(%@)", matches);
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
+
+    NSLog(@"(<) contaComDescricao: return = %@", matches);
 
     return matches;
 }

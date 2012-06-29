@@ -118,8 +118,6 @@
     self.contaSelecionada.diaDeVencimento = [NSDecimalNumber numberWithDouble:sender.value];
     // Notifica o delegate da alteração
     [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
-    // Log da operação
-    NSLog(@"self.contaSelecionada.diaDeVencimento - valor: %@", self.contaSelecionada.diaDeVencimento);
 }
 
 // Chamado quando o valor do stepper de melhor fia muda de estado
@@ -128,8 +126,6 @@
     self.contaSelecionada.melhorDiaDeCompra = [NSDecimalNumber numberWithDouble:sender.value];
     // Notifica o delegate da alteração
     [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
-    // Log da operação
-    NSLog(@"self.contaSelecionada.melhorDiaDeCompra - valor: %@", self.contaSelecionada.melhorDiaDeCompra);
 
 }
 
@@ -138,8 +134,6 @@
     self.contaSelecionada.descricao = self.tfDescricaoDaConta.text;
     // Notifica o delegate da alteração
     [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
-    // Log da operação
-    NSLog(@"self.contaSelecionada.descricao - valor: %@", self.contaSelecionada.descricao);
 }
 
 // Chamado quando a edição no campo empresa termina
@@ -147,14 +141,10 @@
     self.contaSelecionada.empresa = self.tfEmpresa.text;
     // Notifica o delegate da alteração
     [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
-    // Log da operação
-    NSLog(@"elf.contaSelecionada.empresa - valor: %@", self.contaSelecionada.empresa);
 }
 
 // Chamado quando a edição no campo limite total inicia
 - (IBAction)tfLimiteTotalDidBegin:(UITextField *)sender {
-    NSLog(@"tfLimiteTotalDidBegin - valor: %@", sender.text);
-
 }
 
 // Chamado quando a edição no campo limite total termina
@@ -166,13 +156,10 @@
         // Notifica o delegate da alteração
         [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
     }
-    // Log da operação
-    NSLog(@"self.contaSelecionada.limite - valor: %@", self.contaSelecionada.limite);
 }
 
 // Chamado quando a edição no campo juros inicia
 - (IBAction)tfJurosEditingDidBegin:(UITextField *)sender {
-    NSLog(@"tfJurosEditingDidBegin - valor: %@", sender.text);
 }
 
 // Chamado quando a edição no campo juros termina
@@ -182,8 +169,6 @@
         // Notifica o delegate da alteração
         [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
     } 
-    // Log da operação
-    NSLog(@"self.contaSelecionada.jurosMes - valor: %@", self.contaSelecionada.jurosMes);
 }
 
 // para criar uma conta nos criamos o objeto CoreData com os campos vazios
@@ -201,8 +186,6 @@
     [self atualizarCamposNaTela];
     // Notifica o delegate da alteração
     [self.contaDelegate contaFoiAlterada:self.contaSelecionada];
-    // Log da operação
-    NSLog(@"Criada conta: %@", self.contaSelecionada);
 }
 
 # pragma mark TableView
@@ -286,11 +269,9 @@
 {
     if (buttonIndex == 0)
     {
-        NSLog(@"Sim");
         // Seta o "foco" no campo descrição
         [self.tfDescricaoDaConta becomeFirstResponder];
     } else {
-        NSLog(@"Não");
         // É o mesmo que cancelar a o cadastro
         [self clickBotaoCancelar:nil];
     }
