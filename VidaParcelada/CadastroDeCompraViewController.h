@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfValorTotal;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btSave;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btCancelar;
+@property (weak, nonatomic) IBOutlet UITextField *tfValorDaParcela;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIPickerView *contasPickerView;
@@ -37,7 +38,6 @@
 @property (strong, nonatomic) IBOutlet UINavigationItem *topBar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btDataOk;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btContaOk;
-@property (weak, nonatomic) IBOutlet UILabel *labelValorParcela;
 
 @property (nonatomic, retain) Compra *compraSelecionada;
 

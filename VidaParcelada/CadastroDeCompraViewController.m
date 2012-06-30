@@ -16,6 +16,10 @@
 - (IBAction)removeDataPickerAnimaed:(id)sender;
 - (IBAction)removeContasPickerAnimated:(id)sender;
 - (BOOL)verificaDataDaCompraAvisaUsuario;
+- (void)calculaValorTotal;
+- (void)calculaValorDaParcela;
+- (void)atualizarCamposNaTela;
+- (void)inicializarTela;
 
 @end
 
@@ -33,6 +37,7 @@
 @synthesize tfValorTotal = _tfValorTotal;
 @synthesize btSave = _btSave;
 @synthesize btCancelar = _btCancelar;
+@synthesize tfValorDaParcela = _tfValorDaParcela;
 @synthesize datePicker = _datePicker;
 @synthesize contasPickerView = _contasPickerView;
 @synthesize valorFormatter = _valorFormatter;
@@ -44,11 +49,13 @@
 @synthesize topBar = _topBar;
 @synthesize btDataOk = _doneButton;
 @synthesize btContaOk = _btContaOk;
-@synthesize labelValorParcela = _labelValorParcela;
 @synthesize listaDeContas = _listaDeContas;
 @synthesize considerarParcelasAnterioresPagas = _considerarParcelasAnterioresPagas;
 @synthesize actionSheetVencimento = _actionSheetVencimento;
 @synthesize actionSheetApagarParcelas = _actionSheetApagarParcelas;
+
+- (IBAction)tfValorDaParcelaDidEndOnExit:(id)sender {
+}
 
 - (UIActionSheet *)actionSheetVencimento
 {
@@ -223,9 +230,9 @@
     [self setBtCancelar:nil];
     [self setContasPickerView:nil];
     [self setBtContaOk:nil];
-    [self setLabelValorParcela:nil];
     [self setActionSheetVencimento:nil];
     [self setActionSheetApagarParcelas:nil];
+    [self setTfValorDaParcela:nil];
     [super viewDidUnload];
     
     // Release any retained subviews of the main view.
@@ -393,10 +400,46 @@
                            eQtdeDeDigitos:8];
         result = NO;
         
+        [self calculaValorDaParcela];
+        
+    } else if (textField == self.tfValorDaParcela) {
+        
+        self.algumCampoFoiAlterado = YES;
+        
+        [VidaParceladaHelper formataValor:textField 
+                               novoDigito:string 
+                                 comRange:range 
+                          usandoFormatter:self.valorFormatter
+                           eQtdeDeDigitos:8];
+        result = NO;
+        
+        [self calculaValorTotal];
+        
     } 
+
     
     return result;
 }
+
+- (void)calculaValorTotal {
+    // calcula o valor total a partir do valor das parcelas dessa compra
+    NSNumber *valorTmp;
+    valorTmp = [self.valorFormatter numberFromString:self.tfValorDaParcela.text];
+    
+    if ([valorTmp intValue] > 0 && self.stepperQtdeDeParcelas.value > 0.0) {
+        
+        NSDecimalNumber *valorParcela = [NSDecimalNumber decimalNumberWithString:[valorTmp stringValue]];
+        NSDecimalNumber *qtdeDecimal = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:self.stepperQtdeDeParcelas.value] decimalValue]];
+        NSDecimalNumber *valorTotal = [valorParcela decimalNumberByMultiplyingBy:qtdeDecimal];
+        self.tfValorTotal.text = [self.valorFormatter stringFromNumber:valorTotal];
+                
+    } else {
+        
+        self.tfValorTotal.text =  [self.valorFormatter stringFromNumber:[NSNumber numberWithInt:0]];  
+        
+    }
+}
+
 
 - (void)calculaValorDaParcela {
     // calcula o valor das parcelas dessa compra
@@ -406,16 +449,35 @@
         NSDecimalNumber *valorTotal = [NSDecimalNumber decimalNumberWithString:[valorTmp stringValue]];
         NSDecimalNumber *qtdeDecimal = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithDouble:self.stepperQtdeDeParcelas.value] decimalValue]];
         NSDecimalNumber *valorParcela = [valorTotal decimalNumberByDividingBy:qtdeDecimal];
-        self.labelValorParcela.text = [self.valorFormatter stringFromNumber:valorParcela];
+        
+        // Alteração para entrar com o valor da parcela manualmente.
+        self.tfValorDaParcela.text = [self.valorFormatter stringFromNumber:valorParcela];
+        
     } else {
-        self.labelValorParcela.text = [self.valorFormatter stringFromNumber:[NSNumber numberWithInt:0]];        
+        
+        // Alteração para entrar com o valor da parcela manualmente.
+        self.tfValorDaParcela.text = [self.valorFormatter stringFromNumber:[NSNumber numberWithInt:0]]; 
+
     }
 }
 
 - (IBAction)stepperQtdeDeParcelasValueChanged:(UIStepper *)sender {
     self.algumCampoFoiAlterado = YES;
     self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f",sender.value];    
-    [self calculaValorDaParcela];
+    
+    // verifica em qual campo estamos e reage alterando o
+    // total ou o valor da parcela.
+    if ([self.tfValorTotal isFirstResponder]) {
+        // Se estamos no valorTotal
+        [self calculaValorDaParcela];
+    } else if ([self.tfValorDaParcela isFirstResponder]) {
+        // se estamos no valor da parcela
+        [self calculaValorTotal];
+    } else {
+        // Não estamos em nenhum campo, assume a parcela.
+        [self calculaValorDaParcela];
+    }
+    
     // somente atualiza se a conta já tiver sido criada.
     if (self.compraSelecionada) {
         self.compraSelecionada.qtdeTotalDeParcelas = [NSNumber numberWithDouble:sender.value];

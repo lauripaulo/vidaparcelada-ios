@@ -45,8 +45,6 @@
 		79D3335B156F11CB00D034D3 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D3335A156F11CB00D034D3 /* Icon-Small-50.png */; };
 		79D3335D156F121900D034D3 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D3335C156F121900D034D3 /* Icon-Small.png */; };
 		79D3335F156F125800D034D3 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D3335E156F125800D034D3 /* Icon-Small@2x.png */; };
-		79D33363156F12E600D034D3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D33362156F12E600D034D3 /* Default.png */; };
-		79D33365156F132100D034D3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D33364156F132100D034D3 /* Default@2x.png */; };
 		79D3336B156F19F800D034D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 79D3336A156F19F800D034D3 /* iTunesArtwork */; };
 		79D3336D156F1A3D00D034D3 /* LogoBarra.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D3336C156F1A3D00D034D3 /* LogoBarra.png */; };
 		79F92E1E1539F15D0031A919 /* CadastroDaContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */; };
@@ -64,6 +62,7 @@
 		7935EF901585340500C916E0 /* RootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarController.m; sourceTree = "<group>"; };
 		79362F81153D122E005459E8 /* Conta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Conta+AddOn.h"; sourceTree = "<group>"; };
 		79362F82153D122E005459E8 /* Conta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Conta+AddOn.m"; sourceTree = "<group>"; };
+		79456A30159FB5E500712D1E /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		794FF62D15975D8A0009D1DD /* Conta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conta.h; sourceTree = "<group>"; };
 		794FF62E15975D8A0009D1DD /* Conta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conta.m; sourceTree = "<group>"; };
 		794FF632159761360009D1DD /* OptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
@@ -105,7 +104,6 @@
 		79BC16FA1589881800D234AF /* TipoConta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoConta.m; sourceTree = "<group>"; };
 		79BC16FC1589881800D234AF /* Compra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compra.h; sourceTree = "<group>"; };
 		79BC16FD1589881900D234AF /* Compra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Compra.m; sourceTree = "<group>"; };
-		79C9331B159EB7A400651DDB /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		79C9331C159EBE1000651DDB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		79C9331D159EBE1000651DDB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		79D33354156F116600D034D3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -114,8 +112,6 @@
 		79D3335A156F11CB00D034D3 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		79D3335C156F121900D034D3 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		79D3335E156F125800D034D3 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
-		79D33362156F12E600D034D3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
-		79D33364156F132100D034D3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		79D3336A156F19F800D034D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		79D3336C156F1A3D00D034D3 /* LogoBarra.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoBarra.png; sourceTree = "<group>"; };
 		79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDaContaViewController.h; sourceTree = "<group>"; };
@@ -199,8 +195,6 @@
 				79C9331D159EBE1000651DDB /* Default@2x.png */,
 				79D3336C156F1A3D00D034D3 /* LogoBarra.png */,
 				79D3336A156F19F800D034D3 /* iTunesArtwork */,
-				79D33364156F132100D034D3 /* Default@2x.png */,
-				79D33362156F12E600D034D3 /* Default.png */,
 				79D3335E156F125800D034D3 /* Icon-Small@2x.png */,
 				79D3335C156F121900D034D3 /* Icon-Small.png */,
 				79D3335A156F11CB00D034D3 /* Icon-Small-50.png */,
@@ -375,8 +369,6 @@
 				79D3335B156F11CB00D034D3 /* Icon-Small-50.png in Resources */,
 				79D3335D156F121900D034D3 /* Icon-Small.png in Resources */,
 				79D3335F156F125800D034D3 /* Icon-Small@2x.png in Resources */,
-				79D33363156F12E600D034D3 /* Default.png in Resources */,
-				79D33365156F132100D034D3 /* Default@2x.png in Resources */,
 				79D3336B156F19F800D034D3 /* iTunesArtwork in Resources */,
 				79D3336D156F1A3D00D034D3 /* LogoBarra.png in Resources */,
 				7935EF961585555F00C916E0 /* Icon.png in Resources */,
@@ -433,7 +425,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7900B300155232C80050C652 /* en */,
-				79C9331B159EB7A400651DDB /* pt */,
+				79456A30159FB5E500712D1E /* pt */,
 			);
 			name = MainStoryboard.storyboard;
 			path = ..;
