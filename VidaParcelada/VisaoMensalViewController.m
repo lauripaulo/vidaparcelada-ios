@@ -21,6 +21,7 @@
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize objetivoMensal = _objetivoMensal;
+@synthesize compraSelecionada = _compraSelecionada;
 
 // sobrescreve o setter para o BD do VP
 // e inicializa o fetchResultsController
@@ -207,7 +208,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section 
 {
-    return 40.0f;
+    return 25.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section 
@@ -229,15 +230,55 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+
     [super viewWillAppear:animated];
     [[self tableView] reloadData];
     self.objetivoMensal = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
 
+    NSLog(@"(<) viewWillAppear: ");
 }
 
 // Não permite edição das celulas
 - (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleNone;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    Parcela *parcela = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (self.compraSelecionada != parcela.compra) {
+        self.compraSelecionada = parcela.compra;
+    }
+}
+
+// Temos que passar o banco de dados que abrimos aqui
+// no primeiro controller do app para todos
+// os outros controllers. Dessa forma todos terao um atributo
+// UIManagedDocument *vpDatabase implementado.
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // ATENÇÃO: Quando utilizamos Segues a celula que dispara o segue
+    // é passada como sender, e a única maneira de sabermos qual objeto
+    // do fetchedResultsController foi selecionado é passando a cell
+    // para a tabela e pedido no indexPath.
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        Parcela *parcela = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        self.compraSelecionada = parcela.compra;
+    }
+    
+    // primeiro informa a compra porque a pesquisa das parcelas precisa da compra.
+    if ([segue.destinationViewController respondsToSelector:@selector(setCompraSelecionada:)]){
+        [segue.destinationViewController setCompraSelecionada:self.compraSelecionada];
+    }
+    
+    // Por último passa o managedDocument
+    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
+        [segue.destinationViewController setVpDatabase:self.vpDatabase];
+    }
+}
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CoreDataTableViewController.h"
+#import "Compra+AddOn.h"
 
 @interface VisaoMensalViewController : CoreDataTableViewController
 
@@ -18,4 +19,6 @@
 @property (nonatomic, strong) NSNumberFormatter *valorFormatter;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSDecimalNumber *objetivoMensal;
+@property (nonatomic, strong) Compra *compraSelecionada;
+
 @end

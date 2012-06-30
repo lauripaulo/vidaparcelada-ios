@@ -195,7 +195,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+
     [super viewWillAppear:animated];
+
+    NSLog(@"(<) viewWillAppear: ");
 }
 
 - (void)viewDidUnload

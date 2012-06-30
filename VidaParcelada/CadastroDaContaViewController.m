@@ -77,6 +77,16 @@
     return result;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+    
+    [super viewWillAppear: animated];
+
+    NSLog(@"(<) viewWillAppear: ");
+
+}
+
 // Atualiza os campos da tela atual com os dados da conta passados
 // pelo controller pai.
 - (void)atualizarCamposNaTela
@@ -235,50 +245,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-/*
- * Exemplo de popup e retorno
- *
-- (IBAction)clickBotaoSalvar:(UIBarButtonItem *)sender {
-    // Se a conta que acabamos de criar estiver com descrição vazia devemos perguntar ao usuário e
-    // apagar a conta se ele não quiser manter os dados.
-    if (!self.contaSelecionada.descricao || [self.contaSelecionada.descricao length] == 0) {
-        // Avisar o usuário
-        UIAlertView *alert;
-        alert = [[UIAlertView alloc] initWithTitle:@"Atenção" 
-                                           message:@"Uma conta precisa de uma descrição para ser válida. Informar uma descrição agora?" 
-                                          delegate:self 
-                                 cancelButtonTitle:@"Sim" 
-                                 otherButtonTitles:@"Não", nil];
-        [alert show];
-    } else {
-        // Todos os dados já foram salvos durante a edição
-        // de cada campo. Basta voltar a tela anterior
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
-
-- (IBAction)clickBotaoCancelar:(UIBarButtonItem *)sender {
-    // Se o usuário não quer informar a descrição vamos informar por ele :)
-    self.contaSelecionada.empresa = @"Conta sem descrição";
-    // E voltar a tela anterior
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-// Evento do UIAlertView
-- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
-{
-    if (buttonIndex == 0)
-    {
-        // Seta o "foco" no campo descrição
-        [self.tfDescricaoDaConta becomeFirstResponder];
-    } else {
-        // É o mesmo que cancelar a o cadastro
-        [self clickBotaoCancelar:nil];
-    }
-
-}
-*/
-
 - (void)viewWillDisappear:(BOOL)animated
 {
 }
@@ -324,83 +290,5 @@
 
     }
 }
-
-#pragma mark - Table view data source
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 0;
-//}
-
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
-
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    
-//    // Configure the cell...
-//    
-//    return cell;
-//}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-//#pragma mark - Table view delegate
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // Navigation logic may go here. Create and push another view controller.
-//    /*
-//     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-//     // ...
-//     // Pass the selected object to the new view controller.
-//     [self.navigationController pushViewController:detailViewController animated:YES];
-//     */
-//}
 
 @end
