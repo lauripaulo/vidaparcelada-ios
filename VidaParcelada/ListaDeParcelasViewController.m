@@ -18,6 +18,22 @@
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize compraSelecionada = _compraSelecionada;
+@synthesize parcelaSelecionada = _parcelaSelecionada;
+
+
+//
+// Delegate para avisar que uma parcela foi alterada
+// e a tabela precisa recarregar os seus dados
+//
+- (void)parcelaFoiAlterada:(Parcela *)parcela
+{
+    NSLog(@"(>) parcelaFoiAlterada: %@", parcela);
+    
+    [self.tableView reloadData];
+    
+    NSLog(@"(<) parcelaFoiAlterada: ");
+
+}
 
 // sobrescreve o setter para o BD do VP
 // e inicializa o fetchResultsController
@@ -34,6 +50,7 @@
     NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
     [super viewWillAppear:animated];
+    self.parcelaSelecionada = nil;
 
     NSLog(@"(<) viewWillAppear: ");
 
@@ -152,6 +169,33 @@
 - (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleNone;
 }
+
+// Temos que passar o banco de dados que abrimos aqui
+// no primeiro controller do app para todos
+// os outros controllers. Dessa forma todos terao um atributo
+// UIManagedDocument *vpDatabase implementado.
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // ATENÇÃO: Quando utilizamos Segues a celula que dispara o segue
+    // é passada como sender, e a única maneira de sabermos qual objeto
+    // do fetchedResultsController foi selecionado é passando a cell
+    // para a tabela e pedido no indexPath.
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        self.parcelaSelecionada = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+    
+    // primeiro informa a compra porque a pesquisa das parcelas precisa da compra.
+    if ([segue.destinationViewController respondsToSelector:@selector(setParcelaSelecionada:)]){
+        [segue.destinationViewController setParcelaSelecionada:self.parcelaSelecionada];
+    }
+    
+    // Por último passa o managedDocument
+    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
+        [segue.destinationViewController setVpDatabase:self.vpDatabase];
+    }
+}
+
 
 #pragma mark - Table view data source
 

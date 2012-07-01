@@ -10,6 +10,7 @@
 #import "Parcela+AddOn.h"
 #import "Compra+AddOn.h"
 #import "VidaParceladaHelper.h"
+#import "Conta+AddOn.h"
 
 @interface VisaoMensalViewController ()
 
@@ -101,9 +102,10 @@
     Parcela *parcela = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     NSString *valor = [self.valorFormatter stringFromNumber:parcela.valor];
-    NSString *vencimento = [self.dateFormatter stringFromDate:parcela.dataVencimento];
+//    NSString *vencimento = [self.dateFormatter stringFromDate:parcela.dataVencimento];
     
-    NSString *detail = [NSString stringWithFormat:@"%@ - %@ - %@", vencimento, parcela.descricao, valor];
+//    NSString *detail = [NSString stringWithFormat:@"%@ - %@ - %@", vencimento, parcela.descricao, valor];
+    NSString *detail = [NSString stringWithFormat:@"%@ - %@ - %@", parcela.compra.origem.descricao, parcela.descricao, valor];
     
     cell.textLabel.text = parcela.compra.descricao;
     cell.detailTextLabel.text = detail;

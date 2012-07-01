@@ -28,6 +28,13 @@ extern NSString * const PARCELA_VENCIDA; // Todas as parcela pagas
                      pertenceACompra:(Compra *)compra
                            inContext:(NSManagedObjectContext *)context;
 
+//
+// Itera em todas as compras e identifica parcelas que estão vencendo no mês atual
+// 
+- (NSArray *) parcelasPendentesDoMes:(NSDate *)data
+                           inContext:(NSManagedObjectContext *)context;
+
+
 @end
 
 //
@@ -39,10 +46,5 @@ extern NSString * const PARCELA_VENCIDA; // Todas as parcela pagas
 
 - (void)parcelaFoiAlterada:(Parcela *)parcela;
 
-//
-// Itera em todas as compras e identifica parcelas que estão vencendo no mês atual
-// 
-- (NSArray *) parcelasPendentesDoMes:(NSDate *)data
-                           inContext:(NSManagedObjectContext *)context;
 
 @end

@@ -124,6 +124,8 @@
 
 - (void)atualizarCamposNaTela
 {
+    self.algumCampoFoiAlterado = NO;
+    
     self.tfDescricao.text = self.compraSelecionada.descricao;
     self.contaSelecionada = self.compraSelecionada.origem;
     self.dataSelecionada = self.compraSelecionada.dataDaCompra;
@@ -477,6 +479,7 @@
         // Não estamos em nenhum campo, assume a parcela.
         [self calculaValorDaParcela];
     }
+    
     
     // somente atualiza se a conta já tiver sido criada.
     if (self.compraSelecionada) {

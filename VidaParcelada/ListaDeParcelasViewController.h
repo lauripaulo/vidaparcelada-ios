@@ -13,7 +13,7 @@
 #import "Conta+AddOn.h"
 #import "TipoConta+AddOn.h"
 
-@interface ListaDeParcelasViewController : CoreDataTableViewController
+@interface ListaDeParcelasViewController : CoreDataTableViewController <AlteracaoDeParcelaDelegate>
 
 // banco de dados atualmente em uso. Precisa ser definido no 
 // prepareForSegue do controler que abre o banco de dados.
@@ -25,5 +25,6 @@
 // Compra atualmente selecionada na table
 @property (nonatomic) Compra *compraSelecionada;
 
+@property (nonatomic) Parcela *parcelaSelecionada;
 
 @end
