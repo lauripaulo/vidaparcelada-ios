@@ -10,6 +10,7 @@
 #import "Conta+AddOn.h"
 #import "TipoConta+AddOn.h"
 #import "VidaParceladaHelper.h"
+#import "CadastroDaContaViewController.h"
 
 @interface ListaDeContasViewController ()
 
@@ -87,6 +88,12 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setContaSelecionada:)]){
         [segue.destinationViewController setContaSelecionada:self.contaSelecionada];
     }
+    
+    // Adiciona como delegate
+    if ([segue.destinationViewController respondsToSelector:@selector(setContaDelegate:)]){
+        [segue.destinationViewController setContaDelegate:self];
+    }
+
 }
 
 - (id)initWithStyle:(UITableViewStyle)style

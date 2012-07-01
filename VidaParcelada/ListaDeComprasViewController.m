@@ -81,6 +81,11 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
         [segue.destinationViewController setVpDatabase:self.vpDatabase];
     }
+    
+    // Adiciona como delegate
+    if ([segue.destinationViewController respondsToSelector:@selector(setCompraDelegate:)]){
+        [segue.destinationViewController setCompraDelegate:self];
+    }
 }
 
 - (id)initWithStyle:(UITableViewStyle)style

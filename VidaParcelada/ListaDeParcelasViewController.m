@@ -7,6 +7,7 @@
 //
 
 #import "ListaDeParcelasViewController.h"
+#import "CadastroDeParcelaViewController.h"
 
 @interface ListaDeParcelasViewController ()
 
@@ -194,6 +195,12 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
         [segue.destinationViewController setVpDatabase:self.vpDatabase];
     }
+    
+    // Se adiciona como delegate
+    if ([segue.destinationViewController respondsToSelector:@selector(setParcelaDelegate:)]){
+        [segue.destinationViewController setParcelaDelegate:self];
+    }
+    
 }
 
 

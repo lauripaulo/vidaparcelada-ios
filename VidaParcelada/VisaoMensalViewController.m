@@ -11,6 +11,7 @@
 #import "Compra+AddOn.h"
 #import "VidaParceladaHelper.h"
 #import "Conta+AddOn.h"
+#import "CadastroDeCompraViewController.h"
 
 @interface VisaoMensalViewController ()
 
@@ -23,6 +24,16 @@
 @synthesize dateFormatter = _dateFormatter;
 @synthesize objetivoMensal = _objetivoMensal;
 @synthesize compraSelecionada = _compraSelecionada;
+
+- (void)compraFoiAlterada:(Compra *)compra;
+{
+    [self.tableView reloadData];
+}
+
+- (void)parcelaFoiAlterada:(Parcela *)parcela;
+{
+    [self.tableView reloadData];
+}
 
 // sobrescreve o setter para o BD do VP
 // e inicializa o fetchResultsController
@@ -102,9 +113,10 @@
     Parcela *parcela = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     NSString *valor = [self.valorFormatter stringFromNumber:parcela.valor];
-//    NSString *vencimento = [self.dateFormatter stringFromDate:parcela.dataVencimento];
     
+//    NSString *vencimento = [self.dateFormatter stringFromDate:parcela.dataVencimento];    
 //    NSString *detail = [NSString stringWithFormat:@"%@ - %@ - %@", vencimento, parcela.descricao, valor];
+    
     NSString *detail = [NSString stringWithFormat:@"%@ - %@ - %@", parcela.compra.origem.descricao, parcela.descricao, valor];
     
     cell.textLabel.text = parcela.compra.descricao;
@@ -235,8 +247,8 @@
     NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
 
     [super viewWillAppear:animated];
-    [[self tableView] reloadData];
     self.objetivoMensal = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
+    [[self tableView] reloadData];
 
     NSLog(@"(<) viewWillAppear: ");
 }
@@ -280,6 +292,12 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
         [segue.destinationViewController setVpDatabase:self.vpDatabase];
     }
+    
+    // Adiciona como delegate
+    if ([segue.destinationViewController respondsToSelector:@selector(setCompraDelegate:)]){
+        [segue.destinationViewController setCompraDelegate:self];
+    }
+
 }
 
 

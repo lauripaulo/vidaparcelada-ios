@@ -25,7 +25,7 @@
 @synthesize btCancelar;
 @synthesize parcelaSelecionada = _parcelaSelecionada;
 @synthesize vpDatabase = _vpDatabase;
-@synthesize parceladDelegate = _parceladDelegate;
+@synthesize parcelaDelegate = _parceladDelegate;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize algumCampoFoiAlterado = _algumCampoFoiAlterado;

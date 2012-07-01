@@ -28,7 +28,7 @@
 @property (strong, nonatomic) Parcela *parcelaSelecionada;
 
 // Delegate que recebe notificação quando uma conta é alterada
-@property (assign) id <AlteracaoDeParcelaDelegate> parceladDelegate;
+@property (assign) id <AlteracaoDeParcelaDelegate> parcelaDelegate;
 
 @property (nonatomic, retain) NSNumberFormatter *valorFormatter;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
