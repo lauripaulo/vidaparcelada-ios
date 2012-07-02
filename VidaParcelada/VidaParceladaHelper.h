@@ -46,4 +46,10 @@
 // Função que recebe um NSError e loga as informações se for pertinente
 + (void) trataErro:(NSError *)error;
 
+// Salva o numero de parcelas padrão do usuário
++ (void) salvaNumeroDeParcelasPadrao:(NSNumber *)numParcelas;
+
+// Retorna o numero de parcelas padrão do usuário
++ (NSNumber *) retornaNumeroDeParcelasPadrao;
+
 @end

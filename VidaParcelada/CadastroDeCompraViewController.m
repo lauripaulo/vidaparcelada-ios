@@ -159,8 +159,12 @@
     self.contaSelecionada = [Compra retornaContaDefaultNoContexto:self.vpDatabase.managedObjectContext];
     
     self.tfDescricao.text = @"";
-    self.stepperQtdeDeParcelas.value = 3;
-    self.tfQtdeDeParcelas.text = @"3";
+    
+    // valor do steeper vem das configurações do aplicativo
+    double qtdeParcela = [[VidaParceladaHelper retornaNumeroDeParcelasPadrao] doubleValue];
+    self.stepperQtdeDeParcelas.value = qtdeParcela;
+    self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f", qtdeParcela];
+    
     self.tfValorTotal.text = [self.valorFormatter stringFromNumber:0];
     self.cellDataDaCompra.textLabel.text = @"Data da compra";
     self.cellDataDaCompra.detailTextLabel.text = [self.dateFormatter stringFromDate:self.dataSelecionada];

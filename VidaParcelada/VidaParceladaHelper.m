@@ -273,6 +273,35 @@
     NSLog (@"(<) salvaLimiteDeGastoGlobalStr: ");
 }
 
++ (void) salvaNumeroDeParcelasPadrao:(NSNumber *)numParcelas
+{
+    NSLog (@"(>) salvaNumeroDeParcelasPadrao: %@", numParcelas);
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:numParcelas forKey:@"numParcelas"];
+    [defaults synchronize];
+
+    NSLog (@"(<) salvaNumeroDeParcelasPadrao: ");
+}
+
++ (NSNumber *) retornaNumeroDeParcelasPadrao
+{
+    NSLog (@"(>) retornaNumeroDeParcelasPadrao: ");
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *numParcelas = [defaults objectForKey:@"numParcelas"];
+
+    if (!numParcelas) {
+        NSLog (@"(!) retornaNumeroDeParcelasPadrao: vazio, inicializando com 1.");
+        numParcelas = [[NSNumber alloc] initWithInt:1];
+        [VidaParceladaHelper salvaNumeroDeParcelasPadrao:numParcelas];
+    }
+    
+    NSLog (@"(<) retornaNumeroDeParcelasPadrao: return = %@", numParcelas);
+
+    return numParcelas;
+}
+
 + (void) trataErro:(NSError *)error
 {
     if (error) {

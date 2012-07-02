@@ -28,6 +28,8 @@
 @synthesize valorFormatter = _valorFormatter;
 @synthesize vpDatabase = _vpDatabase;
 @synthesize tfObjetivoMensal = _tfObjetivoMensal;
+@synthesize tfQtdeParcelas = _tfQtdeParcelas;
+@synthesize stepperQtdeParcelas = _stepperQtdeParcelas;
 
 //
 // Codigo de gerenciamento do teclado
@@ -37,6 +39,12 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (IBAction)stepperQtdeParcelasValueChanged:(UIStepper *)sender {
+    NSNumber *valor = [NSDecimalNumber numberWithDouble:sender.value];
+    self.tfQtdeParcelas.text = [NSString stringWithFormat:@"%2.0f", sender.value];
+    [VidaParceladaHelper salvaNumeroDeParcelasPadrao:valor];
 }
 
 // Outlet para avisar quando a edição do objetivo terminar e para
@@ -104,6 +112,11 @@
     [self.valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     self.tfObjetivoMensal.text = [VidaParceladaHelper retornaLimiteDeGastoGlobalStr];
+    
+    // steeper de parcelas
+    double qtdeParcelas = [[VidaParceladaHelper retornaNumeroDeParcelasPadrao] doubleValue];
+    self.stepperQtdeParcelas.value = qtdeParcelas;
+    self.tfQtdeParcelas.text = [NSString stringWithFormat:@"%2.0f", qtdeParcelas];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -115,6 +128,8 @@
 - (void)viewDidUnload
 {
     [self setTfObjetivoMensal:nil];
+    [self setTfQtdeParcelas:nil];
+    [self setStepperQtdeParcelas:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

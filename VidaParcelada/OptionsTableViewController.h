@@ -13,5 +13,7 @@
 @property (nonatomic, strong) UIManagedDocument *vpDatabase;
 @property (weak, nonatomic) IBOutlet UITextField *tfObjetivoMensal;
 
+@property (weak, nonatomic) IBOutlet UITextField *tfQtdeParcelas;
+@property (weak, nonatomic) IBOutlet UIStepper *stepperQtdeParcelas;
 
 @end
