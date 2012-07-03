@@ -1,4 +1,4 @@
-	//
+//
 //  VisaoMensalViewController.m
 //  VidaParcelada
 //
@@ -88,7 +88,7 @@
     
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
-    request.predicate = [NSPredicate predicateWithFormat:@"dataVencimento >= %@", vencimento];
+    request.predicate = [NSPredicate predicateWithFormat:@"dataVencimento >= %@ AND estado <> %@", vencimento, PARCELA_PAGA];
     request.sortDescriptors = [NSArray arrayWithObject:
                                [NSSortDescriptor sortDescriptorWithKey:@"dataVencimento" ascending:YES 
                                                               selector:@selector(compare:)]];

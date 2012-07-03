@@ -12,6 +12,8 @@
 
 @interface CadastroDeParcelaViewController ()
 
+- (void)removeTodosOsChecksDeEstado;
+
 @end
 
 @implementation CadastroDeParcelaViewController
@@ -58,10 +60,40 @@
 }
 
 - (IBAction)onSalvarPressionado:(UIBarButtonItem *)sender {
+    NSLog(@"(>) onSalvarPressionado: %@ ", sender);
+    
+    // Se algo foi alterado salva e avisa o delegate.
+    if (self.algumCampoFoiAlterado && self.parcelaSelecionada) {
+        NSNumber *valorTmp= [self.valorFormatter numberFromString:self.tfValor.text];
+        self.parcelaSelecionada.descricao = self.tfDescricao.text;
+        self.parcelaSelecionada.valor = [NSDecimalNumber decimalNumberWithString:[valorTmp stringValue]];
+        
+        // Qual o estado da compra
+        if (self.cellParcelaPaga.accessoryType == UITableViewCellAccessoryCheckmark) {
+            self.parcelaSelecionada.estado = PARCELA_PAGA;
+        } else if (self.cellParcelaPendente.accessoryType == UITableViewCellAccessoryCheckmark) {
+            self.parcelaSelecionada.estado = PARCELA_PENDENTE_PAGAMENTO;
+        } else if (self.cellParcelaVencida.accessoryType == UITableViewCellAccessoryCheckmark) {
+            self.parcelaSelecionada.estado = PARCELA_VENCIDA;
+        }
+        NSLog(@"(!) onSalvarPressionado: parcela = %@", self.parcelaSelecionada);
+        
+        // Persiste no coredata - talvez isso devesse sair do controller...
+        NSError *erro = nil;
+        [self.vpDatabase.managedObjectContext save:&erro];
+        [VidaParceladaHelper trataErro:erro];
+    }
+    
+    // Volta para a tela anterior
+    [self.navigationController popViewControllerAnimated:YES];
+
+    NSLog(@"(<) onSalvarPressionado: ");
 }
 
 - (IBAction)onCancelarPressionado:(UIBarButtonItem *)sender {
+    NSLog(@"(>) onCancelarPressionado: %@ ", sender);
     [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"(<) onCancelarPressionado: ");
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -87,11 +119,15 @@
         self.algumCampoFoiAlterado = NO;
         self.tfDescricao.text = self.parcelaSelecionada.descricao;
         self.tfValor.text = [self.valorFormatter stringFromNumber:self.parcelaSelecionada.valor];
-        if ([self.parcelaSelecionada.estado isEqualToString:PARCELA_PAGA]) {
-            
-        } else if ([self.parcelaSelecionada.estado isEqualToString:PARCELA_PENDENTE_PAGAMENTO]) {
         
+        // atualiza o estado da parcela
+        [self removeTodosOsChecksDeEstado];
+        if ([self.parcelaSelecionada.estado isEqualToString:PARCELA_PAGA]) {
+            self.cellParcelaPaga.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else if ([self.parcelaSelecionada.estado isEqualToString:PARCELA_PENDENTE_PAGAMENTO]) {
+            self.cellParcelaPendente.accessoryType = UITableViewCellAccessoryCheckmark;
         } else if ([self.parcelaSelecionada.estado isEqualToString:PARCELA_VENCIDA]) {
+            self.cellParcelaVencida.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
 
@@ -136,13 +172,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    // remove todos os checks atuais.
+    [self removeTodosOsChecksDeEstado];
+    
+    // colocar o check no escolhido
+    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
+    newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    // Avisa que o campo foi alterado.
+    self.algumCampoFoiAlterado = YES;
+    
+}
+
+- (void)removeTodosOsChecksDeEstado
+{
+    self.cellParcelaPaga.accessoryType = UITableViewCellAccessoryNone;
+    self.cellParcelaPendente.accessoryType = UITableViewCellAccessoryNone;
+    self.cellParcelaVencida.accessoryType = UITableViewCellAccessoryNone;
 }
 
 @end
