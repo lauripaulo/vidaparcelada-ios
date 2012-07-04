@@ -32,6 +32,9 @@
     NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
 
     [super viewWillAppear:animated];
+    NSIndexPath *catIndex = [self.fetchedResultsController indexPathForObject:self.tipoSelecionado];
+    UITableViewCell *newCell = [self.tableView cellForRowAtIndexPath:catIndex];
+    newCell.accessoryType = UITableViewCellAccessoryCheckmark;
     
     NSLog(@"(<) viewWillAppear: ");
 
@@ -125,10 +128,13 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSInteger catIndex = [self.fetchedResultsController indexPathForObject:self.tipoSelecionado].row;
+    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
     
-    // Neste caso não é necessário remover o checkmark da celular selecionada anteriormente
+    // Neste caso não é necessário remover o checkmark da celula selecionada anteriormente
     // caso a gente tenha uma linha já selecionada
     if (catIndex == indexPath.row) {
+        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.navigationController popViewControllerAnimated:YES];
         return;
     }
     // Procura a linha que tem atualmente o chekmark utilizando o indice do objeto
@@ -143,7 +149,7 @@
     
     // Colocar o checkmark na célula que foi selecionada e atualiza o tipo
     // correspondente na variavel de controle
-    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
+    
     if (newCell.accessoryType == UITableViewCellAccessoryNone) {
         newCell.accessoryType = UITableViewCellAccessoryCheckmark;
         // Atualiza o selecionado e avisa o delegate

@@ -132,7 +132,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1046" y="1040"/>
+            <point key="canvasLocation" x="1046" y="1031"/>
         </scene>
         <!--Lista De Contas View Controller - Contas-->
         <scene sceneID="Dc5-C8-4A1">
@@ -1100,8 +1100,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                         <action selector="stepperQtdeParcelasValueChanged:" destination="dYw-Yz-4cr" eventType="valueChanged" id="oeX-za-ydu"/>
                                                     </connections>
                                                 </stepper>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="1" textAlignment="center" minimumFontSize="14" id="bhf-4P-Yfx">
-                                                    <rect key="frame" x="122" y="7" width="56" height="31"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="1" textAlignment="center" minimumFontSize="14" id="bhf-4P-Yfx">
+                                                    <rect key="frame" x="122" y="6" width="56" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.80000001192092896" green="1" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
