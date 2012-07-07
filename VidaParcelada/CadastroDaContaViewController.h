@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIStepper *stepperMelhorDia;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellTipoConta;
 
+@property (weak, nonatomic) IBOutlet UISwitch *uiSwitchCartaoPreferencial;
 @property (nonatomic, strong) Conta *contaSelecionada;
 
 // Delegate que recebe notificação quando uma conta é alterada

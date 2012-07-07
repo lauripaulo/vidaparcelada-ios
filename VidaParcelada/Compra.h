@@ -2,7 +2,7 @@
 //  Compra.h
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 13/06/12.
+//  Created by Lauri Laux on 06/07/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * estado;
 @property (nonatomic, retain) NSNumber * qtdeTotalDeParcelas;
 @property (nonatomic, retain) NSDecimalNumber * valorTotal;
+@property (nonatomic, retain) NSString * detalhes;
 @property (nonatomic, retain) Conta *origem;
 @property (nonatomic, retain) NSSet *parcelas;
 @end

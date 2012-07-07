@@ -19,6 +19,7 @@
                 eJurosMes:(NSDecimalNumber *) jurosMes
            comLimiteTotal:(NSDecimalNumber *) limite
      comMelhorDiaDeCompra:(NSNumber *) melhorDiaDeCompra
+       cartaoPreferencial:(BOOL)preferencial
                 inContext:(NSManagedObjectContext *)context;
 
 // Retorna todas as contas atualmente cadastradas para usar em

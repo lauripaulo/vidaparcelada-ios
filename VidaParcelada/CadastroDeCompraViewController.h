@@ -49,6 +49,7 @@
 @property (strong, nonatomic) UIActionSheet *actionSheetVencimento;
 @property (strong, nonatomic) UIActionSheet *actionSheetApagarParcelas;
 
+@property (weak, nonatomic) IBOutlet UITextField *tfDetalhesDaCompra;
 
 // Delegate que recebe notificação quando uma conta é alterada
 @property (assign) id <AlteracaoDeCompraDelegate> compraDelegate;

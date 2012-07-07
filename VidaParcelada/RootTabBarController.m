@@ -28,52 +28,50 @@
 // estado satisfatório para o primeiro uso.
 -(void)insertDefaultDbData:(UIManagedDocument *)document
 {
+    NSLog (@"(>) insertDefaultDbData: %@", document);
+    
     // Temos que inserir os tipos de conta padrão, o usuário
     // na versão 1.0 não podera incluir tipos de conta.
     TipoConta *cartao = [TipoConta contaComNome:@"Cartão de crédito" eDescricao:@"Cartão com data de vencimento" identificadorDeTipo:1 inContext:document.managedObjectContext];
-    NSLog(@"Criado cartao: %@", cartao);
-    TipoConta *cheque = [TipoConta contaComNome:@"Cheque pré-datado" eDescricao:@"Cheques para pagamento de uma compra." identificadorDeTipo:2 inContext:document.managedObjectContext];
-    NSLog(@"Criado cheque: %@", cheque);
-    TipoConta *carnes = [TipoConta contaComNome:@"Carnê de Pagamento" eDescricao:@"Parcelas para pagamento de uma compra" identificadorDeTipo:3 inContext:document.managedObjectContext];
-    NSLog(@"Criado Carnê de Pagamento %@", carnes);
-    TipoConta *crediario = [TipoConta contaComNome:@"Crediário" eDescricao:@"Parcelamento diretamente com a loja" identificadorDeTipo:4 inContext:document.managedObjectContext];
-    NSLog(@"Criado Crediário: %@", crediario);
+    TipoConta *crediario = [TipoConta contaComNome:@"Outros" eDescricao:@"Outras formas de parcelamento" identificadorDeTipo:2 inContext:document.managedObjectContext];
     
-    Conta *conta = [Conta contaComDescricao:@"Yahoo VISA" 
-                                  daEmpresa:@"Credicard" 
-                         comVencimentoNoDia:[NSNumber numberWithInt:17]
-                                  eJurosMes:[NSDecimalNumber decimalNumberWithString:@"8.5"]
-                             comLimiteTotal:[NSDecimalNumber decimalNumberWithString:@"3000"]
-                       comMelhorDiaDeCompra:[NSNumber numberWithInt:4] 
-                                  inContext:document.managedObjectContext];
-    NSLog(@"Criada conta: %@", conta);
+    NSLog (@"(!) Criado tipos de conta inciais: %@, %@", cartao, crediario);
+    
+    NSLog (@"(<) insertDefaultDbData: ");
     
 }
 
 -(void)openDatabase
 {    
+    NSLog (@"(>) openDatabase: ");
+           
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self.managedDocument.fileURL path]]){
         // O banco de dados não existe.
-        NSLog(@"Banco de dados não encontrado. Criando...");
+        NSLog(@"(!) openDatabase: Banco de dados não encontrado. Criando...");
         [self.managedDocument saveToURL:self.managedDocument.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             [self insertDefaultDbData:self.managedDocument];
             [self databaseAbertoComSucesso:success];
         }];
     } else if (self.managedDocument.documentState == UIDocumentStateClosed) {
         // O banco de dados existe, vamos abri-lo
-        NSLog(@"Banco de dados encontrado como estao FECHADO. Abrindo...");
+        NSLog(@"(!) openDatabase: Banco de dados encontrado como estao FECHADO. Abrindo...");
         [self.managedDocument openWithCompletionHandler:^(BOOL success) {
             [self databaseAbertoComSucesso:success];
         }];
     } else if (self.managedDocument.documentState == UIDocumentStateNormal) {
         // o banco de dados já está aberto
-        NSLog(@"Banco de dados encontrado e aberto!");
+        NSLog(@"(!) openDatabase: Banco de dados encontrado e aberto!");
         [self databaseAbertoComSucesso:YES];
     }
+    
+    NSLog (@"(<) openDatabase: ");
+
 }
 
 - (void)databaseAbertoComSucesso:(BOOL) success
 {
+    NSLog (@"(>) databaseAbertoComSucesso: %@", (success ? @"YES" : @"NO"));
+    
     if (success) {
         // o banco de dados foi aberto com sucesso, então temos que passar
         // a informação do ManagedDocument para todos os controllers
@@ -106,10 +104,12 @@
         // temos que logar e tentar recuperar o BD
         // ou mostrar uma tela de erro pedindo para o 
         // usuário re-instalar o app.
-        NSLog(@"Erro fatal abrindo BD!!!");
+        NSLog(@"(!) databaseAbertoComSucesso: Erro fatal abrindo BD!!!");
         
     }
     
+    NSLog (@"(<) databaseAbertoComSucesso: ");
+ 
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

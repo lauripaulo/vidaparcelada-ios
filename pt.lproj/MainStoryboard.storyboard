@@ -559,7 +559,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9LR-jk-g4o">
-                                        <rect key="frame" x="0.0" y="315" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="315" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -576,11 +576,28 @@
                                                     <rect key="frame" x="142" y="6" width="138" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="tfValorDaParcelaDidEndOnExit:" destination="KDO-cB-7qR" eventType="editingDidEndOnExit" id="gy5-L1-Wbj"/>
                                                         <outlet property="delegate" destination="KDO-cB-7qR" id="k6H-XC-4aQ"/>
                                                     </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jGY-GD-Iif">
+                                        <rect key="frame" x="0.0" y="359" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Detalhes da compra." minimumFontSize="17" clearButtonMode="whileEditing" id="HvE-S2-qMF">
+                                                    <rect key="frame" x="20" y="6" width="273" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -623,6 +640,7 @@
                         <outlet property="datePicker" destination="xYF-Iy-eDm" id="hDM-BC-mdD"/>
                         <outlet property="stepperQtdeDeParcelas" destination="Kns-wk-tdz" id="51b-p1-AFp"/>
                         <outlet property="tfDescricao" destination="Wmt-5x-t8q" id="RYk-uL-Smt"/>
+                        <outlet property="tfDetalhesDaCompra" destination="HvE-S2-qMF" id="jHL-w3-2oy"/>
                         <outlet property="tfQtdeDeParcelas" destination="o02-UN-73w" id="WVS-t6-KfS"/>
                         <outlet property="tfValorDaParcela" destination="esa-wy-57U" id="bFe-cD-pVs"/>
                         <outlet property="tfValorTotal" destination="2JA-qr-hYM" id="Tdw-zz-crY"/>
@@ -802,7 +820,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ymP-pv-auu">
-                                        <rect key="frame" x="0.0" y="319" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="319" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -830,12 +848,37 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="RrO-Ek-pHe">
+                                        <rect key="frame" x="0.0" y="363" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Conta preferêncial:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="abr-bZ-QTS">
+                                                    <rect key="frame" x="11" y="11" width="137" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="nDZ-FO-TZj">
+                                                    <rect key="frame" x="201" y="8" width="79" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="uiSwitchCartaoPreferencialChanged:" destination="VSo-TW-Q2V" eventType="valueChanged" id="MDx-ww-1CK"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Vencimentos:" id="XbH-by-Z34">
+                            <tableViewSection headerTitle="Vencimentos:" footerTitle="Você encontra o vencimento e melhor dia, geralmente, na fatura do seu cartão." id="XbH-by-Z34">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fGO-qh-hpE">
-                                        <rect key="frame" x="0.0" y="410" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="454" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -867,7 +910,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="mRp-sJ-eNx">
-                                        <rect key="frame" x="0.0" y="455" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="499" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -876,7 +919,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Melhor dia:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ISq-dq-lHu">
                                                     <rect key="frame" x="20" y="11" width="78" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -919,6 +962,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="tfJuros" destination="yer-qN-9I9" id="eiz-Pl-ekc"/>
                         <outlet property="tfLimiteTotal" destination="hf7-PB-Crx" id="X3Z-GM-hyI"/>
                         <outlet property="tfMelhorDia" destination="ARF-RP-pYm" id="e2K-ts-DGx"/>
+                        <outlet property="uiSwitchCartaoPreferencial" destination="nDZ-FO-TZj" id="tLX-Gj-bc7"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -1169,6 +1213,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="tfJuros" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfLimiteTotal" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfMelhorDia" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="uiSwitchCartaoPreferencial" candidateClass="UISwitch"/>
             </relationships>
         </class>
         <class className="CadastroDeCompraViewController" superclassName="UITableViewController">
@@ -1186,6 +1231,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="stepperQtdeDeParcelas" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="tfDetalhesDaCompra" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfQtdeDeParcelas" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfValorDaParcela" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfValorTotal" candidateClass="UITextField"/>

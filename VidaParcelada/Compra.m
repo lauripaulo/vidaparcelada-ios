@@ -2,7 +2,7 @@
 //  Compra.m
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 13/06/12.
+//  Created by Lauri Laux on 06/07/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @dynamic estado;
 @dynamic qtdeTotalDeParcelas;
 @dynamic valorTotal;
+@dynamic detalhes;
 @dynamic origem;
 @dynamic parcelas;
 

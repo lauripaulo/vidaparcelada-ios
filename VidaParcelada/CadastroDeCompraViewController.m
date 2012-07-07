@@ -53,6 +53,7 @@
 @synthesize considerarParcelasAnterioresPagas = _considerarParcelasAnterioresPagas;
 @synthesize actionSheetVencimento = _actionSheetVencimento;
 @synthesize actionSheetApagarParcelas = _actionSheetApagarParcelas;
+@synthesize tfDetalhesDaCompra = _tfDetalhesDaCompra;
 
 - (IBAction)tfValorDaParcelaDidEndOnExit:(id)sender {
 }
@@ -127,6 +128,7 @@
     self.algumCampoFoiAlterado = NO;
     
     self.tfDescricao.text = self.compraSelecionada.descricao;
+    self.tfDetalhesDaCompra.text = self.compraSelecionada.detalhes;
     self.contaSelecionada = self.compraSelecionada.origem;
     self.dataSelecionada = self.compraSelecionada.dataDaCompra;
 
@@ -159,6 +161,7 @@
     self.contaSelecionada = [Compra retornaContaDefaultNoContexto:self.vpDatabase.managedObjectContext];
     
     self.tfDescricao.text = @"";
+    self.tfDetalhesDaCompra.text = @"";
     
     // valor do steeper vem das configurações do aplicativo
     double qtdeParcela = [[VidaParceladaHelper retornaNumeroDeParcelasPadrao] doubleValue];
@@ -239,6 +242,7 @@
     [self setActionSheetVencimento:nil];
     [self setActionSheetApagarParcelas:nil];
     [self setTfValorDaParcela:nil];
+    [self setTfDetalhesDaCompra:nil];
     [super viewDidUnload];
     
     // Release any retained subviews of the main view.
@@ -279,13 +283,14 @@
     }
     
     Compra *novaCompra = [Compra compraComDescricao:self.tfDescricao.text
-                                           dataDaCompra:self.dataSelecionada 
-                                              comEstado:COMPRA_PENDENTE_PAGAMENTO 
-                                         qtdeDeParcelas:qtdeParcelas
-                                             valorTotal:[NSDecimalNumber decimalNumberWithString:[valor stringValue]]
-                                               comConta:self.contaSelecionada
-                             assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas
-                                              inContext:self.vpDatabase.managedObjectContext];
+                                        comDetalhes:self.tfDetalhesDaCompra.text
+                                       dataDaCompra:self.dataSelecionada 
+                                          comEstado:COMPRA_PENDENTE_PAGAMENTO 
+                                     qtdeDeParcelas:qtdeParcelas
+                                         valorTotal:[NSDecimalNumber decimalNumberWithString:[valor stringValue]]
+                                           comConta:self.contaSelecionada
+                         assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas
+                                          inContext:self.vpDatabase.managedObjectContext];
 
     // salva o contexto do core data para evitar perda de dados
     NSError *error = nil;
@@ -331,10 +336,10 @@
         // Action sheet do estado das parcelas
         if (buttonIndex == [actionSheet destructiveButtonIndex]) {
             // Considerar parcelas anteriores pagas.
-            self.considerarParcelasAnterioresPagas = YES;
+            self.considerarParcelasAnterioresPagas = NO;
         } else if (buttonIndex == [actionSheet cancelButtonIndex]) {
             // Considerar parcelas anteriores pendentes de pagamento
-            self.considerarParcelasAnterioresPagas = NO;
+            self.considerarParcelasAnterioresPagas = YES;
         }
         [self salvarDados];
     } else if (actionSheet == self.actionSheetApagarParcelas) {
@@ -528,6 +533,17 @@
 {
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 
+    // Se o teclado estiver ativo remove
+    if (self.tfDescricao.isFirstResponder) {
+        [self.tfDescricao resignFirstResponder];
+    } else if (self.tfQtdeDeParcelas.isFirstResponder) {
+        [self.tfQtdeDeParcelas resignFirstResponder];
+    } else if (self.tfValorDaParcela.isFirstResponder) {
+        [self.tfValorDaParcela resignFirstResponder];
+    } else if (self.tfValorTotal.isFirstResponder) {
+        [self.tfValorTotal resignFirstResponder];
+    }
+    
     // Verifica se é a cell que tem a data para trazer o date picker
     if (indexPath.section == 0 && indexPath.row == 1) {
         // Data selecionada

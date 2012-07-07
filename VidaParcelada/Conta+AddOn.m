@@ -18,11 +18,12 @@
                    eJurosMes:(NSDecimalNumber *) jurosMes
               comLimiteTotal:(NSDecimalNumber *) limite
         comMelhorDiaDeCompra:(NSNumber *) melhorDiaDeCompra
+          cartaoPreferencial:(BOOL)preferencial
                    inContext:(NSManagedObjectContext *)context
 {
     Conta *conta = nil;
     
-    NSLog(@"(>) contaComDescricao: %@, %@, %@, %@, %@, %@, %@", descricao, empresa, diaDeVencimento, jurosMes, limite, melhorDiaDeCompra, context);
+    NSLog(@"(>) contaComDescricao: %@, %@, %@, %@, %@, %@, %@, %@", descricao, empresa, diaDeVencimento, jurosMes, limite, melhorDiaDeCompra, (preferencial ? @"YES" : @"NO"), context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
@@ -54,6 +55,7 @@
                               eJurosMes:jurosMes 
                          comLimiteTotal:limite 
                    comMelhorDiaDeCompra:melhorDiaDeCompra 
+                     cartaoPreferencial:preferencial
                               inContext:context];
     
     } else  {
@@ -67,12 +69,14 @@
         conta.jurosMes = jurosMes;
         conta.limite = limite;
         conta.melhorDiaDeCompra = melhorDiaDeCompra;
+        // maneira de colocar BOOLs no coredata
+        conta.preferencial = [NSNumber numberWithBool:preferencial];
         conta.compras = nil; // conta nova não tem compras...
         
         // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
         request.sortDescriptors = [NSArray arrayWithObject:
-                                   [NSSortDescriptor sortDescriptorWithKey:@"tipo" ascending:YES]];
+                                   [NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES]];
         NSArray *tipos = [context executeFetchRequest:request error:&error];
 
         // Tratamento de errors

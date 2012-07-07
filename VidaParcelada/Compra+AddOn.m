@@ -21,6 +21,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 @implementation Compra (AddOn)
 
 +(Compra *)compraComDescricao:(NSString *)descricao
+                  comDetalhes:(NSString *)detalhes
                  dataDaCompra:(NSDate *)data
                     comEstado:(NSString *)estado
                qtdeDeParcelas:(NSNumber *)parcelas
@@ -31,7 +32,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 {
     Compra *novaCompra = nil;
     
-    NSLog(@"(>) compraComDescricao: %@, %@, %@, %@, %@, %@, %@, %@", descricao, data, estado, parcelas, valorTotal, conta, (parcelasAntigasPagas ? @"YES" : @"NO"), context);
+    NSLog(@"(>) compraComDescricao: %@, %@, %@, %@, %@, %@, %@, %@, %@", descricao, detalhes, data, estado, parcelas, valorTotal, conta, (parcelasAntigasPagas ? @"YES" : @"NO"), context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
@@ -58,6 +59,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         // ...e chama novamente de forma recursiva
         // este metodo de criação.
         novaCompra = [self compraComDescricao:descricao 
+                                  comDetalhes:detalhes
                                  dataDaCompra:data 
                                     comEstado:estado 
                                qtdeDeParcelas:parcelas 
@@ -72,6 +74,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         //
         novaCompra = [NSEntityDescription insertNewObjectForEntityForName:@"Compra" inManagedObjectContext:context];
         novaCompra.descricao = descricao;
+        novaCompra.detalhes = detalhes;
         novaCompra.dataDaCompra = data;
         novaCompra.estado = estado;
         novaCompra.valorTotal = valorTotal;
@@ -100,6 +103,9 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     // para a conta vamos selecionar o primeiro objeto da tabela conta
     // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
+    
+    request.predicate = [NSPredicate predicateWithFormat:@"preferencial = %@", [NSNumber numberWithBool:YES]];
+ 
     request.sortDescriptors = [NSArray arrayWithObject:
                                [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
                                                               selector:@selector(localizedCaseInsensitiveCompare:)]];

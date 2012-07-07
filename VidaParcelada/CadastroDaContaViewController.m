@@ -37,6 +37,7 @@
 @synthesize stepperVencimento = _stepperVencimento;
 @synthesize stepperMelhorDia = _stepperMelhorDia;
 @synthesize cellTipoConta = _cellTipoConta;
+@synthesize uiSwitchCartaoPreferencial = _uiSwitchCartaoPreferencial;
 @synthesize activeField = _activeField;
 @synthesize contaSelecionada = _contaSelecionada;
 @synthesize contaDelegate = _contaDelegate;
@@ -86,6 +87,14 @@
     NSLog(@"(<) viewWillAppear: ");
 
 }
+- (IBAction)uiSwitchCartaoPreferencialChanged:(UISwitch *)sender {
+    NSLog (@"(>) uiSwitchCartaoPreferencialChanged: %@", sender);
+    
+    self.contaSelecionada.preferencial = [NSNumber numberWithBool:sender.on]; ;
+    
+    NSLog (@"(<) uiSwitchCartaoPreferencialChanged: ");
+
+}
 
 // Atualiza os campos da tela atual com os dados da conta passados
 // pelo controller pai.
@@ -107,6 +116,8 @@
     
     self.stepperVencimento.value = [self.contaSelecionada.diaDeVencimento doubleValue];
     self.tfDiaVencimento.text = [NSString stringWithFormat:@"%2.0f", [self.contaSelecionada.diaDeVencimento doubleValue]];
+    
+    self.uiSwitchCartaoPreferencial.on = [self.contaSelecionada.preferencial boolValue];
     
     // Formatando valores 
     self.tfJuros.text = [self.percentFormatter stringFromNumber:self.contaSelecionada.jurosMes];
@@ -185,12 +196,15 @@
 // também associamos ao primeiro TipoConta que encontramos no banco de dados
 - (void)criarNovaConta
 {
+    BOOL preferencial = self.uiSwitchCartaoPreferencial.on;
+    
     self.contaSelecionada = [Conta contaComDescricao:@"" 
                                            daEmpresa:@"" 
                                   comVencimentoNoDia:[NSNumber numberWithInt:1]
                                            eJurosMes:[NSDecimalNumber decimalNumberWithString:@"0"]
                                       comLimiteTotal:[NSDecimalNumber decimalNumberWithString:@"0"]
-                                comMelhorDiaDeCompra:[NSNumber numberWithInt:1] 
+                                comMelhorDiaDeCompra:[NSNumber numberWithInt:1]
+                                  cartaoPreferencial:(BOOL)preferencial
                                            inContext:self.vpDatabase.managedObjectContext];
     
     [self atualizarCamposNaTela];
@@ -261,6 +275,7 @@
     [self setStepperMelhorDia:nil];
     [self setCellTipoConta:nil];
     [self setTableView:nil];
+    [self setUiSwitchCartaoPreferencial:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

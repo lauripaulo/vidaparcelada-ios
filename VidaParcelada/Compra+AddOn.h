@@ -21,6 +21,7 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
 // Cria uma nova compra
 //
 +(Compra *)compraComDescricao:(NSString *)descricao
+                  comDetalhes:(NSString *)detalhes
                  dataDaCompra:(NSDate *)data
                     comEstado:(NSString *)estado
                qtdeDeParcelas:(NSNumber *)parcelas
