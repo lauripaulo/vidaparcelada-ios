@@ -1,21 +1,24 @@
 //
-//  TipoDaContaViewController.m
+//  EscolherContaViewController.m
 //  VidaParcelada
 //
-//  Created by Lauri Paulo Laux Junior Laux on 14/04/12.
+//  Created by Lauri Laux on 08/07/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "TipoDaContaViewController.h"
+#import "EscolherContaViewController.h"
+#import "TipoConta+AddOn.h"
 
-@interface TipoDaContaViewController ()
+@interface EscolherContaViewController ()
+
 @end
 
-@implementation TipoDaContaViewController
+@implementation EscolherContaViewController
 
+@synthesize contaDelegate = _contaDelegate;
+@synthesize contaSelecionada = _contaSelecionada;
 @synthesize vpDatabase = _vpDatabase;
-@synthesize tipoSelecionado = _tipoSelecionado;
-@synthesize tipoContaDelegate = _tipoContaDelegate;
+
 
 // sobrescreve o setter para o BD do VP
 // e inicializa o fetchResultsController
@@ -30,14 +33,14 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
-
+    
     [super viewWillAppear:animated];
-    NSIndexPath *catIndex = [self.fetchedResultsController indexPathForObject:self.tipoSelecionado];
+    NSIndexPath *catIndex = [self.fetchedResultsController indexPathForObject:self.contaSelecionada];
     UITableViewCell *newCell = [self.tableView cellForRowAtIndexPath:catIndex];
     newCell.accessoryType = UITableViewCellAccessoryCheckmark;
     
     NSLog(@"(<) viewWillAppear: ");
-
+    
 }
 #pragma mark TableView
 
@@ -55,10 +58,10 @@
 -(void)setupFetchedResultsController
 {
     self.debug = YES;
-
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
     request.sortDescriptors = [NSArray arrayWithObject:
-                               [NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES 
+                               [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
                                                               selector:@selector(localizedCaseInsensitiveCompare:)]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
@@ -67,7 +70,7 @@
                                                                                    cacheName:nil]; 
     
     // Celula com marcação
-    NSIndexPath *index = [self.fetchedResultsController indexPathForObject:self.tipoSelecionado];
+    NSIndexPath *index = [self.fetchedResultsController indexPathForObject:self.contaSelecionada];
     if (index) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:index];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -79,16 +82,21 @@
 // preenchidos corretamente.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Tipo da Conta Cell";
+    static NSString *CellIdentifier = @"Conta Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    TipoConta *tipoConta = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = tipoConta.nome;
-    cell.detailTextLabel.text = tipoConta.descricao;
+    Conta *conta = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (conta.descricao) {
+        cell.textLabel.text = conta.descricao;
+        cell.detailTextLabel.text = conta.empresa;
+    } else {
+        cell.textLabel.text = conta.tipo.nome;
+        cell.detailTextLabel.text = conta.tipo.descricao;
+    }
     
     return cell;
 }
@@ -98,7 +106,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSInteger catIndex = [self.fetchedResultsController indexPathForObject:self.tipoSelecionado].row;
+    NSInteger catIndex = [self.fetchedResultsController indexPathForObject:self.contaSelecionada].row;
     UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
     
     // Neste caso não é necessário remover o checkmark da celula selecionada anteriormente
@@ -110,7 +118,7 @@
     }
     // Procura a linha que tem atualmente o chekmark utilizando o indice do objeto
     // selecionado atualmente.
-    NSIndexPath *oldIndexPath = [self.fetchedResultsController indexPathForObject:self.tipoSelecionado];
+    NSIndexPath *oldIndexPath = [self.fetchedResultsController indexPathForObject:self.contaSelecionada];
     
     // Descoberto a linha nos retiramos o checkmark da linha.
     UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
@@ -124,11 +132,13 @@
     if (newCell.accessoryType == UITableViewCellAccessoryNone) {
         newCell.accessoryType = UITableViewCellAccessoryCheckmark;
         // Atualiza o selecionado e avisa o delegate
-        self.tipoSelecionado = [self.fetchedResultsController objectAtIndexPath:indexPath];    
-        [self.tipoContaDelegate tipoContaEscolhido:self.tipoSelecionado];
+        self.contaSelecionada = [self.fetchedResultsController objectAtIndexPath:indexPath];    
+        [self.contaDelegate contaEscolhida:self.contaSelecionada];
     }
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+
 
 @end

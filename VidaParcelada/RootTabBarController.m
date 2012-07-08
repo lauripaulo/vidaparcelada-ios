@@ -78,6 +78,9 @@
         // que fazem parte do tab view.
         NSArray *viewController = [self viewControllers];
         
+        // Esconde tab bar para abrir espaço.
+        self.hidesBottomBarWhenPushed = YES;	
+        
         // O primeiro TAB é o Previsão
         UINavigationController *nvPrevisao = (UINavigationController *) [viewController objectAtIndex:0];
         VisaoMensalViewController *previsao = (VisaoMensalViewController *) [[nvPrevisao viewControllers] objectAtIndex:0];

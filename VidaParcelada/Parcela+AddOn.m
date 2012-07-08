@@ -60,8 +60,17 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    if (!matches || ([matches count] > 0)) {
-        NSLog(@"(!) novaParcelaComDescricao: [matches count] = %d", [matches count]);
+    NSLog(@"(!) novaParcelaComDescricao: [matches count] = %d", [matches count]);
+    
+    // Se o objeto existir carrega o objeto para edição
+    if (matches && [matches count] == 1) {
+        novaParcela = [matches objectAtIndex:0];
+        NSLog(@"(!) novaParcelaComDescricao: loaded = %@", novaParcela);
+    }
+    
+    // Se existir mais de 1 objeto é uma situação de excessão e
+    // devemos apagar os existentes e criar um novo
+    if (matches && ([matches count] > 1)) {
         //
         // Apaga todos os itens errados...
         //
@@ -84,7 +93,10 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         //
         // Cria o novo objeto
         //
-        novaParcela = [NSEntityDescription insertNewObjectForEntityForName:@"Parcela" inManagedObjectContext:context];
+        if (!novaParcela) {
+            novaParcela = [NSEntityDescription insertNewObjectForEntityForName:@"Parcela" inManagedObjectContext:context];
+            NSLog(@"(!) novaParcelaComDescricao: new = %@", novaParcela);
+        }
         novaParcela.descricao = descricao;
         novaParcela.dataVencimento = dataDeVencimento;
         novaParcela.estado = estado;

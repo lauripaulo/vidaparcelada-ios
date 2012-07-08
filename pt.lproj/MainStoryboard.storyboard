@@ -447,27 +447,32 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="0bN-K0-rzQ" kind="push" identifier="Escolher Conta" id="XWf-lp-xRQ"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="eRU-4V-brw" detailTextLabel="JPc-xF-dph" style="IBUITableViewCellStyleValue1" id="oZp-hM-bmd">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="oZp-hM-bmd">
                                         <rect key="frame" x="0.0" y="91" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Data da compra:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eRU-4V-brw">
-                                                    <rect key="frame" x="10" y="11" width="134" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00/00/0000" textAlignment="right" minimumFontSize="17" id="SMe-Fp-q4v">
+                                                    <rect key="frame" x="163" y="6" width="105" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="tfDataCompraEdit:" destination="KDO-cB-7qR" eventType="editingDidBegin" id="bhJ-0v-ZSe"/>
+                                                    </connections>
+                                                </textField>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Data da compra:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="xF6-Un-onh">
+                                                    <rect key="frame" x="10" y="8" width="150" height="24"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JPc-xF-dph">
-                                                    <rect key="frame" x="226" y="11" width="44" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -631,14 +636,13 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btCancelar" destination="dbu-kL-zsI" id="Rfl-8M-9Z9"/>
-                        <outlet property="btContaOk" destination="7iB-xp-26N" id="9lT-m6-BCm"/>
                         <outlet property="btDataOk" destination="atW-0G-Ez8" id="Fdf-3j-Na2"/>
                         <outlet property="btSave" destination="E38-QW-S7h" id="LFQ-u7-xqB"/>
                         <outlet property="cellConta" destination="jDP-sA-JeY" id="BXj-9z-7QG"/>
                         <outlet property="cellDataDaCompra" destination="oZp-hM-bmd" id="yyQ-5X-6DG"/>
-                        <outlet property="contasPickerView" destination="kS5-Jl-cia" id="b4n-Yp-1O3"/>
                         <outlet property="datePicker" destination="xYF-Iy-eDm" id="hDM-BC-mdD"/>
                         <outlet property="stepperQtdeDeParcelas" destination="Kns-wk-tdz" id="51b-p1-AFp"/>
+                        <outlet property="tfDataCompra" destination="SMe-Fp-q4v" id="egw-GN-kxb"/>
                         <outlet property="tfDescricao" destination="Wmt-5x-t8q" id="RYk-uL-Smt"/>
                         <outlet property="tfDetalhesDaCompra" destination="HvE-S2-qMF" id="jHL-w3-2oy"/>
                         <outlet property="tfQtdeDeParcelas" destination="o02-UN-73w" id="WVS-t6-KfS"/>
@@ -647,14 +651,6 @@
                         <outlet property="topBar" destination="QJr-dM-SlX" id="Rv7-sK-0ut"/>
                     </connections>
                 </tableViewController>
-                <pickerView contentMode="scaleToFill" id="kS5-Jl-cia">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <connections>
-                        <outlet property="dataSource" destination="KDO-cB-7qR" id="nZn-fh-Mlc"/>
-                        <outlet property="delegate" destination="KDO-cB-7qR" id="QfQ-3h-R7b"/>
-                    </connections>
-                </pickerView>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="15" id="xYF-Iy-eDm">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -692,13 +688,54 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <action selector="removeDataPickerAnimaed:" destination="KDO-cB-7qR" id="vNf-XB-tX4"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem title="Conta Ok" id="7iB-xp-26N">
-                    <connections>
-                        <action selector="removeContasPickerAnimated:" destination="KDO-cB-7qR" id="eT0-uw-JxN"/>
-                    </connections>
-                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1722" y="-210"/>
+        </scene>
+        <!--Escolher Conta View Controller - Escolha a conta-->
+        <scene sceneID="MMN-dx-1Ih">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fp1-tm-r9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="0bN-K0-rzQ" customClass="EscolherContaViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KFW-LS-2MN">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Conta Cell" textLabel="fd9-Dc-GHL" detailTextLabel="1QC-5e-IzL" style="IBUITableViewCellStyleSubtitle" id="fAf-Zd-nFz">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fd9-Dc-GHL">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1QC-5e-IzL">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0bN-K0-rzQ" id="Es1-7T-ahq"/>
+                            <outlet property="delegate" destination="0bN-K0-rzQ" id="e8d-qM-iyu"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Escolha a conta" id="uHK-tW-39H"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="2193" y="-210"/>
         </scene>
         <!--Cadastro Da Conta View Controller - Conta-->
         <scene sceneID="Zgr-B0-KWP">
@@ -1219,17 +1256,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="CadastroDeCompraViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDeCompraViewController.h"/>
             <relationships>
-                <relationship kind="action" name="removeContasPickerAnimated:"/>
                 <relationship kind="action" name="removeDataPickerAnimaed:"/>
                 <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btContaOk" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="btDataOk" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="btSave" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="cellConta" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="cellDataDaCompra" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="contasPickerView" candidateClass="UIPickerView"/>
                 <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
                 <relationship kind="outlet" name="stepperQtdeDeParcelas" candidateClass="UIStepper"/>
+                <relationship kind="outlet" name="tfDataCompra" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfDetalhesDaCompra" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfQtdeDeParcelas" candidateClass="UITextField"/>
@@ -1252,6 +1287,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </class>
         <class className="CoreDataTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
+        </class>
+        <class className="EscolherContaViewController" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EscolherContaViewController.h"/>
         </class>
         <class className="ListaDeComprasViewController" superclassName="CoreDataTableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeComprasViewController.h"/>

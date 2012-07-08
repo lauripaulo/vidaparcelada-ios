@@ -14,7 +14,7 @@
 #import "TipoConta+AddOn.h"
 #import "VidaParceladaHelper.h"
 
-@interface CadastroDeCompraViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIPickerViewDelegate, UIActionSheetDelegate>
+@interface CadastroDeCompraViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, ContaEscolhidaDelegate>
 
 // aqui definimos nosso banco de dados global
 // que todos os controllers irão utilizar
@@ -32,12 +32,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfValorDaParcela;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (strong, nonatomic) IBOutlet UIPickerView *contasPickerView;
+//@property (strong, nonatomic) IBOutlet UIPickerView *contasPickerView;
 @property (nonatomic, retain) NSNumberFormatter *valorFormatter;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) IBOutlet UINavigationItem *topBar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *btDataOk;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *btContaOk;
 
 @property (nonatomic, retain) Compra *compraSelecionada;
 
@@ -53,5 +52,11 @@
 
 // Delegate que recebe notificação quando uma conta é alterada
 @property (assign) id <AlteracaoDeCompraDelegate> compraDelegate;
+
+@property (weak, nonatomic) IBOutlet UITextField *tfDataCompra;
+
+// Delegate que recebe notificação quando uma conta é selecionada
+@property (assign) id <ContaEscolhidaDelegate> contaEscolhidaDelegate;
+
 
 @end

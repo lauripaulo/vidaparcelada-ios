@@ -21,7 +21,7 @@
           cartaoPreferencial:(BOOL)preferencial
                    inContext:(NSManagedObjectContext *)context
 {
-    Conta *conta = nil;
+    Conta *novaConta = nil;
     
     NSLog(@"(>) contaComDescricao: %@, %@, %@, %@, %@, %@, %@, %@", descricao, empresa, diaDeVencimento, jurosMes, limite, melhorDiaDeCompra, (preferencial ? @"YES" : @"NO"), context);
     
@@ -37,8 +37,17 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
 
-    if (!matches || ([matches count] > 0)) {
-        NSLog(@"(!) contaComDescricao: [matches count] = %d", [matches count]);
+    NSLog(@"(!) contaComDescricao: [matches count] = %d", [matches count]);
+    
+    // Se o objeto existir carrega o objeto para edição
+    if (matches && [matches count] == 1) {
+        novaConta = [matches objectAtIndex:0];
+        NSLog(@"(!) contaComDescricao: loaded = %@", novaConta);
+    }
+    
+    // Se existir mais de 1 objeto é uma situação de excessão e
+    // devemos apagar os existentes e criar um novo
+    if (matches && ([matches count] > 1)) {
         //
         // Apaga todos os itens errados...
         //
@@ -49,7 +58,7 @@
     
         // ...e chama novamente de forma recursiva
         // este metodo de criação.
-        conta = [self contaComDescricao:descricao 
+        novaConta = [self contaComDescricao:descricao 
                               daEmpresa:empresa 
                      comVencimentoNoDia:diaDeVencimento 
                               eJurosMes:jurosMes 
@@ -62,16 +71,19 @@
         //
         // Cria o novo objeto
         //
-        conta = [NSEntityDescription insertNewObjectForEntityForName:@"Conta" inManagedObjectContext:context];
-        conta.descricao = descricao;
-        conta.empresa = empresa;
-        conta.diaDeVencimento = diaDeVencimento;
-        conta.jurosMes = jurosMes;
-        conta.limite = limite;
-        conta.melhorDiaDeCompra = melhorDiaDeCompra;
+        if (!novaConta) {
+            novaConta = [NSEntityDescription insertNewObjectForEntityForName:@"Conta" inManagedObjectContext:context];
+            novaConta.compras = nil; // conta nova não tem compras...
+            NSLog(@"(!) contaComDescricao: new = %@", novaConta);
+        }
+        novaConta.descricao = descricao;
+        novaConta.empresa = empresa;
+        novaConta.diaDeVencimento = diaDeVencimento;
+        novaConta.jurosMes = jurosMes;
+        novaConta.limite = limite;
+        novaConta.melhorDiaDeCompra = melhorDiaDeCompra;
         // maneira de colocar BOOLs no coredata
-        conta.preferencial = [NSNumber numberWithBool:preferencial];
-        conta.compras = nil; // conta nova não tem compras...
+        novaConta.preferencial = [NSNumber numberWithBool:preferencial];
         
         // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
@@ -83,7 +95,7 @@
         [VidaParceladaHelper trataErro:error];
         
         if (tipos && [tipos count] > 0) {
-            conta.tipo = [tipos objectAtIndex:0];
+            novaConta.tipo = [tipos objectAtIndex:0];
         }
     } 
     
@@ -92,9 +104,9 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog(@"(<) contaComDescricao: return = %@", conta);
+    NSLog(@"(<) contaComDescricao: return = %@", novaConta);
 
-    return conta;
+    return novaConta;
 }
 
 + (NSArray *)contasCadastradasUsandoContext:(NSManagedObjectContext *)context

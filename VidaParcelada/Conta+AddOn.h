@@ -34,3 +34,11 @@
 - (void)contaFoiAlterada:(Conta *)conta;
 
 @end
+
+// Utilizado para avisar que um tipo de conta foi escolhida na tela
+// de seleção de tipos.
+@protocol ContaEscolhidaDelegate <NSObject>
+
+- (void)contaEscolhida:(Conta *)conta;
+
+@end

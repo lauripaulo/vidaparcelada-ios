@@ -8,13 +8,12 @@
 
 #import "CadastroDeCompraViewController.h"
 #import "VidaParceladaHelper.h"
+#import "EscolherContaViewController.h"
 
 @interface CadastroDeCompraViewController ()
 
 - (void)animateDataPicker:(NSDate *)date;
-- (void)animateContaPicker;
 - (IBAction)removeDataPickerAnimaed:(id)sender;
-- (IBAction)removeContasPickerAnimated:(id)sender;
 - (BOOL)verificaDataDaCompraAvisaUsuario;
 - (void)calculaValorTotal;
 - (void)calculaValorDaParcela;
@@ -39,7 +38,6 @@
 @synthesize btCancelar = _btCancelar;
 @synthesize tfValorDaParcela = _tfValorDaParcela;
 @synthesize datePicker = _datePicker;
-@synthesize contasPickerView = _contasPickerView;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize compraSelecionada = _compraSelecionada;
@@ -48,12 +46,12 @@
 @synthesize algumCampoFoiAlterado = _algumCampoFoiAlterado;
 @synthesize topBar = _topBar;
 @synthesize btDataOk = _doneButton;
-@synthesize btContaOk = _btContaOk;
 @synthesize listaDeContas = _listaDeContas;
 @synthesize considerarParcelasAnterioresPagas = _considerarParcelasAnterioresPagas;
 @synthesize actionSheetVencimento = _actionSheetVencimento;
 @synthesize actionSheetApagarParcelas = _actionSheetApagarParcelas;
 @synthesize tfDetalhesDaCompra = _tfDetalhesDaCompra;
+@synthesize contaEscolhidaDelegate = _contaEscolhidaDelegate;
 
 - (IBAction)tfValorDaParcelaDidEndOnExit:(id)sender {
 }
@@ -101,17 +99,10 @@
     return _datePicker;
 }
 
-- (UIPickerView *)contasPickerView
-{
-    if (_contasPickerView == nil) {
-        _contasPickerView = [[UIPickerView alloc] init];
-    }
-    return _contasPickerView;
-}
-
 #pragma mark - AlteracaoDeContaDelegate
 
 @synthesize compraDelegate = _compraDelegate;
+@synthesize tfDataCompra = _tfDataCompra;
 
 #pragma mark - Table View
 - (id)initWithStyle:(UITableViewStyle)style
@@ -123,6 +114,19 @@
     return self;
 }
 
+- (void)atualizaDescricaoDaConta
+{
+    // Mostra os dados da conta. Se a conta não tem descriçao usa os dados
+    // do tipo da conta no seu lugar.
+    if (self.contaSelecionada.descricao) {
+        self.cellConta.textLabel.text = self.contaSelecionada.descricao;
+        self.cellConta.detailTextLabel.text = self.contaSelecionada.empresa;
+    } else {
+        self.cellConta.textLabel.text = self.contaSelecionada.tipo.nome;
+        self.cellConta.detailTextLabel.text = self.contaSelecionada.tipo.descricao;
+    }
+}
+
 - (void)atualizarCamposNaTela
 {
     self.algumCampoFoiAlterado = NO;
@@ -132,18 +136,9 @@
     self.contaSelecionada = self.compraSelecionada.origem;
     self.dataSelecionada = self.compraSelecionada.dataDaCompra;
 
-    // Mostra os dados da conta. Se a conta não tem descriçao usa os dados
-    // do tipo da conta no seu lugar.
-    if (self.compraSelecionada.origem.descricao) {
-        self.cellConta.textLabel.text = self.compraSelecionada.origem.descricao;
-        self.cellConta.detailTextLabel.text = self.compraSelecionada.origem.empresa;
-    } else {
-        self.cellConta.textLabel.text = self.compraSelecionada.origem.tipo.nome;
-        self.cellConta.detailTextLabel.text = self.compraSelecionada.origem.tipo.descricao;
-    }
+    [self atualizaDescricaoDaConta];
 
-    self.cellDataDaCompra.textLabel.text = @"Data da compra";
-    self.cellDataDaCompra.detailTextLabel.text = [self.dateFormatter stringFromDate:self.compraSelecionada.dataDaCompra];
+    self.tfDataCompra.text = [self.dateFormatter stringFromDate:self.compraSelecionada.dataDaCompra];
     
     // Stepper de parcela
     self.stepperQtdeDeParcelas.value = [self.compraSelecionada.qtdeTotalDeParcelas doubleValue];
@@ -169,15 +164,12 @@
     self.tfQtdeDeParcelas.text = [NSString stringWithFormat:@"%2.0f", qtdeParcela];
     
     self.tfValorTotal.text = [self.valorFormatter stringFromNumber:0];
-    self.cellDataDaCompra.textLabel.text = @"Data da compra";
-    self.cellDataDaCompra.detailTextLabel.text = [self.dateFormatter stringFromDate:self.dataSelecionada];
-    if (self.contaSelecionada.descricao || [self.contaSelecionada.descricao length] > 0) {
-        self.cellConta.textLabel.text = self.contaSelecionada.descricao;
-        self.cellConta.detailTextLabel.text = self.contaSelecionada.empresa;
-    } else {
-        self.cellConta.textLabel.text = self.contaSelecionada.tipo.nome;
-        self.cellConta.detailTextLabel.text = self.contaSelecionada.tipo.descricao;
-    }
+    self.tfValorDaParcela.text = [self.valorFormatter stringFromNumber:0];
+    
+    self.tfDataCompra.text = [self.dateFormatter stringFromDate:self.dataSelecionada];
+    
+    [self atualizaDescricaoDaConta];
+
     [self calculaValorDaParcela];
 }
 
@@ -201,6 +193,8 @@
         [self inicializarTela];
     }
 
+    self.tfDataCompra.inputView = self.datePicker;
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -221,7 +215,6 @@
 - (void)viewDidUnload
 {
     [self setCellConta:nil];
-    [self setCellConta:nil];
     [self setCellDataDaCompra:nil];
     [self setTfDescricao:nil];
     [self setTfQtdeDeParcelas:nil];
@@ -237,12 +230,11 @@
     [self setBtDataOk:nil];
     [self setDatePicker:nil];
     [self setBtCancelar:nil];
-    [self setContasPickerView:nil];
-    [self setBtContaOk:nil];
     [self setActionSheetVencimento:nil];
     [self setActionSheetApagarParcelas:nil];
     [self setTfValorDaParcela:nil];
     [self setTfDetalhesDaCompra:nil];
+    [self setTfDataCompra:nil];
     [super viewDidUnload];
     
     // Release any retained subviews of the main view.
@@ -254,17 +246,29 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+// avisa quando a conta for escolhida com sucesso.
+- (void)contaEscolhida:(Conta *)conta
+{
+    self.contaSelecionada = conta;
+    [self atualizaDescricaoDaConta];
+}
+
 // Temos que passar o banco de dados que abrimos aqui
 // no primeiro controller do app para todos
 // os outros controllers. Dessa forma todos terao um atributo
 // UIManagedDocument *vpDatabase implementado.
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"Tipo da Conta"]) {
-        if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
-            [segue.destinationViewController setVpDatabase:self.vpDatabase];
-        }
+    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
+        [segue.destinationViewController setVpDatabase:self.vpDatabase];
     }
+    if ([segue.destinationViewController respondsToSelector:@selector(setContaSelecionada:)]){
+        [segue.destinationViewController setContaSelecionada:self.contaSelecionada];
+    }
+    if ([segue.destinationViewController respondsToSelector:@selector(setContaDelegate:)]) {
+        [segue.destinationViewController setContaDelegate:self];
+    }
+
 }
 
 #pragma mark - Eventos
@@ -355,9 +359,7 @@
 
 
 - (void)exitThisController {
-    // Se alguma das view estiver na tela remove
-    [self removeAllPickers];
-    
+    // Se alguma das view estiver na tela remove    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -426,7 +428,11 @@
         
         [self calculaValorTotal];
         
-    } 
+    } else if (textField == self.tfDataCompra) {
+        
+        result = NO;
+        
+    }
 
     
     return result;
@@ -526,6 +532,11 @@
 
 #pragma mark - Table view data source
 
+- (IBAction)tfDataCompraEdit:(UITextField *)sender {
+    NSDate *date = [self.dateFormatter dateFromString:self.tfDataCompra.text];        
+    [self animateDataPicker:date];
+
+}
 
 #pragma mark - Table view delegate
 
@@ -542,123 +553,34 @@
         [self.tfValorDaParcela resignFirstResponder];
     } else if (self.tfValorTotal.isFirstResponder) {
         [self.tfValorTotal resignFirstResponder];
+    } else if (self.tfDataCompra.isFirstResponder) {
+        [self.tfDataCompra resignFirstResponder];
     }
     
-    // Verifica se é a cell que tem a data para trazer o date picker
-    if (indexPath.section == 0 && indexPath.row == 1) {
+    if (cell == self.cellDataDaCompra) {
         // Data selecionada
-        NSDate *date = [self.dateFormatter dateFromString:cell.detailTextLabel.text];
+        NSDate *date = [self.dateFormatter dateFromString:self.tfDataCompra.text];        
         [self animateDataPicker:date];
-    } else if (indexPath.section == 0 && indexPath.row == 0) {
-        // Conta selecionada
-        [self animateContaPicker];
-    } else {
-        [self removeAllPickers];
     }
-    
+        
 }
 
 - (void)animateDataPicker:(NSDate *)date
 {
     self.datePicker.date = date;
     
-    // Se o picker de conta estiver ativo temos que manda-lo embora
-    if (self.contasPickerView.superview != nil) {
-        [self removeContasPickerAnimated:self];
-    }
-	
-	// check if our date picker is already on screen
-	if (self.datePicker.superview == nil)
-	{
-		[self.view.window addSubview: self.datePicker];
-		
-		// size up the picker view to our screen and compute the start/end frame origin for our slide up animation
-		//
-		// compute the start frame        
-		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-		CGSize pickerSize = [self.datePicker sizeThatFits:CGSizeZero];
-		CGRect startRect = CGRectMake(0.0,
-									  screenRect.origin.y + screenRect.size.height,
-									  pickerSize.width, pickerSize.height);
-		self.datePicker.frame = startRect;
-		
-		// compute the end frame
-		CGRect pickerRect = CGRectMake(0.0,
-									   screenRect.origin.y + screenRect.size.height - pickerSize.height,
-									   pickerSize.width,
-									   pickerSize.height);
-        
-        // Animação retirada do curso da Stanford
-        [UIView animateWithDuration:0.3 animations:^{
-            self.datePicker.frame = pickerRect;
-            
-            // shrink the table vertical size to make room for the date picker
-            CGRect newFrame = self.tableView.frame;
-            newFrame.size.height -= self.datePicker.frame.size.height ;
-            self.tableView.frame = newFrame;
-        } completion:^(BOOL finished) {
-            // Remover botões e adicionar o "pronto"
-            self.topBar.leftBarButtonItem = self.btDataOk;
-            self.topBar.rightBarButtonItem = nil;
-        }];
-		
-	}
-}
+    [self.tfDataCompra becomeFirstResponder];
 
-- (void)animateContaPicker
-{	
-    // Se o picker de data estiver ativo temos que manda-lo embora
-    if (self.datePicker.superview != nil) {
-        [self removeDataPickerAnimaed:self];
-    }
-    
-	// check if our date picker is already on screen
-	if (self.contasPickerView.superview == nil)
-	{
-		[self.view.window addSubview: self.contasPickerView];
-		
-		// size up the picker view to our screen and compute the start/end frame origin for our slide up animation
-		//
-		// compute the start frame
-		// size up the picker view to our screen and compute the start/end frame origin for our slide up animation
-		//
-		// compute the start frame      
-		CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-		CGSize pickerSize = [self.contasPickerView sizeThatFits:CGSizeZero];
-		CGRect startRect = CGRectMake(0.0,
-									  screenRect.origin.y + screenRect.size.height,
-									  pickerSize.width, pickerSize.height);
-		self.contasPickerView.frame = startRect;
-		
-		// compute the end frame
-		CGRect pickerRect = CGRectMake(0.0,
-									   screenRect.origin.y + screenRect.size.height - pickerSize.height,
-									   pickerSize.width,
-									   pickerSize.height);
-        
-        // Animação retirada do curso da Stanford
-        [UIView animateWithDuration:0.3 animations:^{
-            self.contasPickerView.frame = pickerRect;
-            
-            // shrink the table vertical size to make room for the date picker
-            CGRect newFrame = self.tableView.frame;
-            newFrame.size.height -= self.contasPickerView.frame.size.height;
-            self.tableView.frame = newFrame;
-        }completion:^(BOOL finished) {
-            // Remover botões e adicionar o "pronto"
-            self.topBar.leftBarButtonItem = self.btContaOk;
-            self.topBar.rightBarButtonItem = nil;
-        }];
-		
-	}
+    // Remover botões e adicionar o "pronto"
+    self.topBar.leftBarButtonItem = self.btDataOk;
+    self.topBar.rightBarButtonItem = nil;
 }
 
 - (IBAction)dateAction:(id)sender
 {
-	NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-	cell.detailTextLabel.text = [self.dateFormatter stringFromDate:self.datePicker.date];
+    self.tfDataCompra.text = [self.dateFormatter stringFromDate:self.datePicker.date];
     self.dataSelecionada = self.datePicker.date;
+    
     // Se for uma alteração vamos atualizar o bd.
     if (self.compraSelecionada) {
         self.compraSelecionada.dataDaCompra = self.dataSelecionada;
@@ -679,103 +601,16 @@
 
 - (IBAction)removeDataPickerAnimaed:(id)sender
 {
-	CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-	CGRect endFrame = self.datePicker.frame;
-	endFrame.origin.y = screenRect.origin.y + screenRect.size.height;
-		
-    // Animação retirada do curso da Stanford
-    [UIView animateWithDuration:0.3 animations:^{
-        // deselect the current table row
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        // grow the table back again in vertical size to make room for the date picker
-        self.datePicker.frame = endFrame;
-        CGRect newFrame = self.tableView.frame;
-        newFrame.size.height += self.datePicker.frame.size.height;
-        self.tableView.frame = newFrame;
-    } completion:^(BOOL finished) {
-        // the date picker has finished sliding downwards, so remove it
-        [self.datePicker removeFromSuperview];
-        [self putSaveAndCancelButtonsBack];
-    }];
+
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    // the date picker has finished sliding downwards, so remove it
+    [self.datePicker removeFromSuperview];
+    [self putSaveAndCancelButtonsBack];
+    
+    [self.tfDataCompra resignFirstResponder];
 	
 }
-
-- (IBAction)removeContasPickerAnimated:(id)sender;
-{
-	CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-	CGRect endFrame = self.contasPickerView.frame;
-	endFrame.origin.y = screenRect.origin.y + screenRect.size.height;
-    
-    // Animação retirada do curso da Stanford
-    [UIView animateWithDuration:0.3 animations:^{
-        // deselect the current table row
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-        // grow the table back again in vertical size to make room for the date picker
-        self.contasPickerView.frame = endFrame;
-        CGRect newFrame = self.tableView.frame;
-        newFrame.size.height += self.contasPickerView.frame.size.height;
-        self.tableView.frame = newFrame;
-    } completion:^(BOOL finished) {
-        // the date picker has finished sliding downwards, so remove it
-        [self.contasPickerView removeFromSuperview];
-        [self putSaveAndCancelButtonsBack];
-    }];
-	
-}
-
-#pragma mark - UIPickerViewDelegate & DataSource
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [self.listaDeContas count];
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    Conta *conta = (Conta *) [self.listaDeContas objectAtIndex:row];
-    return [NSString stringWithFormat:@"%@", conta.descricao];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    self.contaSelecionada = [self.listaDeContas objectAtIndex:row];
-    if (self.contaSelecionada.descricao || [self.contaSelecionada.descricao length] > 0) {
-        self.cellConta.textLabel.text = self.contaSelecionada.descricao;
-        self.cellConta.detailTextLabel.text = self.contaSelecionada.empresa;
-    } else {
-        self.cellConta.textLabel.text = self.contaSelecionada.tipo.nome;
-        self.cellConta.detailTextLabel.text = self.contaSelecionada.tipo.descricao;
-    }
-    // Se a compra existir vamos atualizar o db
-    if (self.compraSelecionada) {
-        self.compraSelecionada.origem = self.contaSelecionada;
-    }
-    
-    [self removeContasPickerAnimated:self];
-}
-
-- (void)removeAllPickers {
-    // check if our date picker is already on screen
-    [UIView animateWithDuration:.3 animations:^{
-        if (self.contasPickerView.superview != nil)
-        {
-            [self removeContasPickerAnimated:self];
-        }
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:.3 animations:^{
-            if (self.datePicker.superview != nil) {
-                [self removeDataPickerAnimaed:self];
-            }
-        }];
-    }];
-}
-
 
 @end

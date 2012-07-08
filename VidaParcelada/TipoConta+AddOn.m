@@ -32,14 +32,23 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
    
-    if (!matches || ([matches count] > 0)) {
-        NSLog(@"(!) contaComNome: [matches count] = %d", [matches count]);
+    NSLog(@"(!) contaComNome: [matches count] = %d", [matches count]);
+    
+    // Se o objeto existir carrega o objeto para edição
+    if (matches && [matches count] == 1) {
+        tipoConta = [matches objectAtIndex:0];
+        NSLog(@"(!) contaComNome: loaded = %@", tipoConta);
+    }
+    
+    // Se existir mais de 1 objeto é uma situação de excessão e
+    // devemos apagar os existentes e criar um novo
+    if (matches && ([matches count] > 1)) {
         //
         // Apaga todos os itens errados...
         //
-        for (TipoConta *tipoConta in matches) {
-            [context deleteObject:tipoConta];
-            NSLog(@"(!) contaComNome: deleted = %@", tipoConta);
+        for (TipoConta *tipo in matches) {
+            [context deleteObject:tipo];
+            NSLog(@"(!) contaComNome: deleted = %@", tipo);
         }
         
         // ...e chama novamente de forma recursiva
@@ -53,7 +62,10 @@
         //
         // Cria o novo objeto
         //
-        tipoConta = [NSEntityDescription insertNewObjectForEntityForName:@"TipoConta" inManagedObjectContext:context];
+        if (!tipoConta) {
+            tipoConta = [NSEntityDescription insertNewObjectForEntityForName:@"TipoConta" inManagedObjectContext:context];
+            NSLog(@"(!) contaComNome: new = %@", tipoConta);
+        }
         tipoConta.nome = nome;
         tipoConta.descricao = descricao;
         tipoConta.tipo = [NSNumber numberWithInt:tipo];

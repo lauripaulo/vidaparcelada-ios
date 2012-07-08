@@ -46,8 +46,17 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
 
-    if (!matches || ([matches count] > 0)) {
-        NSLog(@"(!) compraComDescricao: [matches count] = %d", [matches count]);
+    NSLog(@"(!) compraComDescricao: [matches count] = %d", [matches count]);
+    
+    // Se o objeto existir carrega o objeto para edição
+    if (matches && [matches count] == 1) {
+        novaCompra = [matches objectAtIndex:0];
+        NSLog(@"(!) compraComDescricao: loaded = %@", novaCompra);
+    }
+        
+    // Se existir mais de 1 objeto é uma situação de excessão e
+    // devemos apagar os existentes e criar um novo
+    if (matches && ([matches count] > 1)) {
         //
         // Apaga todos os itens errados...
         //
@@ -72,7 +81,10 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         //
         // Cria o novo objeto
         //
-        novaCompra = [NSEntityDescription insertNewObjectForEntityForName:@"Compra" inManagedObjectContext:context];
+        if (!novaCompra) {
+            novaCompra = [NSEntityDescription insertNewObjectForEntityForName:@"Compra" inManagedObjectContext:context];
+            NSLog(@"(!) compraComDescricao: new = %@", novaCompra);
+        }
         novaCompra.descricao = descricao;
         novaCompra.detalhes = detalhes;
         novaCompra.dataDaCompra = data;
