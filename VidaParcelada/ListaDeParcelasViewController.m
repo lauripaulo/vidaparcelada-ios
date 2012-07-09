@@ -62,7 +62,7 @@
     if (_compraSelecionada != novaCompra) {
         _compraSelecionada = novaCompra;
     }
-    [self.tableView reloadData];
+    [self setupFetchedResultsController];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -133,8 +133,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
     request.predicate = [NSPredicate predicateWithFormat:@"compra = %@", self.compraSelecionada];
     request.sortDescriptors = [NSArray arrayWithObject:
-                               [NSSortDescriptor sortDescriptorWithKey:@"dataVencimento" ascending:YES 
-                                                              selector:nil]];
+                               [NSSortDescriptor sortDescriptorWithKey:@"dataVencimento" ascending:YES]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
                                                                         managedObjectContext:self.vpDatabase.managedObjectContext 

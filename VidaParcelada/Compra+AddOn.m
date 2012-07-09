@@ -185,7 +185,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         // Se for antes do melhor dia a data de vencimento é durante o 
         // mês atual
         [dataDeVencimentoComps setDay:[conta.diaDeVencimento intValue]];
-        [dataDeVencimentoComps setMonth:(dataDaCompraComps.month)];
+        [dataDeVencimentoComps setMonth:(dataDaCompraComps.month + (i-1))];
         [dataDeVencimentoComps setYear:dataDaCompraComps.year];        
     }
     
