@@ -8,7 +8,6 @@
 
 #import "VidaParceladaHelper.h"
 
-
 @implementation VidaParceladaHelper
 
 + (NSString *)removeCharsNaoNumericos:(NSString *)stringAtual
@@ -307,11 +306,11 @@
     if (error) {
         // Loga informações do erro
         NSLog (@"(!) Erro encontrado - NSError code: %d", error.code);
-        NSLog (@"(!) - Description .......: %@", error.localizedDescription);
+        NSLog (@"(!) - Description .......: %@", error.description);
         NSLog (@"(!) - FailureReason .....: %@", error.localizedFailureReason);
         NSLog (@"(!) - RecoveryOptions ...: %@", error.localizedRecoveryOptions);
         NSLog (@"(!) - RecoverySuggestion : %@", error.localizedRecoverySuggestion);
-        
+
         // tratamento específico para cada tipo de erro
                
     }

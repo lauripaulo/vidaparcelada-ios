@@ -32,6 +32,27 @@
 @synthesize vpDatabase = _vpDatabase;
 @synthesize btnAdicionarConta = _btnAdicionarConta;
 @synthesize contaSelecionada = _contaSelecionada;
+@synthesize comprasPresentesAlert = _comprasPresentesAlert;
+
+- (UIAlertView *) comprasPresentesAlert
+{
+    if (!_comprasPresentesAlert) {
+        _comprasPresentesAlert = [[UIAlertView alloc] initWithTitle:@"Atenção!" message:@"Esta conta possui compras associadas que serão apagadas também. Cofirma a ação?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+    }
+    return _comprasPresentesAlert;
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
+    
+    if (buttonIndex > 0) {
+        [self apagaConta:self.contaSelecionada];
+    }
+    
+    NSLog(@"(<) alertView:");
+
+}
 
 // sobrescreve o setter para o BD do VP
 // e inicializa o fetchResultsController
@@ -162,24 +183,52 @@
 }
 
 
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)apagaConta:(Conta *)conta
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {  
+    NSLog(@"(>) apagaConta: %@", conta);
+    
+    if (conta) {
         // Delete the row from the data source
         NSError *error;
         self.debug = YES;
-        Conta *conta = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        // Apaga o objeto
         [self.fetchedResultsController.managedObjectContext deleteObject:conta];
         
         [self.fetchedResultsController.managedObjectContext save:&error];
         // Tratamento de errors
         [VidaParceladaHelper trataErro:error];
-
+        
         [self.fetchedResultsController performFetch:&error];
         // Tratamento de errors
         [VidaParceladaHelper trataErro:error];
+        
+        self.contaSelecionada = nil;
+    }
+    
+    NSLog(@"(<) apagaConta: %@", conta);
+
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"(>) tableView:commitEditingStyle:  %@, %d, %@", tableView, editingStyle, indexPath);
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {  
+                
+        Conta *conta = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        if ([conta.compras count] > 0) {
+            self.contaSelecionada = conta;
+            [self.comprasPresentesAlert show];
+        } else {
+            [self apagaConta:conta];
+        }
+        
     }   
+    
+    NSLog(@"(<) tableView:commitEditingStyle: ");
 }
 
 // Popula a tabela com os dados do CoreData
@@ -230,48 +279,5 @@
         self.btnAdicionarConta.enabled = YES;
     }
 }
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 0;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
-//
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 @end

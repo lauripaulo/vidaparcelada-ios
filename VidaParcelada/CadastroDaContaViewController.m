@@ -131,6 +131,16 @@
     self.contaSelecionada.tipo = tipoConta;
     self.cellTipoConta.textLabel.text = self.contaSelecionada.tipo.nome;
     self.cellTipoConta.detailTextLabel.text = self.contaSelecionada.tipo.descricao;
+    
+    // Se o nome ou a descrição da conta estiver vazias assume o tipo como default.
+    if (!self.tfDescricaoDaConta.text || [self.tfDescricaoDaConta.text length] == 0) {
+        self.contaSelecionada.descricao = tipoConta.nome;
+        self.tfDescricaoDaConta.text = self.contaSelecionada.descricao;
+    }
+    if (!self.tfEmpresa.text || [self.tfEmpresa.text length] == 0) {
+        self.contaSelecionada.empresa = tipoConta.descricao;
+        self.tfEmpresa.text = self.contaSelecionada.empresa;
+    }
 }
 
 // Chamado quando o valor do stepper de vencimento muda de estado

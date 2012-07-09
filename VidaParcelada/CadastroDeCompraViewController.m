@@ -250,6 +250,7 @@
 - (void)contaEscolhida:(Conta *)conta
 {
     self.contaSelecionada = conta;
+    
     [self atualizaDescricaoDaConta];
 }
 
@@ -286,6 +287,9 @@
         valor = [NSNumber numberWithInt:0];
     }
     
+    if (!self.tfDescricao.text) self.tfDescricao.text = @"";
+    if (!self.tfDetalhesDaCompra.text) self.tfDetalhesDaCompra.text = @"";
+    
     Compra *novaCompra = [Compra compraComDescricao:self.tfDescricao.text
                                         comDetalhes:self.tfDetalhesDaCompra.text
                                        dataDaCompra:self.dataSelecionada 
@@ -295,13 +299,6 @@
                                            comConta:self.contaSelecionada
                          assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas
                                           inContext:self.vpDatabase.managedObjectContext];
-
-    // salva o contexto do core data para evitar perda de dados
-    NSError *error = nil;
-    [self.vpDatabase.managedObjectContext save:&error];
-    
-    // Tratamento de errors
-    [VidaParceladaHelper trataErro:error];
 
     // Notifica o delegate que a compra mudou
     self.compraSelecionada = novaCompra;
