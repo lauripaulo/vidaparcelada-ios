@@ -115,9 +115,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     // para a conta vamos selecionar o primeiro objeto da tabela conta
     // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
-    
-    request.predicate = [NSPredicate predicateWithFormat:@"preferencial = %@", [NSNumber numberWithBool:YES]];
- 
+     
     request.sortDescriptors = [NSArray arrayWithObject:
                                [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
                                                               selector:@selector(localizedCaseInsensitiveCompare:)]];
@@ -126,9 +124,22 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
+    
+    // Itera nos resultados e retorna o a primeira conta preferencial, se não houver
+    // retorna o primeiro resultado.
+    for (Conta *c in tipos) {
+        NSLog(@"(!) retornaContaDefaultNoContexto: conta encontrada = %@", c);
+        if ([c.preferencial isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+            conta = c;
+            break;
+        }
+    }
 
-    if (tipos && [tipos count] > 0) {
+    // Se não houverem contas preferenciais escolhe a primeira disponível.
+    if (!conta && tipos && [tipos count] > 0) {
        conta = [tipos objectAtIndex:0];
+    } else {
+        NSLog(@"(!) retornaContaDefaultNoContexto: nenhuma conta encontrada.");
     }
     
     NSLog(@"(<) retornaContaDefaultNoContexto: return = %@", conta);
