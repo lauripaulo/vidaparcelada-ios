@@ -11,6 +11,7 @@
 #import "Conta+AddOn.h"
 #import "CadastroDeCompraViewController.h"
 #import "RootTabBarController.h"
+#import "Parcela+AddOn.h"
 
 @interface ListaDeComprasViewController ()
 
@@ -45,14 +46,18 @@
 -(void)setupFetchedResultsController
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
+    
+    // Mostra apenas as compras que possuem alguma parcela pendente ou vencida
+
+    request.predicate = [NSPredicate predicateWithFormat:@"SUBQUERY(parcelas, $x, $x.estado <> %@).@count > 0", PARCELA_PAGA];
+    
     request.sortDescriptors = [NSArray arrayWithObject:
-                               [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
-                                                              selector:@selector(localizedCaseInsensitiveCompare:)]];
+                               [NSSortDescriptor sortDescriptorWithKey:@"dataDaCompra" ascending:NO ]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
                                                                         managedObjectContext:self.vpDatabase.managedObjectContext 
                                                                           sectionNameKeyPath:nil 
-                                                                                   cacheName:nil]; 
+                                                                                   cacheName:nil]; // @"ListaDeComprasCache"
 }
 
 
@@ -72,16 +77,16 @@
         self.compraSelecionada = [self.fetchedResultsController objectAtIndexPath:indexPath];
     }
 
-    // primeiro informa a compra porque a pesquisa das parcelas precisa da compra.
-    if ([segue.destinationViewController respondsToSelector:@selector(setCompraSelecionada:)]){
-        [segue.destinationViewController setCompraSelecionada:self.compraSelecionada];
-    }
-
     // Por último passa o managedDocument
     if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
         [segue.destinationViewController setVpDatabase:self.vpDatabase];
     }
     
+    // primeiro informa a compra porque a pesquisa das parcelas precisa da compra.
+    if ([segue.destinationViewController respondsToSelector:@selector(setCompraSelecionada:)]){
+        [segue.destinationViewController setCompraSelecionada:self.compraSelecionada];
+    }
+
     // Adiciona como delegate
     if ([segue.destinationViewController respondsToSelector:@selector(setCompraDelegate:)]){
         [segue.destinationViewController setCompraDelegate:self];
