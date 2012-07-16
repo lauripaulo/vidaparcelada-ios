@@ -2,7 +2,7 @@
 //  Compra.h
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 08/07/12.
+//  Created by Lauri Laux on 15/07/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -14,11 +14,11 @@
 @interface Compra : NSManagedObject
 
 @property (nonatomic, retain) NSDate * dataDaCompra;
+@property (nonatomic, retain) NSString * descricao;
+@property (nonatomic, retain) NSString * detalhes;
 @property (nonatomic, retain) NSString * estado;
 @property (nonatomic, retain) NSNumber * qtdeTotalDeParcelas;
 @property (nonatomic, retain) NSDecimalNumber * valorTotal;
-@property (nonatomic, retain) NSString * descricao;
-@property (nonatomic, retain) NSString * detalhes;
 @property (nonatomic, retain) Conta *origem;
 @property (nonatomic, retain) NSSet *parcelas;
 @end

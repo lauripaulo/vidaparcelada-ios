@@ -42,7 +42,6 @@
 {
     if (_vpDatabase != mangedDocument) {
         _vpDatabase = mangedDocument;
-        [self setupFetchedResultsController];
     }
 }
 
@@ -52,6 +51,7 @@
     
     [super viewWillAppear:animated];
     self.parcelaSelecionada = nil;
+    [self setupFetchedResultsController];
 
     NSLog(@"(<) viewWillAppear: ");
 
@@ -62,7 +62,6 @@
     if (_compraSelecionada != novaCompra) {
         _compraSelecionada = novaCompra;
     }
-    [self setupFetchedResultsController];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
