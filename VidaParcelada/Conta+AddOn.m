@@ -86,10 +86,11 @@
         novaConta.preferencial = [NSNumber numberWithBool:preferencial];
         
         // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
-        request.sortDescriptors = [NSArray arrayWithObject:
-                                   [NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES]];
-        NSArray *tipos = [context executeFetchRequest:request error:&error];
+        NSFetchRequest *tipoRequest = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
+        tipoRequest.predicate = [NSPredicate predicateWithFormat:@"nome = 'Cartão de crédito' "];
+        tipoRequest.sortDescriptors = [NSArray arrayWithObject:
+                                       [NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+        NSArray *tipos = [context executeFetchRequest:tipoRequest error:&error];
 
         // Tratamento de errors
         [VidaParceladaHelper trataErro:error];
