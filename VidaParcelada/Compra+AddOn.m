@@ -285,5 +285,33 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 
 }
 
++(int) quantidadeDeCompras:(NSManagedObjectContext *)context comConta:(Conta *)conta
+{
+    NSLog(@"(>) quantidadeDeCompras: %@, %@", context, (conta ? conta.descricao : nil));
+
+    int count = 0;
+    
+    // Query no banco de dados
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
+    
+    // Somente restringe se a conta for válida
+    if (conta) {
+        request.predicate = [NSPredicate predicateWithFormat:@"conta = %@", conta];
+    }
+
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
+    
+    if (matches && [matches count] > 0) {
+        count = [matches count];
+    }
+    
+    NSLog(@"(<) quantidadeDeCompras: return = %d", count);
+    
+    return count;
+}
 
 @end

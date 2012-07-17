@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RootTabBarController : UITabBarController
+@interface RootTabBarController : UITabBarController <UINavigationControllerDelegate>
 
 // aqui definimos nosso banco de dados global
 // que todos os controllers irão utilizar

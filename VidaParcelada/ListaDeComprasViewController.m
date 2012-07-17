@@ -12,6 +12,7 @@
 #import "CadastroDeCompraViewController.h"
 #import "RootTabBarController.h"
 #import "Parcela+AddOn.h"
+#import "CadastroDaContaViewController.h"
 
 @interface ListaDeComprasViewController ()
 
@@ -25,6 +26,28 @@
 @synthesize compraSelecionada = _compraSelecionada;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
+@synthesize semContasCadastradasAlert = _semContasCadastradasAlert;
+
+// sobrescreve o setter
+- (UIAlertView *) semContasCadastradasAlert
+{
+    if (!_semContasCadastradasAlert) {
+        _semContasCadastradasAlert = [[UIAlertView alloc] initWithTitle:@"Atenção" message:@"Antes de cadastrar as suas compras é necessário informar pelo menos uma conta de cartão de crédito." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    }
+    return _semContasCadastradasAlert;    
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
+    
+    if (alertView == self.semContasCadastradasAlert) {
+        [self performSegueWithIdentifier:@"SemContasCadastradasSegue" sender:self];
+    }
+    
+    NSLog(@"(<) alertView:");
+    
+}
 
 // sobrescreve o setter para o BD do VP
 // e inicializa o fetchResultsController
@@ -107,6 +130,10 @@
     NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
     self.compraSelecionada = nil;
+    
+    if ([Conta quantidadeDeContas:self.vpDatabase.managedObjectContext] == 0) {
+        [self.semContasCadastradasAlert show];
+    }
     
     NSLog(@"(<) viewWillAppear: ");
 }

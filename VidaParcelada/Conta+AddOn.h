@@ -26,6 +26,10 @@
 // um UIPickerView, por exemplo.
 + (NSArray *)contasCadastradasUsandoContext:(NSManagedObjectContext *)context;
 
+// Retorna a quantidade de compras cadastradas nesse momento
+// na base de dados
++(int) quantidadeDeContas:(NSManagedObjectContext *)context;
+
 @end
 
 // Delegate para avisar a TableView cliente que os dados da conta foram atualizados

@@ -58,6 +58,12 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
                           dataDaCompra:(NSDate *)data 
                                  numDaParcela:(int)i;
 
+// Retorna a quantidade de compras cadastradas nesse momento
+// na base de dados, para uma conta informada. Passsar nil para a conta 
+// caso deseje listar todas as compras independente de conta.
++(int) quantidadeDeCompras:(NSManagedObjectContext *)context comConta:(Conta *)conta;
+
+
 @end
 
 //

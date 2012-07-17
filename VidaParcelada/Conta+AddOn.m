@@ -131,5 +131,31 @@
     return matches;
 }
 
+// Retorna a quantidade de compras cadastradas nesse momento
+// na base de dados
++(int) quantidadeDeContas:(NSManagedObjectContext *)context 
+{
+    NSLog(@"(>) quantidadeDeContas: %@", context);
+
+    int count = 0;
+    
+    // Query no banco de dados
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
+    
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
+    
+    if (matches && [matches count] > 0) {
+        count = [matches count];
+    }
+    
+    NSLog(@"(<) quantidadeDeContas: %d", count);
+
+    return count;
+}
+
 
 @end

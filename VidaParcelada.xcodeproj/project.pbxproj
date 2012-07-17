@@ -72,7 +72,6 @@
 		796A824B159D475F0072E99B /* contas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contas.png; sourceTree = "<group>"; };
 		796A824C159D475F0072E99B /* opcao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opcao.png; sourceTree = "<group>"; };
 		796A824D159D475F0072E99B /* previsao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = previsao.png; sourceTree = "<group>"; };
-		796AACB215B1DE4E00C9FB2C /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		796AACC315B38EC200C9FB2C /* Parcela.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parcela.h; sourceTree = "<group>"; };
 		796AACC415B38EC200C9FB2C /* Parcela.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parcela.m; sourceTree = "<group>"; };
 		796AACC615B38EC200C9FB2C /* TipoConta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoConta.h; sourceTree = "<group>"; };
@@ -120,6 +119,7 @@
 		79D3335E156F125800D034D3 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		79D3336A156F19F800D034D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		79D3336C156F1A3D00D034D3 /* LogoBarra.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoBarra.png; sourceTree = "<group>"; };
+		79D652B915B513AD006289E4 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDaContaViewController.h; sourceTree = "<group>"; };
 		79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDaContaViewController.m; sourceTree = "<group>"; };
 		79F92E201539F19C0031A919 /* TipoDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoDaContaViewController.h; sourceTree = "<group>"; };
@@ -150,6 +150,7 @@
 		7924ECD11537C32C00D47F92 /* db */ = {
 			isa = PBXGroup;
 			children = (
+				798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */,
 				796AACC315B38EC200C9FB2C /* Parcela.h */,
 				796AACCC15B38EC200C9FB2C /* Conta.h */,
 				796AACCD15B38EC200C9FB2C /* Conta.m */,
@@ -158,7 +159,6 @@
 				796AACC615B38EC200C9FB2C /* TipoConta.h */,
 				796AACC715B38EC200C9FB2C /* TipoConta.m */,
 				796AACC415B38EC200C9FB2C /* Parcela.m */,
-				798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */,
 				79362F81153D122E005459E8 /* Conta+AddOn.h */,
 				79362F82153D122E005459E8 /* Conta+AddOn.m */,
 				796CE1DE153B13E300B6AE11 /* TipoConta+AddOn.h */,
@@ -437,7 +437,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				7900B300155232C80050C652 /* en */,
-				796AACB215B1DE4E00C9FB2C /* pt */,
+				79D652B915B513AD006289E4 /* pt */,
 			);
 			name = MainStoryboard.storyboard;
 			path = ..;

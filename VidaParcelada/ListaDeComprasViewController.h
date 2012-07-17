@@ -10,7 +10,7 @@
 #import "CoreDataTableViewController.h"
 #import "Compra+AddOn.h"
 
-@interface ListaDeComprasViewController : CoreDataTableViewController <AlteracaoDeCompraDelegate>
+@interface ListaDeComprasViewController : CoreDataTableViewController <AlteracaoDeCompraDelegate, UIAlertViewDelegate>
 
 // aqui definimos nosso banco de dados global
 // que todos os controllers irão utilizar
@@ -22,5 +22,7 @@
 
 @property (nonatomic, strong) NSNumberFormatter *valorFormatter;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+
+@property (nonatomic, strong) UIAlertView *semContasCadastradasAlert;
 
 @end
