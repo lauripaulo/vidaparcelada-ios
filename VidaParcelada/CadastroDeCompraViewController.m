@@ -118,7 +118,7 @@
 {
     // Mostra os dados da conta. Se a conta não tem descriçao usa os dados
     // do tipo da conta no seu lugar.
-    if (self.contaSelecionada.descricao) {
+    if (self.contaSelecionada.descricao && [self.contaSelecionada.descricao length] > 0) {
         self.cellConta.textLabel.text = self.contaSelecionada.descricao;
         self.cellConta.detailTextLabel.text = self.contaSelecionada.empresa;
     } else {
@@ -171,6 +171,8 @@
     [self atualizaDescricaoDaConta];
 
     [self calculaValorDaParcela];
+    
+    [self calculaValorTotal];
 }
 
 - (void)viewDidLoad

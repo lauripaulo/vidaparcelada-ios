@@ -90,7 +90,7 @@
     }
     
     Conta *conta = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if (conta.descricao) {
+    if (conta.descricao && [conta.descricao length] > 0) {
         cell.textLabel.text = conta.descricao;
         cell.detailTextLabel.text = conta.empresa;
     } else {
