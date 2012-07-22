@@ -12,6 +12,7 @@
 #import "VidaParceladaHelper.h"
 #import "Conta+AddOn.h"
 #import "CadastroDeCompraViewController.h"
+#import "CadastroDeParcelaViewController.h" 
 
 @interface VisaoMensalViewController ()
 
@@ -24,13 +25,9 @@
 @synthesize dateFormatter = _dateFormatter;
 @synthesize objetivoMensal = _objetivoMensal;
 @synthesize compraSelecionada = _compraSelecionada;
+@synthesize parcelaSelecionada = _parcelaSelecionada;
 
 - (void)compraFoiAlterada:(Compra *)compra;
-{
-    [self.tableView reloadData];
-}
-
-- (void)parcelaFoiAlterada:(Parcela *)parcela;
 {
     [self.tableView reloadData];
 }
@@ -258,12 +255,29 @@
     return UITableViewCellEditingStyleNone;
 }
 
+//
+// Delegate para avisar que uma parcela foi alterada
+// e a tabela precisa recarregar os seus dados
+//
+- (void)parcelaFoiAlterada:(Parcela *)parcela
+{
+    NSLog(@"(>) parcelaFoiAlterada: %@", parcela);
+    
+    [self.tableView reloadData];
+    
+    NSLog(@"(<) parcelaFoiAlterada: ");
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     Parcela *parcela = [self.fetchedResultsController objectAtIndexPath:indexPath];
     if (self.compraSelecionada != parcela.compra) {
         self.compraSelecionada = parcela.compra;
+    } 
+    if (self.parcelaSelecionada != parcela) {
+        self.parcelaSelecionada = parcela;
     }
 }
 
@@ -281,11 +295,17 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         Parcela *parcela = [self.fetchedResultsController objectAtIndexPath:indexPath];
         self.compraSelecionada = parcela.compra;
+        self.parcelaSelecionada = parcela;
     }
     
     // primeiro informa a compra porque a pesquisa das parcelas precisa da compra.
     if ([segue.destinationViewController respondsToSelector:@selector(setCompraSelecionada:)]){
         [segue.destinationViewController setCompraSelecionada:self.compraSelecionada];
+    }
+    
+    // passa a parcela atualmente selectionada.
+    if ([segue.destinationViewController respondsToSelector:@selector(setParcelaSelecionada:)]) {
+        [segue.destinationViewController setParcelaSelecionada:self.parcelaSelecionada];
     }
     
     // Por último passa o managedDocument
@@ -297,7 +317,18 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setCompraDelegate:)]){
         [segue.destinationViewController setCompraDelegate:self];
     }
+    if ([segue.destinationViewController respondsToSelector:@selector(setParcelaDelegate:)]) {
+        [segue.destinationViewController setParcelaDelegate:self];
+    }
+}
 
+// quando você aperta o botão de detalhes, aquele botão azul, na célula da tabela
+// ele dispara esse método. Basta pegar o que foi escolhido e pedir para o navigation
+// controller realizar o 'segue' que você precisa.
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"editarCompra" sender:self];
+    
 }
 
 

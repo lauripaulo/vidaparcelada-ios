@@ -21,5 +21,6 @@
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSDecimalNumber *objetivoMensal;
 @property (nonatomic, strong) Compra *compraSelecionada;
+@property (nonatomic, strong) Parcela *parcelaSelecionada;
 
 @end
