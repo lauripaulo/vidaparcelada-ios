@@ -59,7 +59,7 @@
 - (UIActionSheet *)actionSheetVencimento
 {
     if (_actionSheetVencimento == nil) {
-        _actionSheetVencimento = [[UIActionSheet alloc] initWithTitle:@"Como ficam as parcelas anteriores vencidas? Devem ser marcadas como..."
+        _actionSheetVencimento = [[UIActionSheet alloc] initWithTitle:@"As parcelas vencidas devem ser marcadas como..."
                                                              delegate:self
                                                     cancelButtonTitle:@"Parcelas já pagas"
                                                destructiveButtonTitle:@"Pendente pagamento"

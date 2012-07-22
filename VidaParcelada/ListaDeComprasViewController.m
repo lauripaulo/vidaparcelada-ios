@@ -32,7 +32,8 @@
 - (UIAlertView *) semContasCadastradasAlert
 {
     if (!_semContasCadastradasAlert) {
-        _semContasCadastradasAlert = [[UIAlertView alloc] initWithTitle:@"Atenção" message:@"Antes de cadastrar as suas compras é necessário informar pelo menos uma conta de cartão de crédito." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        NSString *texto = @"Antes de cadastrar as suas compras é necessário informar uma conta de cartão de crédito. Clique em OK e cadastre o cartão que você mais utiliza. Você pode gerenciar os seus cartões utilizando o icone Contas.";
+        _semContasCadastradasAlert = [[UIAlertView alloc] initWithTitle:@"Atenção" message:texto delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     }
     return _semContasCadastradasAlert;    
 }
