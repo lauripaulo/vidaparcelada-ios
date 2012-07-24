@@ -301,6 +301,81 @@
     return numParcelas;
 }
 
+// Salva o estado da exibição da mensagem de boas vindas da de cada
+// aba para o usuário utilizando NSDefaults
++ (void) salvaEstadoApresentacaoInicialAba:(NSString *)nomeAba exibido:(BOOL)estado
+{
+    NSLog (@"(>) salvaEstadoApresentacaoInicialAba: %@, %@", nomeAba, (estado ? @"YES" : @"NO"));
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (estado) {
+        [defaults setObject:@"YES" forKey:nomeAba];
+    } else {
+        [defaults setObject:@"NO" forKey:nomeAba];
+    }
+    
+    // guarda abas criadas em um dictionary
+    NSArray *arrayAbasOriginal = [defaults objectForKey:@"arrayAbas"];
+    NSMutableArray *arrayAbas = [arrayAbasOriginal mutableCopy];
+    if (!arrayAbas) {
+        arrayAbas = [[NSMutableArray alloc] init];
+        NSLog (@"(!) salvaEstadoApresentacaoInicialAba: created = arrayAbas.");   
+    }
+    if (![arrayAbas containsObject:nomeAba]) {
+        [arrayAbas addObject:nomeAba];
+        NSLog (@"(!) salvaEstadoApresentacaoInicialAba: added = arrayAbas(%@)", nomeAba);;   
+    }
+    [defaults setObject:arrayAbas forKey:@"arrayAbas"];
+
+    [defaults synchronize];
+    
+    NSLog (@"(<) salvaEstadoApresentacaoInicialAba: ");
+
+}
+
+// Retorna se a aba passada como parametro já foi exibida
++ (BOOL) retornaEstadoApresentacaoInicialAba:(NSString *)nomeAba
+{
+    BOOL resultado = NO;
+    NSLog (@"(>) retornaEstadoApresentacaoInicialAba: %@", nomeAba);
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *estado = [defaults objectForKey:nomeAba];
+    if (!estado) {
+        [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeAba exibido:resultado];
+        NSLog (@"(!) retornaEstadoApresentacaoInicialAba: vazio, inicializando com NO.");   
+    } else {
+        resultado = [estado isEqual:@"YES"];
+    }
+    
+    NSLog (@"(<) retornaEstadoApresentacaoInicialAba: return = %@", (resultado ? @"YES" : @"NO"));
+    
+    return resultado;
+}
+
+// Volta ao estado inicial onde nenum aba foi apresentada.
++ (void) resetaTodosOsEstadosApresentacaoInicialAba
+{
+    NSLog (@"(>) resetaTodosOsEstadosApresentacaoInicialAba: ");
+
+    // guarda abas criadas em um dictionary
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *arrayAbas = [defaults objectForKey:@"arrayAbas"];
+    if (!arrayAbas) {
+        arrayAbas = [[NSMutableArray alloc] init];
+    } else {
+        for (NSString *nomeAba in arrayAbas) {
+            [defaults removeObjectForKey:nomeAba];
+            NSLog (@"(!) resetaTodosOsEstadosApresentacaoInicialAba: removed = %@", nomeAba);
+        }
+        [defaults removeObjectForKey:@"arrayAbas"];
+    }
+    [defaults synchronize];
+
+    NSLog (@"(<) resetaTodosOsEstadosApresentacaoInicialAba: ");
+}
+
+
 + (void) trataErro:(NSError *)error
 {
     if (error) {

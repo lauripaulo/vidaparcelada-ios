@@ -18,8 +18,6 @@
 
 @end
 
-
-
 @implementation ListaDeComprasViewController
 
 @synthesize vpDatabase = _vpDatabase;
@@ -27,6 +25,19 @@
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize semContasCadastradasAlert = _semContasCadastradasAlert;
+@synthesize primeiroUsoAlert = _primeiroUsoAlert;
+
+// sobreescreve o setter
+// - @synthesize primeiroUsoAlert = _primeiroUsoAlert;
+// - @property (nonatomic, strong) UIAlertView *primeiroUsoAlert;
+- (UIAlertView *) primeiroUsoAlert 
+{
+    if (!_primeiroUsoAlert) {
+        NSString *texto = @"Utilize o botão + acima para cadastrar novas compras. Para alterar suas compras atuais toque na seta azul no lado direto da linha e para gerenciar suas parcelas toque em qualquer parte da linha com o item desejado.";
+        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:@"Bem vindo!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    }
+    return _primeiroUsoAlert;
+}
 
 // sobrescreve o setter
 - (UIAlertView *) semContasCadastradasAlert
@@ -44,6 +55,17 @@
     
     if (alertView == self.semContasCadastradasAlert) {
         [self performSegueWithIdentifier:@"SemContasCadastradasSegue" sender:self];
+    }
+    
+    // Usuário confirmou que viu o primeiro aviso da tela.
+    if (alertView == self.primeiroUsoAlert) {
+        // atualiza o estado para exibido
+        NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+        [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
+        // Verifica se precisa exibir a mensagem de cadastro de contas
+        if ([Conta quantidadeDeContas:self.vpDatabase.managedObjectContext] == 0) {
+            [self.semContasCadastradasAlert show];
+        }
     }
     
     NSLog(@"(<) alertView:");
@@ -131,9 +153,18 @@
     NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
     self.compraSelecionada = nil;
-    
-    if ([Conta quantidadeDeContas:self.vpDatabase.managedObjectContext] == 0) {
-        [self.semContasCadastradasAlert show];
+        
+    //
+    // Chamada a primeira vez que a aba é exibida passando o nome da própria
+    // classe, retorna YES se em algum momento esse aviso já foi exibido.
+    //
+    NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+    if (![VidaParceladaHelper retornaEstadoApresentacaoInicialAba:nomeDaAba]) {
+        [self.primeiroUsoAlert show];
+    } else {
+        if ([Conta quantidadeDeContas:self.vpDatabase.managedObjectContext] == 0) {
+            [self.semContasCadastradasAlert show];
+        }
     }
     
     NSLog(@"(<) viewWillAppear: ");

@@ -33,11 +33,22 @@
 @synthesize btnAdicionarConta = _btnAdicionarConta;
 @synthesize contaSelecionada = _contaSelecionada;
 @synthesize comprasPresentesAlert = _comprasPresentesAlert;
+@synthesize primeiroUsoAlert = _primeiroUsoAlert;
+
+// define o alerta de primeiro uso
+- (UIAlertView *) primeiroUsoAlert 
+{
+    if (!_primeiroUsoAlert) {
+        NSString *texto = @"Aqui você visualiza e controla seus cartões de crédito. Utilize o botão + acima para cadastrar novas Contas. Para alterar suas compras atuais toque na linha com o item desejado. Para apagar uma conta você deve tocar no botão Editar no canto superior direito. Cadastre uma conta para cada cartão de crédito que você possui.";
+        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:@"Bem vindo!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    }
+    return _primeiroUsoAlert;
+}
 
 - (UIAlertView *) comprasPresentesAlert
 {
     if (!_comprasPresentesAlert) {
-        _comprasPresentesAlert = [[UIAlertView alloc] initWithTitle:@"Atenção!" message:@"Esta conta possui compras associadas que serão apagadas também. Cofirma a ação?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+        _comprasPresentesAlert = [[UIAlertView alloc] initWithTitle:@"Atenção!" message:@"Esta conta possui compras associadas que também serão apagadas. Cofirma a ação?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
     }
     return _comprasPresentesAlert;
 }
@@ -46,8 +57,19 @@
 {
     NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
     
-    if (buttonIndex > 0) {
-        [self apagaConta:self.contaSelecionada];
+    // Usuário confirmou que viu o primeiro aviso da tela.
+    if (alertView == self.primeiroUsoAlert) {
+        // atualiza o estado para exibido
+        NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+        [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
+    }
+
+    // Realmente devemos apagar essa conta?
+    if (alertView == self.comprasPresentesAlert) {
+        if (buttonIndex > 0) {
+            [self.contaSelecionada removeCompras:self.contaSelecionada.compras];
+            [self apagaConta:self.contaSelecionada];
+        }
     }
     
     NSLog(@"(<) alertView:");
@@ -131,7 +153,16 @@
     NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
 
     [super viewWillAppear:animated];
-    
+   
+    //
+    // Chamada a primeira vez que a aba é exibida passando o nome da própria
+    // classe, retorna YES se em algum momento esse aviso já foi exibido.
+    //
+    NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+    if (![VidaParceladaHelper retornaEstadoApresentacaoInicialAba:nomeDaAba]) {
+        [self.primeiroUsoAlert show];
+    }
+
     NSLog(@"(<) viewWillAppear: ");
 
 }

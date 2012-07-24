@@ -8,6 +8,8 @@
 
 #import "Parcela+AddOn.h"
 #import "VidaParceladaHelper.h"
+#import "Compra+AddOn.h"
+
 //
 // Estados possíveis da compra
 //
@@ -47,7 +49,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 {
     Parcela *novaParcela = nil;
     
-    NSLog(@"(>) novaParcelaComDescricao: %@, %@, %@, %@, %@, %@, %@", descricao, dataDeVencimento, estado, numeroDaParcela, valor, compra, context);
+    NSLog(@"(>) novaParcelaComDescricao: %@, %@, %@, %@, %@, %@, %@", descricao, dataDeVencimento, estado, numeroDaParcela, valor, compra.descricao, context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
@@ -65,7 +67,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     // Se o objeto existir carrega o objeto para edição
     if (matches && [matches count] == 1) {
         novaParcela = [matches objectAtIndex:0];
-        NSLog(@"(!) novaParcelaComDescricao: loaded = %@", novaParcela);
+        NSLog(@"(!) novaParcelaComDescricao: loaded = %@", novaParcela.descricao);
     }
     
     // Se existir mais de 1 objeto é uma situação de excessão e
@@ -76,7 +78,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         //
         for (Parcela *parcela in matches) {
             [context deleteObject:parcela];
-            NSLog(@"(!) novaParcelaComDescricao: deleted = %@", parcela);
+            NSLog(@"(!) novaParcelaComDescricao: deleted = %@", parcela.descricao);
         }
         
         // ...e chama novamente de forma recursiva
@@ -95,7 +97,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         //
         if (!novaParcela) {
             novaParcela = [NSEntityDescription insertNewObjectForEntityForName:@"Parcela" inManagedObjectContext:context];
-            NSLog(@"(!) novaParcelaComDescricao: new = %@", novaParcela);
+            NSLog(@"(!) novaParcelaComDescricao: new = %@", novaParcela.descricao);
         }
         novaParcela.descricao = descricao;
         novaParcela.dataVencimento = dataDeVencimento;
@@ -110,7 +112,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog(@"(<) novaParcelaComDescricao: return = %@", novaParcela);
+    NSLog(@"(<) novaParcelaComDescricao: return = %@", novaParcela.descricao);
 
     return novaParcela;
 }

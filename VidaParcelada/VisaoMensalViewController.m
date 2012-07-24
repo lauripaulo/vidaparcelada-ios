@@ -26,6 +26,17 @@
 @synthesize objetivoMensal = _objetivoMensal;
 @synthesize compraSelecionada = _compraSelecionada;
 @synthesize parcelaSelecionada = _parcelaSelecionada;
+@synthesize primeiroUsoAlert = _primeiroUsoAlert;
+
+// define o alerta de primeiro uso
+- (UIAlertView *) primeiroUsoAlert 
+{
+    if (!_primeiroUsoAlert) {
+        NSString *texto = @"A previsão é o local onde você pode ver quais parcelas vencem neste mês e em meses futuros. Você também pode acompanhar o valor de cada parcela e também qual o valor total já gasto somando todos os seus cartões/contas.";
+        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:@"Bem vindo!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    }
+    return _primeiroUsoAlert;
+}
 
 - (void)compraFoiAlterada:(Compra *)compra;
 {

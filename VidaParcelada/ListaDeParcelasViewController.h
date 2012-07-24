@@ -13,7 +13,7 @@
 #import "Conta+AddOn.h"
 #import "TipoConta+AddOn.h"
 
-@interface ListaDeParcelasViewController : CoreDataTableViewController <AlteracaoDeParcelaDelegate>
+@interface ListaDeParcelasViewController : CoreDataTableViewController <AlteracaoDeParcelaDelegate, UIAlertViewDelegate>
 
 // banco de dados atualmente em uso. Precisa ser definido no 
 // prepareForSegue do controler que abre o banco de dados.
@@ -26,5 +26,9 @@
 @property (nonatomic) Compra *compraSelecionada;
 
 @property (nonatomic) Parcela *parcelaSelecionada;
+
+// define um alert para ser mostrado no primeiro uso de uma funcionalidade
+// ou de uma nova tela.
+@property (nonatomic, strong) UIAlertView *primeiroUsoAlert;
 
 @end

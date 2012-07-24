@@ -20,5 +20,8 @@
 
 @property (nonatomic, strong) UIAlertView *comprasPresentesAlert;
 
+// define um alert para ser mostrado no primeiro uso de uma funcionalidade
+// ou de uma nova tela.
+@property (nonatomic, strong) UIAlertView *primeiroUsoAlert;
 
 @end

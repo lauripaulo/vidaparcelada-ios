@@ -8,6 +8,7 @@
 
 #import "ListaDeParcelasViewController.h"
 #import "CadastroDeParcelaViewController.h"
+#import "VidaParceladaHelper.h"
 
 @interface ListaDeParcelasViewController ()
 
@@ -20,7 +21,27 @@
 @synthesize dateFormatter = _dateFormatter;
 @synthesize compraSelecionada = _compraSelecionada;
 @synthesize parcelaSelecionada = _parcelaSelecionada;
+@synthesize primeiroUsoAlert = _primeiroUsoAlert;
 
+// define o alerta de primeiro uso
+- (UIAlertView *) primeiroUsoAlert 
+{
+    if (!_primeiroUsoAlert) {
+        NSString *texto = @"Aqui são exibidas as parcelas da compra selecionada no passo anterior. Você ainda pode alterar uma parcela tocando na linha desejada. Parcelas não podem ser apagadas. Para alterar as parcelas você deve editar a compra relacionada a elas e diminuir a ou aumentar quantidade de parcelas.";
+        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:@"Bem vindo!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    }
+    return _primeiroUsoAlert;
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // Usuário confirmou que viu o primeiro aviso da tela.
+    if (alertView == self.primeiroUsoAlert) {
+        // atualiza o estado para exibido
+        NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+        [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
+    }
+}
 
 //
 // Delegate para avisar que uma parcela foi alterada
@@ -52,6 +73,15 @@
     [super viewWillAppear:animated];
     self.parcelaSelecionada = nil;
     [self setupFetchedResultsController];
+
+    //
+    // Chamada a primeira vez que a aba é exibida passando o nome da própria
+    // classe, retorna YES se em algum momento esse aviso já foi exibido.
+    //
+    NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+    if (![VidaParceladaHelper retornaEstadoApresentacaoInicialAba:nomeDaAba]) {
+        [self.primeiroUsoAlert show];
+    }
 
     NSLog(@"(<) viewWillAppear: ");
 

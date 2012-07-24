@@ -52,4 +52,14 @@
 // Retorna o numero de parcelas padrão do usuário
 + (NSNumber *) retornaNumeroDeParcelasPadrao;
 
+// Salva o estado da exibição da mensagem de boas vindas da de cada
+// aba para o usuário utilizando NSDefaults
++ (void) salvaEstadoApresentacaoInicialAba:(NSString *)nomeAba exibido:(BOOL)estado;
+
+// Retorna se a aba passada como parametro já foi exibida
++ (BOOL) retornaEstadoApresentacaoInicialAba:(NSString *)nomeAba;
+
+// Volta ao estado inicial onde nenum aba foi apresentada.
++ (void) resetaTodosOsEstadosApresentacaoInicialAba;
+
 @end

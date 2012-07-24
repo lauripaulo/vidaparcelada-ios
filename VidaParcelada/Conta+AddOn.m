@@ -42,7 +42,7 @@
     // Se o objeto existir carrega o objeto para edição
     if (matches && [matches count] == 1) {
         novaConta = [matches objectAtIndex:0];
-        NSLog(@"(!) contaComDescricao: loaded = %@", novaConta);
+        NSLog(@"(!) contaComDescricao: loaded = %@", novaConta.descricao);
     }
     
     // Se existir mais de 1 objeto é uma situação de excessão e
@@ -53,7 +53,7 @@
         //
         for (Conta *conta in matches) {
             [context deleteObject:conta];
-            NSLog(@"(!) contaComDescricao: deleted = %@", conta);
+            NSLog(@"(!) contaComDescricao: deleted = %@", conta.descricao);
         }
     
         // ...e chama novamente de forma recursiva
@@ -74,7 +74,7 @@
         if (!novaConta) {
             novaConta = [NSEntityDescription insertNewObjectForEntityForName:@"Conta" inManagedObjectContext:context];
             novaConta.compras = nil; // conta nova não tem compras...
-            NSLog(@"(!) contaComDescricao: new = %@", novaConta);
+            NSLog(@"(!) contaComDescricao: new = %@", novaConta.descricao);
         }
         novaConta.descricao = descricao;
         novaConta.empresa = empresa;
@@ -105,7 +105,7 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog(@"(<) contaComDescricao: return = %@", novaConta);
+    NSLog(@"(<) contaComDescricao: return = %@", novaConta.descricao);
 
     return novaConta;
 }
