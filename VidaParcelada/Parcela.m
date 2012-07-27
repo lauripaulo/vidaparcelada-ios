@@ -2,8 +2,8 @@
 //  Parcela.m
 //  VidaParcelada
 //
-//  Created by Lauri Laux on 15/07/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Lauri P. Laux Jr on 26/07/12.
+//
 //
 
 #import "Parcela.h"

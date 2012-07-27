@@ -76,14 +76,6 @@
             novaConta.compras = nil; // conta nova não tem compras...
             NSLog(@"(!) contaComDescricao: new = %@", novaConta.descricao);
         }
-        novaConta.descricao = descricao;
-        novaConta.empresa = empresa;
-        novaConta.diaDeVencimento = diaDeVencimento;
-        novaConta.jurosMes = jurosMes;
-        novaConta.limite = limite;
-        novaConta.melhorDiaDeCompra = melhorDiaDeCompra;
-        // maneira de colocar BOOLs no coredata
-        novaConta.preferencial = [NSNumber numberWithBool:preferencial];
         
         // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
         NSFetchRequest *tipoRequest = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
@@ -98,7 +90,17 @@
         if (tipos && [tipos count] > 0) {
             novaConta.tipo = [tipos objectAtIndex:0];
         }
-    } 
+        
+        novaConta.descricao = descricao;
+        novaConta.empresa = empresa;
+        novaConta.diaDeVencimento = diaDeVencimento;
+        novaConta.jurosMes = jurosMes;
+        novaConta.limite = limite;
+        novaConta.melhorDiaDeCompra = melhorDiaDeCompra;
+        // maneira de colocar BOOLs no coredata
+        novaConta.preferencial = [NSNumber numberWithBool:preferencial];
+        
+ }
     
     [context save:(&error)];
 
@@ -157,5 +159,20 @@
     return count;
 }
 
++(void)removeContaTotalmente:(Conta *)conta
+                   inContext:(NSManagedObjectContext *)context
+{
+    NSLog(@"(>) removeContaTotalmente: %@", conta.descricao);
+     
+    [context deleteObject:conta];
+    
+    NSError *error = nil;
+    [context save:(&error)];
+    
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
+    
+    NSLog(@"(<) removeContaTotalmente: ");
+}
 
 @end

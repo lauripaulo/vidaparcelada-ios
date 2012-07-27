@@ -22,17 +22,20 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 // gera o mes e ano atual para uso na tela de agrupamento.
 - (NSString *)tMesAno
 {
+    NSString *mes = nil;
     NSString *mesAno = nil;
     [self willAccessValueForKey:@"dataVencimento"];
     NSDate *dataReal = [self dataVencimento];
     [self didAccessValueForKey:@"dataVencimento"];
-    if (mesAno == nil)
-    {
-        NSDateFormatter *dateFormatter;
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MMMM/yyyy"];
-        mesAno = [dateFormatter stringFromDate:dataReal];
-    }
+
+    NSDateFormatter *dateFormatter;
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMMM"];
+    mes = [dateFormatter stringFromDate:dataReal];
+    mes = [mes stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[mes substringToIndex:1] uppercaseString]];
+    [dateFormatter setDateFormat:@"yyyy"];
+    mesAno = [mes stringByAppendingFormat:@" de %@", [dateFormatter stringFromDate:dataReal]];
+    
     return mesAno;
 }
 

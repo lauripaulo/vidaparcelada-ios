@@ -162,6 +162,7 @@
     if (![VidaParceladaHelper retornaEstadoApresentacaoInicialAba:nomeDaAba]) {
         [self.primeiroUsoAlert show];
     } else {
+        [self.tableView reloadData];
         if ([Conta quantidadeDeContas:self.vpDatabase.managedObjectContext] == 0) {
             [self.semContasCadastradasAlert show];
         }

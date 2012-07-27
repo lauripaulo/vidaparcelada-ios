@@ -11,6 +11,7 @@
 #import "TipoConta+AddOn.h"
 #import "VidaParceladaHelper.h"
 #import "CadastroDaContaViewController.h"
+#import "Parcela+AddOn.h"
 
 @interface ListaDeContasViewController ()
 
@@ -48,7 +49,7 @@
 - (UIAlertView *) comprasPresentesAlert
 {
     if (!_comprasPresentesAlert) {
-        _comprasPresentesAlert = [[UIAlertView alloc] initWithTitle:@"Atenção!" message:@"Esta conta possui compras associadas que também serão apagadas. Cofirma a ação?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+        _comprasPresentesAlert = [[UIAlertView alloc] initWithTitle:@"Atenção!" message:@"Esta conta possui compras e parcelas associadas que também serão apagadas. Você irá perder todos esses dados se optar por exluir a conta. Você confirma a exclusão da conta?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
     }
     return _comprasPresentesAlert;
 }
@@ -67,8 +68,7 @@
     // Realmente devemos apagar essa conta?
     if (alertView == self.comprasPresentesAlert) {
         if (buttonIndex > 0) {
-            [self.contaSelecionada removeCompras:self.contaSelecionada.compras];
-            [self apagaConta:self.contaSelecionada];
+            [Conta removeContaTotalmente:self.contaSelecionada inContext:self.vpDatabase.managedObjectContext];
         }
     }
     

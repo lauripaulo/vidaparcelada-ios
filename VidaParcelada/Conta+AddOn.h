@@ -30,6 +30,10 @@
 // na base de dados
 +(int) quantidadeDeContas:(NSManagedObjectContext *)context;
 
++(void)removeContaTotalmente:(Conta *)conta
+                   inContext:(NSManagedObjectContext *)context;
+
+
 @end
 
 // Delegate para avisar a TableView cliente que os dados da conta foram atualizados
