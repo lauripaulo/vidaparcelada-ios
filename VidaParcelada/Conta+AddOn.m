@@ -175,4 +175,67 @@
     NSLog(@"(<) removeContaTotalmente: ");
 }
 
+// Verifica todos as contas existentes para saber se a data
+// passada como parametro é a data de vencimento do cartão
+// ou o melhor dia, dependendo dos parametros passados.
+// Retorna um array de cartões que atendem a essa restrição,
+// se nenhum estiver vencendo o retorno será nil.
++ (NSArray *)verificaDataRetornandoContas:(NSDate *)data
+                           usandoContexto:(NSManagedObjectContext *)context
+                     comparandoVencimento:(BOOL)vencimento
+                      comparandoMelhorDia:(BOOL)melhorDia
+{
+    NSLog(@"(>) verificaDataRetornandoContas - %@, %@, %@, %@", data, context, (vencimento ? @"YES" : @"NO"), (melhorDia ? @"YES" : @"NO"));
+
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    
+    // Para transformar a data em dia/string
+    NSDateFormatter *dateFormatter;
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"d"];
+    
+    // Para transformar o dia/string em numero e comparar
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterDecimalStyle];
+
+    // Dia em string e numero
+    NSString *dataString = [dateFormatter stringFromDate:data];
+    NSNumber *diaParam = [nf numberFromString:dataString];
+    NSLog(@"(!) verificaDataRetornandoContas - diaParam = %@", diaParam);
+   
+    // precisamos listar todas as contas
+    NSArray *contas = [Conta contasCadastradasUsandoContext:context];
+    
+    // Iterar e descobrir se alguma delas tem a data de vencimento
+    // igual a passada.
+    for (Conta *candidato in contas){
+
+        // Para facilitar podemos converter as duas para o mesmo formato,
+        // na verdade precisamos apenas do dia, como um numero basta para
+        // a nossa comparação.
+        if (vencimento) {
+            if ([diaParam isEqualToNumber:candidato.diaDeVencimento]) {
+                [result addObject:candidato];
+                NSLog(@"(!) verificaDataRetornandoContas - found diaDeVencimento = %@", candidato.diaDeVencimento);
+            }
+        }
+        if (melhorDia) {
+            // Avalia o melhor dia apenas se ele for diferente do vencimento.
+            if ([candidato.diaDeVencimento isEqualToNumber:candidato.melhorDiaDeCompra]) {
+                NSLog(@"(!) verificaDataRetornandoContas - found melhorDiaDeCompra == diaDeVencimento");
+            } else {
+                if ([diaParam isEqualToNumber:candidato.melhorDiaDeCompra]) {
+                    [result addObject:candidato];
+                    NSLog(@"(!) verificaDataRetornandoContas - found melhorDiaDeCompra = %@", candidato.melhorDiaDeCompra);
+                }
+            }
+        }
+        
+    }
+    
+    NSLog(@"(<) verificaDataRetornandoContas - result = count(%u)", [result count]);
+
+    return [result copy];
+}
+
 @end

@@ -29,7 +29,7 @@
 - (void)navigationController:(UINavigationController *)navigationController 
       willShowViewController:(UIViewController *)viewController animated:(BOOL)animated 
 {
-    [viewController viewWillAppear:animated];
+    //[viewController viewWillAppear:animated];
 }
 
 //

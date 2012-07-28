@@ -27,6 +27,7 @@
 @synthesize compraSelecionada = _compraSelecionada;
 @synthesize parcelaSelecionada = _parcelaSelecionada;
 @synthesize primeiroUsoAlert = _primeiroUsoAlert;
+@synthesize vencimentosAlert = _vencimentosAlert;
 
 // define o alerta de primeiro uso
 - (UIAlertView *) primeiroUsoAlert 
@@ -50,9 +51,32 @@
     if (_vpDatabase != mangedDocument) {
         _vpDatabase = mangedDocument;
         [self setupFetchedResultsController];
+        [self verificaVencimentos];
     }
 }
 
+-(void)verificaVencimentos
+{
+    // Verifica se existem cartões que vencem hoje ou que tem melhor dia hoje.
+    NSDate *hoje = [[NSDate alloc] init];
+    NSArray *contas = [Conta verificaDataRetornandoContas:hoje
+                                           usandoContexto:self.vpDatabase.managedObjectContext
+                                     comparandoVencimento:YES
+                                      comparandoMelhorDia:NO];
+    
+    NSString *descricaoContas = @"";
+    for (Conta *c in contas) {
+        descricaoContas = [descricaoContas stringByAppendingString:c.descricao];
+        descricaoContas = [descricaoContas stringByAppendingString:@" - "];
+        descricaoContas = [descricaoContas stringByAppendingString:c.empresa];
+        descricaoContas = [descricaoContas stringByAppendingString:@". \n"];
+    }
+    
+    NSString *texto = [NSString stringWithFormat:@"Hoje é dia de vencimento de cartão! \n\n%@\nNão esqueça de pagar suas parcelas!", descricaoContas];
+    _vencimentosAlert = [[UIAlertView alloc] initWithTitle:@"Vencimento!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [self.vencimentosAlert show];
+
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -257,6 +281,10 @@
     [super viewWillAppear:animated];
     self.objetivoMensal = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
     [[self tableView] reloadData];
+    
+    if (self.vpDatabase) {
+        [self verificaVencimentos];
+    }
 
     NSLog(@"(<) viewWillAppear: ");
 }

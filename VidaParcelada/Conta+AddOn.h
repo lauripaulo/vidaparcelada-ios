@@ -33,6 +33,15 @@
 +(void)removeContaTotalmente:(Conta *)conta
                    inContext:(NSManagedObjectContext *)context;
 
+// Verifica todos as contas existentes para saber se a data
+// passada como parametro é a data de vencimento do cartão
+// ou o melhor dia, dependendo dos parametros passados.
+// Retorna um array de cartões que atendem a essa restrição,
+// se nenhum estiver vencendo o retorno será nil.
++ (NSArray *)verificaDataRetornandoContas:(NSDate *)data
+           usandoContexto:(NSManagedObjectContext *)context
+     comparandoVencimento:(BOOL)vencimento
+      comparandoMelhorDia:(BOOL)melhorDia;
 
 @end
 
