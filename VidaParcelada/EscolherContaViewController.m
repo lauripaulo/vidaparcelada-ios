@@ -67,7 +67,7 @@
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
                                                                         managedObjectContext:self.vpDatabase.managedObjectContext 
                                                                           sectionNameKeyPath:nil 
-                                                                                   cacheName:nil]; 
+                                                                                   cacheName:@"ListaDeContaParaEscolherCache"];
     
     // Celula com marcação
     NSIndexPath *index = [self.fetchedResultsController indexPathForObject:self.contaSelecionada];

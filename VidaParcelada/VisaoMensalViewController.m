@@ -104,7 +104,7 @@
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
                                                                         managedObjectContext:self.vpDatabase.managedObjectContext 
                                                                           sectionNameKeyPath:@"tMesAno" 
-                                                                                   cacheName:nil]; 
+                                                                                   cacheName:@"VisaoMensalCache"];
     
 }
 

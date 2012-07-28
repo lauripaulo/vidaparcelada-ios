@@ -103,7 +103,7 @@
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
                                                                         managedObjectContext:self.vpDatabase.managedObjectContext 
                                                                           sectionNameKeyPath:nil 
-                                                                                   cacheName:nil]; // @"ListaDeComprasCache"
+                                                                                   cacheName:@"ListaDeComprasCache"]; // @"ListaDeComprasCache"
 }
 
 
