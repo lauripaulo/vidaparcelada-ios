@@ -29,4 +29,8 @@
 // ou de uma nova tela.
 @property (nonatomic, strong) UIAlertView *primeiroUsoAlert;
 
+// Define um alert basico de eventos relacionados a dia do vencimento
+// das suas contas ou melhor dia de compra com um cartão específico.
+@property (nonatomic, strong) UIAlertView *vencimentosAlert;
+
 @end

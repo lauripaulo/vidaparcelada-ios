@@ -26,6 +26,7 @@
 @synthesize dateFormatter = _dateFormatter;
 @synthesize semContasCadastradasAlert = _semContasCadastradasAlert;
 @synthesize primeiroUsoAlert = _primeiroUsoAlert;
+@synthesize vencimentosAlert = _vencimentosAlert;
 
 // sobreescreve o setter
 // - @synthesize primeiroUsoAlert = _primeiroUsoAlert;
@@ -47,6 +48,34 @@
         _semContasCadastradasAlert = [[UIAlertView alloc] initWithTitle:@"Atenção" message:texto delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     }
     return _semContasCadastradasAlert;    
+}
+
+-(void)verificaVencimentos
+{
+    // Verifica se existem cartões que vencem hoje ou que tem melhor dia hoje.
+    NSDate *hoje = [[NSDate alloc] init];
+    NSArray *contas = [Conta verificaDataRetornandoContas:hoje
+                                           usandoContexto:self.vpDatabase.managedObjectContext
+                                     comparandoVencimento:NO
+                                      comparandoMelhorDia:YES];
+    
+    // Sem contas não é necessário mostrar nenhum evento.
+    if (!contas || [contas count] == 0) {
+        return;
+    }
+    
+    NSString *descricaoContas = @"";
+    for (Conta *c in contas) {
+        descricaoContas = [descricaoContas stringByAppendingString:c.descricao];
+        descricaoContas = [descricaoContas stringByAppendingString:@" - "];
+        descricaoContas = [descricaoContas stringByAppendingString:c.empresa];
+        descricaoContas = [descricaoContas stringByAppendingString:@". \n"];
+    }
+    
+    NSString *texto = [NSString stringWithFormat:@"Hoje é o melhor dia de compra com cartão! \n\n%@\nCompras realizadas hoje terão vencimento apenas no próximo mês. Aproveite!", descricaoContas];
+    _vencimentosAlert = [[UIAlertView alloc] initWithTitle:@"Melhor dia!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [self.vencimentosAlert show];
+    
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -165,6 +194,9 @@
         [self.tableView reloadData];
         if ([Conta quantidadeDeContas:self.vpDatabase.managedObjectContext] == 0) {
             [self.semContasCadastradasAlert show];
+        } else {
+            // verifica se estamos no melhor dia para compra.
+            [self verificaVencimentos];
         }
     }
     

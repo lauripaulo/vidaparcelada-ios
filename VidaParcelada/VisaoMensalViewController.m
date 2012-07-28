@@ -64,6 +64,11 @@
                                      comparandoVencimento:YES
                                       comparandoMelhorDia:NO];
     
+    // Sem contas não é necessário mostrar nenhum evento.
+    if (!contas || [contas count] == 0) {
+        return;
+    }
+
     NSString *descricaoContas = @"";
     for (Conta *c in contas) {
         descricaoContas = [descricaoContas stringByAppendingString:c.descricao];
