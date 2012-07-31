@@ -8,6 +8,7 @@
 
 #import "Conta+AddOn.h"
 #import "VidaParceladaHelper.h"
+#import "TipoConta+AddOn.h"
 
 @implementation Conta (AddOn)
 
@@ -19,15 +20,16 @@
               comLimiteTotal:(NSDecimalNumber *) limite
         comMelhorDiaDeCompra:(NSNumber *) melhorDiaDeCompra
           cartaoPreferencial:(BOOL)preferencial
+                comTipoConta:(TipoConta *)tipoConta
                    inContext:(NSManagedObjectContext *)context
 {
     Conta *novaConta = nil;
     
-    NSLog(@"(>) contaComDescricao: %@, %@, %@, %@, %@, %@, %@, %@", descricao, empresa, diaDeVencimento, jurosMes, limite, melhorDiaDeCompra, (preferencial ? @"YES" : @"NO"), context);
+    NSLog(@"(>) contaComDescricao: %@, %@, %@, %@, %@, %@, %@, %@, %@", descricao, empresa, diaDeVencimento, jurosMes, limite, melhorDiaDeCompra, (preferencial ? @"YES" : @"NO"), tipoConta.nome, context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
-    request.predicate = [NSPredicate predicateWithFormat:@"descricao = %@", descricao];
+    request.predicate = [NSPredicate predicateWithFormat:@"descricao = %@ AND empresa = %@", descricao, empresa];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
@@ -58,13 +60,14 @@
     
         // ...e chama novamente de forma recursiva
         // este metodo de criação.
-        novaConta = [self contaComDescricao:descricao 
+        novaConta = [self contaComDescricao:descricao
                               daEmpresa:empresa 
                      comVencimentoNoDia:diaDeVencimento 
                               eJurosMes:jurosMes 
                          comLimiteTotal:limite 
                    comMelhorDiaDeCompra:melhorDiaDeCompra 
                      cartaoPreferencial:preferencial
+                           comTipoConta:tipoConta
                               inContext:context];
     
     } else  {
@@ -76,21 +79,7 @@
             novaConta.compras = nil; // conta nova não tem compras...
             NSLog(@"(!) contaComDescricao: new = %@", novaConta.descricao);
         }
-        
-        // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
-        NSFetchRequest *tipoRequest = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
-        tipoRequest.predicate = [NSPredicate predicateWithFormat:@"nome = 'Cartão de crédito' "];
-        tipoRequest.sortDescriptors = [NSArray arrayWithObject:
-                                       [NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
-        NSArray *tipos = [context executeFetchRequest:tipoRequest error:&error];
-
-        // Tratamento de errors
-        [VidaParceladaHelper trataErro:error];
-        
-        if (tipos && [tipos count] > 0) {
-            novaConta.tipo = [tipos objectAtIndex:0];
-        }
-        
+        novaConta.tipo = tipoConta;
         novaConta.descricao = descricao;
         novaConta.empresa = empresa;
         novaConta.diaDeVencimento = diaDeVencimento;
@@ -110,6 +99,35 @@
     NSLog(@"(<) contaComDescricao: return = %@", novaConta.descricao);
 
     return novaConta;
+}
+
++ (TipoConta *) retornaTipoContaPadraoNoContexto:(NSManagedObjectContext *)context
+{
+    NSLog(@"(>) retornaTipoContaPadraoNoContexto: %@", context);
+
+    NSError *error = nil;
+
+    // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
+    NSFetchRequest *tipoRequest = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
+    tipoRequest.predicate = [NSPredicate predicateWithFormat:@"nome = 'Cartão de crédito' "];
+    tipoRequest.sortDescriptors = [NSArray arrayWithObject:
+                                   [NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
+    
+    NSArray *tipos = [context executeFetchRequest:tipoRequest error:&error];
+    
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
+    
+    if (tipos && [tipos count] > 0) {
+        TipoConta *tipo = [tipos objectAtIndex:0];
+        NSLog(@"(<) retornaTipoContaPadraoNoContexto: return = %@", tipo.descricao);
+        return tipo;
+    }
+    
+    NSLog(@"(<) retornaTipoContaPadraoNoContexto: return = nil");
+
+    return nil;
+
 }
 
 + (NSArray *)contasCadastradasUsandoContext:(NSManagedObjectContext *)context

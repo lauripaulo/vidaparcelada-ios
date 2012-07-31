@@ -20,6 +20,7 @@
            comLimiteTotal:(NSDecimalNumber *) limite
      comMelhorDiaDeCompra:(NSNumber *) melhorDiaDeCompra
        cartaoPreferencial:(BOOL)preferencial
+             comTipoConta:(TipoConta *)tipoConta
                 inContext:(NSManagedObjectContext *)context;
 
 // Retorna todas as contas atualmente cadastradas para usar em
@@ -42,6 +43,8 @@
            usandoContexto:(NSManagedObjectContext *)context
      comparandoVencimento:(BOOL)vencimento
       comparandoMelhorDia:(BOOL)melhorDia;
+
++ (TipoConta *) retornaTipoContaPadraoNoContexto:(NSManagedObjectContext *)context;
 
 @end
 

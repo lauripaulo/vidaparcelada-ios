@@ -10,7 +10,7 @@
 #import "Conta+AddOn.h"
 #import "TipoConta+AddOn.h"
 
-@interface CadastroDaContaViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, TipoContaEscolhidoDelegate>
+@interface CadastroDaContaViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, TipoContaEscolhidoDelegate, UIAlertViewDelegate>
 
 // aqui definimos nosso banco de dados global
 // que todos os controllers irão utilizar
@@ -25,11 +25,20 @@
 @property (weak, nonatomic) IBOutlet UIStepper *stepperVencimento;
 @property (weak, nonatomic) IBOutlet UIStepper *stepperMelhorDia;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellTipoConta;
+@property (weak, nonatomic) IBOutlet UINavigationItem *topBar;
 
 @property (weak, nonatomic) IBOutlet UISwitch *uiSwitchCartaoPreferencial;
 @property (nonatomic, strong) Conta *contaSelecionada;
+@property (nonatomic, strong) TipoConta *tipoContaSelecionada;
 
 // Delegate que recebe notificação quando uma conta é alterada
 @property (assign) id <AlteracaoDeContaDelegate> contaDelegate;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnCancelar;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnSalvar;
+
+
+@property (nonatomic, strong) UIAlertView *validacaoAlert;
 
 @end

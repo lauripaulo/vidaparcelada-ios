@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="emI-sT-MCG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="emI-sT-MCG">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
-        <development version="4300" defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <development version="4300" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
         <!--Lista De Compras View Controller - Compras-->
@@ -993,9 +993,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Conta" id="aId-Vs-3Uh"/>
+                    <navigationItem key="navigationItem" title="Conta" id="aId-Vs-3Uh">
+                        <barButtonItem key="leftBarButtonItem" title="Salvar" id="51g-Av-wpz">
+                            <connections>
+                                <action selector="onSalvarPressionado:" destination="VSo-TW-Q2V" id="rPH-VS-gaE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Cancelar" id="S5l-6Z-xMQ">
+                            <connections>
+                                <action selector="onCancelarPressionado:" destination="VSo-TW-Q2V" id="E8u-Zi-87z"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="btnCancelar" destination="S5l-6Z-xMQ" id="jDL-VV-NLP"/>
+                        <outlet property="btnSalvar" destination="51g-Av-wpz" id="hf6-y3-3Kc"/>
                         <outlet property="cellTipoConta" destination="yzD-8L-trF" id="mRO-Rb-5gv"/>
                         <outlet property="stepperMelhorDia" destination="EPC-aX-5y8" id="tVE-2N-l7O"/>
                         <outlet property="stepperVencimento" destination="w17-yN-6B9" id="xBm-Jf-Hus"/>
@@ -1005,6 +1018,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="tfJuros" destination="yer-qN-9I9" id="eiz-Pl-ekc"/>
                         <outlet property="tfLimiteTotal" destination="hf7-PB-Crx" id="X3Z-GM-hyI"/>
                         <outlet property="tfMelhorDia" destination="ARF-RP-pYm" id="e2K-ts-DGx"/>
+                        <outlet property="topBar" destination="aId-Vs-3Uh" id="01l-MH-PHa"/>
                         <outlet property="uiSwitchCartaoPreferencial" destination="nDZ-FO-TZj" id="tLX-Gj-bc7"/>
                     </connections>
                 </tableViewController>
@@ -1243,90 +1257,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="opcao.png" width="30" height="31"/>
         <image name="previsao.png" width="30" height="17"/>
     </resources>
-    <classes>
-        <class className="CadastroDaContaViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDaContaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cellTipoConta" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="stepperMelhorDia" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="stepperVencimento" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfDescricaoDaConta" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfDiaVencimento" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfEmpresa" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfJuros" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfLimiteTotal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfMelhorDia" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="uiSwitchCartaoPreferencial" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="CadastroDeCompraViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDeCompraViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="removeDataPickerAnimaed:"/>
-                <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btDataOk" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btSave" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="cellConta" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellDataDaCompra" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="stepperQtdeDeParcelas" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfDataCompra" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfDetalhesDaCompra" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfQtdeDeParcelas" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfValorDaParcela" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfValorTotal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="topBar" candidateClass="UINavigationItem"/>
-            </relationships>
-        </class>
-        <class className="CadastroDeParcelaViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDeParcelaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btSalvar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="cellParcelaPaga" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellParcelaPendente" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellParcelaVencida" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfValor" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="CoreDataTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
-        </class>
-        <class className="EscolherContaViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EscolherContaViewController.h"/>
-        </class>
-        <class className="ListaDeComprasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeComprasViewController.h"/>
-        </class>
-        <class className="ListaDeContasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeContasViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnAdicionarConta" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="ListaDeParcelasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeParcelasViewController.h"/>
-        </class>
-        <class className="OptionsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="stepperQtdeParcelas" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfObjetivoMensal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfQtdeParcelas" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RootTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RootTabBarController.h"/>
-        </class>
-        <class className="TipoDaContaViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TipoDaContaViewController.h"/>
-        </class>
-        <class className="VisaoMensalViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VisaoMensalViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

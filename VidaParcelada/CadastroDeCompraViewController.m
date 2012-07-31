@@ -190,6 +190,7 @@
     // com os dados dessa conta.
     self.listaDeContas = [Conta contasCadastradasUsandoContext:self.vpDatabase.managedObjectContext];
     if (self.compraSelecionada) {
+        self.topBar.rightBarButtonItem = nil;
         [self atualizarCamposNaTela];
     } else {
         [self inicializarTela];
