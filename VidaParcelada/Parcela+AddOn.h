@@ -7,7 +7,7 @@
 //
 
 #import "Parcela.h"
-
+#import "Conta+AddOn.h"
 //
 // Estados possíveis da compra
 //
@@ -31,9 +31,19 @@ extern NSString * const PARCELA_VENCIDA; // Todas as parcela pagas
 //
 // Itera em todas as compras e identifica parcelas que estão vencendo no mês atual
 // 
-- (NSArray *) parcelasPendentesDoMes:(NSDate *)data
++ (NSArray *) parcelasPendentesDoMes:(NSDate *)data
+                            eDaConta:(Conta *)conta
                            inContext:(NSManagedObjectContext *)context;
 
+//
+// Calcula valor total das parcelas passadas como parametro.
+//
++ (NSDecimalNumber *) calculaValorTotalDasParcelas:(NSArray *)parcelas;
+
+//
+// Paga as parcelas passadas como parametro
+//
++ (int)pagaListaDeParcelas:(NSArray *)parcelas;
 
 @end
 

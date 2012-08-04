@@ -30,6 +30,13 @@
      usandoFormatter:(NSNumberFormatter *)formatter
       eQtdeDeDigitos:(int)qtdeDigitos;
 
+// retorna o mês atual no formato necessário para comparar
+// com as parcelas.
++ (NSString *) formataMesParaTopCell:(NSDate *)data;
+
+// retorna a data formatada apenas para o mês
++ (NSString *) formataApenasMesCompleto:(NSDate *)data;
+
 // Retorna o objetivo de gasto global do NSUserDefaults
 // em formato de string (que é nativamente suportado)
 // e retorna convertido para NSDecimalNumber para quem chamou a função.

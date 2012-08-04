@@ -18,6 +18,7 @@
 		7947B80B15C23B390083B177 /* Parcela.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947B80A15C23B390083B177 /* Parcela.m */; };
 		7947B80E15C23B390083B177 /* TipoConta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947B80D15C23B390083B177 /* TipoConta.m */; };
 		794FF634159761360009D1DD /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FF633159761360009D1DD /* OptionsTableViewController.m */; };
+		795FFCA815C8D6FA00816B70 /* PagarFaturaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795FFCA715C8D6FA00816B70 /* PagarFaturaViewController.m */; };
 		796A824E159D475F0072E99B /* compras.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824A159D475F0072E99B /* compras.png */; };
 		796A824F159D475F0072E99B /* contas.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824B159D475F0072E99B /* contas.png */; };
 		796A8250159D475F0072E99B /* opcao.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824C159D475F0072E99B /* opcao.png */; };
@@ -48,7 +49,7 @@
 		79D3335F156F125800D034D3 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D3335E156F125800D034D3 /* Icon-Small@2x.png */; };
 		79D3336B156F19F800D034D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 79D3336A156F19F800D034D3 /* iTunesArtwork */; };
 		79D3336D156F1A3D00D034D3 /* LogoBarra.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D3336C156F1A3D00D034D3 /* LogoBarra.png */; };
-		79E4E4D415C61F5000CF7551 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79E4E4D315C61F5000CF7551 /* iPhone.storyboard */; };
+		79DBA40015CCBDBA008BF96B /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79DBA40215CCBDBA008BF96B /* iPhone.storyboard */; };
 		79F92E1E1539F15D0031A919 /* CadastroDaContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */; };
 		79F92E221539F19C0031A919 /* TipoDaContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F92E211539F19C0031A919 /* TipoDaContaViewController.m */; };
 		79FEE572153917BC00DE35F5 /* ListaDeContasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FEE571153917BC00DE35F5 /* ListaDeContasViewController.m */; };
@@ -75,6 +76,8 @@
 		7947B80D15C23B390083B177 /* TipoConta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoConta.m; sourceTree = "<group>"; };
 		794FF632159761360009D1DD /* OptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
 		794FF633159761360009D1DD /* OptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsTableViewController.m; sourceTree = "<group>"; };
+		795FFCA615C8D6FA00816B70 /* PagarFaturaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagarFaturaViewController.h; sourceTree = "<group>"; };
+		795FFCA715C8D6FA00816B70 /* PagarFaturaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagarFaturaViewController.m; sourceTree = "<group>"; };
 		796A824A159D475F0072E99B /* compras.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compras.png; sourceTree = "<group>"; };
 		796A824B159D475F0072E99B /* contas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contas.png; sourceTree = "<group>"; };
 		796A824C159D475F0072E99B /* opcao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opcao.png; sourceTree = "<group>"; };
@@ -118,7 +121,8 @@
 		79D3335E156F125800D034D3 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		79D3336A156F19F800D034D3 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		79D3336C156F1A3D00D034D3 /* LogoBarra.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoBarra.png; sourceTree = "<group>"; };
-		79E4E4D315C61F5000CF7551 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
+		79DBA40415CCBDC2008BF96B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
+		79DBA40915CDD12F008BF96B /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDaContaViewController.h; sourceTree = "<group>"; };
 		79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDaContaViewController.m; sourceTree = "<group>"; };
 		79F92E201539F19C0031A919 /* TipoDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoDaContaViewController.h; sourceTree = "<group>"; };
@@ -288,6 +292,8 @@
 		799C54AA15430383009A235D /* Cadastros */ = {
 			isa = PBXGroup;
 			children = (
+				795FFCA615C8D6FA00816B70 /* PagarFaturaViewController.h */,
+				795FFCA715C8D6FA00816B70 /* PagarFaturaViewController.m */,
 				79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */,
 				79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */,
 				79456A31159FD2AD00712D1E /* CadastroDeParcelaViewController.h */,
@@ -303,7 +309,7 @@
 		799C54AB154303B9009A235D /* Storyboards/Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				79E4E4D315C61F5000CF7551 /* iPhone.storyboard */,
+				79DBA40215CCBDBA008BF96B /* iPhone.storyboard */,
 			);
 			name = "Storyboards/Data Model";
 			sourceTree = "<group>";
@@ -391,7 +397,7 @@
 				796A8251159D475F0072E99B /* previsao.png in Resources */,
 				79C9331E159EBE1000651DDB /* Default.png in Resources */,
 				79C9331F159EBE1000651DDB /* Default@2x.png in Resources */,
-				79E4E4D415C61F5000CF7551 /* iPhone.storyboard in Resources */,
+				79DBA40015CCBDBA008BF96B /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,10 +432,23 @@
 				7947B80815C23B390083B177 /* Conta.m in Sources */,
 				7947B80B15C23B390083B177 /* Parcela.m in Sources */,
 				7947B80E15C23B390083B177 /* TipoConta.m in Sources */,
+				795FFCA815C8D6FA00816B70 /* PagarFaturaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		79DBA40215CCBDBA008BF96B /* iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79DBA40415CCBDC2008BF96B /* en */,
+				79DBA40915CDD12F008BF96B /* pt */,
+			);
+			name = iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		798FF4191533B4B200385C5E /* Debug */ = {

@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSDecimalNumber *objetivoMensal;
 @property (nonatomic, strong) Compra *compraSelecionada;
 @property (nonatomic, strong) Parcela *parcelaSelecionada;
+@property (weak, nonatomic) IBOutlet UINavigationItem *topBar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFaturas;
 
 // define um alert para ser mostrado no primeiro uso de uma funcionalidade
 // ou de uma nova tela.

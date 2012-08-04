@@ -158,6 +158,42 @@
 
 }
 
+// retorna o mês atual no formato necessário para comparar
+// com as parcelas.
++ (NSString *) formataMesParaTopCell:(NSDate *)data
+{
+    NSLog (@"(>) retornaMesAtualFormatado: %@", data);
+
+    NSString *retorno = nil;
+    
+    NSDateFormatter *dateFormatter;
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMMM"];
+    NSString *mes = [dateFormatter stringFromDate:data];
+    mes = [mes stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[mes substringToIndex:1] uppercaseString]];
+    [dateFormatter setDateFormat:@"yyyy"];
+    retorno = [NSString stringWithFormat:@"Previsão para %@ de %@", mes, [dateFormatter stringFromDate:data]];
+    
+    NSLog (@"(<) retornaMesAtualFormatado: return = %@", retorno);
+
+    return retorno;
+}
+
+// retorna a data formatada apenas para o mês
++ (NSString *) formataApenasMesCompleto:(NSDate *)data
+{
+    NSLog (@"(>) formataApenasMesCompleto: %@", data);
+        
+    NSDateFormatter *dateFormatter;
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMMM"];
+    NSString *mes = [dateFormatter stringFromDate:data];
+    mes = [mes stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[mes substringToIndex:1] uppercaseString]];
+    
+    NSLog (@"(<) formataApenasMesCompleto: return = %@", mes);
+    
+    return mes;
+}
 
 //This method is responsible for add mask characters properly
 + (void)formatInput:(UITextField*)aTextField 
@@ -229,7 +265,7 @@
 {
     NSLog (@"(>) retornaLimiteDeGastoGlobal: ");
 
-    NSDecimalNumber *valorFinal = [[NSDecimalNumber alloc] initWithInt:0];
+    NSDecimalNumber *valorFinal = nil;
     
     NSString *currentStringVal = [VidaParceladaHelper retornaLimiteDeGastoGlobalStr];
  

@@ -26,6 +26,8 @@
 @synthesize objetivoMensal = _objetivoMensal;
 @synthesize compraSelecionada = _compraSelecionada;
 @synthesize parcelaSelecionada = _parcelaSelecionada;
+@synthesize topBar = _topBar;
+@synthesize btnFaturas = _btnPagar;
 @synthesize primeiroUsoAlert = _primeiroUsoAlert;
 @synthesize vencimentosAlert = _vencimentosAlert;
 
@@ -94,6 +96,8 @@
 
 - (void)viewDidUnload
 {
+    [self setTopBar:nil];
+    [self setBtnFaturas:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

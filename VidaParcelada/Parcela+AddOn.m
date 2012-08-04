@@ -9,6 +9,7 @@
 #import "Parcela+AddOn.h"
 #import "VidaParceladaHelper.h"
 #import "Compra+AddOn.h"
+#import "VidaParceladaHelper.h"
 
 //
 // Estados possíveis da compra
@@ -22,19 +23,12 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 // gera o mes e ano atual para uso na tela de agrupamento.
 - (NSString *)tMesAno
 {
-    NSString *mes = nil;
     NSString *mesAno = nil;
     [self willAccessValueForKey:@"dataVencimento"];
     NSDate *dataReal = [self dataVencimento];
     [self didAccessValueForKey:@"dataVencimento"];
 
-    NSDateFormatter *dateFormatter;
-    dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMMM"];
-    mes = [dateFormatter stringFromDate:dataReal];
-    mes = [mes stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[mes substringToIndex:1] uppercaseString]];
-    [dateFormatter setDateFormat:@"yyyy"];
-    mesAno = [mes stringByAppendingFormat:@" de %@", [dateFormatter stringFromDate:dataReal]];
+    mesAno = [VidaParceladaHelper formataMesParaTopCell:dataReal];
     
     return mesAno;
 }
@@ -121,17 +115,24 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 }
 
 
-- (NSArray *) parcelasPendentesDoMes:(NSDate *)data
++ (NSArray *) parcelasPendentesDoMes:(NSDate *)data
+                            eDaConta:(Conta *)conta
                            inContext:(NSManagedObjectContext *)context
 {
-    NSLog(@"(>) parcelasPendentesDoMes: %@, %@", data, context);
+    NSLog(@"(>) parcelasPendentesDoMes: '%@', '%@', '%@'", data, conta.descricao, context);
 
     // Vamos listar todas as parcelas
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
     
     // Uma parcela pendente tem o vencimento menor que a data passada
     // como parametro e está com seu pagamento pendente
-    request.predicate = [NSPredicate predicateWithFormat:@"dataVencimento <= %@ AND estado = %@", data, PARCELA_PENDENTE_PAGAMENTO];
+//    NSString *mesAtual = [VidaParceladaHelper retornaMesFormatado:data];
+    
+    if (conta) {
+    request.predicate = [NSPredicate predicateWithFormat:@"estado = %@ AND compra.origem = %@", PARCELA_PENDENTE_PAGAMENTO, conta];
+    } else {
+        request.predicate = [NSPredicate predicateWithFormat:@"estado = %@", PARCELA_PENDENTE_PAGAMENTO];
+    }
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
@@ -146,5 +147,42 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     return matches;
 }
 
+
++ (NSDecimalNumber *) calculaValorTotalDasParcelas:(NSArray *)parcelas
+{
+    NSLog(@"(>) calculaValorTotalDasParcelas: %d", [parcelas count]);
+
+    NSDecimalNumber *valorTotal = [[NSDecimalNumber alloc] initWithInt:0];
+    
+    for (Parcela *parc in parcelas) {
+        valorTotal = [valorTotal decimalNumberByAdding:parc.valor];
+    }
+    
+    NSLog(@"(<) parcelasPendentesDoMes: return = %@", valorTotal);
+    
+    return valorTotal;
+}
+
+
++ (int)pagaListaDeParcelas:(NSArray *)parcelas
+{
+    NSLog(@"(>) pagaListaDeParcelas: %d", [parcelas count]);
+    
+    NSEnumerator *e = [parcelas objectEnumerator];
+    id object;
+    int i = 0;
+    while (object = [e nextObject]) {
+        Parcela *parcela = (Parcela *)object;
+        if (![parcela.estado isEqual:PARCELA_PAGA]) {
+            parcela.estado = PARCELA_PAGA;
+            i++;
+            NSLog(@"(!) pagaListaDeParcelas: parcela da compra = %@", parcela.compra.descricao);
+        }
+    }
+    
+    NSLog(@"(<) pagaListaDeParcelas: return = %d", i);
+    
+    return i;
+}
 
 @end
