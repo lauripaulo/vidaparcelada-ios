@@ -24,6 +24,8 @@
 - (void)escolheContaParaPagamento;
 - (void)atualizaDadosNaTela;
 - (void)calculaDiferencaDeValores;
+- (void)executaAjusteDeCompraAMaior;
+- (void)calculaJuros;
 
 @end
 
@@ -34,6 +36,8 @@
 @synthesize tfValorPago;
 @synthesize cellDiferenca;
 @synthesize cellPagarFatura;
+@synthesize cellValorJuros = _cellValorJuros;
+@synthesize cellCancelarPagamento = _cellCancelarPagamento;
 
 @synthesize contaSelecionada = _contaSelecionada;
 @synthesize vpDatabase = _vpDatabase;
@@ -49,6 +53,7 @@
 @synthesize parcelaPagasComSucessoAlert = _parcelaPagasComSucessoAlert;
 @synthesize parcelaPagasAMaiorAlert = _parcelaPagasAMaiorAlert;
 @synthesize parcelaPagasAMenorAlert = _parcelaPagasAMenorAlert;
+@synthesize valorJuros = _valorJuros;
 
 - (NSDate *)hoje
 {
@@ -58,6 +63,13 @@
     return _hoje;
 }
 
+- (NSDecimalNumber *)valorJuros
+{
+    if (!_valorJuros) {
+        _valorJuros = [[NSDecimalNumber alloc] initWithInt:0];
+    }
+    return _valorJuros;
+}
 
 - (NSDecimalNumber *)diferencaDeValor
 {
@@ -96,7 +108,7 @@
 - (UIAlertView *) semParcelasPendentesNaContaAlert
 {
     if (!_semParcelasPendentesNaContaAlert) {
-        NSString *texto = @"A conta escolhida não possui parcelas pendentes de pagamente para o mês atual. Você pode pagar suas parcelas apenas no mês do seu vencimento.";
+        NSString *texto = @"A conta escolhida não possui parcelas pendentes de pagamento para o mês atual. Você pode pagar suas parcelas apenas no mês do seu vencimento.";
         _semParcelasPendentesNaContaAlert = [[UIAlertView alloc] initWithTitle:@"Pagamento!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _semParcelasPendentesNaContaAlert;
@@ -114,7 +126,7 @@
 - (UIAlertView *) parcelaPagasAMaiorAlert
 {
     if (!_parcelaPagasAMaiorAlert) {
-        NSString *texto = @"Você pagou um valor maior que o total pendente. O valor será descontado da previsão de gastos do próximo mês.";
+        NSString *texto = @"Você não pode pagar uma valor maior que o total previsto da fatura.";
         _parcelaPagasAMaiorAlert = [[UIAlertView alloc] initWithTitle:@"Pagamento!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _parcelaPagasAMaiorAlert;
@@ -142,11 +154,19 @@
     NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
     
     if (alertView == self.semNenhumaParcelaPendenteAlert) {
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissModalViewControllerAnimated:YES];
     } else if (alertView == self.semParcelasPendentesNaContaAlert) {
-        [self.navigationController popViewControllerAnimated:YES];
+        //        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissModalViewControllerAnimated:YES];
     } else if (alertView == self.parcelaPagasComSucessoAlert) {
-        [self.navigationController popViewControllerAnimated:YES];
+        //        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissModalViewControllerAnimated:YES];
+    } else if (alertView == self.parcelaPagasAMaiorAlert) {
+        //        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissModalViewControllerAnimated:YES];
+    } else if (alertView == self.parcelaPagasAMenorAlert) {
+        // Nada a fazer neste caso
     }
     
     NSLog(@"(<) alertView: ");
@@ -169,6 +189,7 @@
         result = NO;
         
         [self calculaDiferencaDeValores];
+        [self calculaJuros];
     }
         
     return result;
@@ -288,7 +309,11 @@
     }
     
     self.cellDiferenca.detailTextLabel.text = [self.valorFormatter stringFromNumber:self.diferencaDeValor];
+    self.cellValorJuros.detailTextLabel.text = [self.valorFormatter stringFromNumber:self.valorJuros];
     self.cellMesDaFatura.detailTextLabel.text = [VidaParceladaHelper formataApenasMesCompleto:self.hoje];
+    self.tfValorPago.text = [self.valorFormatter stringFromNumber:self.valorPagamento];
+    [self calculaDiferencaDeValores];
+    [self calculaJuros];
     
     NSLog(@"(<) atualizaDadosNaTela: ");
 }
@@ -316,6 +341,8 @@
     [self setTfValorPago:nil];
     [self setCellDiferenca:nil];
     [self setCellPagarFatura:nil];
+    [self setCellValorJuros:nil];
+    [self setCellCancelarPagamento:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -336,20 +363,65 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     if (self.cellPagarFatura == newCell) {
-        // Realiza o Pagamento
-        [Parcela pagaListaDeParcelas:self.parcelasParaPagamento];
         
         // Avisa o usuário da resolução de valores
         NSNumber *diferenca = [self.valorFormatter numberFromString:self.cellDiferenca.detailTextLabel.text];
         if ([diferenca intValue] == 0) {
+            // Realiza o Pagamento
+            [Parcela pagaListaDeParcelas:self.parcelasParaPagamento];
             [self.parcelaPagasComSucessoAlert show];
         } else if ([diferenca intValue] > 0) {
+            // Realiza o Pagamento
+            [Parcela pagaListaDeParcelas:self.parcelasParaPagamento];
+            [self executaAjusteDeCompraAMaior];
             [self.parcelaPagasAMenorAlert show];
         } else {
             [self.parcelaPagasAMaiorAlert show];
         }
+    } else if (self.cellCancelarPagamento == newCell) {
+        [self dismissModalViewControllerAnimated:YES];
     }
     
+}
+
+- (void)executaAjusteDeCompraAMaior
+{
+    NSNumber *numParcelas = [[NSNumber alloc] initWithInt:1];
+    
+    //
+    // multiplicadorJuros = (juros / 100) +1;
+    //
+//    NSDecimalNumber *um = [NSDecimalNumber decimalNumberWithString:@"1"];
+//    NSDecimalNumber *cem = [NSDecimalNumber decimalNumberWithString:@"100"];
+//    NSDecimalNumber *multiplicadorJuros = self.contaSelecionada.jurosMes;
+//    multiplicadorJuros = [multiplicadorJuros decimalNumberByDividingBy:cem];
+//    multiplicadorJuros = [multiplicadorJuros decimalNumberByAdding:um];
+//    NSDecimalNumber *totalComJuros = [self.diferencaDeValor decimalNumberByMultiplyingBy:multiplicadorJuros];
+    [self calculaJuros];
+    
+    // Mostra a quantidade de juros
+    NSString *textoValJuros = [self.valorFormatter stringFromNumber:[self.valorJuros decimalNumberBySubtracting:self.diferencaDeValor]];
+    NSString *textoJuros = [NSString stringWithFormat:@"Valor: %@, Juros: %@", [self.valorFormatter stringFromNumber:self.diferencaDeValor], textoValJuros];
+    
+    Compra *ajuste = [Compra compraComDescricao:@"Juros do cartão" comDetalhes:textoJuros dataDaCompra:self.hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:numParcelas valorTotal:self.valorJuros comConta:self.contaSelecionada assumirAnterioresComoPagas:YES inContext:self.vpDatabase.managedObjectContext];
+    
+    NSLog(@"Ajuste = %@", ajuste);
+}
+
+- (void)calculaJuros
+{
+    //
+    // multiplicadorJuros = (juros / 100) +1;
+    //
+    NSDecimalNumber *um = [NSDecimalNumber decimalNumberWithString:@"1"];
+    NSDecimalNumber *cem = [NSDecimalNumber decimalNumberWithString:@"100"];
+    NSDecimalNumber *multiplicadorJuros = self.contaSelecionada.jurosMes;
+    multiplicadorJuros = [multiplicadorJuros decimalNumberByDividingBy:cem];
+    multiplicadorJuros = [multiplicadorJuros decimalNumberByAdding:um];
+    NSDecimalNumber *totalComJuros = [self.diferencaDeValor decimalNumberByMultiplyingBy:multiplicadorJuros];
+    
+    self.valorJuros = totalComJuros;
+    self.cellValorJuros.detailTextLabel.text = [self.valorFormatter stringFromNumber:self.valorJuros];
 }
 
 @end

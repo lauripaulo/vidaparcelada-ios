@@ -158,7 +158,7 @@
 //    NSString *vencimento = [self.dateFormatter stringFromDate:parcela.dataVencimento];    
 //    NSString *detail = [NSString stringWithFormat:@"%@ - %@ - %@", vencimento, parcela.descricao, valor];
     
-    NSString *detail = [NSString stringWithFormat:@"%@ - %@ - %@", parcela.compra.origem.descricao, parcela.descricao, valor];
+    NSString *detail = [NSString stringWithFormat:@"%@ - Parcela: %@ - %@", valor, parcela.numeroDaParcela, parcela.compra.origem.descricao];
     
     cell.textLabel.text = parcela.compra.descricao;
     cell.detailTextLabel.text = detail;

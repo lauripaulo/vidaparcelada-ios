@@ -167,7 +167,10 @@
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
                                                                         managedObjectContext:self.vpDatabase.managedObjectContext 
                                                                           sectionNameKeyPath:nil 
-                                                                                   cacheName:@"ListaDeParcelasCache"];
+                                                                                   cacheName:nil];
+    // !!!! Cache desabilitado devido a um erro infame !!!
+    // !!!! @"ListaDeParcelasCache"
+    // !!!! voltar quando resolver erro de inconsitencia de cache.
 }
 
 // Popula a tabela com os dados do CoreData

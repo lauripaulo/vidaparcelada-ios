@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfValorPago;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellDiferenca;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellPagarFatura;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellValorJuros;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellCancelarPagamento;
 
 @property (strong, nonatomic) Conta *contaSelecionada;
 @property (strong, nonatomic) NSManagedObject *vpDatabase;
@@ -27,6 +29,7 @@
 @property (strong, nonatomic) NSDecimalNumber *valorTotal;
 @property (strong, nonatomic) NSDecimalNumber *diferencaDeValor;
 @property (strong, nonatomic) NSDecimalNumber *valorPagamento;
+@property (strong, nonatomic) NSDecimalNumber *valorJuros;
 @property (strong, nonatomic) NSArray *parcelasParaPagamento;
 @property (strong, nonatomic) NSDate *hoje;
 

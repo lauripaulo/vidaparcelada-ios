@@ -261,6 +261,43 @@
 
 }
 
+// Retorna o primeiro dia do mês da data passada como parametro
++ (NSDate *) retornaPrimeiroDiaDoMes:(NSDate *)data
+{
+    NSLog (@"(>) retornaPrimeiroDiaDoMes: %@", data);
+
+    NSDate *retorno = nil;
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comp = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:data];
+    [comp setDay:1];
+    retorno = [gregorian dateFromComponents:comp];
+
+    NSLog (@"(<) retornaPrimeiroDiaDoMes: return = %@", retorno);
+
+    return retorno;
+}
+
+// Retorna o ultimo dia do mês
++ (NSDate *) retornaUltimoDiaDoMes:(NSDate *)data
+{
+    NSLog (@"(>) retornaUltimoDiaDoMes: %@", data);
+    
+    NSDate *retorno = nil;
+    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+    NSRange daysRange = [currentCalendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:data];
+    NSLog(@"(<) retornaUltimoDiaDoMes: dia = %i", daysRange.length);
+
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comp = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:data];
+    [comp setDay:daysRange.length];
+    retorno = [gregorian dateFromComponents:comp];
+    
+    NSLog (@"(<) retornaUltimoDiaDoMes: return = %@", retorno);
+    
+    return retorno;    
+}
+
+
 + (NSDecimalNumber *) retornaLimiteDeGastoGlobal
 {
     NSLog (@"(>) retornaLimiteDeGastoGlobal: ");

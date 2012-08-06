@@ -37,6 +37,12 @@
 // retorna a data formatada apenas para o mês
 + (NSString *) formataApenasMesCompleto:(NSDate *)data;
 
+// Retorna o primeiro dia do mês da data passada como parametro
++ (NSDate *) retornaPrimeiroDiaDoMes:(NSDate *)data;
+
+// Retorna o ultimo dia do mês
++ (NSDate *) retornaUltimoDiaDoMes:(NSDate *)data;
+
 // Retorna o objetivo de gasto global do NSUserDefaults
 // em formato de string (que é nativamente suportado)
 // e retorna convertido para NSDecimalNumber para quem chamou a função.

@@ -124,14 +124,13 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     // Vamos listar todas as parcelas
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
     
-    // Uma parcela pendente tem o vencimento menor que a data passada
-    // como parametro e está com seu pagamento pendente
-//    NSString *mesAtual = [VidaParceladaHelper retornaMesFormatado:data];
+    NSDate *inicioDoMes = [VidaParceladaHelper retornaPrimeiroDiaDoMes:data];
+    NSDate *fimDoMes = [VidaParceladaHelper retornaUltimoDiaDoMes:data];
     
     if (conta) {
-    request.predicate = [NSPredicate predicateWithFormat:@"estado = %@ AND compra.origem = %@", PARCELA_PENDENTE_PAGAMENTO, conta];
+        request.predicate = [NSPredicate predicateWithFormat:@"estado = %@ AND compra.origem = %@ AND (dataVencimento >= %@) AND (dataVencimento <= %@)", PARCELA_PENDENTE_PAGAMENTO, conta, inicioDoMes, fimDoMes];
     } else {
-        request.predicate = [NSPredicate predicateWithFormat:@"estado = %@", PARCELA_PENDENTE_PAGAMENTO];
+        request.predicate = [NSPredicate predicateWithFormat:@"estado = %@ AND (dataVencimento >= %@) AND (dataVencimento <= %@)", PARCELA_PENDENTE_PAGAMENTO, inicioDoMes, fimDoMes];
     }
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
@@ -142,7 +141,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
  
-    NSLog(@"(<) parcelasPendentesDoMes: return = %@", matches);
+    NSLog(@"(<) parcelasPendentesDoMes: return = %d", [matches count]);
 
     return matches;
 }

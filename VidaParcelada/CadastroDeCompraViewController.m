@@ -53,7 +53,10 @@
 @synthesize tfDetalhesDaCompra = _tfDetalhesDaCompra;
 @synthesize contaEscolhidaDelegate = _contaEscolhidaDelegate;
 
-- (IBAction)tfValorDaParcelaDidEndOnExit:(id)sender {
+- (IBAction)tfValorDaParcelaDidEndOnExit:(UITextField *)sender {
+    self.algumCampoFoiAlterado = YES;
+    [sender resignFirstResponder];
+    [self calculaValorTotal];
 }
 
 - (UIActionSheet *)actionSheetVencimento
@@ -71,7 +74,7 @@
 - (UIActionSheet *)actionSheetApagarParcelas
 {
     if (_actionSheetApagarParcelas == nil) {
-        _actionSheetApagarParcelas = [[UIActionSheet alloc] initWithTitle:@"Os dados das parcelas mudaram. Será necessário apagar as parcelas atuais e criar novas parcelas."
+        _actionSheetApagarParcelas = [[UIActionSheet alloc] initWithTitle:@"Os dados das parcelas mudaram. Será necessário apagar as parcelas atuais e criar novas parcelas. As novas parcelas estarão pendetes de pagamento, mas você pode marca-las como pagas manualmente."
                                                                  delegate:self
                                                         cancelButtonTitle:@"Cancelar atualização"
                                                    destructiveButtonTitle:@"Recriar parcelas"
@@ -190,7 +193,7 @@
     // com os dados dessa conta.
     self.listaDeContas = [Conta contasCadastradasUsandoContext:self.vpDatabase.managedObjectContext];
     if (self.compraSelecionada) {
-        self.topBar.rightBarButtonItem = nil;
+        //self.topBar.rightBarButtonItem = nil;
         [self atualizarCamposNaTela];
     } else {
         [self inicializarTela];
@@ -310,12 +313,38 @@
 }
 
 - (void)atualizarCompraAtual {
+    
+    // Qual o numero de parcelas que foi escolhido pelo usuario?
+    NSNumber *qtdeParcelas = [NSNumber numberWithDouble:self.stepperQtdeDeParcelas.value];
+    NSNumber *valor;
+    
+    // Se o usuário não informar o valor da campra vamos
+    // assumir que é zero nesse primeiro momento para evitar erros
+    if (self.tfValorTotal.text) {
+        valor = [self.valorFormatter numberFromString:self.tfValorTotal.text];
+    } else {
+        valor = [NSNumber numberWithInt:0];
+    }
+    
+    if (!self.tfDescricao.text) self.tfDescricao.text = @"";
+    if (!self.tfDetalhesDaCompra.text) self.tfDetalhesDaCompra.text = @"";
+
+    self.compraSelecionada.descricao = self.tfDescricao.text;
+    self.compraSelecionada.detalhes = self.tfDetalhesDaCompra.text;
+    self.compraSelecionada.dataDaCompra = self.dataSelecionada;
+    self.compraSelecionada.estado = COMPRA_PENDENTE_PAGAMENTO;
+    self.compraSelecionada.qtdeTotalDeParcelas = qtdeParcelas;
+    self.compraSelecionada.valorTotal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
+    self.compraSelecionada.origem = self.contaSelecionada;
+    
     // Se a compra existir temos que recriar as parcelas, isso significa apagar as atuais
     // e recriar
     [Compra apagarParcelasDaCompra:self.compraSelecionada inContext:self.vpDatabase.managedObjectContext];
     
     // recriar parcelas
     [Compra criarParcelasDaCompra:self.compraSelecionada assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas inContext:self.vpDatabase.managedObjectContext];
+    
+    [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
 }
 
 - (BOOL)verificaDataDaCompraAvisaUsuario
@@ -345,15 +374,20 @@
             // Considerar parcelas anteriores pendentes de pagamento
             self.considerarParcelasAnterioresPagas = YES;
         }
-        [self salvarDados];
+        if (self.algumCampoFoiAlterado) {
+            [self.actionSheetApagarParcelas showInView:self.view];
+        } else {
+            [self salvarDados];
+        }
     } else if (actionSheet == self.actionSheetApagarParcelas) {
         // Action sheet informando que as parcelas precisam ser recriadas.
         if (buttonIndex == [actionSheet destructiveButtonIndex]) {
             // Apagar Parcelas.
+            [self salvarDados];
         } else if (buttonIndex == [actionSheet cancelButtonIndex]) {
             // Considerar parcelas anteriores pendentes de pagamento
+            [self exitThisController];
         }
-        [self salvarDados];
     }
 }
 
@@ -376,7 +410,11 @@
 - (IBAction)onSalvarPressionado:(id)sender {
     
     if (![self verificaDataDaCompraAvisaUsuario]) {
-        [self salvarDados];    
+        if (self.algumCampoFoiAlterado) {
+            [self.actionSheetApagarParcelas showInView:self.view];
+        } else {
+            [self salvarDados];
+        }
     }
     
 }
@@ -404,9 +442,7 @@
     
     if (textField == self.tfValorTotal) {
         
-        self.algumCampoFoiAlterado = YES;
-        
-        [VidaParceladaHelper formataValor:textField 
+        [VidaParceladaHelper formataValor:textField
                                novoDigito:string 
                                  comRange:range 
                           usandoFormatter:self.valorFormatter
@@ -417,9 +453,7 @@
         
     } else if (textField == self.tfValorDaParcela) {
         
-        self.algumCampoFoiAlterado = YES;
-        
-        [VidaParceladaHelper formataValor:textField 
+        [VidaParceladaHelper formataValor:textField
                                novoDigito:string 
                                  comRange:range 
                           usandoFormatter:self.valorFormatter
@@ -494,39 +528,16 @@
         // Não estamos em nenhum campo, assume a parcela.
         [self calculaValorDaParcela];
     }
-    
-    
-    // somente atualiza se a conta já tiver sido criada.
-    if (self.compraSelecionada) {
-        self.compraSelecionada.qtdeTotalDeParcelas = [NSNumber numberWithDouble:sender.value];
-        // Notifica o delegate que a compra mudou
-        [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
-    }
 }
 
 - (IBAction)tfDescricaoEditingDidEnd:(UITextField *)sender {
-    self.compraSelecionada.descricao = self.tfDescricao.text;
     // somente atualiza se a conta já tiver sido criada.
-    if (self.compraSelecionada) {
-        // Notifica o delegate da alteração
-        [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
-        [sender resignFirstResponder];
-    }
+   [sender resignFirstResponder];
 }
 
 - (IBAction)tfValorTotalEditingDidEnd:(UITextField *)sender {
     self.algumCampoFoiAlterado = YES;
-    // somente atualiza se a conta já tiver sido criada.
-    if (self.compraSelecionada) {
-        if ([sender.text length] > 0) {
-            NSNumber *valor;
-            valor = [self.valorFormatter numberFromString:sender.text];
-            self.compraSelecionada.valorTotal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
-            // Notifica o delegate da alteração
-            [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
-            [sender resignFirstResponder];
-        }
-    }
+    [sender resignFirstResponder];
     [self calculaValorDaParcela];
 }
 
@@ -580,11 +591,7 @@
 {
     self.tfDataCompra.text = [self.dateFormatter stringFromDate:self.datePicker.date];
     self.dataSelecionada = self.datePicker.date;
-    
-    // Se for uma alteração vamos atualizar o bd.
-    if (self.compraSelecionada) {
-        self.compraSelecionada.dataDaCompra = self.dataSelecionada;
-    }
+    self.algumCampoFoiAlterado = YES;
 }
 
 
