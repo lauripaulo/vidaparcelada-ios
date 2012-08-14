@@ -27,8 +27,9 @@
 - (UIAlertView *) primeiroUsoAlert 
 {
     if (!_primeiroUsoAlert) {
-        NSString *texto = @"Aqui são exibidas as parcelas da compra selecionada no passo anterior. Você ainda pode alterar uma parcela tocando na linha desejada. Parcelas não podem ser apagadas. Para alterar as parcelas você deve editar a compra relacionada a elas e diminuir a ou aumentar quantidade de parcelas.";
-        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:@"Bem vindo!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *titulo = NSLocalizedString (@"titulo.bemvindo", @"Bem vindo!");
+        NSString *texto = NSLocalizedString(@"lista.parcelas.primeiro.uso", @"Primeiro uso parcelas");
+        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _primeiroUsoAlert;
 }

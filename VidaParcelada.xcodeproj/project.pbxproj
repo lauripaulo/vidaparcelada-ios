@@ -30,6 +30,7 @@
 		79702CFA159D37F60010CE10 /* previsao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CF2159D37F60010CE10 /* previsao@2x.png */; };
 		797D9D3115463C9000D3B067 /* Compra+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D3015463C9000D3B067 /* Compra+AddOn.m */; };
 		797D9D341546458800D3B067 /* Parcela+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D331546458800D3B067 /* Parcela+AddOn.m */; };
+		7980243115D9E29F0051D6C9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7980243015D9E29F0051D6C9 /* Localizable.strings */; };
 		798FF4021533B4B200385C5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4011533B4B200385C5E /* UIKit.framework */; };
 		798FF4041533B4B200385C5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4031533B4B200385C5E /* Foundation.framework */; };
 		798FF4061533B4B200385C5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4051533B4B200385C5E /* CoreGraphics.framework */; };
@@ -92,6 +93,7 @@
 		797D9D3015463C9000D3B067 /* Compra+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Compra+AddOn.m"; sourceTree = "<group>"; };
 		797D9D321546458800D3B067 /* Parcela+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parcela+AddOn.h"; sourceTree = "<group>"; };
 		797D9D331546458800D3B067 /* Parcela+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Parcela+AddOn.m"; sourceTree = "<group>"; };
+		7980243015D9E29F0051D6C9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; path = Localizable.strings; sourceTree = "<group>"; wrapsLines = 1; };
 		798FF3FD1533B4B200385C5E /* VidaParcelada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VidaParcelada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798FF4011533B4B200385C5E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		798FF4031533B4B200385C5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -246,6 +248,7 @@
 		798FF4071533B4B200385C5E /* VidaParcelada */ = {
 			isa = PBXGroup;
 			children = (
+				7980243015D9E29F0051D6C9 /* Localizable.strings */,
 				7935EF8E158533C500C916E0 /* TabBarRootView */,
 				799C54A815430347009A235D /* TableViews */,
 				799C54AA15430383009A235D /* Cadastros */,
@@ -397,6 +400,7 @@
 				79C9331E159EBE1000651DDB /* Default.png in Resources */,
 				79C9331F159EBE1000651DDB /* Default@2x.png in Resources */,
 				79DBA40015CCBDBA008BF96B /* iPhone.storyboard in Resources */,
+				7980243115D9E29F0051D6C9 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

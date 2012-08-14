@@ -35,8 +35,9 @@
 - (UIAlertView *) primeiroUsoAlert 
 {
     if (!_primeiroUsoAlert) {
-        NSString *texto = @"A previsão é o local onde você pode ver quais parcelas vencem neste mês e em meses futuros. Você também pode acompanhar o valor de cada parcela e também qual o valor total já gasto somando todos os seus cartões/contas.";
-        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:@"Bem vindo!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *titulo = NSLocalizedString(@"titulo.bemvindo", @"Bem vindo!");
+        NSString *texto = NSLocalizedString(@"lista.previsao.primeiro.uso", @"Primeiro uso previsão");;
+        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _primeiroUsoAlert;
 }
@@ -79,7 +80,8 @@
         descricaoContas = [descricaoContas stringByAppendingString:@". \n"];
     }
     
-    NSString *texto = [NSString stringWithFormat:@"Hoje é dia de vencimento de cartão! \n\n%@\nNão esqueça de pagar suas parcelas!", descricaoContas];
+    NSString *txtVal = NSLocalizedString(@"lista.previsao.vencimento.cartao", @"Dia de vencimento do cartão");
+    NSString *texto = [NSString stringWithFormat:txtVal, descricaoContas];
     _vencimentosAlert = [[UIAlertView alloc] initWithTitle:@"Vencimento!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [self.vencimentosAlert show];
 
@@ -189,8 +191,10 @@
     if (qtdeDeParcelas > 1) {
         descricaoDaParcela = @"parcelas";
     }
-    NSString *textoInformativo = [NSString stringWithFormat:@" Compras no período "];
-    NSString *textoValorTotal = [NSString stringWithFormat:@" %d %@ no total de %@ ", qtdeDeParcelas, descricaoDaParcela, valor];
+    NSString *textoInformativo = NSLocalizedString(@"lista.previsao.texto.informativo", @"Compras no periodo");
+    NSString *noTotal = NSLocalizedString(@"lista.previsao.texto.nototalde", @"no total de");
+    
+    NSString *textoValorTotal = [NSString stringWithFormat:@" %d %@ %@ %@ ", qtdeDeParcelas, descricaoDaParcela, noTotal, valor];
     
     // Para customizar o footer da tabela com os dados da soma
     // parcelas e o numero de parcelas
@@ -204,7 +208,7 @@
         // http://www.innerexception.com/2011/02/how-to-compare-nsdecimalnumbers-in.html
         //
         letra = [UIColor colorWithRed:0.545 green:0 blue:0 alpha:1]; /*#8b0000*/
-        textoInformativo = [NSString stringWithFormat:@" Atenção! Você ultrapassou seu objetivo mensal "];      
+        textoInformativo = NSLocalizedString(@"lista.previsao.texto.estouromensal", @"Previsao aviso estouro mensal");
     }
     
     

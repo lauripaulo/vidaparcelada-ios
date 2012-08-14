@@ -48,10 +48,15 @@
 {
     NSLog (@"(>) insertDefaultDbData: %@", document);
     
-    // Temos que inserir os tipos de conta padrão, o usuário
-    // na versão 1.0 não podera incluir tipos de conta.
-    TipoConta *cartao = [TipoConta contaComNome:@"Cartão de crédito" eDescricao:@"Cartão com data de vencimento" identificadorDeTipo:1 inContext:document.managedObjectContext];
-    TipoConta *crediario = [TipoConta contaComNome:@"Outros" eDescricao:@"Outras formas de parcelamento" identificadorDeTipo:2 inContext:document.managedObjectContext];
+    // Conta principal de exemplo.
+    NSString *contaNome = NSLocalizedString (@"cartao.exemplo1.nome", @"Cartão de crédito");
+    NSString *contaDescricao = NSLocalizedString (@"cartao.exemplo1.descricao", @"Cartão com data de vencimento");
+    TipoConta *cartao = [TipoConta contaComNome:contaNome eDescricao:contaDescricao identificadorDeTipo:1 inContext:document.managedObjectContext];
+    
+    // Para englobar todas as outras contas.
+    contaNome = NSLocalizedString (@"cartao.exemplo2.nome", @"Outros");
+    contaDescricao = NSLocalizedString (@"cartao.exemplo2.descricao", @"Outras formas de parcelamento");
+    TipoConta *crediario = [TipoConta contaComNome:contaNome eDescricao:contaDescricao identificadorDeTipo:2 inContext:document.managedObjectContext];
     
     NSLog (@"(!) Criado tipos de conta inciais: %@, %@", cartao, crediario);
     

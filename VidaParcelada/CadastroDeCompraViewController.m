@@ -62,7 +62,8 @@
 - (UIActionSheet *)actionSheetVencimento
 {
     if (_actionSheetVencimento == nil) {
-        _actionSheetVencimento = [[UIActionSheet alloc] initWithTitle:@"As parcelas vencidas devem ser marcadas como..."
+        NSString *titulo = NSLocalizedString(@"cadastro.compra.marcar.parcelas", @"Marcar parcelas como");
+        _actionSheetVencimento = [[UIActionSheet alloc] initWithTitle:titulo
                                                              delegate:self
                                                     cancelButtonTitle:@"Parcelas já pagas"
                                                destructiveButtonTitle:@"Pendente pagamento"
@@ -74,7 +75,8 @@
 - (UIActionSheet *)actionSheetApagarParcelas
 {
     if (_actionSheetApagarParcelas == nil) {
-        _actionSheetApagarParcelas = [[UIActionSheet alloc] initWithTitle:@"Os dados das parcelas mudaram. Será necessário apagar as parcelas atuais e criar novas parcelas. As novas parcelas estarão pendetes de pagamento, mas você pode marca-las como pagas manualmente."
+        NSString *titulo = NSLocalizedString(@"cadastro.compra.apagar.parcelas", @"Ação ao apagar parcelas");
+        _actionSheetApagarParcelas = [[UIActionSheet alloc] initWithTitle:titulo
                                                                  delegate:self
                                                         cancelButtonTitle:@"Cancelar atualização"
                                                    destructiveButtonTitle:@"Recriar parcelas"

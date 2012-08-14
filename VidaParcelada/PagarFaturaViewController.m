@@ -99,8 +99,9 @@
 - (UIAlertView *) semNenhumaParcelaPendenteAlert
 {
     if (!_semNenhumaParcelaPendenteAlert) {
-        NSString *texto = @"Você não possue parcelas pendentes de pagamente para o mês atual em nenhuma das suas contas. Você pode pagar suas parcelas apenas no mês do seu vencimento.";
-        _semNenhumaParcelaPendenteAlert = [[UIAlertView alloc] initWithTitle:@"Pagamento" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *titulo = NSLocalizedString(@"titulo.pagamento", @"Pagamento!");
+        NSString *texto = NSLocalizedString(@"cadastro.pagamento.semparcelas", @"Sem parcelas em nenhuma conta");
+        _semNenhumaParcelaPendenteAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _semNenhumaParcelaPendenteAlert;
 }
@@ -108,8 +109,9 @@
 - (UIAlertView *) semParcelasPendentesNaContaAlert
 {
     if (!_semParcelasPendentesNaContaAlert) {
-        NSString *texto = @"A conta escolhida não possui parcelas pendentes de pagamento para o mês atual. Você pode pagar suas parcelas apenas no mês do seu vencimento.";
-        _semParcelasPendentesNaContaAlert = [[UIAlertView alloc] initWithTitle:@"Pagamento!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *titulo = NSLocalizedString(@"titulo.pagamento", @"Pagamento!");
+        NSString *texto = NSLocalizedString(@"cadastro.pagamento.conta.semparcelas", @"Sem parcelas na conta escolhida");
+        _semParcelasPendentesNaContaAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _semParcelasPendentesNaContaAlert;
 }
@@ -117,8 +119,9 @@
 - (UIAlertView *) parcelaPagasComSucessoAlert
 {
     if (!_parcelaPagasComSucessoAlert) {
-        NSString *texto = @"Pagamento efetuado.";
-        _parcelaPagasComSucessoAlert = [[UIAlertView alloc] initWithTitle:@"Pagamento!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *titulo = NSLocalizedString(@"titulo.pagamento", @"Pagamento!");
+        NSString *texto = NSLocalizedString(@"cadastro.pagamento.conta.pagamentoefetuado", @"Pagamento efetuado");
+        _parcelaPagasComSucessoAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _parcelaPagasComSucessoAlert;
 }
@@ -126,8 +129,9 @@
 - (UIAlertView *) parcelaPagasAMaiorAlert
 {
     if (!_parcelaPagasAMaiorAlert) {
-        NSString *texto = @"Você não pode pagar uma valor maior que o total previsto da fatura.";
-        _parcelaPagasAMaiorAlert = [[UIAlertView alloc] initWithTitle:@"Pagamento!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *titulo = NSLocalizedString(@"titulo.pagamento", @"Pagamento!");
+        NSString *texto = NSLocalizedString(@"cadastro.pagamento.conta.amaior", @"Pagamento a maior");
+        _parcelaPagasAMaiorAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _parcelaPagasAMaiorAlert;
 }
@@ -135,8 +139,9 @@
 - (UIAlertView *) parcelaPagasAMenorAlert
 {
     if (!_parcelaPagasAMenorAlert) {
-        NSString *texto = @"Você pagou um valor menor que o total pendente. O valor sera acrescido de juros do cartão e adicionado na previsão do próximo mês.";
-        _parcelaPagasAMenorAlert = [[UIAlertView alloc] initWithTitle:@"Pagamento!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *titulo = NSLocalizedString(@"titulo.pagamento", @"Pagamento!");
+        NSString *texto = NSLocalizedString(@"cadastro.pagamento.conta.amenor", @"Pagamento a menor");
+        _parcelaPagasAMenorAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _parcelaPagasAMenorAlert;
 }

@@ -101,7 +101,7 @@
 
     BOOL saiDaTela = YES;
     if ([self.tfDescricaoDaConta.text length] == 0 || [self.tfEmpresa.text length] == 0) {
-        NSString *texto = @"Você não informou a descrição da conta ou o nome da empresa. Não tem problema, vou preencher para você com o nome e descrição do tipo da conta escolhida. Não se preocupe, depois você pode editar a conta e mudar.";
+        NSString *texto = NSLocalizedString(@"cadastro.conta.campos.faltando", @"Campos faltando");
         _validacaoAlert = [[UIAlertView alloc] initWithTitle:@"Informação!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [self.validacaoAlert show];
         

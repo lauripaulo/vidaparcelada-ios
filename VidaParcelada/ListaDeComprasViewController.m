@@ -34,8 +34,9 @@
 - (UIAlertView *) primeiroUsoAlert 
 {
     if (!_primeiroUsoAlert) {
-        NSString *texto = @"Utilize o botão + acima para cadastrar novas compras. Para alterar suas compras atuais toque na seta azul no lado direto da linha e para gerenciar suas parcelas toque em qualquer parte da linha com o item desejado.";
-        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:@"Bem vindo!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *texto = NSLocalizedString(@"lista.compras.primeira.mensagem", @"Primeira mensagem lista de compras");
+        NSString *titulo = NSLocalizedString(@"titulo.bemvindo", @"Bem vindo!");
+        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _primeiroUsoAlert;
 }
@@ -44,8 +45,9 @@
 - (UIAlertView *) semContasCadastradasAlert
 {
     if (!_semContasCadastradasAlert) {
-        NSString *texto = @"Antes de cadastrar as suas compras é necessário informar uma conta de cartão de crédito. Clique em OK e cadastre o cartão que você mais utiliza. Você pode gerenciar os seus cartões utilizando o icone Contas.";
-        _semContasCadastradasAlert = [[UIAlertView alloc] initWithTitle:@"Atenção" message:texto delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        NSString *texto = NSLocalizedString(@"lista.compras.popup.semcontas", @"Sem contas cadastradas popup");
+        NSString *titulo = NSLocalizedString(@"titulo.atencao", @"Atenção!");
+        _semContasCadastradasAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     }
     return _semContasCadastradasAlert;    
 }
@@ -72,8 +74,10 @@
         descricaoContas = [descricaoContas stringByAppendingString:@". \n"];
     }
     
-    NSString *texto = [NSString stringWithFormat:@"Hoje é o melhor dia de compra com cartão! \n\n%@\nCompras realizadas hoje terão vencimento apenas no próximo mês. Aproveite!", descricaoContas];
-    _vencimentosAlert = [[UIAlertView alloc] initWithTitle:@"Melhor dia!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    NSString *txtVal = NSLocalizedString(@"lista.compras.popup.melhordia", @"Aviso de melhor dia de compras");
+    NSString *titulo = NSLocalizedString(@"titulo.melhordia", @"Melhor dia!");
+    NSString *texto = [NSString stringWithFormat:txtVal, descricaoContas];
+    _vencimentosAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [self.vencimentosAlert show];
     
 }

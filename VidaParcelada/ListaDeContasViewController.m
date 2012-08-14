@@ -40,8 +40,9 @@
 - (UIAlertView *) primeiroUsoAlert 
 {
     if (!_primeiroUsoAlert) {
-        NSString *texto = @"Aqui você visualiza e controla seus cartões de crédito. Utilize o botão + acima para cadastrar novas Contas. Para alterar suas compras atuais toque na linha com o item desejado. Para apagar uma conta você deve tocar no botão Editar no canto superior direito. Cadastre uma conta para cada cartão de crédito que você possui.";
-        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:@"Bem vindo!" message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *texto = NSLocalizedString(@"lista.contas.primeira.mensagem", @"Primeira mensagem lista de contas");
+        NSString *titulo = NSLocalizedString(@"titulo.bemvindo", @"Bem vindo!");
+        _primeiroUsoAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     }
     return _primeiroUsoAlert;
 }
@@ -49,7 +50,9 @@
 - (UIAlertView *) comprasPresentesAlert
 {
     if (!_comprasPresentesAlert) {
-        _comprasPresentesAlert = [[UIAlertView alloc] initWithTitle:@"Atenção!" message:@"Esta conta possui compras e parcelas associadas que também serão apagadas. Você irá perder todos esses dados se optar por exluir a conta. Você confirma a exclusão da conta?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+        NSString *titulo = NSLocalizedString(@"titulo.atencao", "Atenção!");
+        NSString *texto = NSLocalizedString(@"lista.contas.popup.apagar", @"Compras presentes cuidado ao apagar");
+        _comprasPresentesAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
     }
     return _comprasPresentesAlert;
 }
