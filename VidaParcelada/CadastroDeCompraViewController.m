@@ -374,7 +374,7 @@
             // Considerar parcelas anteriores pendentes de pagamento
             self.considerarParcelasAnterioresPagas = YES;
         }
-        if (self.algumCampoFoiAlterado) {
+        if (self.algumCampoFoiAlterado && self.compraSelecionada) {
             [self.actionSheetApagarParcelas showInView:self.view];
         } else {
             [self salvarDados];
@@ -410,7 +410,7 @@
 - (IBAction)onSalvarPressionado:(id)sender {
     
     if (![self verificaDataDaCompraAvisaUsuario]) {
-        if (self.algumCampoFoiAlterado) {
+        if (self.algumCampoFoiAlterado && self.compraSelecionada) {
             [self.actionSheetApagarParcelas showInView:self.view];
         } else {
             [self salvarDados];

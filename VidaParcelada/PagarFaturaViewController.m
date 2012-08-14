@@ -166,7 +166,7 @@
         //        [self.navigationController popViewControllerAnimated:YES];
         [self dismissModalViewControllerAnimated:YES];
     } else if (alertView == self.parcelaPagasAMenorAlert) {
-        // Nada a fazer neste caso
+        [self dismissModalViewControllerAnimated:YES];
     }
     
     NSLog(@"(<) alertView: ");
@@ -306,12 +306,16 @@
         } else {
             self.cellCartao.detailTextLabel.text = self.contaSelecionada.tipo.descricao;
         }
+    } else {
+        self.cellCartao.textLabel.text = @"Nenhuma conta";
+        self.cellCartao.detailTextLabel.text = @"Sem parcelas pendentes.";
     }
     
     self.cellDiferenca.detailTextLabel.text = [self.valorFormatter stringFromNumber:self.diferencaDeValor];
     self.cellValorJuros.detailTextLabel.text = [self.valorFormatter stringFromNumber:self.valorJuros];
     self.cellMesDaFatura.detailTextLabel.text = [VidaParceladaHelper formataApenasMesCompleto:self.hoje];
     self.tfValorPago.text = [self.valorFormatter stringFromNumber:self.valorPagamento];
+    
     [self calculaDiferencaDeValores];
     [self calculaJuros];
     
@@ -388,15 +392,6 @@
 {
     NSNumber *numParcelas = [[NSNumber alloc] initWithInt:1];
     
-    //
-    // multiplicadorJuros = (juros / 100) +1;
-    //
-//    NSDecimalNumber *um = [NSDecimalNumber decimalNumberWithString:@"1"];
-//    NSDecimalNumber *cem = [NSDecimalNumber decimalNumberWithString:@"100"];
-//    NSDecimalNumber *multiplicadorJuros = self.contaSelecionada.jurosMes;
-//    multiplicadorJuros = [multiplicadorJuros decimalNumberByDividingBy:cem];
-//    multiplicadorJuros = [multiplicadorJuros decimalNumberByAdding:um];
-//    NSDecimalNumber *totalComJuros = [self.diferencaDeValor decimalNumberByMultiplyingBy:multiplicadorJuros];
     [self calculaJuros];
     
     // Mostra a quantidade de juros
@@ -418,7 +413,13 @@
     NSDecimalNumber *multiplicadorJuros = self.contaSelecionada.jurosMes;
     multiplicadorJuros = [multiplicadorJuros decimalNumberByDividingBy:cem];
     multiplicadorJuros = [multiplicadorJuros decimalNumberByAdding:um];
-    NSDecimalNumber *totalComJuros = [self.diferencaDeValor decimalNumberByMultiplyingBy:multiplicadorJuros];
+    
+    NSDecimalNumber *totalComJuros = nil;
+    if ([self.diferencaDeValor intValue] > 0) {
+        totalComJuros = [self.diferencaDeValor decimalNumberByMultiplyingBy:multiplicadorJuros];
+    } else {
+        totalComJuros = [[NSDecimalNumber alloc] initWithInt:0];
+    }
     
     self.valorJuros = totalComJuros;
     self.cellValorJuros.detailTextLabel.text = [self.valorFormatter stringFromNumber:self.valorJuros];
