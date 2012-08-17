@@ -48,17 +48,35 @@
 {
     NSLog (@"(>) insertDefaultDbData: %@", document);
     
-    // Conta principal de exemplo.
+    // Tipo Conta principal.
     NSString *contaNome = NSLocalizedString (@"cartao.exemplo1.nome", @"Cartão de crédito");
-    NSString *contaDescricao = NSLocalizedString (@"cartao.exemplo1.descricao", @"Cartão com data de vencimento");
-    TipoConta *cartao = [TipoConta contaComNome:contaNome eDescricao:contaDescricao identificadorDeTipo:1 inContext:document.managedObjectContext];
+    NSString *tipoContaDescricao = NSLocalizedString (@"cartao.exemplo1.descricao", @"Cartão com data de vencimento");
+    TipoConta *cartao = [TipoConta contaComNome:contaNome eDescricao:tipoContaDescricao identificadorDeTipo:1 inContext:document.managedObjectContext];
     
-    // Para englobar todas as outras contas.
+    // Tipo conta para englobar todas as outras contas.
     contaNome = NSLocalizedString (@"cartao.exemplo2.nome", @"Outros");
-    contaDescricao = NSLocalizedString (@"cartao.exemplo2.descricao", @"Outras formas de parcelamento");
-    TipoConta *crediario = [TipoConta contaComNome:contaNome eDescricao:contaDescricao identificadorDeTipo:2 inContext:document.managedObjectContext];
+    tipoContaDescricao = NSLocalizedString (@"cartao.exemplo2.descricao", @"Outras formas de parcelamento");
+    TipoConta *crediario = [TipoConta contaComNome:contaNome eDescricao:tipoContaDescricao identificadorDeTipo:2 inContext:document.managedObjectContext];
     
-    NSLog (@"(!) Criado tipos de conta inciais: %@, %@", cartao, crediario);
+    // Cria a conta padrão de exemplo para preencher o produto
+    Conta *conta;
+    NSString *contaDescricao = NSLocalizedString(@"conta.exemplo.cadastro.nome", @"Descrição da compra de exemplo");
+    NSString *empresaDescricao = NSLocalizedString(@"conta.exemplo.cadastro.empresa", @"Empresa da compra de exemplo");
+    NSNumber *vencimento = [NSNumber numberWithInt:15];
+    NSDecimalNumber *jurosMes = [NSDecimalNumber decimalNumberWithString:@"12"];
+    NSDecimalNumber *limiteTotal = [NSDecimalNumber decimalNumberWithString:@"1000"];
+    NSNumber *melhorDia = [NSNumber numberWithInt:3];
+    conta = [Conta contaComDescricao:contaDescricao daEmpresa:empresaDescricao comVencimentoNoDia:vencimento eJurosMes:jurosMes comLimiteTotal:limiteTotal comMelhorDiaDeCompra:melhorDia cartaoPreferencial:NO comTipoConta:cartao inContext:document.managedObjectContext];
+    
+    // E criamos uma compra de exemplo
+    NSString *descricaoCompra = NSLocalizedString(@"compra.exemplo.cadastro.descricao", @"Descrição compra de exemplo");
+    NSString *detalhesCompra = NSLocalizedString(@"compra.exemplo.cadastro.detalhes", @"Detalhes compra de exemplo");
+    NSDate *hoje = [[NSDate alloc] init];
+    NSNumber *parcelas = [NSNumber numberWithInt:5];
+    NSDecimalNumber *valorTotal = [NSDecimalNumber decimalNumberWithString:@"899"];
+    Compra *compra = [Compra compraComDescricao:descricaoCompra comDetalhes:detalhesCompra dataDaCompra:hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:parcelas valorTotal:valorTotal comConta:conta assumirAnterioresComoPagas:YES inContext:document.managedObjectContext];
+                      
+    NSLog (@"(!) Criado: %@, %@, %@, %@", cartao, crediario, conta, compra);
     
     NSLog (@"(<) insertDefaultDbData: ");
     

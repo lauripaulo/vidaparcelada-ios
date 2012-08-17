@@ -154,7 +154,6 @@
 		7924ECD11537C32C00D47F92 /* db */ = {
 			isa = PBXGroup;
 			children = (
-				798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */,
 				7947B80C15C23B390083B177 /* TipoConta.h */,
 				7947B80D15C23B390083B177 /* TipoConta.m */,
 				7947B80915C23B390083B177 /* Parcela.h */,
@@ -248,7 +247,6 @@
 		798FF4071533B4B200385C5E /* VidaParcelada */ = {
 			isa = PBXGroup;
 			children = (
-				7980243015D9E29F0051D6C9 /* Localizable.strings */,
 				7935EF8E158533C500C916E0 /* TabBarRootView */,
 				799C54A815430347009A235D /* TableViews */,
 				799C54AA15430383009A235D /* Cadastros */,
@@ -311,6 +309,7 @@
 		799C54AB154303B9009A235D /* Storyboards/Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */,
 				79DBA40215CCBDBA008BF96B /* iPhone.storyboard */,
 			);
 			name = "Storyboards/Data Model";
@@ -319,6 +318,7 @@
 		799C54AC154303EB009A235D /* Objetos Comuns */ = {
 			isa = PBXGroup;
 			children = (
+				7980243015D9E29F0051D6C9 /* Localizable.strings */,
 				798FF4101533B4B200385C5E /* VidaParceladaAppDelegate.h */,
 				798FF4111533B4B200385C5E /* VidaParceladaAppDelegate.m */,
 				798FF4271533C22300385C5E /* CoreDataTableViewController.h */,
