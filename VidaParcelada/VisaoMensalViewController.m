@@ -42,6 +42,16 @@
     return _primeiroUsoAlert;
 }
 
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // Usuário confirmou que viu o primeiro aviso da tela.
+    if (alertView == self.primeiroUsoAlert) {
+        // atualiza o estado para exibido
+        NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+        [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
+    }
+}
+
 - (void)compraFoiAlterada:(Compra *)compra;
 {
     [self.tableView reloadData];
@@ -299,6 +309,15 @@
         [self verificaVencimentos];
     }
 
+    //
+    // Chamada a primeira vez que a aba é exibida passando o nome da própria
+    // classe, retorna YES se em algum momento esse aviso já foi exibido.
+    //
+    NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+    if (![VidaParceladaHelper retornaEstadoApresentacaoInicialAba:nomeDaAba]) {
+        [self.primeiroUsoAlert show];
+    }
+    
     NSLog(@"(<) viewWillAppear: ");
 }
 

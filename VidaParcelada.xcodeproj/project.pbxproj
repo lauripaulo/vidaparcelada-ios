@@ -309,6 +309,7 @@
 		799C54AB154303B9009A235D /* Storyboards/Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				7980243015D9E29F0051D6C9 /* Localizable.strings */,
 				798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */,
 				79DBA40215CCBDBA008BF96B /* iPhone.storyboard */,
 			);
@@ -318,7 +319,6 @@
 		799C54AC154303EB009A235D /* Objetos Comuns */ = {
 			isa = PBXGroup;
 			children = (
-				7980243015D9E29F0051D6C9 /* Localizable.strings */,
 				798FF4101533B4B200385C5E /* VidaParceladaAppDelegate.h */,
 				798FF4111533B4B200385C5E /* VidaParceladaAppDelegate.m */,
 				798FF4271533C22300385C5E /* CoreDataTableViewController.h */,

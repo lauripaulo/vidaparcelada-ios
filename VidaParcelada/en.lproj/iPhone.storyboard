@@ -377,7 +377,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="1598" y="1031"/>
+            <point key="canvasLocation" x="1722" y="1031"/>
         </scene>
         <!--Lista De Contas View Controller - Contas-->
         <scene sceneID="Dc5-C8-4A1">
@@ -449,7 +449,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection footerTitle="A alteração é apenas na parcela escolhida." id="Rf1-Iu-wmk">
+                            <tableViewSection id="Rf1-Iu-wmk">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="M1Y-K8-53e">
                                         <rect key="frame" x="0.0" y="10" width="320" height="45"/>
@@ -459,7 +459,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="descrição" minimumFontSize="17" clearButtonMode="whileEditing" id="n2a-Hy-EAM">
-                                                    <rect key="frame" x="20" y="6" width="260" height="31"/>
+                                                    <rect key="frame" x="8" y="6" width="272" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -469,21 +469,21 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="3QA-Qj-SON">
-                                        <rect key="frame" x="0.0" y="55" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="55" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Valor:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="frR-Md-w08">
-                                                    <rect key="frame" x="20" y="11" width="101" height="21"/>
+                                                    <rect key="frame" x="9" y="11" width="112" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="R$0,00" textAlignment="right" minimumFontSize="17" id="6MU-g5-LeP">
-                                                    <rect key="frame" x="129" y="6" width="151" height="31"/>
+                                                    <rect key="frame" x="129" y="6" width="164" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -495,12 +495,62 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="qXp-TK-UUc" detailTextLabel="e4r-rr-9LJ" style="IBUITableViewCellStyleValue1" id="6RU-xH-W5M">
+                                        <rect key="frame" x="0.0" y="99" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Vencimento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qXp-TK-UUc">
+                                                    <rect key="frame" x="10" y="11" width="97" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e4r-rr-9LJ">
+                                                    <rect key="frame" x="246" y="11" width="44" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="OrN-Wv-Jqo" detailTextLabel="BEx-xC-sOX" rowHeight="64" style="IBUITableViewCellStyleSubtitle" id="saV-6L-Diw">
+                                        <rect key="frame" x="0.0" y="143" width="320" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="63"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Referente a compra:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OrN-Wv-Jqo">
+                                                    <rect key="frame" x="10" y="12" width="175" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BEx-xC-sOX">
+                                                    <rect key="frame" x="10" y="34" width="36" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Pagamento." footerTitle="Parcelas vencidas podem apenas ser pagas." id="D3B-Aq-3OP">
+                            <tableViewSection headerTitle="Pagamento." id="D3B-Aq-3OP">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="irH-oj-cwO" detailTextLabel="qN2-WQ-yyC" style="IBUITableViewCellStyleSubtitle" id="nDq-PG-KMf">
-                                        <rect key="frame" x="0.0" y="186" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="254" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -525,7 +575,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3KC-vd-Pru" detailTextLabel="XmE-A7-bwz" style="IBUITableViewCellStyleSubtitle" id="cQD-qI-iMo">
-                                        <rect key="frame" x="0.0" y="231" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="299" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
@@ -550,7 +600,7 @@
                                         </view>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="8X9-E5-Wx5" detailTextLabel="0O5-mb-e4j" style="IBUITableViewCellStyleSubtitle" id="4aK-l7-smD">
-                                        <rect key="frame" x="0.0" y="275" width="320" height="45"/>
+                                        <rect key="frame" x="0.0" y="343" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="280" height="43"/>
@@ -597,15 +647,17 @@
                     <connections>
                         <outlet property="btCancelar" destination="MV4-mj-FxK" id="16Y-mK-nsz"/>
                         <outlet property="btSalvar" destination="aH3-Th-suO" id="4Gw-xm-BJF"/>
+                        <outlet property="cellDetalhesCompra" destination="saV-6L-Diw" id="T8g-Wp-2Wp"/>
                         <outlet property="cellParcelaPaga" destination="nDq-PG-KMf" id="epO-tt-Is1"/>
                         <outlet property="cellParcelaPendente" destination="4aK-l7-smD" id="gk7-A8-FsV"/>
                         <outlet property="cellParcelaVencida" destination="cQD-qI-iMo" id="yHg-KM-ErE"/>
+                        <outlet property="cellVencimento" destination="6RU-xH-W5M" id="rQG-eQ-KJi"/>
                         <outlet property="tfDescricao" destination="n2a-Hy-EAM" id="mju-Iq-ntO"/>
                         <outlet property="tfValor" destination="6MU-g5-LeP" id="xUr-M7-eVn"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2193" y="-821"/>
+            <point key="canvasLocation" x="2366" y="-831"/>
         </scene>
         <!--Cadastro De Compra View Controller - Compra-->
         <scene sceneID="PrK-nZ-j2h">
@@ -931,7 +983,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="Escolha a conta" id="uHK-tW-39H"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2193" y="-210"/>
+            <point key="canvasLocation" x="2366" y="-210"/>
         </scene>
         <!--Cadastro Da Conta View Controller - Conta-->
         <scene sceneID="Zgr-B0-KWP">
@@ -1336,7 +1388,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Controle de gastos" footerTitle="Valor máximo que você deseja gastar por mês com suas compras parceladas." id="gax-Ad-pam">
+                            <tableViewSection headerTitle="Controle de gastos" footerTitle="Valor máximo que você deseja gastar por mês com suas compras parceladas em todos os cartões." id="gax-Ad-pam">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ZFr-eW-4Do">
                                         <rect key="frame" x="0.0" y="46" width="320" height="46"/>
@@ -1371,7 +1423,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <tableViewSection headerTitle="Compras e parcelas" footerTitle="Número de parcelas que o aplicativo deve assumir como padrão em novas compras." id="I9f-ik-91t">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rJF-R6-Sy8">
-                                        <rect key="frame" x="0.0" y="178" width="320" height="46"/>
+                                        <rect key="frame" x="0.0" y="197" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -1404,6 +1456,50 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Avisos" footerTitle="Habilita novamente o tutorial para cada tela que é exibido quando o App é usado a primeira vez." id="eAU-vb-uXP">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hC0-dg-g0f">
+                                        <rect key="frame" x="0.0" y="329" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Mostrar tutorial novamente" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="7CU-Dj-JiV">
+                                                    <rect key="frame" x="20" y="11" width="260" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Sobre" footerTitle="VidaParcelada foi desenvolvido por L. P. Laux. Mais informações em: www.vidaparcelada.com.br" id="VZe-lG-irk">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SVv-5Z-Fay">
+                                        <rect key="frame" x="0.0" y="480" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sobre o VidaParcelada" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="JTG-vs-DkA">
+                                                    <rect key="frame" x="20" y="11" width="260" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="dYw-Yz-4cr" id="1XJ-LT-gvY"/>
@@ -1412,6 +1508,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </tableView>
                     <navigationItem key="navigationItem" title="Opções" id="Kid-3s-LHt"/>
                     <connections>
+                        <outlet property="cellMostrarTutorialNovamente" destination="SVv-5Z-Fay" id="YJN-Br-R8d"/>
+                        <outlet property="cellSobre" destination="SVv-5Z-Fay" id="im0-iG-rit"/>
                         <outlet property="stepperQtdeParcelas" destination="NQG-7Y-AqI" id="jUI-GM-swM"/>
                         <outlet property="tfObjetivoMensal" destination="Pfo-cV-hse" id="hEv-cc-0oy"/>
                         <outlet property="tfQtdeParcelas" destination="bhf-4P-Yfx" id="hVk-gv-rGb"/>
@@ -1419,6 +1517,35 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1046" y="1626"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="36S-Ec-mZ5">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4hS-Qu-7wV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="VZP-kg-Tp4" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UEg-ER-Mkx">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="M6c-0Y-dKZ">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VZP-kg-Tp4" id="mCD-3e-aGr"/>
+                            <outlet property="delegate" destination="VZP-kg-Tp4" id="u1d-08-P5i"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1722" y="1626"/>
         </scene>
         <!--Navigation Controller - Personalizar-->
         <scene sceneID="YZ1-PU-wnq">
@@ -1451,6 +1578,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="CadastroDaContaViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDaContaViewController.h"/>
             <relationships>
+                <relationship kind="action" name="onCancelarPressionado:"/>
+                <relationship kind="action" name="onSalvarPressionado:" candidateClass="UIBarButtonItem"/>
+                <relationship kind="action" name="stepperMelhorDiaValueChanged:" candidateClass="UIStepper"/>
+                <relationship kind="action" name="stepperVencimentoValueChanged:" candidateClass="UIStepper"/>
+                <relationship kind="action" name="tfDescricaoDaContaEditingDidEnd:" candidateClass="UITextField"/>
+                <relationship kind="action" name="tfEmpresaEditingDidEnd:" candidateClass="UITextField"/>
+                <relationship kind="action" name="tfJurosEditingDidBegin:" candidateClass="UITextField"/>
+                <relationship kind="action" name="tfJurosEditingDidEnd:" candidateClass="UITextField"/>
+                <relationship kind="action" name="tfLimiteTotalDidBegin:" candidateClass="UITextField"/>
+                <relationship kind="action" name="tfLimiteTotalEditingDidEnd:" candidateClass="UITextField"/>
+                <relationship kind="action" name="uiSwitchCartaoPreferencialChanged:" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="btnCancelar" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="btnSalvar" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="cellTipoConta" candidateClass="UITableViewCell"/>
@@ -1469,15 +1607,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="CadastroDeCompraViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDeCompraViewController.h"/>
             <relationships>
-                <relationship kind="action" name="dateAction:"/>
-                <relationship kind="action" name="onCancelarPressionado:"/>
-                <relationship kind="action" name="onSalvarPressionado:"/>
                 <relationship kind="action" name="removeDataPickerAnimaed:"/>
-                <relationship kind="action" name="stepperQtdeDeParcelasValueChanged:" candidateClass="UIStepper"/>
-                <relationship kind="action" name="tfDataCompraEdit:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfDescricaoEditingDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfValorDaParcelaDidEndOnExit:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfValorTotalEditingDidEnd:" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="btDataOk" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="btSave" candidateClass="UIBarButtonItem"/>
@@ -1499,9 +1629,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <relationships>
                 <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="btSalvar" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="cellDetalhesCompra" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="cellParcelaPaga" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="cellParcelaPendente" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="cellParcelaVencida" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellVencimento" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfValor" candidateClass="UITextField"/>
             </relationships>
@@ -1524,6 +1656,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="OptionsTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsTableViewController.h"/>
             <relationships>
+                <relationship kind="action" name="stepperQtdeParcelasValueChanged:" candidateClass="UIStepper"/>
+                <relationship kind="action" name="tfObjetivoMensalEditingDidEnd:" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="cellMostrarTutorialNovamente" candidateClass="UITableViewCell"/>
+                <relationship kind="outlet" name="cellSobre" candidateClass="UITableViewCell"/>
                 <relationship kind="outlet" name="stepperQtdeParcelas" candidateClass="UIStepper"/>
                 <relationship kind="outlet" name="tfObjetivoMensal" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="tfQtdeParcelas" candidateClass="UITextField"/>

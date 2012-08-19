@@ -9,6 +9,7 @@
 #import "CadastroDeParcelaViewController.h"
 #import "VidaParceladaHelper.h"
 #import "Parcela+AddOn.h"
+#import "Compra+AddOn.h"
 
 @interface CadastroDeParcelaViewController ()
 
@@ -31,6 +32,8 @@
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize algumCampoFoiAlterado = _algumCampoFoiAlterado;
+@synthesize cellVencimento;
+@synthesize cellDetalhesCompra;
 
 //This method comes from UITextFieldDelegate 
 //and this is the most important piece of mask
@@ -120,6 +123,9 @@
         self.tfDescricao.text = self.parcelaSelecionada.descricao;
         self.tfValor.text = [self.valorFormatter stringFromNumber:self.parcelaSelecionada.valor];
         
+        self.cellVencimento.detailTextLabel.text = [self.dateFormatter stringFromDate:self.parcelaSelecionada.dataVencimento];
+        self.cellDetalhesCompra.detailTextLabel.text = self.parcelaSelecionada.compra.descricao;
+        
         // atualiza o estado da parcela
         [self removeTodosOsChecksDeEstado];
         if ([self.parcelaSelecionada.estado isEqualToString:PARCELA_PAGA]) {
@@ -156,6 +162,8 @@
     [self setCellParcelaPendente:nil];
     [self setBtSalvar:nil];
     [self setBtCancelar:nil];
+    [self setCellVencimento:nil];
+    [self setCellDetalhesCompra:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -172,17 +180,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // remove todos os checks atuais.
-    [self removeTodosOsChecksDeEstado];
-    
-    // colocar o check no escolhido
-    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
-    newCell.accessoryType = UITableViewCellAccessoryCheckmark;
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    // Avisa que o campo foi alterado.
-    self.algumCampoFoiAlterado = YES;
+    //
+    // somente avalia toques na parte de baixo.
+    //
+    if (indexPath.section > 0) {
+        // remove todos os checks atuais.
+        [self removeTodosOsChecksDeEstado];
+        
+        // colocar o check no escolhido
+        UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
+        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        
+        // Avisa que o campo foi alterado.
+        self.algumCampoFoiAlterado = YES;
+    }
     
 }
 

@@ -30,6 +30,8 @@
 @synthesize tfObjetivoMensal = _tfObjetivoMensal;
 @synthesize tfQtdeParcelas = _tfQtdeParcelas;
 @synthesize stepperQtdeParcelas = _stepperQtdeParcelas;
+@synthesize cellMostrarTutorialNovamente = _cellMostrarTutorialNovamente;
+@synthesize cellSobre = _cellSobre;
 
 //
 // Codigo de gerenciamento do teclado
@@ -130,6 +132,8 @@
     [self setTfObjetivoMensal:nil];
     [self setTfQtdeParcelas:nil];
     [self setStepperQtdeParcelas:nil];
+    [self setCellMostrarTutorialNovamente:nil];
+    [self setCellSobre:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -140,4 +144,15 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if (cell == self.cellMostrarTutorialNovamente) {
+        [VidaParceladaHelper resetaTodosOsEstadosApresentacaoInicialAba];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+    
+}
 @end

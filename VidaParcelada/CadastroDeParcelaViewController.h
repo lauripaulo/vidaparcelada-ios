@@ -36,5 +36,7 @@
 // Se algum campo foi alterado para o salvar ter contexto para acontecer
 @property (nonatomic) BOOL algumCampoFoiAlterado;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellVencimento;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellDetalhesCompra;
 
 @end

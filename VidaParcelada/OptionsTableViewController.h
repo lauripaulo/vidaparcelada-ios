@@ -15,5 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *tfQtdeParcelas;
 @property (weak, nonatomic) IBOutlet UIStepper *stepperQtdeParcelas;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellMostrarTutorialNovamente;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellSobre;
 
 @end
