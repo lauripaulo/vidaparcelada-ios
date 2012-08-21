@@ -149,9 +149,10 @@
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     if (cell == self.cellMostrarTutorialNovamente) {
         [VidaParceladaHelper resetaTodosOsEstadosApresentacaoInicialAba];
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     
 }

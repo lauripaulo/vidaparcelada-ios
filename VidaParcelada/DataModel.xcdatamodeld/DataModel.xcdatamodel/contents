@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="1.0" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12A269" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Compra" representedClassName="Compra" syncable="YES">
         <attribute name="dataDaCompra" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="descricao" optional="YES" attributeType="String" maxValueString="100" indexed="YES" syncable="YES"/>
@@ -37,9 +37,9 @@
         <relationship name="conta" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Conta" inverseName="tipo" inverseEntity="Conta" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Compra" positionX="160" positionY="9" width="128" height="165"/>
-        <element name="Conta" positionX="412" positionY="99" width="128" height="180"/>
-        <element name="Parcela" positionX="153" positionY="243" width="128" height="150"/>
-        <element name="TipoConta" positionX="403" positionY="342" width="128" height="105"/>
+        <element name="Compra" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Conta" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Parcela" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="TipoConta" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

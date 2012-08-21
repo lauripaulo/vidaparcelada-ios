@@ -24,6 +24,8 @@
 		796A8250159D475F0072E99B /* opcao.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824C159D475F0072E99B /* opcao.png */; };
 		796A8251159D475F0072E99B /* previsao.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824D159D475F0072E99B /* previsao.png */; };
 		796CE1E0153B13E300B6AE11 /* TipoConta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */; };
+		796E9E2915E32F4100A55103 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E9E2815E32F4100A55103 /* AboutViewController.m */; };
+		796E9E2C15E3327800A55103 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7980243015D9E29F0051D6C9 /* Localizable.strings */; };
 		79702CF4159D37F60010CE10 /* compras@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CEC159D37F60010CE10 /* compras@2x.png */; };
 		79702CF6159D37F60010CE10 /* contas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CEE159D37F60010CE10 /* contas@2x.png */; };
 		79702CF8159D37F60010CE10 /* opcao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CF0159D37F60010CE10 /* opcao@2x.png */; };
@@ -85,6 +87,9 @@
 		796A824D159D475F0072E99B /* previsao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = previsao.png; sourceTree = "<group>"; };
 		796CE1DE153B13E300B6AE11 /* TipoConta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TipoConta+AddOn.h"; sourceTree = "<group>"; };
 		796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TipoConta+AddOn.m"; sourceTree = "<group>"; };
+		796E9E2715E32F4100A55103 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		796E9E2815E32F4100A55103 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		796E9E2B15E3327800A55103 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		79702CEC159D37F60010CE10 /* compras@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compras@2x.png"; sourceTree = "<group>"; };
 		79702CEE159D37F60010CE10 /* contas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contas@2x.png"; sourceTree = "<group>"; };
 		79702CF0159D37F60010CE10 /* opcao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opcao@2x.png"; sourceTree = "<group>"; };
@@ -93,7 +98,7 @@
 		797D9D3015463C9000D3B067 /* Compra+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Compra+AddOn.m"; sourceTree = "<group>"; };
 		797D9D321546458800D3B067 /* Parcela+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parcela+AddOn.h"; sourceTree = "<group>"; };
 		797D9D331546458800D3B067 /* Parcela+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Parcela+AddOn.m"; sourceTree = "<group>"; };
-		7980243015D9E29F0051D6C9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; path = Localizable.strings; sourceTree = "<group>"; wrapsLines = 1; };
+		7980243015D9E29F0051D6C9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; path = Localizable.strings; sourceTree = "<group>"; wrapsLines = 1; };
 		798FF3FD1533B4B200385C5E /* VidaParcelada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VidaParcelada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798FF4011533B4B200385C5E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		798FF4031533B4B200385C5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -292,6 +297,8 @@
 		799C54AA15430383009A235D /* Cadastros */ = {
 			isa = PBXGroup;
 			children = (
+				796E9E2715E32F4100A55103 /* AboutViewController.h */,
+				796E9E2815E32F4100A55103 /* AboutViewController.m */,
 				795FFCA615C8D6FA00816B70 /* PagarFaturaViewController.h */,
 				795FFCA715C8D6FA00816B70 /* PagarFaturaViewController.m */,
 				79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */,
@@ -401,6 +408,7 @@
 				79C9331F159EBE1000651DDB /* Default@2x.png in Resources */,
 				79DBA40015CCBDBA008BF96B /* iPhone.storyboard in Resources */,
 				7980243115D9E29F0051D6C9 /* Localizable.strings in Resources */,
+				796E9E2C15E3327800A55103 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +444,7 @@
 				7947B80B15C23B390083B177 /* Parcela.m in Sources */,
 				7947B80E15C23B390083B177 /* TipoConta.m in Sources */,
 				795FFCA815C8D6FA00816B70 /* PagarFaturaViewController.m in Sources */,
+				796E9E2915E32F4100A55103 /* AboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +455,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				79DBA40415CCBDC2008BF96B /* en */,
+				796E9E2B15E3327800A55103 /* pt */,
 			);
 			name = iPhone.storyboard;
 			sourceTree = "<group>";
