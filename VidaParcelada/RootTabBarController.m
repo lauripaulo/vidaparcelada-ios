@@ -13,6 +13,7 @@
 #import "ListaDeComprasViewController.h"
 #import "ListaDeContasViewController.h"
 #import "OptionsTableViewController.h"
+#import "VidaParceladaHelper.h"
 
 @interface RootTabBarController ()
 
@@ -22,6 +23,18 @@
 
 @synthesize managedDocument = _managedDocument;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize waitView = _waitView;
+
+-(UIView *) waitView
+{
+    if (!_waitView) {
+        //CGRect screenFrame = CGRectMake(0, 0, 320, 480);
+        _waitView = [[[NSBundle mainBundle] loadNibNamed:@"WaitView" owner:self options:nil] objectAtIndex:0];
+        CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
+        _waitView.frame = screenFrame;
+    }
+    return _waitView;
+}
 
 //
 // Navigation Controller delegate
@@ -78,6 +91,12 @@
                       
     NSLog (@"(!) Criado: %@, %@, %@, %@", cartao, crediario, conta, compra);
     
+    NSError *error;
+    [document.managedObjectContext save:(&error)];
+    
+    // Tratamento de errors
+    [VidaParceladaHelper trataErro:error];
+    
     NSLog (@"(<) insertDefaultDbData: ");
     
 }
@@ -85,7 +104,8 @@
 -(void)openDatabase
 {    
     NSLog (@"(>) openDatabase: ");
-           
+
+    // realiza tarefas lentas
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self.managedDocument.fileURL path]]){
         // O banco de dados não existe.
         NSLog(@"(!) openDatabase: Banco de dados não encontrado. Criando...");
@@ -147,6 +167,10 @@
         options.navigationController.delegate = self;
 
         // Qualquer outro tab entraria aqui...
+        
+        // Libera o app para uso
+        [self.waitView removeFromSuperview];
+        
     } else {
         // Algo de muito errado aconteceu...
         // temos que logar e tentar recuperar o BD
@@ -192,6 +216,12 @@
         
     // Set the current Core Data DB and Context
     self.managedObjectContext = self.managedDocument.managedObjectContext;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // Adiciona relógio a abertura
+    [self.view addSubview:self.waitView];
 }
 
 - (void)viewDidUnload

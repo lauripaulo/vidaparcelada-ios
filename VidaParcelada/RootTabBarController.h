@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WaitView.h"
 
 @interface RootTabBarController : UITabBarController <UINavigationControllerDelegate>
 
@@ -16,5 +17,7 @@
 @property (nonatomic, strong) UIManagedDocument *managedDocument;
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
+@property (nonatomic, strong)  WaitView *waitView;
 
 @end

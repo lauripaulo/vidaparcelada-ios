@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		790B519815742FD3006877CF /* VisaoMensalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790B519715742FD3006877CF /* VisaoMensalViewController.m */; };
+		790D81F615F5AA0C001456F1 /* WaitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790D81F515F5AA0C001456F1 /* WaitView.xib */; };
+		790D81F915F5AAF7001456F1 /* WaitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D81F815F5AAF7001456F1 /* WaitView.m */; };
 		7935EF911585340500C916E0 /* RootTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7935EF901585340500C916E0 /* RootTabBarController.m */; };
 		7935EF961585555F00C916E0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D33354156F116600D034D3 /* Icon.png */; };
 		7935EF971585556600C916E0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D33355156F116600D034D3 /* Icon@2x.png */; };
@@ -25,7 +27,6 @@
 		796A8251159D475F0072E99B /* previsao.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824D159D475F0072E99B /* previsao.png */; };
 		796CE1E0153B13E300B6AE11 /* TipoConta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */; };
 		796E9E2915E32F4100A55103 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 796E9E2815E32F4100A55103 /* AboutViewController.m */; };
-		796E9E2C15E3327800A55103 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7980243015D9E29F0051D6C9 /* Localizable.strings */; };
 		79702CF4159D37F60010CE10 /* compras@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CEC159D37F60010CE10 /* compras@2x.png */; };
 		79702CF6159D37F60010CE10 /* contas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CEE159D37F60010CE10 /* contas@2x.png */; };
 		79702CF8159D37F60010CE10 /* opcao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CF0159D37F60010CE10 /* opcao@2x.png */; };
@@ -63,6 +64,11 @@
 /* Begin PBXFileReference section */
 		790B519615742FD3006877CF /* VisaoMensalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisaoMensalViewController.h; sourceTree = "<group>"; };
 		790B519715742FD3006877CF /* VisaoMensalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisaoMensalViewController.m; sourceTree = "<group>"; };
+		790D81F315F5A745001456F1 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
+		790D81F415F5A7F8001456F1 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
+		790D81F515F5AA0C001456F1 /* WaitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitView.xib; sourceTree = "<group>"; };
+		790D81F715F5AAF7001456F1 /* WaitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitView.h; sourceTree = "<group>"; };
+		790D81F815F5AAF7001456F1 /* WaitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitView.m; sourceTree = "<group>"; };
 		7935EF8F1585340500C916E0 /* RootTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarController.h; sourceTree = "<group>"; };
 		7935EF901585340500C916E0 /* RootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarController.m; sourceTree = "<group>"; };
 		79362F81153D122E005459E8 /* Conta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Conta+AddOn.h"; sourceTree = "<group>"; };
@@ -89,7 +95,6 @@
 		796CE1DF153B13E300B6AE11 /* TipoConta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TipoConta+AddOn.m"; sourceTree = "<group>"; };
 		796E9E2715E32F4100A55103 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		796E9E2815E32F4100A55103 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		796E9E2B15E3327800A55103 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		79702CEC159D37F60010CE10 /* compras@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compras@2x.png"; sourceTree = "<group>"; };
 		79702CEE159D37F60010CE10 /* contas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contas@2x.png"; sourceTree = "<group>"; };
 		79702CF0159D37F60010CE10 /* opcao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opcao@2x.png"; sourceTree = "<group>"; };
@@ -332,6 +337,9 @@
 				798FF4281533C22300385C5E /* CoreDataTableViewController.m */,
 				799C54AD15430522009A235D /* VidaParceladaHelper.h */,
 				799C54AE15430522009A235D /* VidaParceladaHelper.m */,
+				790D81F515F5AA0C001456F1 /* WaitView.xib */,
+				790D81F715F5AAF7001456F1 /* WaitView.h */,
+				790D81F815F5AAF7001456F1 /* WaitView.m */,
 			);
 			name = "Objetos Comuns";
 			sourceTree = "<group>";
@@ -363,7 +371,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = VidaParcelada;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = 798FF3F71533B4B200385C5E /* Build configuration list for PBXProject "VidaParcelada" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -408,7 +416,7 @@
 				79C9331F159EBE1000651DDB /* Default@2x.png in Resources */,
 				79DBA40015CCBDBA008BF96B /* iPhone.storyboard in Resources */,
 				7980243115D9E29F0051D6C9 /* Localizable.strings in Resources */,
-				796E9E2C15E3327800A55103 /* Localizable.strings in Resources */,
+				790D81F615F5AA0C001456F1 /* WaitView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +453,7 @@
 				7947B80E15C23B390083B177 /* TipoConta.m in Sources */,
 				795FFCA815C8D6FA00816B70 /* PagarFaturaViewController.m in Sources */,
 				796E9E2915E32F4100A55103 /* AboutViewController.m in Sources */,
+				790D81F915F5AAF7001456F1 /* WaitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +464,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				79DBA40415CCBDC2008BF96B /* en */,
-				796E9E2B15E3327800A55103 /* pt */,
+				790D81F315F5A745001456F1 /* pt */,
+				790D81F415F5A7F8001456F1 /* pt */,
 			);
 			name = iPhone.storyboard;
 			sourceTree = "<group>";

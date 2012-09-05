@@ -371,10 +371,10 @@
         // Action sheet do estado das parcelas
         if (buttonIndex == [actionSheet destructiveButtonIndex]) {
             // Considerar parcelas anteriores pagas.
-            self.considerarParcelasAnterioresPagas = NO;
+            self.considerarParcelasAnterioresPagas = YES;
         } else if (buttonIndex == [actionSheet cancelButtonIndex]) {
             // Considerar parcelas anteriores pendentes de pagamento
-            self.considerarParcelasAnterioresPagas = YES;
+            self.considerarParcelasAnterioresPagas = NO;
         }
         if (self.algumCampoFoiAlterado && self.compraSelecionada) {
             [self.actionSheetApagarParcelas showInView:self.view];
