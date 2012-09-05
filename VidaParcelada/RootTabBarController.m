@@ -105,6 +105,10 @@
 {    
     NSLog (@"(>) openDatabase: ");
 
+    // Adiciona relógio a abertura
+    [self.view addSubview:self.waitView];
+    [self.waitView.acitivity startAnimating];
+
     // realiza tarefas lentas
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self.managedDocument.fileURL path]]){
         // O banco de dados não existe.
@@ -220,8 +224,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // Adiciona relógio a abertura
-    [self.view addSubview:self.waitView];
 }
 
 - (void)viewDidUnload
