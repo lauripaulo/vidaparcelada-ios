@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="12B19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="emI-sT-MCG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12B19" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="emI-sT-MCG">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4300" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
         <!--Lista De Compras View Controller - Compras-->
         <scene sceneID="gx5-SI-BfU">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tkb-4O-E3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="Compras" title="Compras" id="fxR-8g-SiN" customClass="ListaDeComprasViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="i5Y-HB-rIM">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -63,13 +62,13 @@
                         <segue destination="VSo-TW-Q2V" kind="push" identifier="SemContasCadastradasSegue" id="mCJ-lC-if4"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tkb-4O-E3D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1046" y="-210"/>
         </scene>
         <!--Root Tab Bar Controller-->
         <scene sceneID="HC9-4K-Eim">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cvs-ld-Z4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController definesPresentationContext="YES" id="emI-sT-MCG" customClass="RootTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="eOz-t8-QOq">
@@ -84,13 +83,13 @@
                         <segue destination="988-OI-Xgw" kind="relationship" relationship="viewControllers" id="KZe-MM-sZW"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cvs-ld-Z4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-207" y="380"/>
         </scene>
         <!--Visao Mensal View Controller - Previsão-->
         <scene sceneID="Xj9-3l-L6c">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X4c-O1-5u3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="Previsao" title="Previsão" id="NnP-yq-o4n" customClass="VisaoMensalViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uCY-W8-04g">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -144,13 +143,13 @@
                         <outlet property="topBar" destination="ckh-Pz-esJ" id="bGH-pF-pGI"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X4c-O1-5u3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1046" y="1031"/>
         </scene>
         <!--Pagar Fatura View Controller - Pagar fatura-->
         <scene sceneID="5wj-pc-0hr">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UEE-fL-GKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="OUg-3X-Apz" customClass="PagarFaturaViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="aAU-jB-YF4">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -159,7 +158,7 @@
                         <sections>
                             <tableViewSection headerTitle="Pagamento de fatura:" id="fJI-Qw-eQH">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ZCS-dh-t2y" detailTextLabel="FN8-8v-w2I" style="IBUITableViewCellStyleSubtitle" id="MNV-Xs-6n8">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ZCS-dh-t2y" detailTextLabel="FN8-8v-w2I" style="IBUITableViewCellStyleSubtitle" id="MNV-Xs-6n8">
                                         <rect key="frame" x="0.0" y="46" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -375,13 +374,13 @@
                         <outlet property="tfValorPago" destination="tP1-LL-ROd" id="NiR-QP-DiG"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UEE-fL-GKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1722" y="1031"/>
         </scene>
         <!--Lista De Contas View Controller - Contas-->
         <scene sceneID="Dc5-C8-4A1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tjn-ed-GAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="Contas" title="Contas" id="1gU-OF-qUp" customClass="ListaDeContasViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KOo-pA-azL">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -435,13 +434,13 @@
                         <outlet property="btnAdicionarConta" destination="AAB-5h-wX7" id="At1-yd-DCV"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tjn-ed-GAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1046" y="380"/>
         </scene>
         <!--Cadastro De Parcela View Controller - Parcela-->
         <scene sceneID="f9m-Ip-7Vy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="caR-jO-vEv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="FYB-Cy-rhd" customClass="CadastroDeParcelaViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="EDf-2h-TUT">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -655,13 +654,13 @@
                         <outlet property="tfValor" destination="6MU-g5-LeP" id="xUr-M7-eVn"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="caR-jO-vEv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2366" y="-831"/>
         </scene>
         <!--Cadastro De Compra View Controller - Compra-->
         <scene sceneID="PrK-nZ-j2h">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oap-aT-ryD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="KDO-cB-7qR" customClass="CadastroDeCompraViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="HPC-6z-F2b">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -764,7 +763,7 @@
                                                         <action selector="stepperQtdeDeParcelasValueChanged:" destination="KDO-cB-7qR" eventType="valueChanged" id="jjP-4Z-doI"/>
                                                     </connections>
                                                 </stepper>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="0" textAlignment="center" minimumFontSize="18" id="o02-UN-73w">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="0" textAlignment="center" minimumFontSize="18" id="o02-UN-73w">
                                                     <rect key="frame" x="128" y="6" width="50" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.80000001192092896" green="1" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
@@ -898,6 +897,7 @@
                         <outlet property="topBar" destination="QJr-dM-SlX" id="Rv7-sK-0ut"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oap-aT-ryD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="15" id="xYF-Iy-eDm">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -941,7 +941,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Escolher Conta View Controller - Escolha a conta-->
         <scene sceneID="MMN-dx-1Ih">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fp1-tm-r9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="0bN-K0-rzQ" customClass="EscolherContaViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KFW-LS-2MN">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -981,13 +980,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </tableView>
                     <navigationItem key="navigationItem" title="Escolha a conta" id="uHK-tW-39H"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fp1-tm-r9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2366" y="-210"/>
         </scene>
         <!--Cadastro Da Conta View Controller - Conta-->
         <scene sceneID="Zgr-B0-KWP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="V8V-D8-cWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="VSo-TW-Q2V" customClass="CadastroDaContaViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Tmt-sj-k9G">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1263,13 +1262,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="uiSwitchCartaoPreferencial" destination="nDZ-FO-TZj" id="tLX-Gj-bc7"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V8V-D8-cWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1722" y="380"/>
         </scene>
         <!--Tipo Da Conta View Controller - Escolha a Conta-->
         <scene sceneID="XaO-dl-TDU">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pe2-zL-Z0m" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="fZx-Xb-pzD" customClass="TipoDaContaViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Xlm-Qm-qsK">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
@@ -1310,13 +1309,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </tableView>
                     <navigationItem key="navigationItem" title="Escolha a Conta" id="ff3-aI-s01"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pe2-zL-Z0m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2366" y="380"/>
         </scene>
         <!--Navigation Controller - Compras-->
         <scene sceneID="AYU-hF-391">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mPt-IA-5AS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="jhL-yx-Ljd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Compras" image="compras.png" id="gRA-7Y-UgO"/>
                     <toolbarItems/>
@@ -1330,13 +1329,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="fxR-8g-SiN" kind="relationship" relationship="rootViewController" id="elX-Ft-CPu"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mPt-IA-5AS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="520" y="-210"/>
         </scene>
         <!--Navigation Controller - Contas-->
         <scene sceneID="tQg-tc-dO4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x39-Yf-aOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="4Ih-Pb-zFP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Contas" image="contas.png" id="vP5-Vx-Ijn"/>
                     <toolbarItems/>
@@ -1350,13 +1349,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="1gU-OF-qUp" kind="relationship" relationship="rootViewController" id="1wP-pw-gSB"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x39-Yf-aOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="520" y="380"/>
         </scene>
         <!--Navigation Controller - Parcelas-->
         <scene sceneID="vlS-zo-g15">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XtB-1f-c2t" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="km8-hy-lJn" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Parcelas" image="previsao.png" id="Z8y-Ip-jUX"/>
                     <toolbarItems/>
@@ -1374,13 +1373,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="NnP-yq-o4n" kind="relationship" relationship="rootViewController" id="cY6-zB-v63"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XtB-1f-c2t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="520" y="1031"/>
         </scene>
         <!--Options Table View Controller - Opções-->
         <scene sceneID="9yS-eX-oQH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v0x-q6-zcK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="dYw-Yz-4cr" customClass="OptionsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="rjd-Mv-c9a">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -1517,13 +1516,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="tfQtdeParcelas" destination="bhf-4P-Yfx" id="hVk-gv-rGb"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v0x-q6-zcK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1046" y="1626"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="f9w-oP-J3y">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MaC-pX-JFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ZHf-Up-JBw" customClass="AboutViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nUK-3a-hry">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
@@ -1571,13 +1570,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="btnWebsite" destination="xDe-b7-Xai" id="e45-Lx-F5e"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MaC-pX-JFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1722" y="1626"/>
         </scene>
         <!--Navigation Controller - Personalizar-->
         <scene sceneID="YZ1-PU-wnq">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ycf-NL-Rl5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="988-OI-Xgw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Personalizar" image="opcao.png" id="lvb-sX-Tgo"/>
                     <toolbarItems/>
@@ -1591,6 +1590,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <segue destination="dYw-Yz-4cr" kind="relationship" relationship="rootViewController" id="Sqq-Rx-Six"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ycf-NL-Rl5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="520" y="1626"/>
         </scene>
@@ -1602,141 +1602,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="opcao.png" width="30" height="31"/>
         <image name="previsao.png" width="30" height="17"/>
     </resources>
-    <classes>
-        <class className="AboutViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="voltarPressed:"/>
-                <relationship kind="action" name="websitePressed:"/>
-                <relationship kind="outlet" name="btnVoltar" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnWebsite" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="CadastroDaContaViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDaContaViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="onCancelarPressionado:"/>
-                <relationship kind="action" name="onSalvarPressionado:" candidateClass="UIBarButtonItem"/>
-                <relationship kind="action" name="stepperMelhorDiaValueChanged:" candidateClass="UIStepper"/>
-                <relationship kind="action" name="stepperVencimentoValueChanged:" candidateClass="UIStepper"/>
-                <relationship kind="action" name="tfDescricaoDaContaEditingDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfEmpresaEditingDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfJurosEditingDidBegin:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfJurosEditingDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfLimiteTotalDidBegin:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfLimiteTotalEditingDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="action" name="uiSwitchCartaoPreferencialChanged:" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="btnCancelar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btnSalvar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="cellTipoConta" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="stepperMelhorDia" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="stepperVencimento" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfDescricaoDaConta" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfDiaVencimento" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfEmpresa" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfJuros" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfLimiteTotal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfMelhorDia" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="topBar" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="uiSwitchCartaoPreferencial" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="CadastroDeCompraViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDeCompraViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dateAction:"/>
-                <relationship kind="action" name="onCancelarPressionado:"/>
-                <relationship kind="action" name="onSalvarPressionado:"/>
-                <relationship kind="action" name="removeDataPickerAnimaed:"/>
-                <relationship kind="action" name="stepperQtdeDeParcelasValueChanged:" candidateClass="UIStepper"/>
-                <relationship kind="action" name="tfDataCompraEdit:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfDescricaoEditingDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfValorDaParcelaDidEndOnExit:" candidateClass="UITextField"/>
-                <relationship kind="action" name="tfValorTotalEditingDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btDataOk" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btSave" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="cellConta" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellDataDaCompra" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="stepperQtdeDeParcelas" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfDataCompra" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfDetalhesDaCompra" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfQtdeDeParcelas" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfValorDaParcela" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfValorTotal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="topBar" candidateClass="UINavigationItem"/>
-            </relationships>
-        </class>
-        <class className="CadastroDeParcelaViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CadastroDeParcelaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btCancelar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="btSalvar" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="cellDetalhesCompra" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellParcelaPaga" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellParcelaPendente" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellParcelaVencida" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellVencimento" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="tfDescricao" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfValor" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="CoreDataTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
-        </class>
-        <class className="EscolherContaViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/EscolherContaViewController.h"/>
-        </class>
-        <class className="ListaDeComprasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeComprasViewController.h"/>
-        </class>
-        <class className="ListaDeContasViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ListaDeContasViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnAdicionarConta" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-        <class className="OptionsTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionsTableViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="stepperQtdeParcelasValueChanged:" candidateClass="UIStepper"/>
-                <relationship kind="action" name="tfObjetivoMensalEditingDidEnd:" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="cellMostrarTutorialNovamente" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellSobre" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="stepperQtdeParcelas" candidateClass="UIStepper"/>
-                <relationship kind="outlet" name="tfObjetivoMensal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tfQtdeParcelas" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="PagarFaturaViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PagarFaturaViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cellCancelarPagamento" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellCartao" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellDiferenca" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellMesDaFatura" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellPagarFatura" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellTotal" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="cellValorJuros" candidateClass="UITableViewCell"/>
-                <relationship kind="outlet" name="tfValorPago" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RootTabBarController" superclassName="UITabBarController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RootTabBarController.h"/>
-        </class>
-        <class className="TipoDaContaViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TipoDaContaViewController.h"/>
-        </class>
-        <class className="VisaoMensalViewController" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/VisaoMensalViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnFaturas" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="topBar" candidateClass="UINavigationItem"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
