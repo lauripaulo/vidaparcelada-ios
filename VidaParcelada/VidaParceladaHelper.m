@@ -12,7 +12,7 @@
 
 + (NSString *)removeCharsNaoNumericos:(NSString *)stringAtual
 {
-    NSLog (@"(>) removeCharsNaoNumericos: %@", stringAtual);
+    //NSLog (@"(>) removeCharsNaoNumericos: %@", stringAtual);
     
     // regex para aceitar apenas numeros
     NSString *regex = @"[0-9]*";
@@ -30,7 +30,7 @@
         }
     }
     
-    NSLog (@"(<) removeCharsNaoNumericos: return = %@", buffer);
+    //NSLog (@"(<) removeCharsNaoNumericos: return = %@", buffer);
     
     return buffer;
 }
@@ -39,7 +39,7 @@
                            range:(NSRange)range 
                       novoDigito:(NSString *)novoDigito
 {
-    NSLog (@"(>) executarBackspaceNoCampo: %@, %@, %@", aTextField.text, NSStringFromRange(range), novoDigito);
+    //NSLog (@"(>) executarBackspaceNoCampo: %@, %@, %@", aTextField.text, NSStringFromRange(range), novoDigito);
 
     // Backspace
     if ([novoDigito length] == 0 && [aTextField.text length] > 0) {
@@ -60,7 +60,7 @@
             aTextField.text = [parte1 stringByAppendingString:parte2];
         }
         
-        NSLog (@"(<) executarBackspaceNoCampo:");
+        //NSLog (@"(<) executarBackspaceNoCampo:");
     }
 }
 
@@ -68,7 +68,7 @@
                        range:(NSRange)range 
                   novoDigito:(NSString *)novoDigito
 {
-    NSLog (@"(>) inserirDigitoNoCampo: %@, %@, %@", aTextField.text, NSStringFromRange(range), novoDigito);
+    //NSLog (@"(>) inserirDigitoNoCampo: %@, %@, %@", aTextField.text, NSStringFromRange(range), novoDigito);
 
     // regex para aceitar apenas numeros
     NSString *regex = @"[0-9]*";
@@ -97,11 +97,11 @@
             aTextField.text = [parte1 stringByAppendingString:novoDigito];
             aTextField.text = [aTextField.text stringByAppendingString:parte2];
        
-            NSLog (@"(!) inserirDigitoNoCampo: aTextField.text = '%@'", aTextField.text);
+            //NSLog (@"(!) inserirDigitoNoCampo: aTextField.text = '%@'", aTextField.text);
         }
         
     }
-    NSLog (@"(<) inserirDigitoNoCampo: ");
+    //NSLog (@"(<) inserirDigitoNoCampo: ");
 }
 
 
@@ -111,7 +111,7 @@
      usandoFormatter:(NSNumberFormatter *)formatter
       eQtdeDeDigitos:(int)qtdeDigitos
 {
-    NSLog (@"(>) formataValor: %@, %@, %@, %@", aTextField.text, novoDigito, NSStringFromRange(range), formatter);
+    //NSLog (@"(>) formataValor: %@, %@, %@, %@", aTextField.text, novoDigito, NSStringFromRange(range), formatter);
 
     [self executarBackspaceNoCampo:aTextField range:range novoDigito:novoDigito];
     [self inserirDigitoNoCampo:aTextField range:range novoDigito:novoDigito];
@@ -126,13 +126,13 @@
     // OK, agora verificamos se o valor adicionado é um numero, adicionamos ao final
     // do buffer para que ele seja formatado corretamente depois.
     
-    NSLog (@"(!) formataValor: buffer = %@", buffer);
+    //NSLog (@"(!) formataValor: buffer = %@", buffer);
         
     // Campo cheio, consome o novo digito
     if ([buffer length] == qtdeDigitos) { // Se o campo já tem o tamanho da mascara o caracter é ignorado.
-        NSLog (@"(!) formataValor: qtdeDigitos = %d", qtdeDigitos);
+        //NSLog (@"(!) formataValor: qtdeDigitos = %d", qtdeDigitos);
     } else if (![regextest evaluateWithObject:novoDigito]) {
-        NSLog (@"(!) formataValor: digito invalido = '%@'", novoDigito);
+        //NSLog (@"(!) formataValor: digito invalido = '%@'", novoDigito);
     } else {
         buffer = [buffer stringByAppendingString:novoDigito];
         NSString *decimalString = @"";
@@ -151,10 +151,10 @@
         NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithString:decimalString];
         aTextField.text = [formatter stringFromNumber:number];
         
-        NSLog (@"(!) formataValor: aTextField.text = '%@'", aTextField.text);
+        //NSLog (@"(!) formataValor: aTextField.text = '%@'", aTextField.text);
   
     }
-    NSLog (@"(<) formataValor: ");
+    //NSLog (@"(<) formataValor: ");
 
 }
 
@@ -162,7 +162,7 @@
 // com as parcelas.
 + (NSString *) formataMesParaTopCell:(NSDate *)data
 {
-    NSLog (@"(>) retornaMesAtualFormatado: %@", data);
+    //NSLog (@"(>) retornaMesAtualFormatado: %@", data);
 
     NSString *retorno = nil;
     
@@ -174,7 +174,7 @@
     [dateFormatter setDateFormat:@"yyyy"];
     retorno = [NSString stringWithFormat:@"Previsão para %@ de %@", mes, [dateFormatter stringFromDate:data]];
     
-    NSLog (@"(<) retornaMesAtualFormatado: return = %@", retorno);
+    //NSLog (@"(<) retornaMesAtualFormatado: return = %@", retorno);
 
     return retorno;
 }
@@ -182,7 +182,7 @@
 // retorna a data formatada apenas para o mês
 + (NSString *) formataApenasMesCompleto:(NSDate *)data
 {
-    NSLog (@"(>) formataApenasMesCompleto: %@", data);
+    //NSLog (@"(>) formataApenasMesCompleto: %@", data);
         
     NSDateFormatter *dateFormatter;
     dateFormatter = [[NSDateFormatter alloc] init];
@@ -190,7 +190,7 @@
     NSString *mes = [dateFormatter stringFromDate:data];
     mes = [mes stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[mes substringToIndex:1] uppercaseString]];
     
-    NSLog (@"(<) formataApenasMesCompleto: return = %@", mes);
+    //NSLog (@"(<) formataApenasMesCompleto: return = %@", mes);
     
     return mes;
 }
@@ -201,7 +201,7 @@
            range:(NSRange)aRange 
            withMask:(NSString *)mask
 {
-    NSLog (@"(>) formatInput: %@, %@, %@, %@", aTextField.text, aString, NSStringFromRange(aRange), mask);
+    //NSLog (@"(>) formatInput: %@, %@, %@, %@", aTextField.text, aString, NSStringFromRange(aRange), mask);
 
     int maskLength = [mask length];
     
@@ -252,19 +252,19 @@
                 NSString *text = [aTextField.text substringToIndex:textLen];
                 aTextField.text = text;
                 
-                NSLog (@"(!) formatInput: aTextField.text = '%@'", aTextField.text);
+                //NSLog (@"(!) formatInput: aTextField.text = '%@'", aTextField.text);
             }
         }
     }
     
-    NSLog (@"(<) formatInput: ");
+    //NSLog (@"(<) formatInput: ");
 
 }
 
 // Retorna o primeiro dia do mês da data passada como parametro
 + (NSDate *) retornaPrimeiroDiaDoMes:(NSDate *)data
 {
-    NSLog (@"(>) retornaPrimeiroDiaDoMes: %@", data);
+    //NSLog (@"(>) retornaPrimeiroDiaDoMes: %@", data);
 
     NSDate *retorno = nil;
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -272,7 +272,7 @@
     [comp setDay:1];
     retorno = [gregorian dateFromComponents:comp];
 
-    NSLog (@"(<) retornaPrimeiroDiaDoMes: return = %@", retorno);
+    //NSLog (@"(<) retornaPrimeiroDiaDoMes: return = %@", retorno);
 
     return retorno;
 }
@@ -280,19 +280,19 @@
 // Retorna o ultimo dia do mês
 + (NSDate *) retornaUltimoDiaDoMes:(NSDate *)data
 {
-    NSLog (@"(>) retornaUltimoDiaDoMes: %@", data);
+    //NSLog (@"(>) retornaUltimoDiaDoMes: %@", data);
     
     NSDate *retorno = nil;
     NSCalendar *currentCalendar = [NSCalendar currentCalendar];
     NSRange daysRange = [currentCalendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:data];
-    NSLog(@"(<) retornaUltimoDiaDoMes: dia = %i", daysRange.length);
+    //NSLog(@"(<) retornaUltimoDiaDoMes: dia = %i", daysRange.length);
 
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comp = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:data];
     [comp setDay:daysRange.length];
     retorno = [gregorian dateFromComponents:comp];
     
-    NSLog (@"(<) retornaUltimoDiaDoMes: return = %@", retorno);
+    //NSLog (@"(<) retornaUltimoDiaDoMes: return = %@", retorno);
     
     return retorno;    
 }
@@ -300,7 +300,7 @@
 
 + (NSDecimalNumber *) retornaLimiteDeGastoGlobal
 {
-    NSLog (@"(>) retornaLimiteDeGastoGlobal: ");
+    //NSLog (@"(>) retornaLimiteDeGastoGlobal: ");
 
     NSDecimalNumber *valorFinal = nil;
     
@@ -314,7 +314,7 @@
     valor = [valorFormatter numberFromString:currentStringVal];
     valorFinal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
 
-    NSLog (@"(<) retornaLimiteDeGastoGlobal: return = %@", valorFinal);
+    //NSLog (@"(<) retornaLimiteDeGastoGlobal: return = %@", valorFinal);
 
     return valorFinal;
 }
@@ -322,13 +322,13 @@
 
 + (NSString *) retornaLimiteDeGastoGlobalStr
 {
-    NSLog (@"(>) retornaLimiteDeGastoGlobalStr: ");
+    //NSLog (@"(>) retornaLimiteDeGastoGlobalStr: ");
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSString *currentStringVal = [defaults objectForKey:@"objetivo"];
    
-    NSLog (@"(<) retornaLimiteDeGastoGlobalStr: return = %@", currentStringVal);
+    //NSLog (@"(<) retornaLimiteDeGastoGlobalStr: return = %@", currentStringVal);
 
     return currentStringVal;
 }
@@ -336,40 +336,40 @@
 
 + (void) salvaLimiteDeGastoGlobalStr:(NSString *)total
 {
-    NSLog (@"(>) salvaLimiteDeGastoGlobalStr: %@", total);
+    //NSLog (@"(>) salvaLimiteDeGastoGlobalStr: %@", total);
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:total forKey:@"objetivo"];
     [defaults synchronize];
     
-    NSLog (@"(<) salvaLimiteDeGastoGlobalStr: ");
+    //NSLog (@"(<) salvaLimiteDeGastoGlobalStr: ");
 }
 
 + (void) salvaNumeroDeParcelasPadrao:(NSNumber *)numParcelas
 {
-    NSLog (@"(>) salvaNumeroDeParcelasPadrao: %@", numParcelas);
+    //NSLog (@"(>) salvaNumeroDeParcelasPadrao: %@", numParcelas);
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:numParcelas forKey:@"numParcelas"];
     [defaults synchronize];
 
-    NSLog (@"(<) salvaNumeroDeParcelasPadrao: ");
+    //NSLog (@"(<) salvaNumeroDeParcelasPadrao: ");
 }
 
 + (NSNumber *) retornaNumeroDeParcelasPadrao
 {
-    NSLog (@"(>) retornaNumeroDeParcelasPadrao: ");
+    //NSLog (@"(>) retornaNumeroDeParcelasPadrao: ");
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *numParcelas = [defaults objectForKey:@"numParcelas"];
 
     if (!numParcelas) {
-        NSLog (@"(!) retornaNumeroDeParcelasPadrao: vazio, inicializando com 1.");
+        //NSLog (@"(!) retornaNumeroDeParcelasPadrao: vazio, inicializando com 1.");
         numParcelas = [[NSNumber alloc] initWithInt:1];
         [VidaParceladaHelper salvaNumeroDeParcelasPadrao:numParcelas];
     }
     
-    NSLog (@"(<) retornaNumeroDeParcelasPadrao: return = %@", numParcelas);
+    //NSLog (@"(<) retornaNumeroDeParcelasPadrao: return = %@", numParcelas);
 
     return numParcelas;
 }
@@ -378,7 +378,7 @@
 // aba para o usuário utilizando NSDefaults
 + (void) salvaEstadoApresentacaoInicialAba:(NSString *)nomeAba exibido:(BOOL)estado
 {
-    NSLog (@"(>) salvaEstadoApresentacaoInicialAba: %@, %@", nomeAba, (estado ? @"YES" : @"NO"));
+    //NSLog (@"(>) salvaEstadoApresentacaoInicialAba: %@, %@", nomeAba, (estado ? @"YES" : @"NO"));
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (estado) {
@@ -392,17 +392,17 @@
     NSMutableArray *arrayAbas = [arrayAbasOriginal mutableCopy];
     if (!arrayAbas) {
         arrayAbas = [[NSMutableArray alloc] init];
-        NSLog (@"(!) salvaEstadoApresentacaoInicialAba: created = arrayAbas.");   
+        //NSLog (@"(!) salvaEstadoApresentacaoInicialAba: created = arrayAbas.");   
     }
     if (![arrayAbas containsObject:nomeAba]) {
         [arrayAbas addObject:nomeAba];
-        NSLog (@"(!) salvaEstadoApresentacaoInicialAba: added = arrayAbas(%@)", nomeAba);;   
+        //NSLog (@"(!) salvaEstadoApresentacaoInicialAba: added = arrayAbas(%@)", nomeAba);;   
     }
     [defaults setObject:arrayAbas forKey:@"arrayAbas"];
 
     [defaults synchronize];
     
-    NSLog (@"(<) salvaEstadoApresentacaoInicialAba: ");
+    //NSLog (@"(<) salvaEstadoApresentacaoInicialAba: ");
 
 }
 
@@ -410,18 +410,18 @@
 + (BOOL) retornaEstadoApresentacaoInicialAba:(NSString *)nomeAba
 {
     BOOL resultado = NO;
-    NSLog (@"(>) retornaEstadoApresentacaoInicialAba: %@", nomeAba);
+    //NSLog (@"(>) retornaEstadoApresentacaoInicialAba: %@", nomeAba);
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *estado = [defaults objectForKey:nomeAba];
     if (!estado) {
         [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeAba exibido:resultado];
-        NSLog (@"(!) retornaEstadoApresentacaoInicialAba: vazio, inicializando com NO.");   
+        //NSLog (@"(!) retornaEstadoApresentacaoInicialAba: vazio, inicializando com NO.");   
     } else {
         resultado = [estado isEqual:@"YES"];
     }
     
-    NSLog (@"(<) retornaEstadoApresentacaoInicialAba: return = %@", (resultado ? @"YES" : @"NO"));
+    //NSLog (@"(<) retornaEstadoApresentacaoInicialAba: return = %@", (resultado ? @"YES" : @"NO"));
     
     return resultado;
 }
@@ -429,7 +429,7 @@
 // Volta ao estado inicial onde nenum aba foi apresentada.
 + (void) resetaTodosOsEstadosApresentacaoInicialAba
 {
-    NSLog (@"(>) resetaTodosOsEstadosApresentacaoInicialAba: ");
+    //NSLog (@"(>) resetaTodosOsEstadosApresentacaoInicialAba: ");
 
     // guarda abas criadas em um dictionary
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -439,13 +439,13 @@
     } else {
         for (NSString *nomeAba in arrayAbas) {
             [defaults removeObjectForKey:nomeAba];
-            NSLog (@"(!) resetaTodosOsEstadosApresentacaoInicialAba: removed = %@", nomeAba);
+            //NSLog (@"(!) resetaTodosOsEstadosApresentacaoInicialAba: removed = %@", nomeAba);
         }
         [defaults removeObjectForKey:@"arrayAbas"];
     }
     [defaults synchronize];
 
-    NSLog (@"(<) resetaTodosOsEstadosApresentacaoInicialAba: ");
+    //NSLog (@"(<) resetaTodosOsEstadosApresentacaoInicialAba: ");
 }
 
 

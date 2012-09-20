@@ -63,7 +63,7 @@
 }
 
 - (IBAction)onSalvarPressionado:(UIBarButtonItem *)sender {
-    NSLog(@"(>) onSalvarPressionado: %@ ", sender);
+    //NSLog(@"(>) onSalvarPressionado: %@ ", sender);
     
     // Se algo foi alterado salva e avisa o delegate.
     if (self.algumCampoFoiAlterado && self.parcelaSelecionada) {
@@ -79,7 +79,7 @@
         } else if (self.cellParcelaVencida.accessoryType == UITableViewCellAccessoryCheckmark) {
             self.parcelaSelecionada.estado = PARCELA_VENCIDA;
         }
-        NSLog(@"(!) onSalvarPressionado: parcela = %@", self.parcelaSelecionada);
+        //NSLog(@"(!) onSalvarPressionado: parcela = %@", self.parcelaSelecionada);
         
         // Persiste no coredata - talvez isso devesse sair do controller...
         NSError *erro = nil;
@@ -90,13 +90,13 @@
     // Volta para a tela anterior
     [self.navigationController popViewControllerAnimated:YES];
 
-    NSLog(@"(<) onSalvarPressionado: ");
+    //NSLog(@"(<) onSalvarPressionado: ");
 }
 
 - (IBAction)onCancelarPressionado:(UIBarButtonItem *)sender {
-    NSLog(@"(>) onCancelarPressionado: %@ ", sender);
+    //NSLog(@"(>) onCancelarPressionado: %@ ", sender);
     [self.navigationController popViewControllerAnimated:YES];
-    NSLog(@"(<) onCancelarPressionado: ");
+    //NSLog(@"(<) onCancelarPressionado: ");
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -146,11 +146,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+    //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
     [super viewWillAppear: animated];
     
-    NSLog(@"(<) viewWillAppear: ");
+    //NSLog(@"(<) viewWillAppear: ");
 }
 
 - (void)viewDidUnload

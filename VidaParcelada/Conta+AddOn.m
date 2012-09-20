@@ -25,7 +25,7 @@
 {
     Conta *novaConta = nil;
     
-    NSLog(@"(>) contaComDescricao: %@, %@, %@, %@, %@, %@, %@, %@, %@", descricao, empresa, diaDeVencimento, jurosMes, limite, melhorDiaDeCompra, (preferencial ? @"YES" : @"NO"), tipoConta.nome, context);
+    //NSLog(@"(>) contaComDescricao: %@, %@, %@, %@, %@, %@, %@, %@, %@", descricao, empresa, diaDeVencimento, jurosMes, limite, melhorDiaDeCompra, (preferencial ? @"YES" : @"NO"), tipoConta.nome, context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
@@ -39,12 +39,12 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
 
-    NSLog(@"(!) contaComDescricao: [matches count] = %d", [matches count]);
+    //NSLog(@"(!) contaComDescricao: [matches count] = %d", [matches count]);
     
     // Se o objeto existir carrega o objeto para edição
     if (matches && [matches count] == 1) {
         novaConta = [matches objectAtIndex:0];
-        NSLog(@"(!) contaComDescricao: loaded = %@", novaConta.descricao);
+        //NSLog(@"(!) contaComDescricao: loaded = %@", novaConta.descricao);
     }
     
     // Se existir mais de 1 objeto é uma situação de excessão e
@@ -55,7 +55,7 @@
         //
         for (Conta *conta in matches) {
             [context deleteObject:conta];
-            NSLog(@"(!) contaComDescricao: deleted = %@", conta.descricao);
+            //NSLog(@"(!) contaComDescricao: deleted = %@", conta.descricao);
         }
     
         // ...e chama novamente de forma recursiva
@@ -77,7 +77,7 @@
         if (!novaConta) {
             novaConta = [NSEntityDescription insertNewObjectForEntityForName:@"Conta" inManagedObjectContext:context];
             novaConta.compras = nil; // conta nova não tem compras...
-            NSLog(@"(!) contaComDescricao: new = %@", novaConta.descricao);
+            //NSLog(@"(!) contaComDescricao: new = %@", novaConta.descricao);
         }
         novaConta.tipo = tipoConta;
         novaConta.descricao = descricao;
@@ -96,14 +96,14 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog(@"(<) contaComDescricao: return = %@", novaConta.descricao);
+    //NSLog(@"(<) contaComDescricao: return = %@", novaConta.descricao);
 
     return novaConta;
 }
 
 + (TipoConta *) retornaTipoContaPadraoNoContexto:(NSManagedObjectContext *)context
 {
-    NSLog(@"(>) retornaTipoContaPadraoNoContexto: %@", context);
+    //NSLog(@"(>) retornaTipoContaPadraoNoContexto: %@", context);
 
     NSError *error = nil;
 
@@ -120,11 +120,11 @@
     
     if (tipos && [tipos count] > 0) {
         TipoConta *tipo = [tipos objectAtIndex:0];
-        NSLog(@"(<) retornaTipoContaPadraoNoContexto: return = %@", tipo.descricao);
+        //NSLog(@"(<) retornaTipoContaPadraoNoContexto: return = %@", tipo.descricao);
         return tipo;
     }
     
-    NSLog(@"(<) retornaTipoContaPadraoNoContexto: return = nil");
+    //NSLog(@"(<) retornaTipoContaPadraoNoContexto: return = nil");
 
     return nil;
 
@@ -132,7 +132,7 @@
 
 + (NSArray *)contasCadastradasUsandoContext:(NSManagedObjectContext *)context
 {    
-    NSLog(@"(>) contasCadastradasUsandoContext: %@", context);
+    //NSLog(@"(>) contasCadastradasUsandoContext: %@", context);
 
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
@@ -146,7 +146,7 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
 
-    NSLog(@"(<) contaComDescricao: return = %@", matches);
+    //NSLog(@"(<) contaComDescricao: return = %@", matches);
 
     return matches;
 }
@@ -155,7 +155,7 @@
 // na base de dados
 +(int) quantidadeDeContas:(NSManagedObjectContext *)context 
 {
-    NSLog(@"(>) quantidadeDeContas: %@", context);
+    //NSLog(@"(>) quantidadeDeContas: %@", context);
 
     int count = 0;
     
@@ -172,7 +172,7 @@
         count = [matches count];
     }
     
-    NSLog(@"(<) quantidadeDeContas: %d", count);
+    //NSLog(@"(<) quantidadeDeContas: %d", count);
 
     return count;
 }
@@ -180,7 +180,7 @@
 +(void)removeContaTotalmente:(Conta *)conta
                    inContext:(NSManagedObjectContext *)context
 {
-    NSLog(@"(>) removeContaTotalmente: %@", conta.descricao);
+    //NSLog(@"(>) removeContaTotalmente: %@", conta.descricao);
      
     [context deleteObject:conta];
     
@@ -190,7 +190,7 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog(@"(<) removeContaTotalmente: ");
+    //NSLog(@"(<) removeContaTotalmente: ");
 }
 
 // Verifica todos as contas existentes para saber se a data
@@ -203,7 +203,7 @@
                      comparandoVencimento:(BOOL)vencimento
                       comparandoMelhorDia:(BOOL)melhorDia
 {
-    NSLog(@"(>) verificaDataRetornandoContas - %@, %@, %@, %@", data, context, (vencimento ? @"YES" : @"NO"), (melhorDia ? @"YES" : @"NO"));
+    //NSLog(@"(>) verificaDataRetornandoContas - %@, %@, %@, %@", data, context, (vencimento ? @"YES" : @"NO"), (melhorDia ? @"YES" : @"NO"));
 
     NSMutableArray *result = [[NSMutableArray alloc] init];
     
@@ -219,7 +219,7 @@
     // Dia em string e numero
     NSString *dataString = [dateFormatter stringFromDate:data];
     NSNumber *diaParam = [nf numberFromString:dataString];
-    NSLog(@"(!) verificaDataRetornandoContas - diaParam = %@", diaParam);
+    //NSLog(@"(!) verificaDataRetornandoContas - diaParam = %@", diaParam);
    
     // precisamos listar todas as contas
     NSArray *contas = [Conta contasCadastradasUsandoContext:context];
@@ -234,24 +234,24 @@
         if (vencimento) {
             if ([diaParam isEqualToNumber:candidato.diaDeVencimento]) {
                 [result addObject:candidato];
-                NSLog(@"(!) verificaDataRetornandoContas - found diaDeVencimento = %@", candidato.diaDeVencimento);
+                //NSLog(@"(!) verificaDataRetornandoContas - found diaDeVencimento = %@", candidato.diaDeVencimento);
             }
         }
         if (melhorDia) {
             // Avalia o melhor dia apenas se ele for diferente do vencimento.
             if ([candidato.diaDeVencimento isEqualToNumber:candidato.melhorDiaDeCompra]) {
-                NSLog(@"(!) verificaDataRetornandoContas - found melhorDiaDeCompra == diaDeVencimento");
+                //NSLog(@"(!) verificaDataRetornandoContas - found melhorDiaDeCompra == diaDeVencimento");
             } else {
                 if ([diaParam isEqualToNumber:candidato.melhorDiaDeCompra]) {
                     [result addObject:candidato];
-                    NSLog(@"(!) verificaDataRetornandoContas - found melhorDiaDeCompra = %@", candidato.melhorDiaDeCompra);
+                    //NSLog(@"(!) verificaDataRetornandoContas - found melhorDiaDeCompra = %@", candidato.melhorDiaDeCompra);
                 }
             }
         }
         
     }
     
-    NSLog(@"(<) verificaDataRetornandoContas - result = count(%u)", [result count]);
+    //NSLog(@"(<) verificaDataRetornandoContas - result = count(%u)", [result count]);
 
     return [result copy];
 }

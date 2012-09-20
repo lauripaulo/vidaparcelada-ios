@@ -18,7 +18,7 @@
 {
     TipoConta *tipoConta = nil;
     
-    NSLog(@"(>) contaComNome: %@, %@, %d, %@", nome, descricao, tipo, context);
+    //NSLog(@"(>) contaComNome: %@, %@, %d, %@", nome, descricao, tipo, context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
@@ -32,12 +32,12 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
    
-    NSLog(@"(!) contaComNome: [matches count] = %d", [matches count]);
+    //NSLog(@"(!) contaComNome: [matches count] = %d", [matches count]);
     
     // Se o objeto existir carrega o objeto para edição
     if (matches && [matches count] == 1) {
         tipoConta = [matches objectAtIndex:0];
-        NSLog(@"(!) contaComNome: loaded = %@", tipoConta.nome);
+        //NSLog(@"(!) contaComNome: loaded = %@", tipoConta.nome);
     }
     
     // Se existir mais de 1 objeto é uma situação de excessão e
@@ -48,7 +48,7 @@
         //
         for (TipoConta *tipo in matches) {
             [context deleteObject:tipo];
-            NSLog(@"(!) contaComNome: deleted = %@", tipo.nome);
+            //NSLog(@"(!) contaComNome: deleted = %@", tipo.nome);
         }
         
         // ...e chama novamente de forma recursiva
@@ -64,7 +64,7 @@
         //
         if (!tipoConta) {
             tipoConta = [NSEntityDescription insertNewObjectForEntityForName:@"TipoConta" inManagedObjectContext:context];
-            NSLog(@"(!) contaComNome: new = %@", tipoConta.nome);
+            //NSLog(@"(!) contaComNome: new = %@", tipoConta.nome);
         }
         tipoConta.nome = nome;
         tipoConta.descricao = descricao;
@@ -76,7 +76,7 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog(@"(<) contaComNome: return = %@", tipoConta.nome);
+    //NSLog(@"(<) contaComNome: return = %@", tipoConta.nome);
 
     return tipoConta;
 }

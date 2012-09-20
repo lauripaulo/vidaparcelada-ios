@@ -299,7 +299,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+    //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
 
     [super viewWillAppear:animated];
     self.objetivoMensal = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
@@ -318,7 +318,7 @@
         [self.primeiroUsoAlert show];
     }
     
-    NSLog(@"(<) viewWillAppear: ");
+    //NSLog(@"(<) viewWillAppear: ");
 }
 
 // Não permite edição das celulas
@@ -332,11 +332,11 @@
 //
 - (void)parcelaFoiAlterada:(Parcela *)parcela
 {
-    NSLog(@"(>) parcelaFoiAlterada: %@", parcela);
+    //NSLog(@"(>) parcelaFoiAlterada: %@", parcela);
     
     [self.tableView reloadData];
     
-    NSLog(@"(<) parcelaFoiAlterada: ");
+    //NSLog(@"(<) parcelaFoiAlterada: ");
     
 }
 

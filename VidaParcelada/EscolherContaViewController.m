@@ -32,14 +32,14 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+    //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
     [super viewWillAppear:animated];
     NSIndexPath *catIndex = [self.fetchedResultsController indexPathForObject:self.contaSelecionada];
     UITableViewCell *newCell = [self.tableView cellForRowAtIndexPath:catIndex];
     newCell.accessoryType = UITableViewCellAccessoryCheckmark;
     
-    NSLog(@"(<) viewWillAppear: ");
+    //NSLog(@"(<) viewWillAppear: ");
     
 }
 #pragma mark TableView

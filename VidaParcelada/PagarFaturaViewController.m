@@ -156,7 +156,7 @@
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
+    //NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
     
     if (alertView == self.semNenhumaParcelaPendenteAlert) {
 //        [self.navigationController popViewControllerAnimated:YES];
@@ -174,7 +174,7 @@
         [self dismissModalViewControllerAnimated:YES];
     }
     
-    NSLog(@"(<) alertView: ");
+    //NSLog(@"(<) alertView: ");
 }
 
 //This method comes from UITextFieldDelegate
@@ -230,7 +230,7 @@
 
 - (void)escolheContaParaPagamento
 {
-    NSLog (@"(>) escolheContaParaPagamento: ");
+    //NSLog (@"(>) escolheContaParaPagamento: ");
         
     if (!self.contaSelecionada) {
         // vamos listar todas as contas, independente se tem ou não parcelas.
@@ -246,7 +246,7 @@
         
         // Se a lista de parcelas pendentes estiver nil é porque não temos nenhuma.
         if (!self.parcelasParaPagamento || [self.parcelasParaPagamento count] == 0) {
-            NSLog (@"(!) escolheContaParaPagamento: Nenhuma parcela para pagar em nenhuma conta!");
+            //NSLog (@"(!) escolheContaParaPagamento: Nenhuma parcela para pagar em nenhuma conta!");
             [self.semNenhumaParcelaPendenteAlert show];
         }
     } else {
@@ -254,18 +254,18 @@
         // vamos avisar o usuário e sair.
         // Se a lista de parcelas pendentes estiver nil é porque não temos nenhuma.
         if (![self temPacelasPendentes:self.contaSelecionada data:self.hoje]) {
-            NSLog (@"(!) escolheContaParaPagamento: Nenhuma parcela para pagar nessa conta!");
+            //NSLog (@"(!) escolheContaParaPagamento: Nenhuma parcela para pagar nessa conta!");
             [self.semParcelasPendentesNaContaAlert show];
         }
     }
 
-    NSLog (@"(<) escolheContaParaPagamento: ");
+    //NSLog (@"(<) escolheContaParaPagamento: ");
 }
 
 
 - (BOOL)temPacelasPendentes:(Conta *)conta data:(NSDate *)hoje
 {
-    NSLog (@"(>) temPacelasPendentes: %@, %@", conta.descricao, hoje);
+    //NSLog (@"(>) temPacelasPendentes: %@, %@", conta.descricao, hoje);
     
     BOOL temParcelas = NO;
     
@@ -288,14 +288,14 @@
         temParcelas = YES;
     }
     
-    NSLog (@"(>) temPacelasPendentes: return = %@", (temParcelas ? @"YES" : @"NO"));
+    //NSLog (@"(>) temPacelasPendentes: return = %@", (temParcelas ? @"YES" : @"NO"));
     
     return temParcelas;
 }
 
 - (void)atualizaDadosNaTela
 {
-    NSLog(@"(>) atualizaDadosNaTela: ");
+    //NSLog(@"(>) atualizaDadosNaTela: ");
     
     if (self.contaSelecionada) {
         // Texto
@@ -324,12 +324,12 @@
     [self calculaDiferencaDeValores];
     [self calculaJuros];
     
-    NSLog(@"(<) atualizaDadosNaTela: ");
+    //NSLog(@"(<) atualizaDadosNaTela: ");
 }
 
 - (void)calculaDiferencaDeValores
 {
-    NSLog(@"(>) calculaDiferencaDeValores: ");
+    //NSLog(@"(>) calculaDiferencaDeValores: ");
 
     NSNumber *valorTmp;
     valorTmp = [self.valorFormatter numberFromString:self.tfValorPago.text];
@@ -339,7 +339,7 @@
     // atualiza tela
     self.cellDiferenca.detailTextLabel.text = [self.valorFormatter stringFromNumber:self.diferencaDeValor];
     
-    NSLog(@"(<) calculaDiferencaDeValores: ");
+    //NSLog(@"(<) calculaDiferencaDeValores: ");
 }
 
 - (void)viewDidUnload
@@ -403,9 +403,9 @@
     NSString *textoValJuros = [self.valorFormatter stringFromNumber:[self.valorJuros decimalNumberBySubtracting:self.diferencaDeValor]];
     NSString *textoJuros = [NSString stringWithFormat:@"Valor: %@, Juros: %@", [self.valorFormatter stringFromNumber:self.diferencaDeValor], textoValJuros];
     
-    Compra *ajuste = [Compra compraComDescricao:@"Juros do cartão" comDetalhes:textoJuros dataDaCompra:self.hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:numParcelas valorTotal:self.valorJuros comConta:self.contaSelecionada assumirAnterioresComoPagas:YES inContext:self.vpDatabase.managedObjectContext];
+    [Compra compraComDescricao:@"Juros do cartão" comDetalhes:textoJuros dataDaCompra:self.hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:numParcelas valorTotal:self.valorJuros comConta:self.contaSelecionada assumirAnterioresComoPagas:YES inContext:self.vpDatabase.managedObjectContext];
     
-    NSLog(@"Ajuste = %@", ajuste);
+    //NSLog(@"Ajuste = %@", ajuste);
 }
 
 - (void)calculaJuros

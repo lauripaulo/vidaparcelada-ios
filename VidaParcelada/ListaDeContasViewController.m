@@ -59,7 +59,7 @@
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
+    //NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
     
     // Usuário confirmou que viu o primeiro aviso da tela.
     if (alertView == self.primeiroUsoAlert) {
@@ -75,7 +75,7 @@
         }
     }
     
-    NSLog(@"(<) alertView:");
+    //NSLog(@"(<) alertView:");
 
 }
 
@@ -153,7 +153,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+    //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
 
     [super viewWillAppear:animated];
    
@@ -166,7 +166,7 @@
         [self.primeiroUsoAlert show];
     }
 
-    NSLog(@"(<) viewWillAppear: ");
+    //NSLog(@"(<) viewWillAppear: ");
 
 }
 
@@ -219,7 +219,7 @@
 
 - (void)apagaConta:(Conta *)conta
 {
-    NSLog(@"(>) apagaConta: %@", conta);
+    //NSLog(@"(>) apagaConta: %@", conta);
     
     if (conta) {
         // Delete the row from the data source
@@ -240,14 +240,14 @@
         self.contaSelecionada = nil;
     }
     
-    NSLog(@"(<) apagaConta: %@", conta);
+    //NSLog(@"(<) apagaConta: %@", conta);
 
 }
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"(>) tableView:commitEditingStyle:  %@, %d, %@", tableView, editingStyle, indexPath);
+    //NSLog(@"(>) tableView:commitEditingStyle:  %@, %d, %@", tableView, editingStyle, indexPath);
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {  
                 
@@ -262,7 +262,7 @@
         
     }   
     
-    NSLog(@"(<) tableView:commitEditingStyle: ");
+    //NSLog(@"(<) tableView:commitEditingStyle: ");
 }
 
 // Popula a tabela com os dados do CoreData

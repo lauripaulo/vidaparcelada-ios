@@ -50,11 +50,11 @@
 //
 - (void)parcelaFoiAlterada:(Parcela *)parcela
 {
-    NSLog(@"(>) parcelaFoiAlterada: %@", parcela);
+    //NSLog(@"(>) parcelaFoiAlterada: %@", parcela);
     
     [self.tableView reloadData];
     
-    NSLog(@"(<) parcelaFoiAlterada: ");
+    //NSLog(@"(<) parcelaFoiAlterada: ");
 
 }
 
@@ -69,7 +69,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+    //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
     [super viewWillAppear:animated];
     self.parcelaSelecionada = nil;
@@ -84,7 +84,7 @@
         [self.primeiroUsoAlert show];
     }
 
-    NSLog(@"(<) viewWillAppear: ");
+    //NSLog(@"(<) viewWillAppear: ");
 
 }
 

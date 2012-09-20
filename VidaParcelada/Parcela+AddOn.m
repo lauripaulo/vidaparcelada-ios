@@ -46,7 +46,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 {
     Parcela *novaParcela = nil;
     
-    NSLog(@"(>) novaParcelaComDescricao: %@, %@, %@, %@, %@, %@, %@", descricao, dataDeVencimento, estado, numeroDaParcela, valor, compra.descricao, context);
+    //NSLog(@"(>) novaParcelaComDescricao: %@, %@, %@, %@, %@, %@, %@", descricao, dataDeVencimento, estado, numeroDaParcela, valor, compra.descricao, context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
@@ -59,12 +59,12 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog(@"(!) novaParcelaComDescricao: [matches count] = %d", [matches count]);
+    //NSLog(@"(!) novaParcelaComDescricao: [matches count] = %d", [matches count]);
     
     // Se o objeto existir carrega o objeto para edição
     if (matches && [matches count] == 1) {
         novaParcela = [matches objectAtIndex:0];
-        NSLog(@"(!) novaParcelaComDescricao: loaded = %@", novaParcela.descricao);
+        //NSLog(@"(!) novaParcelaComDescricao: loaded = %@", novaParcela.descricao);
     }
     
     // Se existir mais de 1 objeto é uma situação de excessão e
@@ -75,7 +75,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         //
         for (Parcela *parcela in matches) {
             [context deleteObject:parcela];
-            NSLog(@"(!) novaParcelaComDescricao: deleted = %@", parcela.descricao);
+            //NSLog(@"(!) novaParcelaComDescricao: deleted = %@", parcela.descricao);
         }
         
         // ...e chama novamente de forma recursiva
@@ -94,7 +94,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         //
         if (!novaParcela) {
             novaParcela = [NSEntityDescription insertNewObjectForEntityForName:@"Parcela" inManagedObjectContext:context];
-            NSLog(@"(!) novaParcelaComDescricao: new = %@", novaParcela.descricao);
+            //NSLog(@"(!) novaParcelaComDescricao: new = %@", novaParcela.descricao);
         }
         novaParcela.descricao = descricao;
         novaParcela.dataVencimento = dataDeVencimento;
@@ -109,7 +109,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog(@"(<) novaParcelaComDescricao: return = %@", novaParcela.descricao);
+    //NSLog(@"(<) novaParcelaComDescricao: return = %@", novaParcela.descricao);
 
     return novaParcela;
 }
@@ -119,7 +119,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
                             eDaConta:(Conta *)conta
                            inContext:(NSManagedObjectContext *)context
 {
-    NSLog(@"(>) parcelasPendentesDoMes: '%@', '%@', '%@'", data, conta.descricao, context);
+    //NSLog(@"(>) parcelasPendentesDoMes: '%@', '%@', '%@'", data, conta.descricao, context);
 
     // Vamos listar todas as parcelas
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
@@ -141,7 +141,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
  
-    NSLog(@"(<) parcelasPendentesDoMes: return = %d", [matches count]);
+    //NSLog(@"(<) parcelasPendentesDoMes: return = %d", [matches count]);
 
     return matches;
 }
@@ -149,7 +149,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 
 + (NSDecimalNumber *) calculaValorTotalDasParcelas:(NSArray *)parcelas
 {
-    NSLog(@"(>) calculaValorTotalDasParcelas: %d", [parcelas count]);
+    //NSLog(@"(>) calculaValorTotalDasParcelas: %d", [parcelas count]);
 
     NSDecimalNumber *valorTotal = [[NSDecimalNumber alloc] initWithInt:0];
     
@@ -157,7 +157,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         valorTotal = [valorTotal decimalNumberByAdding:parc.valor];
     }
     
-    NSLog(@"(<) parcelasPendentesDoMes: return = %@", valorTotal);
+    //NSLog(@"(<) parcelasPendentesDoMes: return = %@", valorTotal);
     
     return valorTotal;
 }
@@ -165,7 +165,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 
 + (int)pagaListaDeParcelas:(NSArray *)parcelas
 {
-    NSLog(@"(>) pagaListaDeParcelas: %d", [parcelas count]);
+    //NSLog(@"(>) pagaListaDeParcelas: %d", [parcelas count]);
     
     NSEnumerator *e = [parcelas objectEnumerator];
     id object;
@@ -175,11 +175,11 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         if (![parcela.estado isEqual:PARCELA_PAGA]) {
             parcela.estado = PARCELA_PAGA;
             i++;
-            NSLog(@"(!) pagaListaDeParcelas: parcela da compra = %@", parcela.compra.descricao);
+            //NSLog(@"(!) pagaListaDeParcelas: parcela da compra = %@", parcela.compra.descricao);
         }
     }
     
-    NSLog(@"(<) pagaListaDeParcelas: return = %d", i);
+    //NSLog(@"(<) pagaListaDeParcelas: return = %d", i);
     
     return i;
 }

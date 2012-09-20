@@ -64,7 +64,6 @@
 
 /* Begin PBXFileReference section */
 		790827FC1604061A00CB4233 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
-		790827FE16041C1B00CB4233 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		790B519615742FD3006877CF /* VisaoMensalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisaoMensalViewController.h; sourceTree = "<group>"; };
 		790B519715742FD3006877CF /* VisaoMensalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisaoMensalViewController.m; sourceTree = "<group>"; };
 		790D81F515F5AA0C001456F1 /* WaitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitView.xib; sourceTree = "<group>"; };
@@ -75,7 +74,7 @@
 		79362F81153D122E005459E8 /* Conta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Conta+AddOn.h"; sourceTree = "<group>"; };
 		79362F82153D122E005459E8 /* Conta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Conta+AddOn.m"; sourceTree = "<group>"; };
 		79456A31159FD2AD00712D1E /* CadastroDeParcelaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDeParcelaViewController.h; sourceTree = "<group>"; };
-		79456A32159FD2AE00712D1E /* CadastroDeParcelaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDeParcelaViewController.m; sourceTree = "<group>"; };
+		79456A32159FD2AE00712D1E /* CadastroDeParcelaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CadastroDeParcelaViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7947B80215C23B390083B177 /* Compra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compra.h; sourceTree = "<group>"; };
 		7947B80315C23B390083B177 /* Compra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Compra.m; sourceTree = "<group>"; };
 		7947B80615C23B390083B177 /* Conta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conta.h; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		797D9D321546458800D3B067 /* Parcela+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parcela+AddOn.h"; sourceTree = "<group>"; };
 		797D9D331546458800D3B067 /* Parcela+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Parcela+AddOn.m"; sourceTree = "<group>"; };
 		7980243015D9E29F0051D6C9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; path = Localizable.strings; sourceTree = "<group>"; wrapsLines = 1; };
+		79899AC9160425B700106524 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		798FF3FD1533B4B200385C5E /* VidaParcelada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VidaParcelada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798FF4011533B4B200385C5E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		798FF4031533B4B200385C5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -121,7 +121,7 @@
 		799C54AD15430522009A235D /* VidaParceladaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VidaParceladaHelper.h; sourceTree = "<group>"; };
 		799C54AE15430522009A235D /* VidaParceladaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VidaParceladaHelper.m; sourceTree = "<group>"; };
 		79A56C5B154486E9005B94C2 /* CadastroDeCompraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDeCompraViewController.h; sourceTree = "<group>"; };
-		79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDeCompraViewController.m; sourceTree = "<group>"; };
+		79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CadastroDeCompraViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		79C256C415AA095F0085F3F1 /* EscolherContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EscolherContaViewController.h; sourceTree = "<group>"; };
 		79C256C515AA095F0085F3F1 /* EscolherContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscolherContaViewController.m; sourceTree = "<group>"; };
 		79C9331C159EBE1000651DDB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		79D3336C156F1A3D00D034D3 /* LogoBarra.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoBarra.png; sourceTree = "<group>"; };
 		79DBA40415CCBDC2008BF96B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDaContaViewController.h; sourceTree = "<group>"; };
-		79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroDaContaViewController.m; sourceTree = "<group>"; };
+		79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CadastroDaContaViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		79F92E201539F19C0031A919 /* TipoDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoDaContaViewController.h; sourceTree = "<group>"; };
 		79F92E211539F19C0031A919 /* TipoDaContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoDaContaViewController.m; sourceTree = "<group>"; };
 		79FEE570153917BC00DE35F5 /* ListaDeContasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListaDeContasViewController.h; sourceTree = "<group>"; };
@@ -467,7 +467,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				79DBA40415CCBDC2008BF96B /* en */,
-				790827FE16041C1B00CB4233 /* pt */,
+				79899AC9160425B700106524 /* pt */,
 			);
 			name = iPhone.storyboard;
 			sourceTree = "<group>";

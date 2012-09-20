@@ -90,11 +90,11 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+    //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
 
     [super viewWillAppear:animated];
     
-    NSLog(@"(<) viewWillAppear: ");
+    //NSLog(@"(<) viewWillAppear: ");
 }
 
 - (id)initWithStyle:(UITableViewStyle)style

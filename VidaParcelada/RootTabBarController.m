@@ -59,7 +59,7 @@
 // estado satisfatório para o primeiro uso.
 -(void)insertDefaultDbData:(UIManagedDocument *)document
 {
-    NSLog (@"(>) insertDefaultDbData: %@", document);
+    //NSLog (@"(>) insertDefaultDbData: %@", document);
     
     // Tipo Conta principal.
     NSString *contaNome = NSLocalizedString (@"cartao.exemplo1.nome", @"Cartão de crédito");
@@ -69,7 +69,7 @@
     // Tipo conta para englobar todas as outras contas.
     contaNome = NSLocalizedString (@"cartao.exemplo2.nome", @"Outros");
     tipoContaDescricao = NSLocalizedString (@"cartao.exemplo2.descricao", @"Outras formas de parcelamento");
-    TipoConta *crediario = [TipoConta contaComNome:contaNome eDescricao:tipoContaDescricao identificadorDeTipo:2 inContext:document.managedObjectContext];
+    [TipoConta contaComNome:contaNome eDescricao:tipoContaDescricao identificadorDeTipo:2 inContext:document.managedObjectContext];
     
     // Cria a conta padrão de exemplo para preencher o produto
     Conta *conta;
@@ -87,9 +87,9 @@
     NSDate *hoje = [[NSDate alloc] init];
     NSNumber *parcelas = [NSNumber numberWithInt:5];
     NSDecimalNumber *valorTotal = [NSDecimalNumber decimalNumberWithString:@"899"];
-    Compra *compra = [Compra compraComDescricao:descricaoCompra comDetalhes:detalhesCompra dataDaCompra:hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:parcelas valorTotal:valorTotal comConta:conta assumirAnterioresComoPagas:YES inContext:document.managedObjectContext];
+    [Compra compraComDescricao:descricaoCompra comDetalhes:detalhesCompra dataDaCompra:hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:parcelas valorTotal:valorTotal comConta:conta assumirAnterioresComoPagas:YES inContext:document.managedObjectContext];
                       
-    NSLog (@"(!) Criado: %@, %@, %@, %@", cartao, crediario, conta, compra);
+    //NSLog (@"(!) Criado: %@, %@, %@, %@", cartao, crediario, conta, compra);
     
     NSError *error;
     [document.managedObjectContext save:(&error)];
@@ -97,13 +97,13 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog (@"(<) insertDefaultDbData: ");
+    //NSLog (@"(<) insertDefaultDbData: ");
     
 }
 
 -(void)openDatabase
 {    
-    NSLog (@"(>) openDatabase: ");
+    //NSLog (@"(>) openDatabase: ");
 
     // Adiciona relógio a abertura
     [self.view addSubview:self.waitView];
@@ -112,30 +112,30 @@
     // realiza tarefas lentas
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self.managedDocument.fileURL path]]){
         // O banco de dados não existe.
-        NSLog(@"(!) openDatabase: Banco de dados não encontrado. Criando...");
+        //NSLog(@"(!) openDatabase: Banco de dados não encontrado. Criando...");
         [self.managedDocument saveToURL:self.managedDocument.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             [self insertDefaultDbData:self.managedDocument];
             [self databaseAbertoComSucesso:success];
         }];
     } else if (self.managedDocument.documentState == UIDocumentStateClosed) {
         // O banco de dados existe, vamos abri-lo
-        NSLog(@"(!) openDatabase: Banco de dados encontrado como estao FECHADO. Abrindo...");
+        //NSLog(@"(!) openDatabase: Banco de dados encontrado como estao FECHADO. Abrindo...");
         [self.managedDocument openWithCompletionHandler:^(BOOL success) {
             [self databaseAbertoComSucesso:success];
         }];
     } else if (self.managedDocument.documentState == UIDocumentStateNormal) {
         // o banco de dados já está aberto
-        NSLog(@"(!) openDatabase: Banco de dados encontrado e aberto!");
+        //NSLog(@"(!) openDatabase: Banco de dados encontrado e aberto!");
         [self databaseAbertoComSucesso:YES];
     }
     
-    NSLog (@"(<) openDatabase: ");
+    //NSLog (@"(<) openDatabase: ");
 
 }
 
 - (void)databaseAbertoComSucesso:(BOOL) success
 {
-    NSLog (@"(>) databaseAbertoComSucesso: %@", (success ? @"YES" : @"NO"));
+    //NSLog (@"(>) databaseAbertoComSucesso: %@", (success ? @"YES" : @"NO"));
     
     if (success) {
         // o banco de dados foi aberto com sucesso, então temos que passar
@@ -180,11 +180,11 @@
         // temos que logar e tentar recuperar o BD
         // ou mostrar uma tela de erro pedindo para o 
         // usuário re-instalar o app.
-        NSLog(@"(!) databaseAbertoComSucesso: Erro fatal abrindo BD!!!");
+        //NSLog(@"(!) databaseAbertoComSucesso: Erro fatal abrindo BD!!!");
         
     }
     
-    NSLog (@"(<) databaseAbertoComSucesso: ");
+    //NSLog (@"(<) databaseAbertoComSucesso: ");
  
 }
 

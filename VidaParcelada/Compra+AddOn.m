@@ -32,7 +32,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 {
     Compra *novaCompra = nil;
     
-    NSLog(@"(>) compraComDescricao: %@, %@, %@, %@, %@, %@, %@, %@, %@", descricao, detalhes, data, estado, parcelas, valorTotal, conta.descricao, (parcelasAntigasPagas ? @"YES" : @"NO"), context);
+    //NSLog(@"(>) compraComDescricao: %@, %@, %@, %@, %@, %@, %@, %@, %@", descricao, detalhes, data, estado, parcelas, valorTotal, conta.descricao, (parcelasAntigasPagas ? @"YES" : @"NO"), context);
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
@@ -46,12 +46,12 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
 
-    NSLog(@"(!) compraComDescricao: [matches count] = %d", [matches count]);
+    //NSLog(@"(!) compraComDescricao: [matches count] = %d", [matches count]);
     
     // Se o objeto existir carrega o objeto para edição
     if (matches && [matches count] == 1) {
         novaCompra = [matches objectAtIndex:0];
-        NSLog(@"(!) compraComDescricao: loaded = %@", novaCompra.descricao);
+        //NSLog(@"(!) compraComDescricao: loaded = %@", novaCompra.descricao);
     }
         
     // Se existir mais de 1 objeto é uma situação de excessão e
@@ -62,7 +62,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         //
         for (Compra *compra in matches) {
             [context deleteObject:compra];
-            NSLog(@"(!) compraComDescricao: deleted = %@", compra.descricao);
+            //NSLog(@"(!) compraComDescricao: deleted = %@", compra.descricao);
         }
         
         // ...e chama novamente de forma recursiva
@@ -83,7 +83,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         //
         if (!novaCompra) {
             novaCompra = [NSEntityDescription insertNewObjectForEntityForName:@"Compra" inManagedObjectContext:context];
-            NSLog(@"(!) compraComDescricao: new = %@", novaCompra.descricao);
+            //NSLog(@"(!) compraComDescricao: new = %@", novaCompra.descricao);
         }
         novaCompra.descricao = descricao;
         novaCompra.detalhes = detalhes;
@@ -101,7 +101,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    NSLog(@"(<) compraComDescricao: return = %@", novaCompra.descricao);
+    //NSLog(@"(<) compraComDescricao: return = %@", novaCompra.descricao);
 
     return novaCompra;
 }
@@ -110,7 +110,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 {
     Conta *conta = nil;
     
-    NSLog(@"(>) retornaContaDefaultNoContexto: %@", context);
+    //NSLog(@"(>) retornaContaDefaultNoContexto: %@", context);
 
     // para a conta vamos selecionar o primeiro objeto da tabela conta
     // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
@@ -128,7 +128,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     // Itera nos resultados e retorna o a primeira conta preferencial, se não houver
     // retorna o primeiro resultado.
     for (Conta *c in tipos) {
-        NSLog(@"(!) retornaContaDefaultNoContexto: conta encontrada = %@", c.descricao);
+        //NSLog(@"(!) retornaContaDefaultNoContexto: conta encontrada = %@", c.descricao);
         if ([c.preferencial isEqualToNumber:[NSNumber numberWithBool:YES]]) {
             conta = c;
             break;
@@ -139,10 +139,10 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     if (!conta && tipos && [tipos count] > 0) {
        conta = [tipos objectAtIndex:0];
     } else {
-        NSLog(@"(!) retornaContaDefaultNoContexto: nenhuma conta encontrada.");
+        //NSLog(@"(!) retornaContaDefaultNoContexto: nenhuma conta encontrada.");
     }
     
-    NSLog(@"(<) retornaContaDefaultNoContexto: return = %@", conta.descricao);
+    //NSLog(@"(<) retornaContaDefaultNoContexto: return = %@", conta.descricao);
 
     return conta;
 }
@@ -150,7 +150,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 + (NSDate *)melhorDiaDeCompraDoMes:(Conta *)conta 
                          dataAtual:(NSDate *)data
 {
-    NSLog(@"(>) melhorDiaDeCompraDoMes: %@, %@", conta.descricao, data);
+    //NSLog(@"(>) melhorDiaDeCompraDoMes: %@, %@", conta.descricao, data);
 
     // para calcular os vencimentos das parcelas
     NSCalendar *calendario = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -165,7 +165,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     
     NSDate *melhorDia = [calendario dateFromComponents:melhorDiaComps];
    
-    NSLog(@"(<) melhorDiaDeCompraDoMes: return = %@", melhorDia);
+    //NSLog(@"(<) melhorDiaDeCompraDoMes: return = %@", melhorDia);
     
     return melhorDia;
    
@@ -175,7 +175,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
                           dataDaCompra:(NSDate *)data 
                                  numDaParcela:(int)i
 {
-    NSLog(@"(>) calculaVencimentoDaParcela: %@, %@, %d", conta.descricao, data, i);
+    //NSLog(@"(>) calculaVencimentoDaParcela: %@, %@, %d", conta.descricao, data, i);
 
     // Vamos precisar de um calendário
     // para calcular os vencimentos das parcelas
@@ -202,7 +202,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     
     NSDate *vencimento = [calendario dateFromComponents:dataDeVencimentoComps];
     
-    NSLog(@"(<) calculaVencimentoDaParcela: return = %@", vencimento);
+    //NSLog(@"(<) calculaVencimentoDaParcela: return = %@", vencimento);
     
     return vencimento;
 }
@@ -219,7 +219,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     
     NSError *error = nil;
 
-    NSLog(@"(>) criarParcelasDaCompra: %@, %@, %@", compra.descricao, (parcelasAntigasPagas ? @"YES" : @"NO"), context);
+    //NSLog(@"(>) criarParcelasDaCompra: %@, %@, %@", compra.descricao, (parcelasAntigasPagas ? @"YES" : @"NO"), context);
     
     // Vamos criar as parcelas de acordo com o número passado.
     NSDecimalNumber *qtdeDecimal = [NSDecimalNumber decimalNumberWithDecimal:[compra.qtdeTotalDeParcelas decimalValue]];
@@ -263,7 +263,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 
     }
 
-    NSLog(@"(<) criarParcelasDaCompra: return = count(%d)", [parcelas count]);
+    //NSLog(@"(<) criarParcelasDaCompra: return = count(%d)", [parcelas count]);
  
     return parcelas;
 }
@@ -274,20 +274,20 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 //
 +(void)apagarParcelasDaCompra:(Compra *)compra inContext:(NSManagedObjectContext *)context
 {
-    NSLog(@"(>) apagarParcelasDaCompra: %@", context);
+    //NSLog(@"(>) apagarParcelasDaCompra: %@", context);
     
     for (Parcela *p in compra.parcelas) {
         [context deleteObject:p];
-        NSLog(@"(!) apagarParcelasDaCompra: deleted = %@", p.descricao);
+        //NSLog(@"(!) apagarParcelasDaCompra: deleted = %@", p.descricao);
     } 
     
-    NSLog(@"(<) apagarParcelasDaCompra: ");
+    //NSLog(@"(<) apagarParcelasDaCompra: ");
 
 }
 
 +(int) quantidadeDeCompras:(NSManagedObjectContext *)context comConta:(Conta *)conta
 {
-    NSLog(@"(>) quantidadeDeCompras: %@, %@", context, (conta ? conta.descricao : nil));
+    //NSLog(@"(>) quantidadeDeCompras: %@, %@", context, (conta ? conta.descricao : nil));
 
     int count = 0;
     
@@ -309,7 +309,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         count = [matches count];
     }
     
-    NSLog(@"(<) quantidadeDeCompras: return = %d", count);
+    //NSLog(@"(<) quantidadeDeCompras: return = %d", count);
     
     return count;
 }

@@ -178,21 +178,21 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
+    //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
     [super viewWillAppear: animated];
 
-    NSLog(@"(<) viewWillAppear: ");
+    //NSLog(@"(<) viewWillAppear: ");
 
 }
 - (IBAction)uiSwitchCartaoPreferencialChanged:(UISwitch *)sender {
-    NSLog (@"(>) uiSwitchCartaoPreferencialChanged: %@", sender);
+    //NSLog (@"(>) uiSwitchCartaoPreferencialChanged: %@", sender);
     
     if (self.contaSelecionada) {
         self.contaSelecionada.preferencial = [NSNumber numberWithBool:sender.on];
     }
     
-    NSLog (@"(<) uiSwitchCartaoPreferencialChanged: ");
+    //NSLog (@"(<) uiSwitchCartaoPreferencialChanged: ");
 
 }
 
