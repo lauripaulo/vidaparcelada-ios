@@ -38,6 +38,9 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnSalvar;
 
+// Define um alert basico para informar sobre as datas de
+// vencimento e melhor dia.
+@property (nonatomic, strong) UIAlertView *datasAlert;
 
 @property (nonatomic, strong) UIAlertView *validacaoAlert;
 

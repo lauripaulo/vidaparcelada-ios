@@ -387,6 +387,7 @@
         } else {
             [self.parcelaPagasAMaiorAlert show];
         }
+        
     } else if (self.cellCancelarPagamento == newCell) {
         [self dismissModalViewControllerAnimated:YES];
     }

@@ -124,6 +124,8 @@
 
 -(void)setupFetchedResultsController
 {
+    self.debug = YES;
+    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
     
     // Mostra apenas as compras que possuem alguma parcela pendente ou vencida

@@ -99,12 +99,12 @@
 		79702CEE159D37F60010CE10 /* contas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contas@2x.png"; sourceTree = "<group>"; };
 		79702CF0159D37F60010CE10 /* opcao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opcao@2x.png"; sourceTree = "<group>"; };
 		79702CF2159D37F60010CE10 /* previsao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "previsao@2x.png"; sourceTree = "<group>"; };
+		79728508160C19A70085AD34 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		797D9D2F15463C9000D3B067 /* Compra+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Compra+AddOn.h"; sourceTree = "<group>"; };
 		797D9D3015463C9000D3B067 /* Compra+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Compra+AddOn.m"; sourceTree = "<group>"; };
 		797D9D321546458800D3B067 /* Parcela+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parcela+AddOn.h"; sourceTree = "<group>"; };
 		797D9D331546458800D3B067 /* Parcela+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Parcela+AddOn.m"; sourceTree = "<group>"; };
 		7980243015D9E29F0051D6C9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; path = Localizable.strings; sourceTree = "<group>"; wrapsLines = 1; };
-		79899AC9160425B700106524 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		798FF3FD1533B4B200385C5E /* VidaParcelada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VidaParcelada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798FF4011533B4B200385C5E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		798FF4031533B4B200385C5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -467,7 +467,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				79DBA40415CCBDC2008BF96B /* en */,
-				79899AC9160425B700106524 /* pt */,
+				79728508160C19A70085AD34 /* pt */,
 			);
 			name = iPhone.storyboard;
 			sourceTree = "<group>";

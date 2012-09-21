@@ -58,5 +58,4 @@
 // Delegate que recebe notificação quando uma conta é selecionada
 @property (assign) id <ContaEscolhidaDelegate> contaEscolhidaDelegate;
 
-
 @end

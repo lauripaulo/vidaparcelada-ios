@@ -54,10 +54,10 @@
             self.title = newfrc.fetchRequest.entity.name;
         }
         if (newfrc) {
-            if (self.debug) //NSLog(@"[%@ %@] %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), oldfrc ? @"updated" : @"set");
+            if (self.debug) NSLog(@"[%@ %@] %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), oldfrc ? @"updated" : @"set");
             [self performFetch]; 
         } else {
-            if (self.debug) //NSLog(@"[%@ %@] reset to nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+            if (self.debug) NSLog(@"[%@ %@] reset to nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
             [self.tableView reloadData];
         }
     }

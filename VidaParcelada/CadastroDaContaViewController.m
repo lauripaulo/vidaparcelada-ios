@@ -48,6 +48,17 @@
 @synthesize percentFormatter = _percentFormatter;
 @synthesize tipoContaSelecionada = _tipoContaSelecionada;
 @synthesize validacaoAlert = _validacaoAlert;
+@synthesize datasAlert = _datasAlert;
+
+- (UIAlertView *)datasAlert
+{
+    if (!_datasAlert) {
+        NSString *texto = NSLocalizedString(@"cadastro.compra.popup.datas", @"Importante datas popup");
+        NSString *titulo = NSLocalizedString(@"titulo.atencao", @"Atenção!");
+        _datasAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    }
+    return _datasAlert;
+}
 
 - (void)persiteContaCriandoNova:(BOOL)criarConta {
     NSNumber *vencimento = [NSDecimalNumber numberWithDouble:self.stepperVencimento.value];
@@ -135,6 +146,12 @@
     if (alertView == self.validacaoAlert) {
         [self.navigationController popViewControllerAnimated:YES];
     }
+    // Usuário confirmou que viu o primeiro aviso da tela.
+    if (alertView == self.datasAlert) {
+        // atualiza o estado para exibido
+        NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+        [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
+    }
 }
 
 
@@ -176,12 +193,26 @@
     return result;
 }
 
+- (IBAction)bVencimentosDatas:(UIButton *)sender {
+    [self.datasAlert show];
+}
+
+
 - (void) viewWillAppear:(BOOL)animated
 {
     //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
     [super viewWillAppear: animated];
 
+    //
+    // Chamada a primeira vez que a aba é exibida passando o nome da própria
+    // classe, retorna YES se em algum momento esse aviso já foi exibido.
+    //
+    NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+    if (![VidaParceladaHelper retornaEstadoApresentacaoInicialAba:nomeDaAba]) {
+        [self.datasAlert show];
+    }
+    
     //NSLog(@"(<) viewWillAppear: ");
 
 }
