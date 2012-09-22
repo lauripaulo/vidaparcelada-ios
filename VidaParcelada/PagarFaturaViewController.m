@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIAlertView *parcelaPagasComSucessoAlert;
 @property (nonatomic, strong) UIAlertView *parcelaPagasAMaiorAlert;
 @property (nonatomic, strong) UIAlertView *parcelaPagasAMenorAlert;
+@property (nonatomic, strong) UIAlertView *parcelaPagasZeradoAlert;
 
 - (BOOL)temPacelasPendentes:(Conta *)conta data:(NSDate *)hoje;
 - (void)escolheContaParaPagamento;
@@ -95,6 +96,15 @@
     return _valorPagamento;
 }
 
+- (UIAlertView *) parcelaPagasZeradoAlert
+{
+    if (!_parcelaPagasZeradoAlert) {
+        NSString *titulo = NSLocalizedString(@"titulo.pagamento", @"Pagamento!");
+        NSString *texto = NSLocalizedString(@"cadastro.pagamento.conta.valorzerado", @"Confirmação de pagamento zerado");
+        _parcelaPagasZeradoAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"OK" otherButtonTitles: @"Não", nil];
+    }
+    return _parcelaPagasZeradoAlert;
+}
 
 - (UIAlertView *) semNenhumaParcelaPendenteAlert
 {
@@ -172,6 +182,12 @@
         [self dismissModalViewControllerAnimated:YES];
     } else if (alertView == self.parcelaPagasAMenorAlert) {
         [self dismissModalViewControllerAnimated:YES];
+    } else if (alertView == self.parcelaPagasZeradoAlert) {
+        if (buttonIndex == 0) {
+            // Pagar mesmo zerado
+            [Parcela pagaListaDeParcelas:self.parcelasParaPagamento];
+            [self dismissModalViewControllerAnimated:YES];
+        }
     }
     
     //NSLog(@"(<) alertView: ");
@@ -375,7 +391,10 @@
         
         // Avisa o usuário da resolução de valores
         NSNumber *diferenca = [self.valorFormatter numberFromString:self.cellDiferenca.detailTextLabel.text];
-        if ([diferenca intValue] == 0) {
+        if (self.valorPagamento.intValue == 0) {
+            // Valor a pagar está zerado
+            [self.parcelaPagasZeradoAlert show];
+        } else if ([diferenca intValue] == 0) {
             // Realiza o Pagamento
             [Parcela pagaListaDeParcelas:self.parcelasParaPagamento];
             [self.parcelaPagasComSucessoAlert show];
