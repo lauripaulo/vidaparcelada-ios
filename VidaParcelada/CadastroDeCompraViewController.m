@@ -52,11 +52,36 @@
 @synthesize actionSheetApagarParcelas = _actionSheetApagarParcelas;
 @synthesize tfDetalhesDaCompra = _tfDetalhesDaCompra;
 @synthesize contaEscolhidaDelegate = _contaEscolhidaDelegate;
+@synthesize datasAlert = _datasAlert;
+
+- (UIAlertView *)datasAlert
+{
+    if (!_datasAlert) {
+        NSString *texto = NSLocalizedString(@"cadastro.compra.popup.datacompra", @"Data da compra");
+        NSString *titulo = NSLocalizedString(@"titulo.atencao", @"Atenção!");
+        _datasAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    }
+    return _datasAlert;
+}
 
 - (IBAction)tfValorDaParcelaDidEndOnExit:(UITextField *)sender {
     self.algumCampoFoiAlterado = YES;
     [sender resignFirstResponder];
     [self calculaValorTotal];
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // Usuário confirmou que viu o primeiro aviso da tela.
+    if (alertView == self.datasAlert) {
+        // atualiza o estado para exibido
+        NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+        [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
+    }
+}
+
+- (IBAction)bVencimentosDatas:(UIButton *)sender {
+    [self.datasAlert show];
 }
 
 - (UIActionSheet *)actionSheetVencimento
@@ -216,7 +241,16 @@
     //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
 
     [super viewWillAppear:animated];
-
+    
+    //
+    // Chamada a primeira vez que a aba é exibida passando o nome da própria
+    // classe, retorna YES se em algum momento esse aviso já foi exibido.
+    //
+    NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
+    if (![VidaParceladaHelper retornaEstadoApresentacaoInicialAba:nomeDaAba]) {
+        [self.datasAlert show];
+    }
+    
     //NSLog(@"(<) viewWillAppear: ");
 }
 

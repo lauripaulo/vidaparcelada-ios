@@ -58,4 +58,8 @@
 // Delegate que recebe notificação quando uma conta é selecionada
 @property (assign) id <ContaEscolhidaDelegate> contaEscolhidaDelegate;
 
+// Define um alert basico para informar sobre as datas de
+// vencimento e melhor dia.
+@property (nonatomic, strong) UIAlertView *datasAlert;
+
 @end
