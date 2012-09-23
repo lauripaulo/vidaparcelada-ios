@@ -439,7 +439,11 @@
             [segue.destinationViewController setTipoContaDelegate:self];
         }
         if ([segue.destinationViewController respondsToSelector:@selector(setTipoSelecionado:)]){
-            [segue.destinationViewController setTipoSelecionado:self.contaSelecionada.tipo];
+            if (self.contaSelecionada.tipo) {
+                [segue.destinationViewController setTipoSelecionado:self.contaSelecionada.tipo];
+            } else {
+                [segue.destinationViewController setTipoSelecionado:self.tipoContaSelecionada];
+            }
         }
 
     }

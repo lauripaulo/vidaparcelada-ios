@@ -24,4 +24,8 @@
 // ou de uma nova tela.
 @property (nonatomic, strong) UIAlertView *primeiroUsoAlert;
 
+@property (nonatomic, strong) NSNumberFormatter *valorFormatter;
+
+@property (nonatomic, strong) NSDecimalNumber *totalGeral;
+
 @end

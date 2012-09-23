@@ -12,6 +12,7 @@
 #import "VidaParceladaHelper.h"
 #import "CadastroDaContaViewController.h"
 #import "Parcela+AddOn.h"
+#import "Compra+AddOn.h"
 
 @interface ListaDeContasViewController ()
 
@@ -35,6 +36,8 @@
 @synthesize contaSelecionada = _contaSelecionada;
 @synthesize comprasPresentesAlert = _comprasPresentesAlert;
 @synthesize primeiroUsoAlert = _primeiroUsoAlert;
+@synthesize valorFormatter = _valorFormatter;
+
 
 // define o alerta de primeiro uso
 - (UIAlertView *) primeiroUsoAlert 
@@ -176,6 +179,9 @@
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.valorFormatter = [[NSNumberFormatter alloc] init];
+    [self.valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -277,21 +283,83 @@
     
     Conta *conta = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
+    // Calcula o Valor a pagar de cada cartão iterando as suas compras
+    // e depois as suas parcelas
+    NSDecimalNumber *valorTotal = [[NSDecimalNumber alloc] initWithInteger:0];
+    NSSet *compras;
+    compras = conta.compras;
+    for (Compra *compra in compras){
+        NSSet *parcelas;
+        parcelas = compra.parcelas;
+        for (Parcela *parcela in parcelas) {
+            valorTotal = [valorTotal decimalNumberByAdding:parcela.valor];
+        }
+    }
+    
+    // Atualiza o total geral, se for a primeira linha cria um novo
+    if (indexPath.row == 0) {
+        self.totalGeral = [[NSDecimalNumber alloc] initWithInt:0];
+        self.totalGeral = valorTotal;
+    } else {
+        self.totalGeral = [self.totalGeral decimalNumberByAdding:valorTotal];
+    }
+    
     // Se a conta tem nome e descrição ele é utilizado, se não possuir
     // utiliza o nome e descrição do tipo do cartão porque temos certeza
     // que toda conta é criada com o primeiro tipo de cartão persistida
     // no banco de dados.
     if (conta.descricao && [conta.descricao length] > 0) { 
         cell.textLabel.text = conta.descricao;
-        cell.detailTextLabel.text = conta.empresa;
+        NSString *descricaoMaisValor = [NSString stringWithFormat:@"%@  %@", conta.empresa, [self.valorFormatter stringFromNumber:valorTotal]];
+        cell.detailTextLabel.text = descricaoMaisValor;
     } else {
         cell.textLabel.text = conta.tipo.nome;
-        cell.detailTextLabel.text = conta.tipo.descricao;
+        NSString *descricaoMaisValor = [NSString stringWithFormat:@"%@  %@", conta.tipo.descricao, [self.valorFormatter stringFromNumber:valorTotal]];
+        cell.detailTextLabel.text = descricaoMaisValor;
     }
     
     return cell;
     
 }
+
+//
+// Aqui é a chave para exibir o valor total por mês!
+//
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+
+    NSString *textoInformativo = NSLocalizedString(@"cadastro.conta.footer.previsto", @"Total de gastos previsto em todas as contas ");
+    NSString *textoValorTotal = [NSString stringWithFormat:@"%@ ", [self.valorFormatter stringFromNumber:self.totalGeral]];
+    
+    // Para customizar o footer da tabela com os dados da soma
+    // parcelas e o numero de parcelas
+    UIColor *fundo = [UIColor colorWithRed:0.71 green:0.71 blue:0.71 alpha:0.8]; /*#b5b5b5*/
+    UIColor *letra = [UIColor darkGrayColor];
+    
+    UIView *myFooter = [[UIView alloc] initWithFrame:CGRectMake(0,60,320,40)];
+//    myFooter.backgroundColor = fundo;
+    
+    // Label superior
+    UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,320,20)] ;
+    firstLabel.font = [UIFont systemFontOfSize:13.0];
+    firstLabel.textColor = letra;
+    firstLabel.backgroundColor = fundo;
+    firstLabel.text = textoInformativo;
+    firstLabel.textAlignment = UITextAlignmentRight;
+    
+    // Label inferior
+    UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,20,320,20)] ;
+    secondLabel.font = [UIFont boldSystemFontOfSize:13.0];
+    secondLabel.textColor = letra;
+    secondLabel.backgroundColor = fundo;
+    secondLabel.text = textoValorTotal;
+    secondLabel.textAlignment = UITextAlignmentRight;
+    
+    [myFooter addSubview:firstLabel];
+    [myFooter addSubview:secondLabel];
+    return myFooter;
+}
+
 
 // Quando o usuário seleciona uma conta devemos atualizar a propriedade de conta selecionada
 // para que o objeto seja passado corretamente para a próxima view
