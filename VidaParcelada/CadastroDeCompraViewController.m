@@ -392,7 +392,7 @@
     NSDate *dataAtual = [[NSDate alloc] init];
     if ([[vencimento earlierDate:dataAtual] isEqualToDate:vencimento]) {
         
-        [self.actionSheetVencimento showInView:self.view];
+        [self.actionSheetVencimento showFromTabBar:self.tabBarController.tabBar];
         resposta = YES;
     }
     return resposta;
@@ -404,14 +404,24 @@
     if (actionSheet == self.actionSheetVencimento) {
         // Action sheet do estado das parcelas
         if (buttonIndex == [actionSheet destructiveButtonIndex]) {
-            // Considerar parcelas anteriores pagas.
-            self.considerarParcelasAnterioresPagas = YES;
-        } else if (buttonIndex == [actionSheet cancelButtonIndex]) {
             // Considerar parcelas anteriores pendentes de pagamento
             self.considerarParcelasAnterioresPagas = NO;
+        
+            // Mudamos a mensagem então
+            NSString *titulo = NSLocalizedString(@"cadastro.compra.apagar.parcelaspendente", @"Ação ao apagar parcelas pendentes");
+            _actionSheetApagarParcelas = [[UIActionSheet alloc] initWithTitle:titulo
+                                                                     delegate:self
+                                                            cancelButtonTitle:@"Cancelar atualização"
+                                                       destructiveButtonTitle:@"Recriar parcelas"
+                                                            otherButtonTitles:nil];
+
+        } else if (buttonIndex == [actionSheet cancelButtonIndex]) {
+            // Considerar parcelas anteriores pagas.
+            self.considerarParcelasAnterioresPagas = YES;
         }
+        // É uma alteração de uma compra existente?
         if (self.algumCampoFoiAlterado && self.compraSelecionada) {
-            [self.actionSheetApagarParcelas showInView:self.view];
+            [self.actionSheetApagarParcelas showFromTabBar:self.tabBarController.tabBar];
         } else {
             [self salvarDados];
         }
@@ -447,7 +457,7 @@
     
     if (![self verificaDataDaCompraAvisaUsuario]) {
         if (self.algumCampoFoiAlterado && self.compraSelecionada) {
-            [self.actionSheetApagarParcelas showInView:self.view];
+            [self.actionSheetApagarParcelas showFromTabBar:self.tabBarController.tabBar];
         } else {
             [self salvarDados];
         }

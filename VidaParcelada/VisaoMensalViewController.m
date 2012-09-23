@@ -125,26 +125,32 @@
 {   
     self.debug = YES;
     
-    // mostrar as compras que vão vencer apenas a partir do dia primeiro 
-    // do mês atual.
-    NSDate *hoje = [[NSDate alloc] init];
-    NSCalendar *calendario = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-    NSDateComponents *hojeComps = [calendario components:unitFlags fromDate:hoje];
-    
-    NSDateComponents *dataDeVencimentoComps = [[NSDateComponents alloc] init];
-    [dataDeVencimentoComps setDay:1];
-    [dataDeVencimentoComps setMonth:hojeComps.month -1];
-    [dataDeVencimentoComps setYear:hojeComps.year];        
-    
-    NSDate *vencimento = [calendario dateFromComponents:dataDeVencimentoComps];
+//    // mostrar as compras que vão vencer apenas a partir do dia primeiro 
+//    // do mês atual.
+//    NSDate *hoje = [[NSDate alloc] init];
+//    NSCalendar *calendario = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+//    NSDateComponents *hojeComps = [calendario components:unitFlags fromDate:hoje];
+//    
+//    NSDateComponents *dataDeVencimentoComps = [[NSDateComponents alloc] init];
+//    [dataDeVencimentoComps setDay:1];
+//    [dataDeVencimentoComps setMonth:hojeComps.month -1];
+//    [dataDeVencimentoComps setYear:hojeComps.year];        
+//    
+//    NSDate *vencimento = [calendario dateFromComponents:dataDeVencimentoComps];
+//    
+//    request.predicate = [NSPredicate predicateWithFormat:@"dataVencimento >= %@ AND estado <> %@", vencimento, PARCELA_PAGA];
     
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
-    request.predicate = [NSPredicate predicateWithFormat:@"dataVencimento >= %@ AND estado <> %@", vencimento, PARCELA_PAGA];
+    
+    request.predicate = [NSPredicate predicateWithFormat:@"estado <> %@", PARCELA_PAGA];
+    
     request.sortDescriptors = [NSArray arrayWithObject:
                                [NSSortDescriptor sortDescriptorWithKey:@"dataVencimento" ascending:YES 
                                                               selector:@selector(compare:)]];
+    
+    //[NSFetchedResultsController deleteCacheWithName:@"VisaoMensalCache"];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
                                                                         managedObjectContext:self.vpDatabase.managedObjectContext 

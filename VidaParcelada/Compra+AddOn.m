@@ -92,7 +92,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         novaCompra.valorTotal = valorTotal;
         novaCompra.qtdeTotalDeParcelas = parcelas;
         novaCompra.origem = conta;
-        [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:YES inContext:context];
+        [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:parcelasAntigasPagas inContext:context];
         
     }
 

@@ -292,7 +292,10 @@
         NSSet *parcelas;
         parcelas = compra.parcelas;
         for (Parcela *parcela in parcelas) {
-            valorTotal = [valorTotal decimalNumberByAdding:parcela.valor];
+            // Soma apenas as parcelas pendentes e vencidas
+            if ([parcela.estado isEqualToString:PARCELA_PENDENTE_PAGAMENTO] || [parcela.estado isEqualToString:PARCELA_VENCIDA]) {
+                valorTotal = [valorTotal decimalNumberByAdding:parcela.valor];
+            }
         }
     }
     
