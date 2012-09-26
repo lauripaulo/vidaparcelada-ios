@@ -21,6 +21,11 @@
 		7947B80B15C23B390083B177 /* Parcela.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947B80A15C23B390083B177 /* Parcela.m */; };
 		7947B80E15C23B390083B177 /* TipoConta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947B80D15C23B390083B177 /* TipoConta.m */; };
 		794FF634159761360009D1DD /* OptionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FF633159761360009D1DD /* OptionsTableViewController.m */; };
+		795FD7EB161295C900BA3E53 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795FD7EA161295C900BA3E53 /* AudioToolbox.framework */; };
+		795FD7ED161295D500BA3E53 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795FD7EC161295D500BA3E53 /* MessageUI.framework */; };
+		795FD7EF161295E100BA3E53 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795FD7EE161295E100BA3E53 /* SystemConfiguration.framework */; };
+		795FD80D1612AD4700BA3E53 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 795FD80B1612AD4700BA3E53 /* libGoogleAdMobAds.a */; };
+		795FD80E1612AD4700BA3E53 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 795FD80C1612AD4700BA3E53 /* README.txt */; };
 		795FFCA815C8D6FA00816B70 /* PagarFaturaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795FFCA715C8D6FA00816B70 /* PagarFaturaViewController.m */; };
 		796A824E159D475F0072E99B /* compras.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824A159D475F0072E99B /* compras.png */; };
 		796A824F159D475F0072E99B /* contas.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824B159D475F0072E99B /* contas.png */; };
@@ -85,6 +90,20 @@
 		7947B80D15C23B390083B177 /* TipoConta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipoConta.m; sourceTree = "<group>"; };
 		794FF632159761360009D1DD /* OptionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsTableViewController.h; sourceTree = "<group>"; };
 		794FF633159761360009D1DD /* OptionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsTableViewController.m; sourceTree = "<group>"; };
+		795FD7EA161295C900BA3E53 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		795FD7EC161295D500BA3E53 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		795FD7EE161295E100BA3E53 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		795FD8021612AD4700BA3E53 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdMobExtras.h; path = VidaParcelada/admob/GADAdMobExtras.h; sourceTree = "<group>"; };
+		795FD8031612AD4700BA3E53 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdNetworkExtras.h; path = VidaParcelada/admob/GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		795FD8041612AD4700BA3E53 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdSize.h; path = VidaParcelada/admob/GADAdSize.h; sourceTree = "<group>"; };
+		795FD8051612AD4700BA3E53 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerView.h; path = VidaParcelada/admob/GADBannerView.h; sourceTree = "<group>"; };
+		795FD8061612AD4700BA3E53 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerViewDelegate.h; path = VidaParcelada/admob/GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		795FD8071612AD4700BA3E53 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitial.h; path = VidaParcelada/admob/GADInterstitial.h; sourceTree = "<group>"; };
+		795FD8081612AD4700BA3E53 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitialDelegate.h; path = VidaParcelada/admob/GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		795FD8091612AD4700BA3E53 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequest.h; path = VidaParcelada/admob/GADRequest.h; sourceTree = "<group>"; };
+		795FD80A1612AD4700BA3E53 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequestError.h; path = VidaParcelada/admob/GADRequestError.h; sourceTree = "<group>"; };
+		795FD80B1612AD4700BA3E53 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAdMobAds.a; path = VidaParcelada/admob/libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		795FD80C1612AD4700BA3E53 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = VidaParcelada/admob/README.txt; sourceTree = "<group>"; };
 		795FFCA615C8D6FA00816B70 /* PagarFaturaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagarFaturaViewController.h; sourceTree = "<group>"; };
 		795FFCA715C8D6FA00816B70 /* PagarFaturaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagarFaturaViewController.m; sourceTree = "<group>"; };
 		796A824A159D475F0072E99B /* compras.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compras.png; sourceTree = "<group>"; };
@@ -152,10 +171,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				795FD7EF161295E100BA3E53 /* SystemConfiguration.framework in Frameworks */,
+				795FD7ED161295D500BA3E53 /* MessageUI.framework in Frameworks */,
+				795FD7EB161295C900BA3E53 /* AudioToolbox.framework in Frameworks */,
 				798FF41F1533B4E000385C5E /* CoreData.framework in Frameworks */,
 				798FF4021533B4B200385C5E /* UIKit.framework in Frameworks */,
 				798FF4041533B4B200385C5E /* Foundation.framework in Frameworks */,
 				798FF4061533B4B200385C5E /* CoreGraphics.framework in Frameworks */,
+				795FD80D1612AD4700BA3E53 /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +215,24 @@
 				7935EF901585340500C916E0 /* RootTabBarController.m */,
 			);
 			name = TabBarRootView;
+			sourceTree = "<group>";
+		};
+		795FD7DB1612956800BA3E53 /* adMob */ = {
+			isa = PBXGroup;
+			children = (
+				795FD8021612AD4700BA3E53 /* GADAdMobExtras.h */,
+				795FD8031612AD4700BA3E53 /* GADAdNetworkExtras.h */,
+				795FD8041612AD4700BA3E53 /* GADAdSize.h */,
+				795FD8051612AD4700BA3E53 /* GADBannerView.h */,
+				795FD8061612AD4700BA3E53 /* GADBannerViewDelegate.h */,
+				795FD8071612AD4700BA3E53 /* GADInterstitial.h */,
+				795FD8081612AD4700BA3E53 /* GADInterstitialDelegate.h */,
+				795FD8091612AD4700BA3E53 /* GADRequest.h */,
+				795FD80A1612AD4700BA3E53 /* GADRequestError.h */,
+				795FD80B1612AD4700BA3E53 /* libGoogleAdMobAds.a */,
+				795FD80C1612AD4700BA3E53 /* README.txt */,
+			);
+			name = adMob;
 			sourceTree = "<group>";
 		};
 		79702CFE159D39640010CE10 /* TabIcons */ = {
@@ -247,6 +288,10 @@
 		798FF4001533B4B200385C5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				795FD7DB1612956800BA3E53 /* adMob */,
+				795FD7EA161295C900BA3E53 /* AudioToolbox.framework */,
+				795FD7EC161295D500BA3E53 /* MessageUI.framework */,
+				795FD7EE161295E100BA3E53 /* SystemConfiguration.framework */,
 				798FF4051533B4B200385C5E /* CoreGraphics.framework */,
 				798FF41E1533B4E000385C5E /* CoreData.framework */,
 				798FF4011533B4B200385C5E /* UIKit.framework */,
@@ -419,6 +464,7 @@
 				7980243115D9E29F0051D6C9 /* Localizable.strings in Resources */,
 				790D81F615F5AA0C001456F1 /* WaitView.xib in Resources */,
 				790827FD1604061A00CB4233 /* Default-568h@2x.png in Resources */,
+				795FD80E1612AD4700BA3E53 /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,6 +571,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VidaParcelada/VidaParcelada-Prefix.pch";
 				INFOPLIST_FILE = "VidaParcelada/VidaParcelada-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/VidaParcelada/admob\"",
+				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -537,6 +589,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VidaParcelada/VidaParcelada-Prefix.pch";
 				INFOPLIST_FILE = "VidaParcelada/VidaParcelada-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/VidaParcelada/admob\"",
+				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

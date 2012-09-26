@@ -13,8 +13,11 @@
 #import "Conta+AddOn.h"
 #import "CadastroDeCompraViewController.h"
 #import "CadastroDeParcelaViewController.h" 
+#import "GADBannerView.h"
 
 @interface VisaoMensalViewController ()
+
+@property (nonatomic, strong) GADBannerView *banner;
 
 @end
 
@@ -30,6 +33,7 @@
 @synthesize btnFaturas = _btnPagar;
 @synthesize primeiroUsoAlert = _primeiroUsoAlert;
 @synthesize vencimentosAlert = _vencimentosAlert;
+@synthesize banner = _banner;
 
 // define o alerta de primeiro uso
 - (UIAlertView *) primeiroUsoAlert 
@@ -50,6 +54,7 @@
         NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
         [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
     }
+    
 }
 
 - (void)compraFoiAlterada:(Compra *)compra;
@@ -301,7 +306,12 @@
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo name];
-} 
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [self.banner removeFromSuperview];
+}
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -323,6 +333,10 @@
     if (![VidaParceladaHelper retornaEstadoApresentacaoInicialAba:nomeDaAba]) {
         [self.primeiroUsoAlert show];
     }
+    
+    //
+    // Se o aplicativo estive no modo FREE puxa e mostra um banner.
+    [self createBanner];
     
     //NSLog(@"(<) viewWillAppear: ");
 }
@@ -408,5 +422,69 @@
     
 }
 
+#pragma mark - Banner
+
+-(void)adViewDidReceiveAd:(GADBannerView *)bannerView
+{
+    [UIView beginAnimations:@"banner" context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    
+    // resize
+    CGRect tableFrame = self.navigationController.visibleViewController.view.frame;
+    tableFrame.size.height = tableFrame.size.height - 50.0f;
+    self.navigationController.visibleViewController.view.frame = tableFrame;
+    
+    // Move banner
+    CGRect bannerFrame = bannerView.viewForBaselineLayout.frame;
+    
+    CGFloat screenSize = self.navigationController.view.frame.size.height;
+    CGFloat tabBarSize = self.tabBarController.tabBar.frame.size.height;
+    CGFloat bannerOrigin = screenSize - tabBarSize;
+    
+//    NSLog (@"bannerOrigin: %f", bannerOrigin);
+    
+    bannerFrame.origin.y = bannerOrigin;
+    bannerView.viewForBaselineLayout.frame = bannerFrame;
+    
+    [UIView commitAnimations];
+}
+
+-(void)adViewWillDismissScreen:(GADBannerView *)bannerView
+{
+    [bannerView removeFromSuperview];
+}
+
+-(void)createBanner
+{
+    // Criar uma visualização do tamanho padrão na parte inferior da tela, escondido.
+    self.banner = [[GADBannerView alloc]
+                                  initWithFrame:CGRectMake(0.0,
+                                                           self.tabBarController.view.frame.size.height,
+                                                           GAD_SIZE_320x50.width,
+                                                           GAD_SIZE_320x50.height)];
+    self.banner.delegate = self;
+    
+    // Especificar o "identificador do bloco de anúncios". Este é seu ID de editor da AdMob.
+    self.banner.adUnitID = @"a1506257e9c0f7c";
+    
+    // Permitir que o tempo de execução saiba qual UIViewController deve ser restaurado depois de levar
+    // o usuário para onde quer que o anúncio vá e adicioná-lo à hierarquia de visualização.
+    self.banner.rootViewController = self;
+    [self.tabBarController.view addSubview:self.banner];
+    
+    GADRequest *request = [GADRequest request];
+    
+    request.testDevices = [NSArray arrayWithObjects:
+                           GAD_SIMULATOR_ID,                               // Simulador
+                           @"5af091a2670105b56394789825ffc4ed699994e3",    // iPhone Junior
+                           @"bbc3e191c3a7b478d93cdb3d1e51107c7956aa58",    // iPad Paula
+                           @"fa97af875a365c09c1a2543a1951dbf0f929060b",    // iPhone Paula
+                           nil];
+    
+    // Iniciar uma solicitação genérica para carregá-la com um anúncio.
+    [self.banner loadRequest:[GADRequest request]];
+}
 
 @end
