@@ -330,9 +330,15 @@
 //
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-
+    
     NSString *textoInformativo = NSLocalizedString(@"cadastro.conta.footer.previsto", @"Total de gastos previsto em todas as contas ");
-    NSString *textoValorTotal = [NSString stringWithFormat:@"%@ ", [self.valorFormatter stringFromNumber:self.totalGeral]];
+
+    NSString *textoValorTotal;
+    if ([self.totalGeral intValue] > 0) {
+        textoValorTotal = [NSString stringWithFormat:@" %@ ", [self.valorFormatter stringFromNumber:self.totalGeral]];
+    } else {
+        textoValorTotal = [NSString stringWithFormat:@" Nenhuma compra realizada. "];
+    }
     
     // Para customizar o footer da tabela com os dados da soma
     // parcelas e o numero de parcelas
@@ -340,7 +346,6 @@
     UIColor *letra = [UIColor darkGrayColor];
     
     UIView *myFooter = [[UIView alloc] initWithFrame:CGRectMake(0,60,320,40)];
-//    myFooter.backgroundColor = fundo;
     
     // Label superior
     UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,320,20)] ;
