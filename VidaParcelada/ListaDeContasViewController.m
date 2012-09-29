@@ -168,6 +168,9 @@
     if (![VidaParceladaHelper retornaEstadoApresentacaoInicialAba:nomeDaAba]) {
         [self.primeiroUsoAlert show];
     }
+    
+    // Always reload data
+    [self.tableView reloadData];
 
     //NSLog(@"(<) viewWillAppear: ");
 

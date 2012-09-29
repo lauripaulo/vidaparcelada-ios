@@ -63,4 +63,8 @@
 // vencimento e melhor dia.
 @property (nonatomic, strong) UIAlertView *datasAlert;
 
+// Se a conta da compra for apagada quando a compra estiver sendo
+// atualizado temos que avisar o usuário e cancelar a edição.
+@property (nonatomic, strong) UIAlertView *contaDeletedAlert;
+
 @end

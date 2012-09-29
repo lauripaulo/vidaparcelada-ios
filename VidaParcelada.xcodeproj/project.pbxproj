@@ -277,7 +277,6 @@
 		798FF3F21533B4B200385C5E = {
 			isa = PBXGroup;
 			children = (
-				793CF5A61617507600A37225 /* AdSupport.framework */,
 				798FF4071533B4B200385C5E /* VidaParcelada */,
 				798FF4001533B4B200385C5E /* Frameworks */,
 				798FF3FE1533B4B200385C5E /* Products */,
@@ -296,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				795FD7DB1612956800BA3E53 /* adMob */,
+				793CF5A61617507600A37225 /* AdSupport.framework */,
 				795FD7EA161295C900BA3E53 /* AudioToolbox.framework */,
 				795FD7EC161295D500BA3E53 /* MessageUI.framework */,
 				795FD7EE161295E100BA3E53 /* SystemConfiguration.framework */,

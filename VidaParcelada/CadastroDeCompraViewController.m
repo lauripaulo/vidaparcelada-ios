@@ -53,6 +53,7 @@
 @synthesize tfDetalhesDaCompra = _tfDetalhesDaCompra;
 @synthesize contaEscolhidaDelegate = _contaEscolhidaDelegate;
 @synthesize datasAlert = _datasAlert;
+@synthesize contaDeletedAlert = _contaDeletedAlert;
 
 - (UIAlertView *)datasAlert
 {
@@ -62,6 +63,16 @@
         _datasAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     }
     return _datasAlert;
+}
+
+- (UIAlertView *)contaDeletedAlert
+{
+    if (!_contaDeletedAlert) {
+        NSString *texto = NSLocalizedString(@"cadastro.compra.conta.apagada", @"Conta desta compra foi apagada");
+        NSString *titulo = NSLocalizedString(@"titulo.atencao", @"Atenção!");
+        _contaDeletedAlert = [[UIAlertView alloc] initWithTitle:titulo message:texto delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    }
+    return _contaDeletedAlert;
 }
 
 - (IBAction)tfValorDaParcelaDidEndOnExit:(UITextField *)sender {
@@ -77,6 +88,9 @@
         // atualiza o estado para exibido
         NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
         [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
+    } else if (alertView == self.contaDeletedAlert) {
+        // Cancela tudo
+        [self exitThisController];
     }
 }
 
@@ -457,6 +471,11 @@
 
 - (IBAction)onSalvarPressionado:(id)sender {
     
+    if (self.compraSelecionada && self.compraSelecionada.origem.managedObjectContext == nil) {
+        // A compra foi apagada ou a sua conta, de qualquer forma não faz sentido fazer
+        // mais nada com ela
+        [self.contaDeletedAlert show];
+    } else     
     if (![self verificaDataDaCompraAvisaUsuario]) {
         if (self.algumCampoFoiAlterado && self.compraSelecionada) {
             [self.actionSheetApagarParcelas showFromTabBar:self.tabBarController.tabBar];

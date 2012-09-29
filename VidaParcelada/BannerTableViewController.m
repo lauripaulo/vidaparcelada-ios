@@ -68,10 +68,10 @@
     NSLog (@"adViewDidReceiveAd");
     
     // resize
-    [UIView beginAnimations:@"resize" context:nil];
-    [UIView setAnimationDuration:0.2];
-    [UIView setAnimationDelay:1.0];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+//    [UIView beginAnimations:@"resize" context:nil];
+//    [UIView setAnimationDuration:0.2];
+//    [UIView setAnimationDelay:1.0];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     
     // Move banner
     CGRect bannerFrame = bannerView.viewForBaselineLayout.frame;
@@ -86,7 +86,7 @@
     tableFrame.size.height = tableFrame.size.height - GAD_SIZE_320x50.height;
     self.navigationController.visibleViewController.view.frame = tableFrame;
     
-    [UIView commitAnimations];
+//    [UIView commitAnimations];
     
     self.bannerWasDisplayed = YES;
 }
