@@ -16,6 +16,9 @@
 		7935EF961585555F00C916E0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D33354156F116600D034D3 /* Icon.png */; };
 		7935EF971585556600C916E0 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D33355156F116600D034D3 /* Icon@2x.png */; };
 		79362F83153D122E005459E8 /* Conta+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 79362F82153D122E005459E8 /* Conta+AddOn.m */; };
+		793CF5A416174FE900A37225 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 793CF5A216174FE900A37225 /* libGoogleAdMobAds.a */; };
+		793CF5A516174FE900A37225 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 793CF5A316174FE900A37225 /* README.txt */; };
+		793CF5A71617507600A37225 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793CF5A61617507600A37225 /* AdSupport.framework */; };
 		79456A33159FD2AE00712D1E /* CadastroDeParcelaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79456A32159FD2AE00712D1E /* CadastroDeParcelaViewController.m */; };
 		7947B80415C23B390083B177 /* Compra.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947B80315C23B390083B177 /* Compra.m */; };
 		7947B80815C23B390083B177 /* Conta.m in Sources */ = {isa = PBXBuildFile; fileRef = 7947B80715C23B390083B177 /* Conta.m */; };
@@ -25,7 +28,6 @@
 		795FD7EB161295C900BA3E53 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795FD7EA161295C900BA3E53 /* AudioToolbox.framework */; };
 		795FD7ED161295D500BA3E53 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795FD7EC161295D500BA3E53 /* MessageUI.framework */; };
 		795FD7EF161295E100BA3E53 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795FD7EE161295E100BA3E53 /* SystemConfiguration.framework */; };
-		795FD80E1612AD4700BA3E53 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 795FD80C1612AD4700BA3E53 /* README.txt */; };
 		795FFCA815C8D6FA00816B70 /* PagarFaturaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795FFCA715C8D6FA00816B70 /* PagarFaturaViewController.m */; };
 		796A824E159D475F0072E99B /* compras.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824A159D475F0072E99B /* compras.png */; };
 		796A824F159D475F0072E99B /* contas.png in Resources */ = {isa = PBXBuildFile; fileRef = 796A824B159D475F0072E99B /* contas.png */; };
@@ -60,7 +62,6 @@
 		79D3336B156F19F800D034D3 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 79D3336A156F19F800D034D3 /* iTunesArtwork */; };
 		79D3336D156F1A3D00D034D3 /* LogoBarra.png in Resources */ = {isa = PBXBuildFile; fileRef = 79D3336C156F1A3D00D034D3 /* LogoBarra.png */; };
 		79DBA40015CCBDBA008BF96B /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79DBA40215CCBDBA008BF96B /* iPhone.storyboard */; };
-		79E2ADD41612B7DF008A5FA7 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E2ADD31612B7DF008A5FA7 /* libGoogleAdMobAds.a */; };
 		79F92E1E1539F15D0031A919 /* CadastroDaContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */; };
 		79F92E221539F19C0031A919 /* TipoDaContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79F92E211539F19C0031A919 /* TipoDaContaViewController.m */; };
 		79FEE572153917BC00DE35F5 /* ListaDeContasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FEE571153917BC00DE35F5 /* ListaDeContasViewController.m */; };
@@ -81,6 +82,18 @@
 		7935EF901585340500C916E0 /* RootTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarController.m; sourceTree = "<group>"; };
 		79362F81153D122E005459E8 /* Conta+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Conta+AddOn.h"; sourceTree = "<group>"; };
 		79362F82153D122E005459E8 /* Conta+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Conta+AddOn.m"; sourceTree = "<group>"; };
+		793CF59916174FE900A37225 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		793CF59A16174FE900A37225 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		793CF59B16174FE900A37225 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		793CF59C16174FE900A37225 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		793CF59D16174FE900A37225 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		793CF59E16174FE900A37225 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		793CF59F16174FE900A37225 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		793CF5A016174FE900A37225 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		793CF5A116174FE900A37225 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		793CF5A216174FE900A37225 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		793CF5A316174FE900A37225 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		793CF5A61617507600A37225 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		79456A31159FD2AD00712D1E /* CadastroDeParcelaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDeParcelaViewController.h; sourceTree = "<group>"; };
 		79456A32159FD2AE00712D1E /* CadastroDeParcelaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CadastroDeParcelaViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7947B80215C23B390083B177 /* Compra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compra.h; sourceTree = "<group>"; };
@@ -96,16 +109,6 @@
 		795FD7EA161295C900BA3E53 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		795FD7EC161295D500BA3E53 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		795FD7EE161295E100BA3E53 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		795FD8021612AD4700BA3E53 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdMobExtras.h; path = VidaParcelada/admob/GADAdMobExtras.h; sourceTree = "<group>"; };
-		795FD8031612AD4700BA3E53 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdNetworkExtras.h; path = VidaParcelada/admob/GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		795FD8041612AD4700BA3E53 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdSize.h; path = VidaParcelada/admob/GADAdSize.h; sourceTree = "<group>"; };
-		795FD8051612AD4700BA3E53 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerView.h; path = VidaParcelada/admob/GADBannerView.h; sourceTree = "<group>"; };
-		795FD8061612AD4700BA3E53 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerViewDelegate.h; path = VidaParcelada/admob/GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		795FD8071612AD4700BA3E53 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitial.h; path = VidaParcelada/admob/GADInterstitial.h; sourceTree = "<group>"; };
-		795FD8081612AD4700BA3E53 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitialDelegate.h; path = VidaParcelada/admob/GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		795FD8091612AD4700BA3E53 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequest.h; path = VidaParcelada/admob/GADRequest.h; sourceTree = "<group>"; };
-		795FD80A1612AD4700BA3E53 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequestError.h; path = VidaParcelada/admob/GADRequestError.h; sourceTree = "<group>"; };
-		795FD80C1612AD4700BA3E53 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.txt; path = VidaParcelada/admob/README.txt; sourceTree = "<group>"; };
 		795FFCA615C8D6FA00816B70 /* PagarFaturaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagarFaturaViewController.h; sourceTree = "<group>"; };
 		795FFCA715C8D6FA00816B70 /* PagarFaturaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagarFaturaViewController.m; sourceTree = "<group>"; };
 		796A824A159D475F0072E99B /* compras.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compras.png; sourceTree = "<group>"; };
@@ -156,7 +159,6 @@
 		79D3336C156F1A3D00D034D3 /* LogoBarra.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoBarra.png; sourceTree = "<group>"; };
 		79DAC14C160D5F4D00E6147B /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		79DBA40415CCBDC2008BF96B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
-		79E2ADD31612B7DF008A5FA7 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAdMobAds.a; path = VidaParcelada/admob/libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		79F92E1C1539F15D0031A919 /* CadastroDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDaContaViewController.h; sourceTree = "<group>"; };
 		79F92E1D1539F15D0031A919 /* CadastroDaContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CadastroDaContaViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		79F92E201539F19C0031A919 /* TipoDaContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipoDaContaViewController.h; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				793CF5A71617507600A37225 /* AdSupport.framework in Frameworks */,
 				795FD7EF161295E100BA3E53 /* SystemConfiguration.framework in Frameworks */,
 				795FD7ED161295D500BA3E53 /* MessageUI.framework in Frameworks */,
 				795FD7EB161295C900BA3E53 /* AudioToolbox.framework in Frameworks */,
@@ -181,7 +184,7 @@
 				798FF4021533B4B200385C5E /* UIKit.framework in Frameworks */,
 				798FF4041533B4B200385C5E /* Foundation.framework in Frameworks */,
 				798FF4061533B4B200385C5E /* CoreGraphics.framework in Frameworks */,
-				79E2ADD41612B7DF008A5FA7 /* libGoogleAdMobAds.a in Frameworks */,
+				793CF5A416174FE900A37225 /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,17 +226,17 @@
 		795FD7DB1612956800BA3E53 /* adMob */ = {
 			isa = PBXGroup;
 			children = (
-				79E2ADD31612B7DF008A5FA7 /* libGoogleAdMobAds.a */,
-				795FD8021612AD4700BA3E53 /* GADAdMobExtras.h */,
-				795FD8031612AD4700BA3E53 /* GADAdNetworkExtras.h */,
-				795FD8041612AD4700BA3E53 /* GADAdSize.h */,
-				795FD8051612AD4700BA3E53 /* GADBannerView.h */,
-				795FD8061612AD4700BA3E53 /* GADBannerViewDelegate.h */,
-				795FD8071612AD4700BA3E53 /* GADInterstitial.h */,
-				795FD8081612AD4700BA3E53 /* GADInterstitialDelegate.h */,
-				795FD8091612AD4700BA3E53 /* GADRequest.h */,
-				795FD80A1612AD4700BA3E53 /* GADRequestError.h */,
-				795FD80C1612AD4700BA3E53 /* README.txt */,
+				793CF59916174FE900A37225 /* GADAdMobExtras.h */,
+				793CF59A16174FE900A37225 /* GADAdNetworkExtras.h */,
+				793CF59B16174FE900A37225 /* GADAdSize.h */,
+				793CF59C16174FE900A37225 /* GADBannerView.h */,
+				793CF59D16174FE900A37225 /* GADBannerViewDelegate.h */,
+				793CF59E16174FE900A37225 /* GADInterstitial.h */,
+				793CF59F16174FE900A37225 /* GADInterstitialDelegate.h */,
+				793CF5A016174FE900A37225 /* GADRequest.h */,
+				793CF5A116174FE900A37225 /* GADRequestError.h */,
+				793CF5A216174FE900A37225 /* libGoogleAdMobAds.a */,
+				793CF5A316174FE900A37225 /* README.txt */,
 			);
 			name = adMob;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 		798FF3F21533B4B200385C5E = {
 			isa = PBXGroup;
 			children = (
+				793CF5A61617507600A37225 /* AdSupport.framework */,
 				798FF4071533B4B200385C5E /* VidaParcelada */,
 				798FF4001533B4B200385C5E /* Frameworks */,
 				798FF3FE1533B4B200385C5E /* Products */,
@@ -469,7 +473,7 @@
 				7980243115D9E29F0051D6C9 /* Localizable.strings in Resources */,
 				790D81F615F5AA0C001456F1 /* WaitView.xib in Resources */,
 				790827FD1604061A00CB4233 /* Default-568h@2x.png in Resources */,
-				795FD80E1612AD4700BA3E53 /* README.txt in Resources */,
+				793CF5A516174FE900A37225 /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,7 +589,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -604,7 +608,7 @@
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

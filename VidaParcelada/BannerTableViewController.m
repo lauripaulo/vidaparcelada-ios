@@ -30,6 +30,7 @@
 
 -(void)adViewDidReceiveAd:(GADBannerView *)bannerView
 {
+    NSLog (@"adViewDidReceiveAd");
     // resize
     [UIView beginAnimations:@"resize" context:nil];
     [UIView setAnimationDuration:0.5];
@@ -58,7 +59,23 @@
 
 -(void)adViewWillDismissScreen:(GADBannerView *)bannerView
 {
+    NSLog (@"adViewWillDismissScreen");
     [bannerView removeFromSuperview];
+}
+
+-(void)adViewDidDismissScreen:(GADBannerView *)adView
+{
+    NSLog (@"adViewDidDismissScreen");
+}
+
+-(void)adViewWillLeaveApplication:(GADBannerView *)adView
+{
+    NSLog (@"adViewWillLeaveApplication");
+}
+
+-(void)adViewWillPresentScreen:(GADBannerView *)adView
+{
+    NSLog (@"adViewWillPresentScreen");
 }
 
 -(void)createDefaultBanner
