@@ -187,6 +187,8 @@
 {
     //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
+    [super viewWillAppear:animated];
+    
     self.compraSelecionada = nil;
         
     //

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Conta+AddOn.h"
 #import "TipoConta+AddOn.h"
+#import "BannerTableViewController.h"
 
-@interface CadastroDaContaViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, TipoContaEscolhidoDelegate, UIAlertViewDelegate>
+@interface CadastroDaContaViewController : BannerTableViewController <UITextFieldDelegate, UIAlertViewDelegate, TipoContaEscolhidoDelegate, UIAlertViewDelegate>
 
 // aqui definimos nosso banco de dados global
 // que todos os controllers irão utilizar

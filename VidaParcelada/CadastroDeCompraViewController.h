@@ -13,8 +13,9 @@
 #import "Conta+AddOn.h"
 #import "TipoConta+AddOn.h"
 #import "VidaParceladaHelper.h"
+#import "BannerTableViewController.h"
 
-@interface CadastroDeCompraViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, ContaEscolhidaDelegate>
+@interface CadastroDeCompraViewController : BannerTableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, ContaEscolhidaDelegate>
 
 // aqui definimos nosso banco de dados global
 // que todos os controllers irão utilizar

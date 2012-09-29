@@ -393,9 +393,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-}
 
 - (void)viewDidUnload
 {

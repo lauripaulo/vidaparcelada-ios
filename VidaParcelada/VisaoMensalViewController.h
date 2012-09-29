@@ -9,9 +9,8 @@
 #import "CoreDataTableViewController.h"
 #import "Compra+AddOn.h"
 #import "Parcela+AddOn.h"
-#import "GADBannerViewDelegate.h"
 
-@interface VisaoMensalViewController : CoreDataTableViewController <AlteracaoDeCompraDelegate, AlteracaoDeParcelaDelegate, GADBannerViewDelegate>
+@interface VisaoMensalViewController : CoreDataTableViewController <AlteracaoDeCompraDelegate, AlteracaoDeParcelaDelegate>
 
 // aqui definimos nosso banco de dados global
 // que todos os controllers irão utilizar
