@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Parcela+AddOn.h"
+#import "BannerTableViewController.h"
 
-@interface CadastroDeParcelaViewController : UITableViewController <UITextFieldDelegate>
+@interface CadastroDeParcelaViewController : BannerTableViewController <UITextFieldDelegate>
 
 // banco de dados atualmente em uso. Precisa ser definido no 
 // prepareForSegue do controler que abre o banco de dados.

@@ -309,7 +309,10 @@
 {
     //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
 
+    // Display banners
+    self.displayAds = YES;
     [super viewWillAppear:animated];
+    
     self.objetivoMensal = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
     [[self tableView] reloadData];
     

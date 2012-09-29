@@ -10,16 +10,51 @@
 
 @interface BannerTableViewController ()
 
+-(NSString *) getUserType;
+
 @end
 
 @implementation BannerTableViewController
 
 @synthesize banner = _banner;
+@synthesize displayAds = _displayAds;
+@synthesize bannerWasDisplayed = _bannerWasDisplayed;
+
+// The user type van be 'normal' (with ads) or 'premium' (without ads)
+-(NSString *) getUserType;
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userType = [defaults objectForKey:@"userType"];
+    
+    if (!userType) {
+        userType = [NSString stringWithFormat:@"normal"];
+        [defaults setObject:userType forKey:@"userType"];
+        [defaults synchronize];
+    }
+    
+    NSLog (@"getUserType = %@", userType);
+
+    return userType;
+}
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self createDefaultBanner];
+    
+    // Do we have to create and call a banner?
+    if (self.displayAds) {
+        // Check to see if we have a premium user
+        if (![self.getUserType isEqualToString:@"premium"]) {
+            // Regular user
+            [self createDefaultBanner];
+            [self getBannerFromAdMob];
+        } else {
+            NSLog (@"VidaParcelada PREMIUM user.");
+        }
+    } else {
+        NSLog (@"No Ads will be displayed for the %@ view controller.", self);
+        return;
+    }
 }
 
 -(void) viewWillDisappear:(BOOL)animated
@@ -31,30 +66,29 @@
 -(void)adViewDidReceiveAd:(GADBannerView *)bannerView
 {
     NSLog (@"adViewDidReceiveAd");
+    
     // resize
     [UIView beginAnimations:@"resize" context:nil];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationDelay:1.5];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationDelay:1.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     
-        // Move banner
-        [UIView beginAnimations:@"banner" context:nil];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:1.0];
-        CGRect bannerFrame = bannerView.viewForBaselineLayout.frame;
-        CGFloat screenSize = self.navigationController.view.frame.size.height;
-        CGFloat tabBarSize = self.tabBarController.tabBar.frame.size.height;
-        CGFloat bannerOrigin = screenSize - tabBarSize;
-        NSLog (@"bannerOrigin: %f", bannerOrigin);
-        bannerFrame.origin.y = bannerOrigin;
-        bannerView.viewForBaselineLayout.frame = bannerFrame;
-        [UIView commitAnimations];
+    // Move banner
+    CGRect bannerFrame = bannerView.viewForBaselineLayout.frame;
+    CGFloat screenSize = self.navigationController.view.frame.size.height;
+    CGFloat tabBarSize = self.tabBarController.tabBar.frame.size.height;
+    CGFloat bannerOrigin = screenSize - tabBarSize;
+    //NSLog (@"bannerOrigin: %f", bannerOrigin);
+    bannerFrame.origin.y = bannerOrigin;
+    bannerView.viewForBaselineLayout.frame = bannerFrame;
     
     CGRect tableFrame = self.navigationController.visibleViewController.view.frame;
     tableFrame.size.height = tableFrame.size.height - GAD_SIZE_320x50.height;
     self.navigationController.visibleViewController.view.frame = tableFrame;
     
     [UIView commitAnimations];
+    
+    self.bannerWasDisplayed = YES;
 }
 
 -(void)adViewWillDismissScreen:(GADBannerView *)bannerView
@@ -80,6 +114,8 @@
 
 -(void)createDefaultBanner
 {
+    NSLog (@"adViewWillPresentScreen");
+    
     // Criar uma visualização do tamanho padrão na parte inferior da tela, escondido.
     self.banner = [[GADBannerView alloc]
                    initWithFrame:CGRectMake(0.0,
@@ -106,10 +142,14 @@
     // Put the banner into play
     self.banner.rootViewController = self;
     [self.tabBarController.view addSubview:self.banner];
+}
+
+-(void)getBannerFromAdMob
+{
+    NSLog (@"getBannerFromAdMob");
 
     // Iniciar uma solicitação genérica para carregá-la com um anúncio.
     [self.banner loadRequest:[GADRequest request]];
-    
 }
 
 @end
