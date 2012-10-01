@@ -2,8 +2,8 @@
 //  Compra+AddOn.m
 //  VidaParcelada
 //
-//  Created by Lauri Paulo Laux Junior Laux on 23/04/12.
-//  Copyright (c) 2012 Oriba Apps. All rights reserved.
+//  Created by L. P. Laux on 23/04/12.
+//  Copyright (c) 2012 Gettin'App. All rights reserved.
 //
 
 #import "Compra+AddOn.h"

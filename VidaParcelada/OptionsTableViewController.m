@@ -8,6 +8,8 @@
 
 #import "OptionsTableViewController.h"
 #import "VidaParceladaHelper.h"
+#import "MKStoreManager.h"
+#import "WaitView.h"
 
 @interface OptionsTableViewController ()
 
@@ -17,6 +19,8 @@
 
 @property (retain) NSNumberFormatter *percentFormatter;
 @property (retain) NSNumberFormatter *valorFormatter;
+
+@property (nonatomic, strong)  WaitView *waitView;
 
 @end
 
@@ -32,6 +36,21 @@
 @synthesize stepperQtdeParcelas = _stepperQtdeParcelas;
 @synthesize cellMostrarTutorialNovamente = _cellMostrarTutorialNovamente;
 @synthesize cellSobre = _cellSobre;
+@synthesize cellComprarPremium = _cellComprarPremium;
+@synthesize waitView = _waitView;
+
+-(UIView *) waitView
+{
+    if (!_waitView) {
+        //CGRect screenFrame = CGRectMake(0, 0, 320, 480);
+        _waitView = [[[NSBundle mainBundle] loadNibNamed:@"WaitView" owner:self options:nil] objectAtIndex:0];
+        CGRect screenFrame = [[UIScreen mainScreen] applicationFrame];
+        _waitView.frame = screenFrame;
+        _waitView.message.text = @"Aguardando iTunes store...";
+    }
+    return _waitView;
+}
+
 
 //
 // Codigo de gerenciamento do teclado
@@ -94,6 +113,11 @@
 
     [super viewWillAppear:animated];
     
+    // Ja comprei a versão premium? Altera botão de compra.
+    if ([MKStoreManager isFeaturePurchased:@"VPPREMIUM"]) {
+        self.cellComprarPremium.textLabel.text = @"Você comprou a versão premium.";
+        [self.cellComprarPremium removeFromSuperview];
+    }
     //NSLog(@"(<) viewWillAppear: ");
 }
 
@@ -134,6 +158,7 @@
     [self setStepperQtdeParcelas:nil];
     [self setCellMostrarTutorialNovamente:nil];
     [self setCellSobre:nil];
+    [self setCellComprarPremium:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -153,7 +178,43 @@
 
     if (cell == self.cellMostrarTutorialNovamente) {
         [VidaParceladaHelper resetaTodosOsEstadosApresentacaoInicialAba];
+    } else if (cell == self.cellComprarPremium) {
+
+        // Ja comprei? Ignora compra
+        if ([MKStoreManager isFeaturePurchased:@"VPPREMIUM"]) {
+            UIAlertView *alertView;
+            alertView = [[UIAlertView alloc] initWithTitle:@"Compra" message:@"Obrigado por comprar a versão premium!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alertView show];
+            return;
+        }
+        
+        // Ainda não comprou? Realiza compra!
+        // Adiciona relógio a abertura
+        [self.tabBarController.view addSubview:self.waitView];
+        [self.waitView.acitivity startAnimating];
+        
+        [[MKStoreManager sharedManager] buyFeature:@"VPPREMIUM"
+            onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads)
+         {
+             NSLog(@"Purchased: %@", purchasedFeature);
+             UIAlertView *alertView;
+             alertView = [[UIAlertView alloc] initWithTitle:@"Compra" message:@"Obrigado por comprar a versão premium!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+             [alertView show];
+         }
+            onCancelled:^
+         {
+             UIAlertView *alertView;
+             alertView = [[UIAlertView alloc] initWithTitle:@"Compra" message:@"Não foi possível realizar a compra, tente novamente mais tarde." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+             [alertView show];
+         }];
+        
     }
     
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // Libera o app para uso
+    [self.waitView removeFromSuperview];
 }
 @end

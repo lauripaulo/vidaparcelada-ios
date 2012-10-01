@@ -12,4 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *acitivity;
 
+@property (weak, nonatomic) IBOutlet UILabel *title;
+
+@property (weak, nonatomic) IBOutlet UILabel *message;
+
 @end

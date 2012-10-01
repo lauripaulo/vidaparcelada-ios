@@ -2,11 +2,12 @@
 //  VidaParceladaAppDelegate.m
 //  VidaParcelada
 //
-//  Created by Lauri Paulo Laux Junior Laux on 09/04/12.
+//  Created by L. P. Laux on 09/04/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "VidaParceladaAppDelegate.h"
+#import "MKStoreManager.h"
 
 @implementation VidaParceladaAppDelegate
 
@@ -17,6 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [MKStoreManager sharedManager];
     
     return YES;
 }

@@ -11,6 +11,9 @@
 @interface AboutViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *btnVoltar;
+
 @property (weak, nonatomic) IBOutlet UIButton *btnWebsite;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnComprarPremium;
 
 @end

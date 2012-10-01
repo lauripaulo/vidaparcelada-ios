@@ -3,7 +3,7 @@
 //  VidaParcelada
 //
 //  Created by Lauri Paulo Laux Junior on 22/04/12.
-//  Copyright (c) 2012 Oriba Apps. All rights reserved.
+//  Copyright (c) 2012 Gettin'App. All rights reserved.
 //
 
 #import "CadastroDeCompraViewController.h"

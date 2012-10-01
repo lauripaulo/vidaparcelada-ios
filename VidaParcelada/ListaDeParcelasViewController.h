@@ -2,7 +2,7 @@
 //  ListaDeParcelasViewController.h
 //  VidaParcelada
 //
-//  Created by Lauri Paulo Laux Junior Laux on 14/04/12.
+//  Created by L. P. Laux on 14/04/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OptionsTableViewController : UITableViewController <UITextFieldDelegate>
+@interface OptionsTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIManagedDocument *vpDatabase;
 @property (weak, nonatomic) IBOutlet UITextField *tfObjetivoMensal;
@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIStepper *stepperQtdeParcelas;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellMostrarTutorialNovamente;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellSobre;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellComprarPremium;
 
 @end

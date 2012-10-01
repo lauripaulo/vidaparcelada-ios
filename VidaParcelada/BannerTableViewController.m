@@ -7,10 +7,9 @@
 //
 
 #import "BannerTableViewController.h"
+#import "MKStoreManager.h"
 
 @interface BannerTableViewController ()
-
--(NSString *) getUserType;
 
 @end
 
@@ -20,23 +19,6 @@
 @synthesize displayAds = _displayAds;
 @synthesize bannerWasDisplayed = _bannerWasDisplayed;
 
-// The user type van be 'normal' (with ads) or 'premium' (without ads)
--(NSString *) getUserType;
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *userType = [defaults objectForKey:@"userType"];
-    
-    if (!userType) {
-        userType = [NSString stringWithFormat:@"normal"];
-        [defaults setObject:userType forKey:@"userType"];
-        [defaults synchronize];
-    }
-    
-    NSLog (@"getUserType = %@", userType);
-
-    return userType;
-}
-
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -44,12 +26,12 @@
     // Do we have to create and call a banner?
     if (self.displayAds) {
         // Check to see if we have a premium user
-        if (![self.getUserType isEqualToString:@"premium"]) {
+        if ([MKStoreManager isFeaturePurchased:@"VPPREMIUM"]) {
+            NSLog (@"VidaParcelada PREMIUM user.");
+        } else {
             // Regular user
             [self createDefaultBanner];
             [self getBannerFromAdMob];
-        } else {
-            NSLog (@"VidaParcelada PREMIUM user.");
         }
     } else {
         NSLog (@"No Ads will be displayed for the %@ view controller.", self);
