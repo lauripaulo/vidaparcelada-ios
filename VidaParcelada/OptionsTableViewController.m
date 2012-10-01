@@ -107,6 +107,12 @@
     }
 }
 
+- (void)updatePremiumCell
+{
+    self.cellComprarPremium.textLabel.text = @"Você comprou a versão premium.";
+    self.cellComprarPremium.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+
 - (void) viewWillAppear:(BOOL)animated
 {
     //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
@@ -115,8 +121,7 @@
     
     // Ja comprei a versão premium? Altera botão de compra.
     if ([MKStoreManager isFeaturePurchased:@"VPPREMIUM"]) {
-        self.cellComprarPremium.textLabel.text = @"Você comprou a versão premium.";
-        [self.cellComprarPremium removeFromSuperview];
+        [self updatePremiumCell];
     }
     //NSLog(@"(<) viewWillAppear: ");
 }
@@ -197,6 +202,7 @@
             onComplete:^(NSString *purchasedFeature, NSData *purchasedReceipt, NSArray *availableDownloads)
          {
              NSLog(@"Purchased: %@", purchasedFeature);
+             [self updatePremiumCell];
              UIAlertView *alertView;
              alertView = [[UIAlertView alloc] initWithTitle:@"Compra" message:@"Obrigado por comprar a versão premium!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
              [alertView show];
