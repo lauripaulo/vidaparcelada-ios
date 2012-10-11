@@ -307,8 +307,10 @@
 // avisa quando a conta for escolhida com sucesso.
 - (void)contaEscolhida:(Conta *)conta
 {
+    if (self.contaSelecionada != conta) {
+        self.algumCampoFoiAlterado = YES;
+    }
     self.contaSelecionada = conta;
-    
     [self atualizaDescricaoDaConta];
 }
 

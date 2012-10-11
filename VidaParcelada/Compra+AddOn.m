@@ -36,7 +36,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
-    request.predicate = [NSPredicate predicateWithFormat:@"descricao = %@ AND estado = %@ AND valorTotal = %@", descricao, estado, valorTotal];
+    request.predicate = [NSPredicate predicateWithFormat:@"descricao = %@ AND valorTotal = %@ AND dataDaCompra = %@ AND origem = %@", descricao, valorTotal, data, conta];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES];
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
@@ -95,6 +95,21 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
         [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:parcelasAntigasPagas inContext:context];
         
     }
+    //
+    // Cria o novo objeto
+    //
+    if (!novaCompra) {
+        novaCompra = [NSEntityDescription insertNewObjectForEntityForName:@"Compra" inManagedObjectContext:context];
+        //NSLog(@"(!) compraComDescricao: new = %@", novaCompra.descricao);
+    }
+    novaCompra.descricao = descricao;
+    novaCompra.detalhes = detalhes;
+    novaCompra.dataDaCompra = data;
+    novaCompra.estado = estado;
+    novaCompra.valorTotal = valorTotal;
+    novaCompra.qtdeTotalDeParcelas = parcelas;
+    novaCompra.origem = conta;
+    [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:parcelasAntigasPagas inContext:context];
 
     [context save:(&error)];
     
@@ -186,7 +201,24 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     NSDateComponents *dataDeVencimentoComps = [[NSDateComponents alloc] init];
     NSDate *melhorDiaDesteMes = [Compra melhorDiaDeCompraDoMes:conta dataAtual:data];
     
-    if ([[data laterDate:melhorDiaDesteMes] isEqualToDate:data] || [data isEqualToDate:melhorDiaDesteMes]) {
+    if ([conta.diaDeVencimento intValue] < [conta.melhorDiaDeCompra intValue]) {
+        // Se o vencimento for menor que o melhor dia significa que o vencimento esta no
+        // mes seguinte ao melhor dia. Ex: Melhor dia 27, vencimento 04.
+        if (dataDaCompraComps.day >= [conta.melhorDiaDeCompra intValue]) {
+            // Se a Data da compra >= melhor dia significa que a fatura fechou e a compra sera computada
+            // para o mes seguinte. No caso de vencimento < o melhor dia será em 2 meses.
+            [dataDeVencimentoComps setDay:[conta.diaDeVencimento intValue]];
+            [dataDeVencimentoComps setMonth:(dataDaCompraComps.month +i +1)];
+            [dataDeVencimentoComps setYear:dataDaCompraComps.year];
+        } else {
+            // Se a Data da compra < melhor dia significa que a fatura está aberta e sera computada
+            // para o proximo mes.
+            [dataDeVencimentoComps setDay:[conta.diaDeVencimento intValue]];
+            [dataDeVencimentoComps setMonth:(dataDaCompraComps.month +i)];
+            [dataDeVencimentoComps setYear:dataDaCompraComps.year];
+        }
+    } else if ([[data laterDate:melhorDiaDesteMes] isEqualToDate:data] || [data isEqualToDate:melhorDiaDesteMes]) {
+        // Vencimento >= melhor dia 
         // Se a compra for *durante* OU *depois* do melhor dia do mes
         // o vencimento será no próximo mês
         [dataDeVencimentoComps setDay:[conta.diaDeVencimento intValue]];
