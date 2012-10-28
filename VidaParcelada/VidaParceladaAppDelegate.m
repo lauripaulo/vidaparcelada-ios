@@ -13,6 +13,9 @@
 
 @synthesize window = _window;
 
+@synthesize defaultContext = _defaultContext;
+@synthesize defaultDatabase = _defaultDatabase;
+
 #pragma mark - Metodos da classe
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

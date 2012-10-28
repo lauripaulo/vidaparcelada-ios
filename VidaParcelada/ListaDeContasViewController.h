@@ -12,10 +12,6 @@
 
 @interface ListaDeContasViewController : CoreDataTableViewController <AlteracaoDeContaDelegate, UIAlertViewDelegate>
 
-// banco de dados atualmente em uso. Precisa ser definido no 
-// prepareForSegue do controler que abre o banco de dados.
-@property (nonatomic, strong) UIManagedDocument *vpDatabase;
-
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnAdicionarConta;
 
 @property (nonatomic, strong) UIAlertView *comprasPresentesAlert;

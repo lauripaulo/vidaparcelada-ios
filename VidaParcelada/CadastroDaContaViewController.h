@@ -13,10 +13,6 @@
 
 @interface CadastroDaContaViewController : BannerTableViewController <UITextFieldDelegate, UIAlertViewDelegate, TipoContaEscolhidoDelegate, UIAlertViewDelegate>
 
-// aqui definimos nosso banco de dados global
-// que todos os controllers irão utilizar
-// para mostrar dados do nosso aplicativo
-@property (nonatomic, strong) UIManagedDocument *vpDatabase;
 @property (weak, nonatomic) IBOutlet UITextField *tfDescricaoDaConta;
 @property (weak, nonatomic) IBOutlet UITextField *tfEmpresa;
 @property (weak, nonatomic) IBOutlet UITextField *tfLimiteTotal;

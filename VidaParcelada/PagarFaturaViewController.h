@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellCancelarPagamento;
 
 @property (strong, nonatomic) Conta *contaSelecionada;
-@property (strong, nonatomic) NSManagedObject *vpDatabase;
 @property (strong, nonatomic) NSString *mesAtual;
 @property (strong, nonatomic) NSDecimalNumber *valorTotal;
 @property (strong, nonatomic) NSDecimalNumber *diferencaDeValor;

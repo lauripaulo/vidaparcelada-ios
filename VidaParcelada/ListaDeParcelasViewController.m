@@ -9,6 +9,7 @@
 #import "ListaDeParcelasViewController.h"
 #import "CadastroDeParcelaViewController.h"
 #import "VidaParceladaHelper.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface ListaDeParcelasViewController ()
 
@@ -16,7 +17,6 @@
 
 @implementation ListaDeParcelasViewController
 
-@synthesize vpDatabase = _vpDatabase;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize compraSelecionada = _compraSelecionada;
@@ -58,14 +58,6 @@
 
 }
 
-// sobrescreve o setter para o BD do VP
-// e inicializa o fetchResultsController
-- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
-{
-    if (_vpDatabase != mangedDocument) {
-        _vpDatabase = mangedDocument;
-    }
-}
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -73,7 +65,6 @@
     
     [super viewWillAppear:animated];
     self.parcelaSelecionada = nil;
-    [self setupFetchedResultsController];
 
     //
     // Chamada a primeira vez que a aba é exibida passando o nome da própria
@@ -118,6 +109,9 @@
     UINavigationBar *morenavbar = self.navigationController.navigationBar;
     UINavigationItem *morenavitem = morenavbar.topItem;
     morenavitem.rightBarButtonItem = nil;
+    
+    [self setupFetchedResultsController];
+
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -160,18 +154,18 @@
 {
     self.debug = YES;
 
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
     request.predicate = [NSPredicate predicateWithFormat:@"compra = %@", self.compraSelecionada];
     request.sortDescriptors = [NSArray arrayWithObject:
                                [NSSortDescriptor sortDescriptorWithKey:@"dataVencimento" ascending:YES]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
-                                                                        managedObjectContext:self.vpDatabase.managedObjectContext 
+                                                                        managedObjectContext:appDelegate.defaultContext
                                                                           sectionNameKeyPath:nil 
-                                                                                   cacheName:nil];
-    // !!!! Cache desabilitado devido a um erro infame !!!
-    // !!!! @"ListaDeParcelasCache"
-    // !!!! voltar quando resolver erro de inconsitencia de cache.
+                                                                                   cacheName:@"ListaDeParcelasCache"];
 }
 
 // Popula a tabela com os dados do CoreData
@@ -203,10 +197,6 @@
     return UITableViewCellEditingStyleNone;
 }
 
-// Temos que passar o banco de dados que abrimos aqui
-// no primeiro controller do app para todos
-// os outros controllers. Dessa forma todos terao um atributo
-// UIManagedDocument *vpDatabase implementado.
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // ATENÇÃO: Quando utilizamos Segues a celula que dispara o segue
@@ -222,11 +212,7 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setParcelaSelecionada:)]){
         [segue.destinationViewController setParcelaSelecionada:self.parcelaSelecionada];
     }
-    
-    // Por último passa o managedDocument
-    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
-        [segue.destinationViewController setVpDatabase:self.vpDatabase];
-    }
+
     
     // Se adiciona como delegate
     if ([segue.destinationViewController respondsToSelector:@selector(setParcelaDelegate:)]){

@@ -8,6 +8,7 @@
 
 #import "PagarFaturaViewController.h"
 #import "VidaParceladaHelper.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface PagarFaturaViewController ()
 
@@ -41,7 +42,6 @@
 @synthesize cellCancelarPagamento = _cellCancelarPagamento;
 
 @synthesize contaSelecionada = _contaSelecionada;
-@synthesize vpDatabase = _vpDatabase;
 @synthesize mesAtual = _mesAtual;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize valorTotal = _valorTotal;
@@ -249,8 +249,11 @@
     //NSLog (@"(>) escolheContaParaPagamento: ");
         
     if (!self.contaSelecionada) {
+        // Delegate com o defaultContext e defaultDatabase
+        VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        
         // vamos listar todas as contas, independente se tem ou não parcelas.
-        NSArray * listaDeContas = [Conta contasCadastradasUsandoContext:self.vpDatabase.managedObjectContext];
+        NSArray * listaDeContas = [Conta contasCadastradasUsandoContext:appDelegate.defaultContext];
         
         // iterando nas contas e pesquisando cada uma por parcelas pendentes para o mes atual
         // se a conta tiver, para o processo e inicia o processo de pagamento
@@ -285,8 +288,11 @@
     
     BOOL temParcelas = NO;
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
     // Quantas parcelas pendentes existem?
-    NSArray *parcelasPendentes = [Parcela parcelasPendentesDoMes:hoje eDaConta:conta inContext:self.vpDatabase.managedObjectContext];
+    NSArray *parcelasPendentes = [Parcela parcelasPendentesDoMes:hoje eDaConta:conta inContext:appDelegate.defaultContext];
     
     // Temos alguma?
     if (parcelasPendentes && [parcelasPendentes count] > 0) {
@@ -423,7 +429,10 @@
     NSString *textoValJuros = [self.valorFormatter stringFromNumber:[self.valorJuros decimalNumberBySubtracting:self.diferencaDeValor]];
     NSString *textoJuros = [NSString stringWithFormat:@"Valor: %@, Juros: %@", [self.valorFormatter stringFromNumber:self.diferencaDeValor], textoValJuros];
     
-    [Compra compraComDescricao:@"Juros do cartão" comDetalhes:textoJuros dataDaCompra:self.hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:numParcelas valorTotal:self.valorJuros comConta:self.contaSelecionada assumirAnterioresComoPagas:YES inContext:self.vpDatabase.managedObjectContext];
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    [Compra compraComDescricao:@"Juros do cartão" comDetalhes:textoJuros dataDaCompra:self.hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:numParcelas valorTotal:self.valorJuros comConta:self.contaSelecionada assumirAnterioresComoPagas:YES inContext:appDelegate.defaultContext];
     
     //NSLog(@"Ajuste = %@", ajuste);
 }

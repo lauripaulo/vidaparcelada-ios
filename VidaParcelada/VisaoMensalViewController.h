@@ -12,11 +12,6 @@
 
 @interface VisaoMensalViewController : CoreDataTableViewController <AlteracaoDeCompraDelegate, AlteracaoDeParcelaDelegate>
 
-// aqui definimos nosso banco de dados global
-// que todos os controllers irão utilizar
-// para mostrar dados do nosso aplicativo
-@property (nonatomic, strong) UIManagedDocument *vpDatabase;
-
 @property (nonatomic, strong) NSNumberFormatter *valorFormatter;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSDecimalNumber *objetivoMensal;

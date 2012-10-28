@@ -10,6 +10,7 @@
 #import "VidaParceladaHelper.h"
 #import "MKStoreManager.h"
 #import "WaitView.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface OptionsTableViewController ()
 
@@ -30,7 +31,6 @@
 @synthesize activeField = _activeField;
 @synthesize percentFormatter = _percentFormatter;
 @synthesize valorFormatter = _valorFormatter;
-@synthesize vpDatabase = _vpDatabase;
 @synthesize tfObjetivoMensal = _tfObjetivoMensal;
 @synthesize tfQtdeParcelas = _tfQtdeParcelas;
 @synthesize stepperQtdeParcelas = _stepperQtdeParcelas;
@@ -93,18 +93,6 @@
     } 
     
     return result;
-}
-
-// sobrescreve o setter para o BD do VP
-// e inicializa o fetchResultsController
-- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
-{
-    if (_vpDatabase != mangedDocument) {
-        _vpDatabase = mangedDocument;
-        //
-        // Inicializações adicionais
-        //
-    }
 }
 
 - (void)updatePremiumCell

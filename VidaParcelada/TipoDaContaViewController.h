@@ -12,11 +12,6 @@
 
 @interface TipoDaContaViewController : CoreDataTableViewController
 
-// aqui definimos nosso banco de dados global
-// que todos os controllers irão utilizar
-// para mostrar dados do nosso aplicativo
-@property (nonatomic, strong) UIManagedDocument *vpDatabase;
-
 // Tipo selecionado
 @property (nonatomic, strong) TipoConta *tipoSelecionado;
 

@@ -13,6 +13,7 @@
 #import "Conta+AddOn.h"
 #import "CadastroDeCompraViewController.h"
 #import "CadastroDeParcelaViewController.h" 
+#import "VidaParceladaAppDelegate.h"
 
 @interface VisaoMensalViewController ()
 
@@ -20,7 +21,6 @@
 
 @implementation VisaoMensalViewController
 
-@synthesize vpDatabase = _vpDatabase;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize objetivoMensal = _objetivoMensal;
@@ -59,23 +59,16 @@
     [self.tableView reloadData];
 }
 
-// sobrescreve o setter para o BD do VP
-// e inicializa o fetchResultsController
-- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
-{
-    if (_vpDatabase != mangedDocument) {
-        _vpDatabase = mangedDocument;
-        [self setupFetchedResultsController];
-        [self verificaVencimentos];
-    }
-}
 
 -(void)verificaVencimentos
 {
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     // Verifica se existem cartões que vencem hoje ou que tem melhor dia hoje.
     NSDate *hoje = [[NSDate alloc] init];
     NSArray *contas = [Conta verificaDataRetornandoContas:hoje
-                                           usandoContexto:self.vpDatabase.managedObjectContext
+                                           usandoContexto:appDelegate.defaultContext
                                      comparandoVencimento:YES
                                       comparandoMelhorDia:NO];
     
@@ -127,23 +120,6 @@
 {   
     self.debug = YES;
     
-//    // mostrar as compras que vão vencer apenas a partir do dia primeiro 
-//    // do mês atual.
-//    NSDate *hoje = [[NSDate alloc] init];
-//    NSCalendar *calendario = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//    unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-//    NSDateComponents *hojeComps = [calendario components:unitFlags fromDate:hoje];
-//    
-//    NSDateComponents *dataDeVencimentoComps = [[NSDateComponents alloc] init];
-//    [dataDeVencimentoComps setDay:1];
-//    [dataDeVencimentoComps setMonth:hojeComps.month -1];
-//    [dataDeVencimentoComps setYear:hojeComps.year];        
-//    
-//    NSDate *vencimento = [calendario dateFromComponents:dataDeVencimentoComps];
-//    
-//    request.predicate = [NSPredicate predicateWithFormat:@"dataVencimento >= %@ AND estado <> %@", vencimento, PARCELA_PAGA];
-    
-    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
     
     request.predicate = [NSPredicate predicateWithFormat:@"estado <> %@", PARCELA_PAGA];
@@ -152,10 +128,13 @@
                                [NSSortDescriptor sortDescriptorWithKey:@"dataVencimento" ascending:YES 
                                                               selector:@selector(compare:)]];
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
     //[NSFetchedResultsController deleteCacheWithName:@"VisaoMensalCache"];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
-                                                                        managedObjectContext:self.vpDatabase.managedObjectContext 
+                                                                        managedObjectContext:appDelegate.defaultContext
                                                                           sectionNameKeyPath:@"tMesAno" 
                                                                                    cacheName:@"VisaoMensalCache"];
     
@@ -276,11 +255,30 @@
     UINavigationItem *morenavitem = morenavbar.topItem;
     morenavitem.rightBarButtonItem = nil;
     
+    self.debug = YES;
+    
+    // Registra para receber notificações de quando o banco de dados abrir
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(onDatabaseAvailable:) name:@"VpDatabaseOpenComplete" object:nil];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)onDatabaseAvailable:(NSNotification *)note
+{
+    // extrai algumas informações da notificação.
+    id poster = [note object];
+    NSString *name = [note name];
+    NSDictionary *extraInfo = [note userInfo];
+    
+    NSLog (@"(!) onDatabaseAvailable - Poster: %@ / name=%@ / extraInfo:%@", poster, name, extraInfo);
+    
+    // Se o DB está OK podemos configurar nosso fetchresults
+    [self setupFetchedResultsController];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section 
@@ -316,7 +314,10 @@
     self.objetivoMensal = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
     [[self tableView] reloadData];
     
-    if (self.vpDatabase) {
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
+    if (appDelegate.defaultDatabase) {
         [self verificaVencimentos];
     }
 
@@ -363,10 +364,6 @@
     }
 }
 
-// Temos que passar o banco de dados que abrimos aqui
-// no primeiro controller do app para todos
-// os outros controllers. Dessa forma todos terao um atributo
-// UIManagedDocument *vpDatabase implementado.
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // ATENÇÃO: Quando utilizamos Segues a celula que dispara o segue
@@ -388,11 +385,6 @@
     // passa a parcela atualmente selectionada.
     if ([segue.destinationViewController respondsToSelector:@selector(setParcelaSelecionada:)]) {
         [segue.destinationViewController setParcelaSelecionada:self.parcelaSelecionada];
-    }
-    
-    // Por último passa o managedDocument
-    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
-        [segue.destinationViewController setVpDatabase:self.vpDatabase];
     }
     
     // Adiciona como delegate

@@ -15,10 +15,6 @@
 
 @interface ListaDeParcelasViewController : CoreDataTableViewController <AlteracaoDeParcelaDelegate, UIAlertViewDelegate>
 
-// banco de dados atualmente em uso. Precisa ser definido no 
-// prepareForSegue do controler que abre o banco de dados.
-@property (nonatomic, strong) UIManagedDocument *vpDatabase;
-
 @property (nonatomic, strong) NSNumberFormatter *valorFormatter;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 

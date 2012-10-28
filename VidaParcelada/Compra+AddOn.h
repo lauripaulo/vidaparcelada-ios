@@ -63,6 +63,8 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
 // caso deseje listar todas as compras independente de conta.
 +(int) quantidadeDeCompras:(NSManagedObjectContext *)context comConta:(Conta *)conta;
 
+// Realiza uma varredura nas compras e atualiza os Core Data
++(void) atualizarComprasAposUpgrade:(NSManagedObjectContext *)context;
 
 @end
 

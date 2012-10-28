@@ -56,13 +56,13 @@
 //    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     
     // Move banner
-    CGRect bannerFrame = bannerView.viewForBaselineLayout.frame;
+    CGRect bannerFrame = bannerView.frame;
     CGFloat screenSize = self.navigationController.view.frame.size.height;
     CGFloat tabBarSize = self.tabBarController.tabBar.frame.size.height;
     CGFloat bannerOrigin = screenSize - tabBarSize;
     //NSLog (@"bannerOrigin: %f", bannerOrigin);
     bannerFrame.origin.y = bannerOrigin;
-    bannerView.viewForBaselineLayout.frame = bannerFrame;
+    bannerView.frame = bannerFrame;
     
     CGRect tableFrame = self.navigationController.visibleViewController.view.frame;
     tableFrame.size.height = tableFrame.size.height - GAD_SIZE_320x50.height;

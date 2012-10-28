@@ -9,6 +9,7 @@
 #import "CadastroDaContaViewController.h"
 #import "TipoDaContaViewController.h"
 #import "VidaParceladaHelper.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface CadastroDaContaViewController ()
 
@@ -27,7 +28,6 @@
 
 #pragma mark Properties
 
-@synthesize vpDatabase = _vpDatabase;
 @synthesize tfDescricaoDaConta = _tfDescricaoDaConta;
 @synthesize tfEmpresa = _tfEmpresa;
 @synthesize tfLimiteTotal = _tfLimiteTotal;
@@ -78,8 +78,11 @@
     
     BOOL preferencial = self.uiSwitchCartaoPreferencial.on;
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
     if (criarConta) {
-    self.contaSelecionada = [Conta contaComDescricao:self.tfDescricaoDaConta.text
+        self.contaSelecionada = [Conta contaComDescricao:self.tfDescricaoDaConta.text
                                            daEmpresa:self.tfEmpresa.text
                                   comVencimentoNoDia:vencimento
                                            eJurosMes:jurosMes
@@ -87,7 +90,7 @@
                                 comMelhorDiaDeCompra:melhorDia
                                   cartaoPreferencial:preferencial
                                         comTipoConta:self.tipoContaSelecionada
-                                           inContext:self.vpDatabase.managedObjectContext];
+                                           inContext:appDelegate.defaultContext];
     
     } else {
         self.contaSelecionada.descricao = self.tfDescricaoDaConta.text;
@@ -99,7 +102,7 @@
         self.contaSelecionada.tipo = self.tipoContaSelecionada;
 
         NSError *error = nil;
-        [self.vpDatabase.managedObjectContext save:(&error)];
+        [appDelegate.defaultContext save:(&error)];
         
         // Tratamento de errors
         [VidaParceladaHelper trataErro:error];
@@ -377,10 +380,13 @@
     [self.percentFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [self.percentFormatter setMinimumFractionDigits:2];
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     // Se o controller receber uma conta selecionada temos que atualizar os campos
     // com os dados dessa conta.
     if (!self.contaSelecionada) {
-        self.tipoContaSelecionada = [Conta retornaTipoContaPadraoNoContexto:self.vpDatabase.managedObjectContext];
+        self.tipoContaSelecionada = [Conta retornaTipoContaPadraoNoContexto:appDelegate.defaultContext];
     } else {
         self.tipoContaSelecionada = self.contaSelecionada.tipo;
         // Se a conta existir não exite opção de cancelar, apenas salvar.
@@ -424,16 +430,9 @@
     return NO;
 }
 
-// Temos que passar o banco de dados que abrimos aqui
-// no primeiro controller do app para todos
-// os outros controllers. Dessa forma todos terao um atributo
-// UIManagedDocument *vpDatabase implementado.
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Tipo da Conta"]) {
-        if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
-            [segue.destinationViewController setVpDatabase:self.vpDatabase];
-        }
         if ([segue.destinationViewController respondsToSelector:@selector(setTipoContaDelegate:)]){
             [segue.destinationViewController setTipoContaDelegate:self];
         }

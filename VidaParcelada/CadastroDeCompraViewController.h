@@ -17,11 +17,6 @@
 
 @interface CadastroDeCompraViewController : BannerTableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIActionSheetDelegate, ContaEscolhidaDelegate>
 
-// aqui definimos nosso banco de dados global
-// que todos os controllers irão utilizar
-// para mostrar dados do nosso aplicativo
-@property (nonatomic, strong) UIManagedDocument *vpDatabase;
-
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellConta;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellDataDaCompra;
 @property (weak, nonatomic) IBOutlet UITextField *tfDescricao;

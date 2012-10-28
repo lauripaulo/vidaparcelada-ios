@@ -9,6 +9,7 @@
 #import "RootTabBarController.h"
 #import "TipoConta+AddOn.h"
 #import "Conta+AddOn.h"
+#import "Compra+AddOn.h"
 #import "VisaoMensalViewController.h"
 #import "ListaDeComprasViewController.h"
 #import "ListaDeContasViewController.h"
@@ -21,8 +22,6 @@
 
 @implementation RootTabBarController
 
-@synthesize managedDocument = _managedDocument;
-@synthesize managedObjectContext = _managedObjectContext;
 @synthesize waitView = _waitView;
 
 -(UIView *) waitView
@@ -59,7 +58,7 @@
 // estado satisfatório para o primeiro uso.
 -(void)insertDefaultDbData:(UIManagedDocument *)document
 {
-    //NSLog (@"(>) insertDefaultDbData: %@", document);
+    NSLog (@"(>) insertDefaultDbData: %@", document);
     
     // Tipo Conta principal.
     NSString *contaNome = NSLocalizedString (@"cartao.exemplo1.nome", @"Cartão de crédito");
@@ -82,14 +81,15 @@
     conta = [Conta contaComDescricao:contaDescricao daEmpresa:empresaDescricao comVencimentoNoDia:vencimento eJurosMes:jurosMes comLimiteTotal:limiteTotal comMelhorDiaDeCompra:melhorDia cartaoPreferencial:NO comTipoConta:cartao inContext:document.managedObjectContext];
     
     // E criamos uma compra de exemplo
+    Compra *compra;
     NSString *descricaoCompra = NSLocalizedString(@"compra.exemplo.cadastro.descricao", @"Descrição compra de exemplo");
     NSString *detalhesCompra = NSLocalizedString(@"compra.exemplo.cadastro.detalhes", @"Detalhes compra de exemplo");
     NSDate *hoje = [[NSDate alloc] init];
     NSNumber *parcelas = [NSNumber numberWithInt:5];
     NSDecimalNumber *valorTotal = [NSDecimalNumber decimalNumberWithString:@"899"];
-    [Compra compraComDescricao:descricaoCompra comDetalhes:detalhesCompra dataDaCompra:hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:parcelas valorTotal:valorTotal comConta:conta assumirAnterioresComoPagas:YES inContext:document.managedObjectContext];
+    compra = [Compra compraComDescricao:descricaoCompra comDetalhes:detalhesCompra dataDaCompra:hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:parcelas valorTotal:valorTotal comConta:conta assumirAnterioresComoPagas:YES inContext:document.managedObjectContext];
                       
-    //NSLog (@"(!) Criado: %@, %@, %@, %@", cartao, crediario, conta, compra);
+    NSLog (@"(!) Criado: %@, %@, %@", cartao, conta, compra);
     
     NSError *error;
     [document.managedObjectContext save:(&error)];
@@ -97,80 +97,61 @@
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    //NSLog (@"(<) insertDefaultDbData: ");
+    NSLog (@"(<) insertDefaultDbData: ");
     
 }
 
 -(void)openDatabase
 {    
-    //NSLog (@"(>) openDatabase: ");
+    NSLog (@"(>) openDatabase: ");
 
     // Adiciona relógio a abertura
     [self.view addSubview:self.waitView];
     [self.waitView.acitivity startAnimating];
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     // realiza tarefas lentas
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[self.managedDocument.fileURL path]]){
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[appDelegate.defaultDatabase.fileURL path]]){
         // O banco de dados não existe.
-        //NSLog(@"(!) openDatabase: Banco de dados não encontrado. Criando...");
-        [self.managedDocument saveToURL:self.managedDocument.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-            [self insertDefaultDbData:self.managedDocument];
+        NSLog(@"(!) openDatabase: Banco de dados não encontrado. Criando...");
+        [appDelegate.defaultDatabase saveToURL:appDelegate.defaultDatabase.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+            [self insertDefaultDbData:appDelegate.defaultDatabase];
             [self databaseAbertoComSucesso:success];
         }];
-    } else if (self.managedDocument.documentState == UIDocumentStateClosed) {
+    } else if (appDelegate.defaultDatabase.documentState == UIDocumentStateClosed) {
         // O banco de dados existe, vamos abri-lo
-        //NSLog(@"(!) openDatabase: Banco de dados encontrado como estao FECHADO. Abrindo...");
-        [self.managedDocument openWithCompletionHandler:^(BOOL success) {
+        NSLog(@"(!) openDatabase: Banco de dados encontrado como estao FECHADO. Abrindo...");
+        [appDelegate.defaultDatabase openWithCompletionHandler:^(BOOL success) {
             [self databaseAbertoComSucesso:success];
         }];
-    } else if (self.managedDocument.documentState == UIDocumentStateNormal) {
+    } else if (appDelegate.defaultDatabase.documentState == UIDocumentStateNormal) {
         // o banco de dados já está aberto
-        //NSLog(@"(!) openDatabase: Banco de dados encontrado e aberto!");
+        NSLog(@"(!) openDatabase: Banco de dados encontrado e aberto!");
         [self databaseAbertoComSucesso:YES];
     }
     
-    //NSLog (@"(<) openDatabase: ");
+    NSLog (@"(<) openDatabase: ");
 
 }
 
 - (void)databaseAbertoComSucesso:(BOOL) success
 {
-    //NSLog (@"(>) databaseAbertoComSucesso: %@", (success ? @"YES" : @"NO"));
+    NSLog (@"(>) databaseAbertoComSucesso: %@", (success ? @"YES" : @"NO"));
     
     if (success) {
-        // o banco de dados foi aberto com sucesso, então temos que passar
-        // a informação do ManagedDocument para todos os controllers
-        // que fazem parte do tab view.
-        NSArray *viewController = [self viewControllers];
         
-        // Esconde tab bar para abrir espaço.
-        self.hidesBottomBarWhenPushed = YES;	
-        
-        // O primeiro TAB é o Previsão
-        UINavigationController *nvPrevisao = (UINavigationController *) [viewController objectAtIndex:0];
-        VisaoMensalViewController *previsao = (VisaoMensalViewController *) [[nvPrevisao viewControllers] objectAtIndex:0];
-        previsao.vpDatabase = self.managedDocument;
-        previsao.navigationController.delegate = self;
-        
-        // O segundo TAB é o Compras
-        UINavigationController *nvCompras = (UINavigationController *) [viewController objectAtIndex:1];
-        ListaDeComprasViewController *compras = (ListaDeComprasViewController *) [[nvCompras viewControllers] objectAtIndex:0];
-        compras.vpDatabase = self.managedDocument;
-        compras.navigationController.delegate = self;
-        
-        // O terceiro TAB é o Contas
-        UINavigationController *nvContas = (UINavigationController *) [viewController objectAtIndex:2];
-        ListaDeContasViewController *contas = (ListaDeContasViewController *) [[nvContas viewControllers] objectAtIndex:0];
-        contas.vpDatabase = self.managedDocument;
-        contas.navigationController.delegate = self;
-        
-        // O quarto TAB é o de Opções
-        UINavigationController *nvOptions = (UINavigationController *) [viewController objectAtIndex:3];
-        OptionsTableViewController *options = (OptionsTableViewController *) [[nvOptions viewControllers] objectAtIndex:0];
-        options.vpDatabase = self.managedDocument;
-        options.navigationController.delegate = self;
+        // Delegate com o defaultContext e defaultDatabase
+        VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
-        // Qualquer outro tab entraria aqui...
+        // Notifica o app que o banco de dados está aberto e está OK
+        NSDictionary *extraInfo = [NSDictionary dictionaryWithObject:appDelegate.defaultContext forKey:@"defaultContext"];
+        NSNotification *note = [NSNotification notificationWithName:@"VpDatabaseOpenComplete" object:self userInfo:extraInfo];
+        
+        NSLog (@"(!) databaseAbertoComSucesso - About to send notification - name=%@ / extraInfo:%@", note.name, note.userInfo);
+        
+        [[NSNotificationCenter defaultCenter] postNotification:note];
         
         // Libera o app para uso
         [self.waitView removeFromSuperview];
@@ -180,11 +161,11 @@
         // temos que logar e tentar recuperar o BD
         // ou mostrar uma tela de erro pedindo para o 
         // usuário re-instalar o app.
-        //NSLog(@"(!) databaseAbertoComSucesso: Erro fatal abrindo BD!!!");
+        NSLog(@"(!) databaseAbertoComSucesso: Erro fatal abrindo BD!!!");
         
     }
     
-    //NSLog (@"(<) databaseAbertoComSucesso: ");
+    NSLog (@"(<) databaseAbertoComSucesso: ");
  
 }
 
@@ -202,9 +183,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     // Nosso banco de dados está aberto???
-    if (!self.managedDocument) {
+    if (!appDelegate.defaultDatabase) {
         
         // Para abrir/criar o banco de dados do VP temos que pegar a pasta do usuário
         // que o app pode escrever.
@@ -214,12 +197,42 @@
         url = [url URLByAppendingPathComponent:@"Vida Parcelada DB"];
         
         // inicializando o DB
-        self.managedDocument = [[UIManagedDocument alloc] initWithFileURL:url];
+        appDelegate.defaultDatabase = [[UIManagedDocument alloc] initWithFileURL:url];
     }
     [self openDatabase];
-        
+
+    // o banco de dados foi aberto com sucesso, então temos que passar
+    // a informação do ManagedDocument para todos os controllers
+    // que fazem parte do tab view.
+    NSArray *viewController = [self viewControllers];
+    
+    // Esconde tab bar para abrir espaço.
+    self.hidesBottomBarWhenPushed = YES;
+    
+    // O primeiro TAB é o Previsão
+    UINavigationController *nvPrevisao = (UINavigationController *) [viewController objectAtIndex:0];
+    VisaoMensalViewController *previsao = (VisaoMensalViewController *) [[nvPrevisao viewControllers] objectAtIndex:0];
+    previsao.navigationController.delegate = self;
+    
+    // O segundo TAB é o Compras
+    UINavigationController *nvCompras = (UINavigationController *) [viewController objectAtIndex:1];
+    ListaDeComprasViewController *compras = (ListaDeComprasViewController *) [[nvCompras viewControllers] objectAtIndex:0];
+    compras.navigationController.delegate = self;
+    
+    // O terceiro TAB é o Contas
+    UINavigationController *nvContas = (UINavigationController *) [viewController objectAtIndex:2];
+    ListaDeContasViewController *contas = (ListaDeContasViewController *) [[nvContas viewControllers] objectAtIndex:0];
+    contas.navigationController.delegate = self;
+    
+    // O quarto TAB é o de Opções
+    UINavigationController *nvOptions = (UINavigationController *) [viewController objectAtIndex:3];
+    OptionsTableViewController *options = (OptionsTableViewController *) [[nvOptions viewControllers] objectAtIndex:0];
+    options.navigationController.delegate = self;
+    
+    // Qualquer outro tab entraria aqui...
+
     // Set the current Core Data DB and Context
-    self.managedObjectContext = self.managedDocument.managedObjectContext;
+    appDelegate.defaultContext = appDelegate.defaultDatabase.managedObjectContext;
 }
 
 - (void)viewWillAppear:(BOOL)animated

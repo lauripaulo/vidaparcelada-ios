@@ -13,6 +13,7 @@
 #import "RootTabBarController.h"
 #import "Parcela+AddOn.h"
 #import "CadastroDaContaViewController.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface ListaDeComprasViewController ()
 
@@ -20,7 +21,6 @@
 
 @implementation ListaDeComprasViewController
 
-@synthesize vpDatabase = _vpDatabase;
 @synthesize compraSelecionada = _compraSelecionada;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
@@ -54,10 +54,13 @@
 
 -(void)verificaVencimentos
 {
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     // Verifica se existem cartões que vencem hoje ou que tem melhor dia hoje.
     NSDate *hoje = [[NSDate alloc] init];
     NSArray *contas = [Conta verificaDataRetornandoContas:hoje
-                                           usandoContexto:self.vpDatabase.managedObjectContext
+                                           usandoContexto:appDelegate.defaultContext
                                      comparandoVencimento:NO
                                       comparandoMelhorDia:YES];
     
@@ -86,6 +89,9 @@
 {
     //NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     if (alertView == self.semContasCadastradasAlert) {
         [self performSegueWithIdentifier:@"SemContasCadastradasSegue" sender:self];
     }
@@ -96,23 +102,13 @@
         NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
         [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
         // Verifica se precisa exibir a mensagem de cadastro de contas
-        if ([Conta quantidadeDeContas:self.vpDatabase.managedObjectContext] == 0) {
+        if ([Conta quantidadeDeContas:appDelegate.defaultContext] == 0) {
             [self.semContasCadastradasAlert show];
         }
     }
     
     //NSLog(@"(<) alertView:");
     
-}
-
-// sobrescreve o setter para o BD do VP
-// e inicializa o fetchResultsController
-- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
-{
-    if (_vpDatabase != mangedDocument) {
-        _vpDatabase = mangedDocument;
-        [self setupFetchedResultsController];
-    }
 }
 
 #pragma mark - AlteracaoDeCompraDelegate
@@ -124,6 +120,9 @@
 
 -(void)setupFetchedResultsController
 {
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     self.debug = YES;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
@@ -136,17 +135,12 @@
                                [NSSortDescriptor sortDescriptorWithKey:@"dataDaCompra" ascending:NO ]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
-                                                                        managedObjectContext:self.vpDatabase.managedObjectContext 
+                                                                        managedObjectContext:appDelegate.defaultContext
                                                                           sectionNameKeyPath:nil 
                                                                                    cacheName:@"ListaDeComprasCache"]; // @"ListaDeComprasCache"
 }
 
 
-
-// Temos que passar o banco de dados que abrimos aqui
-// no primeiro controller do app para todos
-// os outros controllers. Dessa forma todos terao um atributo
-// UIManagedDocument *vpDatabase implementado.
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // ATENÇÃO: Quando utilizamos Segues a celula que dispara o segue
@@ -158,11 +152,6 @@
         self.compraSelecionada = [self.fetchedResultsController objectAtIndexPath:indexPath];
     }
 
-    // Por último passa o managedDocument
-    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
-        [segue.destinationViewController setVpDatabase:self.vpDatabase];
-    }
-    
     // primeiro informa a compra porque a pesquisa das parcelas precisa da compra.
     if ([segue.destinationViewController respondsToSelector:@selector(setCompraSelecionada:)]){
         [segue.destinationViewController setCompraSelecionada:self.compraSelecionada];
@@ -191,7 +180,10 @@
     [super viewWillAppear:animated];
     
     self.compraSelecionada = nil;
-        
+
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     //
     // Chamada a primeira vez que a aba é exibida passando o nome da própria
     // classe, retorna YES se em algum momento esse aviso já foi exibido.
@@ -201,7 +193,7 @@
         [self.primeiroUsoAlert show];
     } else {
         [self.tableView reloadData];
-        if ([Conta quantidadeDeContas:self.vpDatabase.managedObjectContext] == 0) {
+        if ([Conta quantidadeDeContas:appDelegate.defaultContext] == 0) {
             [self.semContasCadastradasAlert show];
         } else {
             // verifica se estamos no melhor dia para compra.
@@ -225,7 +217,9 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // Habilita o botão de edição
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-        
+    
+    [self setupFetchedResultsController];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

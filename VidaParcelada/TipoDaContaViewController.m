@@ -7,25 +7,15 @@
 //
 
 #import "TipoDaContaViewController.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface TipoDaContaViewController ()
 @end
 
 @implementation TipoDaContaViewController
 
-@synthesize vpDatabase = _vpDatabase;
 @synthesize tipoSelecionado = _tipoSelecionado;
 @synthesize tipoContaDelegate = _tipoContaDelegate;
-
-// sobrescreve o setter para o BD do VP
-// e inicializa o fetchResultsController
-- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
-{
-    if (_vpDatabase != mangedDocument) {
-        _vpDatabase = mangedDocument;
-        [self setupFetchedResultsController];
-    }
-}
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -61,8 +51,11 @@
                                [NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES 
                                                               selector:@selector(localizedCaseInsensitiveCompare:)]];
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
-                                                                        managedObjectContext:self.vpDatabase.managedObjectContext 
+                                                                        managedObjectContext:appDelegate.defaultContext
                                                                           sectionNameKeyPath:nil 
                                                                                    cacheName:@"ListaDeTipoDeContaCache"];
     
@@ -129,6 +122,11 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
     
+}
+
+-(void)viewDidLoad
+{
+    [self setupFetchedResultsController];
 }
 
 @end

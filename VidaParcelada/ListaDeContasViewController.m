@@ -13,6 +13,7 @@
 #import "CadastroDaContaViewController.h"
 #import "Parcela+AddOn.h"
 #import "Compra+AddOn.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface ListaDeContasViewController ()
 
@@ -31,7 +32,6 @@
 #pragma mark - Properties
 
 
-@synthesize vpDatabase = _vpDatabase;
 @synthesize btnAdicionarConta = _btnAdicionarConta;
 @synthesize contaSelecionada = _contaSelecionada;
 @synthesize comprasPresentesAlert = _comprasPresentesAlert;
@@ -70,28 +70,20 @@
         NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
         [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
     }
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     // Realmente devemos apagar essa conta?
     if (alertView == self.comprasPresentesAlert) {
         if (buttonIndex > 0) {
-            [Conta removeContaTotalmente:self.contaSelecionada inContext:self.vpDatabase.managedObjectContext];
+            [Conta removeContaTotalmente:self.contaSelecionada inContext:appDelegate.defaultContext];
         }
     }
     
     //NSLog(@"(<) alertView:");
 
 }
-
-// sobrescreve o setter para o BD do VP
-// e inicializa o fetchResultsController
-- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
-{
-    if (_vpDatabase != mangedDocument) {
-        _vpDatabase = mangedDocument;
-        [self setupFetchedResultsController];
-    }
-}
-
 
 #pragma mark - AlteracaoDeContaDelegate
 
@@ -107,10 +99,6 @@
 #pragma mark - TableView
 
 
-// Temos que passar o banco de dados que abrimos aqui
-// no primeiro controller do app para todos
-// os outros controllers. Dessa forma todos terao um atributo
-// UIManagedDocument *vpDatabase implementado.
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Se for um clique no botão "+" a conta selecionada é nil, senão passamos
@@ -129,11 +117,6 @@
         self.contaSelecionada = [self.fetchedResultsController objectAtIndexPath:indexPath];
     }
 
-    // Testamos se o próximo controller responde aos metodos que precisamos passar 
-    // como parametro. Se a resposta for SIM setamos o database e a conta selecionada.
-    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
-        [segue.destinationViewController setVpDatabase:self.vpDatabase];
-    }
     if ([segue.destinationViewController respondsToSelector:@selector(setContaSelecionada:)]){
         [segue.destinationViewController setContaSelecionada:self.contaSelecionada];
     }
@@ -185,6 +168,8 @@
     
     self.valorFormatter = [[NSNumberFormatter alloc] init];
     [self.valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    
+    [self setupFetchedResultsController];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -215,13 +200,16 @@
 {
     self.debug = YES;
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
     request.sortDescriptors = [NSArray arrayWithObject:
                                [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
                                                               selector:@selector(localizedCaseInsensitiveCompare:)]];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
-                                                                        managedObjectContext:self.vpDatabase.managedObjectContext 
+                                                                        managedObjectContext:appDelegate.defaultContext
                                                                           sectionNameKeyPath:nil 
                                                                                    cacheName:@"ListaDeContasCache"];
 }
@@ -248,6 +236,8 @@
         [VidaParceladaHelper trataErro:error];
         
         self.contaSelecionada = nil;
+        
+        [self.tableView reloadData];
     }
     
     //NSLog(@"(<) apagaConta: %@", conta);

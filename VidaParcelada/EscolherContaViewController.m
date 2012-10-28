@@ -8,6 +8,7 @@
 
 #import "EscolherContaViewController.h"
 #import "TipoConta+AddOn.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface EscolherContaViewController ()
 
@@ -17,18 +18,6 @@
 
 @synthesize contaDelegate = _contaDelegate;
 @synthesize contaSelecionada = _contaSelecionada;
-@synthesize vpDatabase = _vpDatabase;
-
-
-// sobrescreve o setter para o BD do VP
-// e inicializa o fetchResultsController
-- (void) setVpDatabase:(UIManagedDocument *)mangedDocument
-{
-    if (_vpDatabase != mangedDocument) {
-        _vpDatabase = mangedDocument;
-        [self setupFetchedResultsController];
-    }
-}
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -64,8 +53,11 @@
                                [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
                                                               selector:@selector(localizedCaseInsensitiveCompare:)]];
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
-                                                                        managedObjectContext:self.vpDatabase.managedObjectContext 
+                                                                        managedObjectContext:appDelegate.defaultContext
                                                                           sectionNameKeyPath:nil 
                                                                                    cacheName:@"ListaDeContaParaEscolherCache"];
     
@@ -139,6 +131,10 @@
     
 }
 
+-(void)viewDidLoad
+{
+    [self setupFetchedResultsController];
+}
 
 
 @end

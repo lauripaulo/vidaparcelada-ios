@@ -12,11 +12,6 @@
 
 @interface ListaDeComprasViewController : CoreDataTableViewController <AlteracaoDeCompraDelegate, UIAlertViewDelegate>
 
-// aqui definimos nosso banco de dados global
-// que todos os controllers irão utilizar
-// para mostrar dados do nosso aplicativo
-@property (nonatomic, strong) UIManagedDocument *vpDatabase;
-
 // Compra atualmente selecionada na table
 @property (nonatomic) Compra *compraSelecionada;
 

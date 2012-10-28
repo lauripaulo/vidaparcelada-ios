@@ -9,6 +9,7 @@
 #import "CadastroDeCompraViewController.h"
 #import "VidaParceladaHelper.h"
 #import "EscolherContaViewController.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface CadastroDeCompraViewController ()
 
@@ -27,7 +28,6 @@
 
 #pragma mark - Atributos
 
-@synthesize vpDatabase = _vpDatabase;
 @synthesize cellConta = _cellConta;
 @synthesize cellDataDaCompra = _cellDataDaCompra;
 @synthesize tfDescricao = _tfDescricao;
@@ -196,8 +196,11 @@
 {
     NSDate *hoje = [[NSDate alloc] init];
 
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     self.dataSelecionada = hoje;
-    self.contaSelecionada = [Compra retornaContaDefaultNoContexto:self.vpDatabase.managedObjectContext];
+    self.contaSelecionada = [Compra retornaContaDefaultNoContexto:appDelegate.defaultContext];
     
     self.tfDescricao.text = @"";
     self.tfDetalhesDaCompra.text = @"";
@@ -229,10 +232,13 @@
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
         
     // Se o controller receber uma conta selecionada temos que atualizar os campos
     // com os dados dessa conta.
-    self.listaDeContas = [Conta contasCadastradasUsandoContext:self.vpDatabase.managedObjectContext];
+    self.listaDeContas = [Conta contasCadastradasUsandoContext:appDelegate.defaultContext];
     if (self.compraSelecionada) {
         //self.topBar.rightBarButtonItem = nil;
         [self atualizarCamposNaTela];
@@ -314,15 +320,8 @@
     [self atualizaDescricaoDaConta];
 }
 
-// Temos que passar o banco de dados que abrimos aqui
-// no primeiro controller do app para todos
-// os outros controllers. Dessa forma todos terao um atributo
-// UIManagedDocument *vpDatabase implementado.
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.destinationViewController respondsToSelector:@selector(setVpDatabase:)]){
-        [segue.destinationViewController setVpDatabase:self.vpDatabase];
-    }
     if ([segue.destinationViewController respondsToSelector:@selector(setContaSelecionada:)]){
         [segue.destinationViewController setContaSelecionada:self.contaSelecionada];
     }
@@ -335,6 +334,9 @@
 #pragma mark - Eventos
 
 - (void)criarNovaCompra {
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     // Qual o numero de parcelas que foi escolhido pelo usuario?
     NSNumber *qtdeParcelas = [NSNumber numberWithDouble:self.stepperQtdeDeParcelas.value];
     NSNumber *valor;
@@ -358,7 +360,7 @@
                                          valorTotal:[NSDecimalNumber decimalNumberWithString:[valor stringValue]]
                                            comConta:self.contaSelecionada
                          assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas
-                                          inContext:self.vpDatabase.managedObjectContext];
+                                          inContext:appDelegate.defaultContext];
 
     // Notifica o delegate que a compra mudou
     self.compraSelecionada = novaCompra;
@@ -391,12 +393,15 @@
     self.compraSelecionada.valorTotal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
     self.compraSelecionada.origem = self.contaSelecionada;
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     // Se a compra existir temos que recriar as parcelas, isso significa apagar as atuais
     // e recriar
-    [Compra apagarParcelasDaCompra:self.compraSelecionada inContext:self.vpDatabase.managedObjectContext];
+    [Compra apagarParcelasDaCompra:self.compraSelecionada inContext:appDelegate.defaultContext];
     
     // recriar parcelas
-    [Compra criarParcelasDaCompra:self.compraSelecionada assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas inContext:self.vpDatabase.managedObjectContext];
+    [Compra criarParcelasDaCompra:self.compraSelecionada assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas inContext:appDelegate.defaultContext];
     
     [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
 }

@@ -20,6 +20,29 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 
 @implementation Compra (AddOn)
 
+// Realiza uma varredura nas compras e atualiza os Core Data
++(void) atualizarComprasAposUpgrade:(NSManagedObjectContext *)context;
+{
+    // Query no banco de dados, todas as compras, sem restrição.
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
+    
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    for (Compra *p in matches) {
+        NSLog (@"Atualizando %@ ...", p.descricao);
+        for (Parcela *parc in p.parcelas){
+            NSLog (@" -> Parcela %@ ...", parc.descricao);
+        }
+        [context save:(&error)];
+        // Tratamento de errors
+        [VidaParceladaHelper trataErro:error];
+    }
+    NSLog (@"Done");
+    
+}
+
+
 +(Compra *)compraComDescricao:(NSString *)descricao
                   comDetalhes:(NSString *)detalhes
                  dataDaCompra:(NSDate *)data

@@ -10,6 +10,7 @@
 #import "VidaParceladaHelper.h"
 #import "Parcela+AddOn.h"
 #import "Compra+AddOn.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface CadastroDeParcelaViewController ()
 
@@ -27,7 +28,6 @@
 @synthesize btSalvar;
 @synthesize btCancelar;
 @synthesize parcelaSelecionada = _parcelaSelecionada;
-@synthesize vpDatabase = _vpDatabase;
 @synthesize parcelaDelegate = _parceladDelegate;
 @synthesize valorFormatter = _valorFormatter;
 @synthesize dateFormatter = _dateFormatter;
@@ -80,10 +80,13 @@
             self.parcelaSelecionada.estado = PARCELA_VENCIDA;
         }
         //NSLog(@"(!) onSalvarPressionado: parcela = %@", self.parcelaSelecionada);
+
+        // Delegate com o defaultContext e defaultDatabase
+        VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
         
         // Persiste no coredata - talvez isso devesse sair do controller...
         NSError *erro = nil;
-        [self.vpDatabase.managedObjectContext save:&erro];
+        [appDelegate.defaultContext save:&erro];
         [VidaParceladaHelper trataErro:erro];
     }
     

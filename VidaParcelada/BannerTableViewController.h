@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GADBannerView.h"
 #import "GADBannerViewDelegate.h"
+#import "VidaParceladaAppDelegate.h"
 
 @interface BannerTableViewController : UITableViewController <GADBannerViewDelegate>
 

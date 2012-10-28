@@ -12,10 +12,6 @@
 
 @interface CadastroDeParcelaViewController : BannerTableViewController <UITextFieldDelegate>
 
-// banco de dados atualmente em uso. Precisa ser definido no 
-// prepareForSegue do controler que abre o banco de dados.
-@property (nonatomic, strong) UIManagedDocument *vpDatabase;
-
 @property (weak, nonatomic) IBOutlet UITextField *tfDescricao;
 @property (weak, nonatomic) IBOutlet UITextField *tfValor;
 
