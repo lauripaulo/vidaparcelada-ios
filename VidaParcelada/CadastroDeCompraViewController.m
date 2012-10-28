@@ -13,7 +13,7 @@
 
 @interface CadastroDeCompraViewController ()
 
-- (void)animateDataPicker:(NSDate *)date;
+- (void)animateDataPicker;
 - (IBAction)removeDataPickerAnimaed:(id)sender;
 - (BOOL)verificaDataDaCompraAvisaUsuario;
 - (void)calculaValorTotal;
@@ -183,6 +183,7 @@
     [self atualizaDescricaoDaConta];
 
     self.tfDataCompra.text = [self.dateFormatter stringFromDate:self.compraSelecionada.dataDaCompra];
+    self.datePicker.date = self.compraSelecionada.dataDaCompra;
     
     // Stepper de parcela
     self.stepperQtdeDeParcelas.value = [self.compraSelecionada.qtdeTotalDeParcelas doubleValue];
@@ -214,6 +215,7 @@
     self.tfValorDaParcela.text = [self.valorFormatter stringFromNumber:0];
     
     self.tfDataCompra.text = [self.dateFormatter stringFromDate:self.dataSelecionada];
+    self.datePicker.date = self.dataSelecionada;
     
     [self atualizaDescricaoDaConta];
 
@@ -618,8 +620,8 @@
 #pragma mark - Table view data source
 
 - (IBAction)tfDataCompraEdit:(UITextField *)sender {
-    NSDate *date = [self.dateFormatter dateFromString:self.tfDataCompra.text];        
-    [self animateDataPicker:date];
+    //NSDate *date = [self.dateFormatter dateFromString:self.tfDataCompra.text];
+    [self animateDataPicker];
 
 }
 
@@ -644,15 +646,16 @@
     
     if (cell == self.cellDataDaCompra) {
         // Data selecionada
-        NSDate *date = [self.dateFormatter dateFromString:self.tfDataCompra.text];        
-        [self animateDataPicker:date];
+        //NSDate *date = [self.dateFormatter dateFromString:self.tfDataCompra.text];
+        [self animateDataPicker];
     }
         
 }
 
-- (void)animateDataPicker:(NSDate *)date
+//- (void)animateDataPicker:(NSDate *)date
+- (void)animateDataPicker
 {
-    self.datePicker.date = date;
+    //self.datePicker.date = date;
     
     [self.tfDataCompra becomeFirstResponder];
 
