@@ -157,7 +157,7 @@
 //    NSString *vencimento = [self.dateFormatter stringFromDate:parcela.dataVencimento];    
 //    NSString *detail = [NSString stringWithFormat:@"%@ - %@ - %@", vencimento, parcela.descricao, valor];
     
-    NSString *detail = [NSString stringWithFormat:@"%@ - Parcela: %@ - %@", valor, parcela.numeroDaParcela, parcela.compra.origem.descricao];
+    NSString *detail = [NSString stringWithFormat:@"%@ - Parcela: %@/%@ - %@", valor, parcela.numeroDaParcela, parcela.compra.qtdeTotalDeParcelas, parcela.compra.origem.descricao];
     
     cell.textLabel.text = parcela.compra.descricao;
     cell.detailTextLabel.text = detail;
@@ -206,6 +206,11 @@
         //
         letra = [UIColor colorWithRed:0.545 green:0 blue:0 alpha:1]; /*#8b0000*/
         textoInformativo = NSLocalizedString(@"lista.previsao.texto.estouromensal", @"Previsao aviso estouro mensal");
+        //
+        // Calcula a diferença entre o que foi gasto e o previsto
+        NSDecimalNumber *diferenca = [valorMes decimalNumberBySubtracting:self.objetivoMensal];
+        NSString *diferencaStr = [self.valorFormatter stringFromNumber:diferenca];
+        textoInformativo = [textoInformativo stringByAppendingFormat:@"%@ ", diferencaStr];
     }
     
     

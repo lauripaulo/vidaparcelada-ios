@@ -309,10 +309,14 @@
     NSNumberFormatter *valorFormatter;
     valorFormatter = [[NSNumberFormatter alloc] init];
     [valorFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-
+    
     NSNumber *valor;
     valor = [valorFormatter numberFromString:currentStringVal];
     valorFinal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
+    
+    if ([valorFinal isEqualToNumber:[NSDecimalNumber notANumber]]) {
+        valorFinal = [NSDecimalNumber decimalNumberWithString:@"0"];
+    }
 
     //NSLog (@"(<) retornaLimiteDeGastoGlobal: return = %@", valorFinal);
 
