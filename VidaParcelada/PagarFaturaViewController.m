@@ -9,6 +9,7 @@
 #import "PagarFaturaViewController.h"
 #import "VidaParceladaHelper.h"
 #import "VidaParceladaAppDelegate.h"
+#import "EscolherContaViewController.h"
 
 @interface PagarFaturaViewController ()
 
@@ -281,6 +282,30 @@
     //NSLog (@"(<) escolheContaParaPagamento: ");
 }
 
+- (void)contaEscolhida:(Conta *)conta
+{
+    self.contaSelecionada = conta;
+    // Se temos uma conta vamos utiliza-la, se ela não tiver parcelas pendentes
+    // vamos avisar o usuário e sair.
+    // Se a lista de parcelas pendentes estiver nil é porque não temos nenhuma.
+    if (![self temPacelasPendentes:self.contaSelecionada data:self.hoje]) {
+        //NSLog (@"(!) escolheContaParaPagamento: Nenhuma parcela para pagar nessa conta!");
+        [self.semParcelasPendentesNaContaAlert show];
+    } else {
+        [self atualizaDadosNaTela];
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController respondsToSelector:@selector(setContaSelecionada:)]){
+        [segue.destinationViewController setContaSelecionada:self.contaSelecionada];
+    }
+    if ([segue.destinationViewController respondsToSelector:@selector(setContaDelegate:)]) {
+        [segue.destinationViewController setContaDelegate:self];
+    }
+    
+}
 
 - (BOOL)temPacelasPendentes:(Conta *)conta data:(NSDate *)hoje
 {

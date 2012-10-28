@@ -12,7 +12,7 @@
 #import "Parcela+AddOn.h"
 #import "TipoConta+AddOn.h"
 
-@interface PagarFaturaViewController : UITableViewController <UIAlertViewDelegate>
+@interface PagarFaturaViewController : UITableViewController <UIAlertViewDelegate, ContaEscolhidaDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellCartao;
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellMesDaFatura;

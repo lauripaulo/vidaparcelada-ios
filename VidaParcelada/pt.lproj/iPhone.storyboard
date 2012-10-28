@@ -132,7 +132,7 @@
                     <navigationItem key="navigationItem" title="Previsão" id="ckh-Pz-esJ">
                         <barButtonItem key="leftBarButtonItem" title="Pagar" id="2Oy-mh-WUr">
                             <connections>
-                                <segue destination="OUg-3X-Apz" kind="modal" identifier="pagar" modalTransitionStyle="coverVertical" id="T5n-zO-hWa"/>
+                                <segue destination="qan-ad-ySV" kind="modal" identifier="pagar" modalTransitionStyle="coverVertical" id="T5n-zO-hWa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -151,17 +151,17 @@
             <objects>
                 <tableViewController id="OUg-3X-Apz" customClass="PagarFaturaViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="aAU-jB-YF4">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Pagamento de fatura:" id="fS0-s1-VHq">
+                            <tableViewSection headerTitle="Dados gerais" id="fS0-s1-VHq">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ZCS-dh-t2y" detailTextLabel="FN8-8v-w2I" style="IBUITableViewCellStyleSubtitle" id="MNV-Xs-6n8">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ZCS-dh-t2y" detailTextLabel="FN8-8v-w2I" style="IBUITableViewCellStyleSubtitle" id="MNV-Xs-6n8">
                                         <rect key="frame" x="0.0" y="46" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <rect key="frame" x="10" y="1" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZCS-dh-t2y">
@@ -181,6 +181,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="0bN-K0-rzQ" kind="push" identifier="escolheContaPagamento" id="RNA-M4-3Ln"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3xz-5b-cLw" detailTextLabel="zvK-eO-kez" style="IBUITableViewCellStyleValue1" id="Bp4-LB-DGK">
                                         <rect key="frame" x="0.0" y="91" width="320" height="44"/>
@@ -375,7 +378,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEE-fL-GKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1722" y="1031"/>
+            <point key="canvasLocation" x="2366" y="1031"/>
         </scene>
         <!--Lista De Contas View Controller - Contas-->
         <scene sceneID="Dc5-C8-4A1">
@@ -693,7 +696,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="0bN-K0-rzQ" kind="push" identifier="Escolher Conta" id="XWf-lp-xRQ"/>
+                                            <segue destination="0bN-K0-rzQ" kind="push" identifier="escolheContaPagamento" id="XWf-lp-xRQ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="oZp-hM-bmd">
@@ -1562,7 +1565,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="ZHf-Up-JBw" kind="modal" id="CKW-3f-hjD"/>
+                                            <segue destination="ZHf-Up-JBw" kind="modal" identifier="about" id="CKW-3f-hjD"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1660,6 +1663,24 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ycf-NL-Rl5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="520" y="1626"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ew5-Hl-zPy">
+            <objects>
+                <navigationController id="qan-ad-ySV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oOc-Sm-pAV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OUg-3X-Apz" kind="relationship" relationship="rootViewController" id="prR-SA-qqp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WfV-mc-WK4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1722" y="1031"/>
         </scene>
     </scenes>
     <resources>
@@ -1792,7 +1813,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mCJ-lC-if4"/>
-        <segue reference="fED-ft-chd"/>
+        <segue reference="RNA-M4-3Ln"/>
+        <segue reference="Dl8-eO-YuZ"/>
+        <segue reference="B1a-xj-kNY"/>
     </inferredMetricsTieBreakers>
 </document>
