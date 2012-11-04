@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		790827FD1604061A00CB4233 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 790827FC1604061A00CB4233 /* Default-568h@2x.png */; };
 		790841191616929B001746B3 /* BannerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790841181616929B001746B3 /* BannerTableViewController.m */; };
+		7908F9111646170D00C4E8E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7908F9131646170D00C4E8E0 /* Localizable.strings */; };
 		790B519815742FD3006877CF /* VisaoMensalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790B519715742FD3006877CF /* VisaoMensalViewController.m */; };
 		790D81F615F5AA0C001456F1 /* WaitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790D81F515F5AA0C001456F1 /* WaitView.xib */; };
 		790D81F915F5AAF7001456F1 /* WaitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D81F815F5AAF7001456F1 /* WaitView.m */; };
@@ -41,7 +42,6 @@
 		79702CFA159D37F60010CE10 /* previsao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CF2159D37F60010CE10 /* previsao@2x.png */; };
 		797D9D3115463C9000D3B067 /* Compra+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D3015463C9000D3B067 /* Compra+AddOn.m */; };
 		797D9D341546458800D3B067 /* Parcela+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D331546458800D3B067 /* Parcela+AddOn.m */; };
-		7980243115D9E29F0051D6C9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7980243015D9E29F0051D6C9 /* Localizable.strings */; };
 		798FF4021533B4B200385C5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4011533B4B200385C5E /* UIKit.framework */; };
 		798FF4041533B4B200385C5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4031533B4B200385C5E /* Foundation.framework */; };
 		798FF4061533B4B200385C5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798FF4051533B4B200385C5E /* CoreGraphics.framework */; };
@@ -83,6 +83,8 @@
 		790827FC1604061A00CB4233 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		790841171616929B001746B3 /* BannerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerTableViewController.h; sourceTree = "<group>"; };
 		790841181616929B001746B3 /* BannerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerTableViewController.m; sourceTree = "<group>"; };
+		7908F9121646170D00C4E8E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7908F9141646171300C4E8E0 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		790B519615742FD3006877CF /* VisaoMensalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisaoMensalViewController.h; sourceTree = "<group>"; };
 		790B519715742FD3006877CF /* VisaoMensalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisaoMensalViewController.m; sourceTree = "<group>"; };
 		790D81F515F5AA0C001456F1 /* WaitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaitView.xib; sourceTree = "<group>"; };
@@ -137,7 +139,6 @@
 		797D9D3015463C9000D3B067 /* Compra+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Compra+AddOn.m"; sourceTree = "<group>"; };
 		797D9D321546458800D3B067 /* Parcela+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parcela+AddOn.h"; sourceTree = "<group>"; };
 		797D9D331546458800D3B067 /* Parcela+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Parcela+AddOn.m"; sourceTree = "<group>"; };
-		7980243015D9E29F0051D6C9 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; path = Localizable.strings; sourceTree = "<group>"; wrapsLines = 1; };
 		798FF3FD1533B4B200385C5E /* VidaParcelada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VidaParcelada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798FF4011533B4B200385C5E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		798FF4031533B4B200385C5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -405,7 +406,7 @@
 		799C54AB154303B9009A235D /* Storyboards/Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				7980243015D9E29F0051D6C9 /* Localizable.strings */,
+				7908F9131646170D00C4E8E0 /* Localizable.strings */,
 				798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */,
 				79DBA40215CCBDBA008BF96B /* iPhone.storyboard */,
 			);
@@ -529,7 +530,7 @@
 				79C9331E159EBE1000651DDB /* Default.png in Resources */,
 				79C9331F159EBE1000651DDB /* Default@2x.png in Resources */,
 				79DBA40015CCBDBA008BF96B /* iPhone.storyboard in Resources */,
-				7980243115D9E29F0051D6C9 /* Localizable.strings in Resources */,
+				7908F9111646170D00C4E8E0 /* Localizable.strings in Resources */,
 				790D81F615F5AA0C001456F1 /* WaitView.xib in Resources */,
 				790827FD1604061A00CB4233 /* Default-568h@2x.png in Resources */,
 				79A4933F1618EAD800053833 /* MKStoreKitConfigs.plist in Resources */,
@@ -584,6 +585,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7908F9131646170D00C4E8E0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7908F9121646170D00C4E8E0 /* en */,
+				7908F9141646171300C4E8E0 /* pt */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		79DBA40215CCBDBA008BF96B /* iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
