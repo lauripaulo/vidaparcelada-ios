@@ -10,6 +10,7 @@
 #import "VidaParceladaHelper.h"
 #import "Compra+AddOn.h"
 #import "VidaParceladaHelper.h"
+#import "VidaParceladaAppDelegate.h"
 
 //
 // Estados possíveis da compra
@@ -42,11 +43,13 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
                     eNumeroDaParcela:(NSNumber *)numeroDaParcela
                             comValor:(NSDecimalNumber *)valor
                      pertenceACompra:(Compra *)compra
-                           inContext:(NSManagedObjectContext *)context
 {
     Parcela *novaParcela = nil;
     
     //NSLog(@"(>) novaParcelaComDescricao: %@, %@, %@, %@, %@, %@, %@", descricao, dataDeVencimento, estado, numeroDaParcela, valor, compra.descricao, context);
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
@@ -55,7 +58,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
+    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
@@ -74,7 +77,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         // Apaga todos os itens errados...
         //
         for (Parcela *parcela in matches) {
-            [context deleteObject:parcela];
+            [appDelegate.defaultContext deleteObject:parcela];
             //NSLog(@"(!) novaParcelaComDescricao: deleted = %@", parcela.descricao);
         }
         
@@ -85,15 +88,14 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
                                           comEstado:estado 
                                    eNumeroDaParcela:numeroDaParcela 
                                            comValor:valor 
-                                    pertenceACompra:compra 
-                                          inContext:context];
+                                    pertenceACompra:compra];
         
     } else {
         //
         // Cria o novo objeto
         //
         if (!novaParcela) {
-            novaParcela = [NSEntityDescription insertNewObjectForEntityForName:@"Parcela" inManagedObjectContext:context];
+            novaParcela = [NSEntityDescription insertNewObjectForEntityForName:@"Parcela" inManagedObjectContext:appDelegate.defaultContext];
             //NSLog(@"(!) novaParcelaComDescricao: new = %@", novaParcela.descricao);
         }
         novaParcela.descricao = descricao;
@@ -104,7 +106,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
         novaParcela.valor = valor;
     }
     
-    [context save:(&error)];
+    [appDelegate.defaultContext save:(&error)];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -117,9 +119,11 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
 
 + (NSArray *) parcelasPendentesDoMes:(NSDate *)data
                             eDaConta:(Conta *)conta
-                           inContext:(NSManagedObjectContext *)context
 {
     //NSLog(@"(>) parcelasPendentesDoMes: '%@', '%@', '%@'", data, conta.descricao, context);
+
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     // Vamos listar todas as parcelas
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
@@ -136,7 +140,7 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
+    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
 
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];

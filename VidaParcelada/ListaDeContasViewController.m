@@ -71,13 +71,10 @@
         [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
     }
     
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
     // Realmente devemos apagar essa conta?
     if (alertView == self.comprasPresentesAlert) {
         if (buttonIndex > 0) {
-            [Conta removeContaTotalmente:self.contaSelecionada inContext:appDelegate.defaultContext];
+            [Conta removeContaTotalmente:self.contaSelecionada];
         }
     }
     
@@ -198,7 +195,7 @@
 // define a query que irá popular a tabela atual
 -(void)setupFetchedResultsController
 {
-    self.debug = YES;
+    self.debug = NO;
     
     // Delegate com o defaultContext e defaultDatabase
     VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -222,7 +219,7 @@
     if (conta) {
         // Delete the row from the data source
         NSError *error;
-        self.debug = YES;
+        self.debug = NO;
         
         // Apaga o objeto
         [self.fetchedResultsController.managedObjectContext deleteObject:conta];

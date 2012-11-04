@@ -20,8 +20,7 @@
            comLimiteTotal:(NSDecimalNumber *) limite
      comMelhorDiaDeCompra:(NSNumber *) melhorDiaDeCompra
        cartaoPreferencial:(BOOL)preferencial
-             comTipoConta:(TipoConta *)tipoConta
-                inContext:(NSManagedObjectContext *)context;
+             comTipoConta:(TipoConta *)tipoConta;
 
 // Retorna todas as contas atualmente cadastradas para usar em
 // um UIPickerView, por exemplo.
@@ -29,10 +28,9 @@
 
 // Retorna a quantidade de compras cadastradas nesse momento
 // na base de dados
-+(int) quantidadeDeContas:(NSManagedObjectContext *)context;
++(int) quantidadeDeContas;
 
-+(void)removeContaTotalmente:(Conta *)conta
-                   inContext:(NSManagedObjectContext *)context;
++(void)removeContaTotalmente:(Conta *)conta;
 
 // Verifica todos as contas existentes para saber se a data
 // passada como parametro é a data de vencimento do cartão
@@ -40,11 +38,10 @@
 // Retorna um array de cartões que atendem a essa restrição,
 // se nenhum estiver vencendo o retorno será nil.
 + (NSArray *)verificaDataRetornandoContas:(NSDate *)data
-           usandoContexto:(NSManagedObjectContext *)context
      comparandoVencimento:(BOOL)vencimento
       comparandoMelhorDia:(BOOL)melhorDia;
 
-+ (TipoConta *) retornaTipoContaPadraoNoContexto:(NSManagedObjectContext *)context;
++ (TipoConta *) retornaTipoContaPadraoNoContexto;
 
 @end
 

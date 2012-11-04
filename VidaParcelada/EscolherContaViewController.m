@@ -46,7 +46,7 @@
 // define a query que irá popular a tabela atual
 -(void)setupFetchedResultsController
 {
-    self.debug = YES;
+    self.debug = NO;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
     request.sortDescriptors = [NSArray arrayWithObject:

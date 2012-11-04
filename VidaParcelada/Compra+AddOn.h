@@ -27,25 +27,22 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
                qtdeDeParcelas:(NSNumber *)parcelas
                    valorTotal:(NSDecimalNumber *)valorTotal
                      comConta:(Conta *)conta
-   assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas
-                    inContext:(NSManagedObjectContext *)context;
+   assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas;
 
 //
 // Cria as parcelas da compra passada como parametro com a opção de apagar
 // ou não as parcelas já existentes
 //
 +(NSSet *)criarParcelasDaCompra:(Compra *)compra
-     assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas
-                      inContext:(NSManagedObjectContext *)context;
+     assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas;
 
 // Escolhe a primeira conta disponivel para uso
-+(Conta *)retornaContaDefaultNoContexto:(NSManagedObjectContext *)context;
++(Conta *)retornaContaDefaultNoContexto;
 
 //
 // Apaga todas as parcelas da compra passada como parametro
 //
-+(void)apagarParcelasDaCompra:(Compra *)compra 
-                    inContext:(NSManagedObjectContext *)context;
++(void)apagarParcelasDaCompra:(Compra *)compra;
 
 // Calcula o melhor dia de compra do mes passado como parametro.
 + (NSDate *)melhorDiaDeCompraDoMes:(Conta *)conta dataAtual:(NSDate *)data;
@@ -61,10 +58,10 @@ extern NSString * const COMPRA_PAGAMENTO_EFETUADO; // Todas as parcela pagas
 // Retorna a quantidade de compras cadastradas nesse momento
 // na base de dados, para uma conta informada. Passsar nil para a conta 
 // caso deseje listar todas as compras independente de conta.
-+(int) quantidadeDeCompras:(NSManagedObjectContext *)context comConta:(Conta *)conta;
++(int) quantidadeDeComprasComConta:(Conta *)conta;
 
 // Realiza uma varredura nas compras e atualiza os Core Data
-+(void) atualizarComprasAposUpgrade:(NSManagedObjectContext *)context;
++(void) atualizarComprasAposUpgrade;
 
 @end
 

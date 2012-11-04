@@ -89,8 +89,7 @@
                                       comLimiteTotal:limiteTotal
                                 comMelhorDiaDeCompra:melhorDia
                                   cartaoPreferencial:preferencial
-                                        comTipoConta:self.tipoContaSelecionada
-                                           inContext:appDelegate.defaultContext];
+                                        comTipoConta:self.tipoContaSelecionada];
     
     } else {
         self.contaSelecionada.descricao = self.tfDescricaoDaConta.text;
@@ -380,13 +379,10 @@
     [self.percentFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [self.percentFormatter setMinimumFractionDigits:2];
     
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
     // Se o controller receber uma conta selecionada temos que atualizar os campos
     // com os dados dessa conta.
     if (!self.contaSelecionada) {
-        self.tipoContaSelecionada = [Conta retornaTipoContaPadraoNoContexto:appDelegate.defaultContext];
+        self.tipoContaSelecionada = [Conta retornaTipoContaPadraoNoContexto];
     } else {
         self.tipoContaSelecionada = self.contaSelecionada.tipo;
         // Se a conta existir não exite opção de cancelar, apenas salvar.

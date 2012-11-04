@@ -197,11 +197,8 @@
 {
     NSDate *hoje = [[NSDate alloc] init];
 
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
     self.dataSelecionada = hoje;
-    self.contaSelecionada = [Compra retornaContaDefaultNoContexto:appDelegate.defaultContext];
+    self.contaSelecionada = [Compra retornaContaDefaultNoContexto];
     
     self.tfDescricao.text = @"";
     self.tfDetalhesDaCompra.text = @"";
@@ -336,8 +333,6 @@
 #pragma mark - Eventos
 
 - (void)criarNovaCompra {
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     // Qual o numero de parcelas que foi escolhido pelo usuario?
     NSNumber *qtdeParcelas = [NSNumber numberWithDouble:self.stepperQtdeDeParcelas.value];
@@ -361,8 +356,7 @@
                                      qtdeDeParcelas:qtdeParcelas
                                          valorTotal:[NSDecimalNumber decimalNumberWithString:[valor stringValue]]
                                            comConta:self.contaSelecionada
-                         assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas
-                                          inContext:appDelegate.defaultContext];
+                         assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas];
 
     // Notifica o delegate que a compra mudou
     self.compraSelecionada = novaCompra;
@@ -395,15 +389,12 @@
     self.compraSelecionada.valorTotal = [NSDecimalNumber decimalNumberWithString:[valor stringValue]];
     self.compraSelecionada.origem = self.contaSelecionada;
     
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
     // Se a compra existir temos que recriar as parcelas, isso significa apagar as atuais
     // e recriar
-    [Compra apagarParcelasDaCompra:self.compraSelecionada inContext:appDelegate.defaultContext];
+    [Compra apagarParcelasDaCompra:self.compraSelecionada];
     
     // recriar parcelas
-    [Compra criarParcelasDaCompra:self.compraSelecionada assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas inContext:appDelegate.defaultContext];
+    [Compra criarParcelasDaCompra:self.compraSelecionada assumirAnterioresComoPagas:self.considerarParcelasAnterioresPagas];
     
     [self.compraDelegate compraFoiAlterada:self.compraSelecionada];
 }

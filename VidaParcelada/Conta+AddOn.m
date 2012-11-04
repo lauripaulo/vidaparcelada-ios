@@ -9,6 +9,7 @@
 #import "Conta+AddOn.h"
 #import "VidaParceladaHelper.h"
 #import "TipoConta+AddOn.h"
+#import "VidaParceladaAppDelegate.h"
 
 @implementation Conta (AddOn)
 
@@ -21,11 +22,13 @@
         comMelhorDiaDeCompra:(NSNumber *) melhorDiaDeCompra
           cartaoPreferencial:(BOOL)preferencial
                 comTipoConta:(TipoConta *)tipoConta
-                   inContext:(NSManagedObjectContext *)context
 {
     Conta *novaConta = nil;
     
     //NSLog(@"(>) contaComDescricao: %@, %@, %@, %@, %@, %@, %@, %@, %@", descricao, empresa, diaDeVencimento, jurosMes, limite, melhorDiaDeCompra, (preferencial ? @"YES" : @"NO"), tipoConta.nome, context);
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
@@ -34,7 +37,7 @@
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
+    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -54,7 +57,7 @@
         // Apaga todos os itens errados...
         //
         for (Conta *conta in matches) {
-            [context deleteObject:conta];
+            [appDelegate.defaultContext deleteObject:conta];
             //NSLog(@"(!) contaComDescricao: deleted = %@", conta.descricao);
         }
     
@@ -67,15 +70,14 @@
                          comLimiteTotal:limite 
                    comMelhorDiaDeCompra:melhorDiaDeCompra 
                      cartaoPreferencial:preferencial
-                           comTipoConta:tipoConta
-                              inContext:context];
+                           comTipoConta:tipoConta];
     
     } else  {
         //
         // Cria o novo objeto
         //
         if (!novaConta) {
-            novaConta = [NSEntityDescription insertNewObjectForEntityForName:@"Conta" inManagedObjectContext:context];
+            novaConta = [NSEntityDescription insertNewObjectForEntityForName:@"Conta" inManagedObjectContext:appDelegate.defaultContext];
             novaConta.compras = nil; // conta nova não tem compras...
             //NSLog(@"(!) contaComDescricao: new = %@", novaConta.descricao);
         }
@@ -91,7 +93,7 @@
         
  }
     
-    [context save:(&error)];
+    [appDelegate.defaultContext save:(&error)];
 
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -101,11 +103,14 @@
     return novaConta;
 }
 
-+ (TipoConta *) retornaTipoContaPadraoNoContexto:(NSManagedObjectContext *)context
++ (TipoConta *) retornaTipoContaPadraoNoContexto
 {
     //NSLog(@"(>) retornaTipoContaPadraoNoContexto: %@", context);
 
     NSError *error = nil;
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
     NSFetchRequest *tipoRequest = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
@@ -113,7 +118,7 @@
     tipoRequest.sortDescriptors = [NSArray arrayWithObject:
                                    [NSSortDescriptor sortDescriptorWithKey:@"nome" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)]];
     
-    NSArray *tipos = [context executeFetchRequest:tipoRequest error:&error];
+    NSArray *tipos = [appDelegate.defaultContext executeFetchRequest:tipoRequest error:&error];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -130,9 +135,12 @@
 
 }
 
-+ (NSArray *)contasCadastradasUsandoContext:(NSManagedObjectContext *)context
++ (NSArray *)contasCadastradasUsandoContext
 {    
     //NSLog(@"(>) contasCadastradasUsandoContext: %@", context);
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
@@ -141,7 +149,7 @@
                                                               selector:@selector(localizedCaseInsensitiveCompare:)]];
     
     NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
+    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -153,9 +161,12 @@
 
 // Retorna a quantidade de compras cadastradas nesse momento
 // na base de dados
-+(int) quantidadeDeContas:(NSManagedObjectContext *)context 
++(int) quantidadeDeContas
 {
     //NSLog(@"(>) quantidadeDeContas: %@", context);
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     int count = 0;
     
@@ -163,7 +174,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
     
     NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
+    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -178,14 +189,16 @@
 }
 
 +(void)removeContaTotalmente:(Conta *)conta
-                   inContext:(NSManagedObjectContext *)context
 {
     //NSLog(@"(>) removeContaTotalmente: %@", conta.descricao);
-     
-    [context deleteObject:conta];
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    [appDelegate.defaultContext deleteObject:conta];
     
     NSError *error = nil;
-    [context save:(&error)];
+    [appDelegate.defaultContext save:(&error)];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -199,11 +212,13 @@
 // Retorna um array de cartões que atendem a essa restrição,
 // se nenhum estiver vencendo o retorno será nil.
 + (NSArray *)verificaDataRetornandoContas:(NSDate *)data
-                           usandoContexto:(NSManagedObjectContext *)context
                      comparandoVencimento:(BOOL)vencimento
                       comparandoMelhorDia:(BOOL)melhorDia
 {
     //NSLog(@"(>) verificaDataRetornandoContas - %@, %@, %@, %@", data, context, (vencimento ? @"YES" : @"NO"), (melhorDia ? @"YES" : @"NO"));
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     NSMutableArray *result = [[NSMutableArray alloc] init];
     
@@ -222,7 +237,7 @@
     //NSLog(@"(!) verificaDataRetornandoContas - diaParam = %@", diaParam);
    
     // precisamos listar todas as contas
-    NSArray *contas = [Conta contasCadastradasUsandoContext:context];
+    NSArray *contas = [Conta contasCadastradasUsandoContext:appDelegate.defaultContext];
     
     // Iterar e descobrir se alguma delas tem a data de vencimento
     // igual a passada.

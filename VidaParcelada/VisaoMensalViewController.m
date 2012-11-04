@@ -62,13 +62,9 @@
 
 -(void)verificaVencimentos
 {
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
     // Verifica se existem cartões que vencem hoje ou que tem melhor dia hoje.
     NSDate *hoje = [[NSDate alloc] init];
     NSArray *contas = [Conta verificaDataRetornandoContas:hoje
-                                           usandoContexto:appDelegate.defaultContext
                                      comparandoVencimento:YES
                                       comparandoMelhorDia:NO];
     
@@ -118,7 +114,7 @@
 // define a query que irá popular a tabela atual
 -(void)setupFetchedResultsController
 {   
-    self.debug = YES;
+    self.debug = NO;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
     
@@ -260,7 +256,7 @@
     UINavigationItem *morenavitem = morenavbar.topItem;
     morenavitem.rightBarButtonItem = nil;
     
-    self.debug = YES;
+    self.debug = NO;
     
     // Registra para receber notificações de quando o banco de dados abrir
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];

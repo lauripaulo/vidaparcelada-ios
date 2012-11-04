@@ -63,12 +63,12 @@
     // Tipo Conta principal.
     NSString *contaNome = NSLocalizedString (@"cartao.exemplo1.nome", @"Cartão de crédito");
     NSString *tipoContaDescricao = NSLocalizedString (@"cartao.exemplo1.descricao", @"Cartão com data de vencimento");
-    TipoConta *cartao = [TipoConta contaComNome:contaNome eDescricao:tipoContaDescricao identificadorDeTipo:1 inContext:document.managedObjectContext];
+    TipoConta *cartao = [TipoConta contaComNome:contaNome eDescricao:tipoContaDescricao identificadorDeTipo:1];
     
     // Tipo conta para englobar todas as outras contas.
     contaNome = NSLocalizedString (@"cartao.exemplo2.nome", @"Outros");
     tipoContaDescricao = NSLocalizedString (@"cartao.exemplo2.descricao", @"Outras formas de parcelamento");
-    [TipoConta contaComNome:contaNome eDescricao:tipoContaDescricao identificadorDeTipo:2 inContext:document.managedObjectContext];
+    [TipoConta contaComNome:contaNome eDescricao:tipoContaDescricao identificadorDeTipo:2];
     
     // Cria a conta padrão de exemplo para preencher o produto
     Conta *conta;
@@ -78,7 +78,7 @@
     NSDecimalNumber *jurosMes = [NSDecimalNumber decimalNumberWithString:@"12"];
     NSDecimalNumber *limiteTotal = [NSDecimalNumber decimalNumberWithString:@"1000"];
     NSNumber *melhorDia = [NSNumber numberWithInt:3];
-    conta = [Conta contaComDescricao:contaDescricao daEmpresa:empresaDescricao comVencimentoNoDia:vencimento eJurosMes:jurosMes comLimiteTotal:limiteTotal comMelhorDiaDeCompra:melhorDia cartaoPreferencial:NO comTipoConta:cartao inContext:document.managedObjectContext];
+    conta = [Conta contaComDescricao:contaDescricao daEmpresa:empresaDescricao comVencimentoNoDia:vencimento eJurosMes:jurosMes comLimiteTotal:limiteTotal comMelhorDiaDeCompra:melhorDia cartaoPreferencial:NO comTipoConta:cartao];
     
     // E criamos uma compra de exemplo
     Compra *compra;
@@ -87,7 +87,7 @@
     NSDate *hoje = [[NSDate alloc] init];
     NSNumber *parcelas = [NSNumber numberWithInt:5];
     NSDecimalNumber *valorTotal = [NSDecimalNumber decimalNumberWithString:@"899"];
-    compra = [Compra compraComDescricao:descricaoCompra comDetalhes:detalhesCompra dataDaCompra:hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:parcelas valorTotal:valorTotal comConta:conta assumirAnterioresComoPagas:YES inContext:document.managedObjectContext];
+    compra = [Compra compraComDescricao:descricaoCompra comDetalhes:detalhesCompra dataDaCompra:hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:parcelas valorTotal:valorTotal comConta:conta assumirAnterioresComoPagas:YES];
                       
     NSLog (@"(!) Criado: %@, %@, %@", cartao, conta, compra);
     

@@ -25,15 +25,13 @@ extern NSString * const PARCELA_VENCIDA; // Todas as parcela pagas
                            comEstado:(NSString *)estado
                     eNumeroDaParcela:(NSNumber *)numeroDaParcela
                             comValor:(NSDecimalNumber *)valor
-                     pertenceACompra:(Compra *)compra
-                           inContext:(NSManagedObjectContext *)context;
+                     pertenceACompra:(Compra *)compra;
 
 //
 // Itera em todas as compras e identifica parcelas que estão vencendo no mês atual
 // 
 + (NSArray *) parcelasPendentesDoMes:(NSDate *)data
-                            eDaConta:(Conta *)conta
-                           inContext:(NSManagedObjectContext *)context;
+                            eDaConta:(Conta *)conta;
 
 //
 // Calcula valor total das parcelas passadas como parametro.

@@ -54,13 +54,9 @@
 
 -(void)verificaVencimentos
 {
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
     // Verifica se existem cartões que vencem hoje ou que tem melhor dia hoje.
     NSDate *hoje = [[NSDate alloc] init];
     NSArray *contas = [Conta verificaDataRetornandoContas:hoje
-                                           usandoContexto:appDelegate.defaultContext
                                      comparandoVencimento:NO
                                       comparandoMelhorDia:YES];
     
@@ -89,9 +85,6 @@
 {
     //NSLog(@"(>) alertView: %@, %d", alertView, buttonIndex);
     
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
     if (alertView == self.semContasCadastradasAlert) {
         [self performSegueWithIdentifier:@"SemContasCadastradasSegue" sender:self];
     }
@@ -102,7 +95,7 @@
         NSString *nomeDaAba = [NSString stringWithFormat:@"%@", [self class]];
         [VidaParceladaHelper salvaEstadoApresentacaoInicialAba:nomeDaAba exibido:YES];
         // Verifica se precisa exibir a mensagem de cadastro de contas
-        if ([Conta quantidadeDeContas:appDelegate.defaultContext] == 0) {
+        if ([Conta quantidadeDeContas] == 0) {
             [self.semContasCadastradasAlert show];
         }
     }
@@ -123,7 +116,7 @@
     // Delegate com o defaultContext e defaultDatabase
     VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
-    self.debug = YES;
+    self.debug = NO;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
     
@@ -181,9 +174,6 @@
     
     self.compraSelecionada = nil;
 
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
     //
     // Chamada a primeira vez que a aba é exibida passando o nome da própria
     // classe, retorna YES se em algum momento esse aviso já foi exibido.
@@ -193,7 +183,7 @@
         [self.primeiroUsoAlert show];
     } else {
         [self.tableView reloadData];
-        if ([Conta quantidadeDeContas:appDelegate.defaultContext] == 0) {
+        if ([Conta quantidadeDeContas] == 0) {
             [self.semContasCadastradasAlert show];
         } else {
             // verifica se estamos no melhor dia para compra.
@@ -294,7 +284,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {  
         // Delete the row from the data source
         NSError *error;
-        self.debug = YES;
+        self.debug = NO;
         Compra *compra = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [self.fetchedResultsController.managedObjectContext deleteObject:compra];
         

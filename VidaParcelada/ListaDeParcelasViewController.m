@@ -152,7 +152,7 @@
 // define a query que irá popular a tabela atual
 -(void)setupFetchedResultsController
 {
-    self.debug = YES;
+    self.debug = NO;
 
     // Delegate com o defaultContext e defaultDatabase
     VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];

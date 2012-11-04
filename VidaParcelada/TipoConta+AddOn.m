@@ -8,18 +8,21 @@
 
 #import "TipoConta+AddOn.h"
 #import "VidaParceladaHelper.h"
+#import "VidaParceladaAppDelegate.h"
 
 @implementation TipoConta (AddOn)
 
 +(TipoConta *)contaComNome:(NSString *)nome 
                 eDescricao:(NSString *)descricao 
        identificadorDeTipo:(int)tipo
-                 inContext:(NSManagedObjectContext *)context 
 {
     TipoConta *tipoConta = nil;
     
     //NSLog(@"(>) contaComNome: %@, %@, %d, %@", nome, descricao, tipo, context);
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"TipoConta"];
     request.predicate = [NSPredicate predicateWithFormat:@"nome = %@", nome];
@@ -27,7 +30,7 @@
     request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
+    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -47,7 +50,7 @@
         // Apaga todos os itens errados...
         //
         for (TipoConta *tipo in matches) {
-            [context deleteObject:tipo];
+            [appDelegate.defaultContext deleteObject:tipo];
             //NSLog(@"(!) contaComNome: deleted = %@", tipo.nome);
         }
         
@@ -55,15 +58,14 @@
         // este metodo de criação.
         tipoConta = [self contaComNome:nome 
                             eDescricao:descricao 
-                   identificadorDeTipo:tipo 
-                             inContext:context];
+                   identificadorDeTipo:tipo];
         
     } else {
         //
         // Cria o novo objeto
         //
         if (!tipoConta) {
-            tipoConta = [NSEntityDescription insertNewObjectForEntityForName:@"TipoConta" inManagedObjectContext:context];
+            tipoConta = [NSEntityDescription insertNewObjectForEntityForName:@"TipoConta" inManagedObjectContext:appDelegate.defaultContext];
             //NSLog(@"(!) contaComNome: new = %@", tipoConta.nome);
         }
         tipoConta.nome = nome;
@@ -71,7 +73,7 @@
         tipoConta.tipo = [NSNumber numberWithInt:tipo];
     }
     
-    [context save:(&error)];
+    [appDelegate.defaultContext save:(&error)];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];

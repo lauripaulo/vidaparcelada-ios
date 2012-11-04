@@ -313,11 +313,8 @@
     
     BOOL temParcelas = NO;
     
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
     // Quantas parcelas pendentes existem?
-    NSArray *parcelasPendentes = [Parcela parcelasPendentesDoMes:hoje eDaConta:conta inContext:appDelegate.defaultContext];
+    NSArray *parcelasPendentes = [Parcela parcelasPendentesDoMes:hoje eDaConta:conta];
     
     // Temos alguma?
     if (parcelasPendentes && [parcelasPendentes count] > 0) {
@@ -454,10 +451,7 @@
     NSString *textoValJuros = [self.valorFormatter stringFromNumber:[self.valorJuros decimalNumberBySubtracting:self.diferencaDeValor]];
     NSString *textoJuros = [NSString stringWithFormat:@"Valor: %@, Juros: %@", [self.valorFormatter stringFromNumber:self.diferencaDeValor], textoValJuros];
     
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
-    [Compra compraComDescricao:@"Juros do cartão" comDetalhes:textoJuros dataDaCompra:self.hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:numParcelas valorTotal:self.valorJuros comConta:self.contaSelecionada assumirAnterioresComoPagas:YES inContext:appDelegate.defaultContext];
+    [Compra compraComDescricao:@"Juros do cartão" comDetalhes:textoJuros dataDaCompra:self.hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:numParcelas valorTotal:self.valorJuros comConta:self.contaSelecionada assumirAnterioresComoPagas:YES];
     
     //NSLog(@"Ajuste = %@", ajuste);
 }

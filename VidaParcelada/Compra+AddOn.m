@@ -10,7 +10,7 @@
 #import "Parcela+AddOn.h"
 #import "Conta+AddOn.h"
 #import "VidaParceladaHelper.h"
-
+#import "VidaParceladaAppDelegate.h"
 //
 // Estados possíveis da compra
 //
@@ -21,20 +21,23 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 @implementation Compra (AddOn)
 
 // Realiza uma varredura nas compras e atualiza os Core Data
-+(void) atualizarComprasAposUpgrade:(NSManagedObjectContext *)context;
++(void) atualizarComprasAposUpgrade;
 {
     // Query no banco de dados, todas as compras, sem restrição.
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
+    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
     
     for (Compra *p in matches) {
         NSLog (@"Atualizando %@ ...", p.descricao);
         for (Parcela *parc in p.parcelas){
             NSLog (@" -> Parcela %@ ...", parc.descricao);
         }
-        [context save:(&error)];
+        [appDelegate.defaultContext save:(&error)];
         // Tratamento de errors
         [VidaParceladaHelper trataErro:error];
     }
@@ -51,80 +54,22 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
                    valorTotal:(NSDecimalNumber *)valorTotal
                      comConta:(Conta *)conta
    assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas
-                    inContext:(NSManagedObjectContext *)context
-{
-    Compra *novaCompra = nil;
-    
+{ 
     //NSLog(@"(>) compraComDescricao: %@, %@, %@, %@, %@, %@, %@, %@, %@", descricao, detalhes, data, estado, parcelas, valorTotal, conta.descricao, (parcelasAntigasPagas ? @"YES" : @"NO"), context);
     
-    // Query no banco de dados
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Compra"];
-    request.predicate = [NSPredicate predicateWithFormat:@"descricao = %@ AND valorTotal = %@ AND dataDaCompra = %@ AND origem = %@", descricao, valorTotal, data, conta];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES];
-    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    
-    NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
-    
-    // Tratamento de errors
-    [VidaParceladaHelper trataErro:error];
-
-    //NSLog(@"(!) compraComDescricao: [matches count] = %d", [matches count]);
-    
-    // Se o objeto existir carrega o objeto para edição
-    if (matches && [matches count] == 1) {
-        novaCompra = [matches objectAtIndex:0];
-        //NSLog(@"(!) compraComDescricao: loaded = %@", novaCompra.descricao);
-    }
-        
-    // Se existir mais de 1 objeto é uma situação de excessão e
-    // devemos apagar os existentes e criar um novo
-    if (matches && ([matches count] > 1)) {
-        //
-        // Apaga todos os itens errados...
-        //
-        for (Compra *compra in matches) {
-            [context deleteObject:compra];
-            //NSLog(@"(!) compraComDescricao: deleted = %@", compra.descricao);
-        }
-        
-        // ...e chama novamente de forma recursiva
-        // este metodo de criação.
-        novaCompra = [self compraComDescricao:descricao 
-                                  comDetalhes:detalhes
-                                 dataDaCompra:data 
-                                    comEstado:estado 
-                               qtdeDeParcelas:parcelas 
-                                   valorTotal:valorTotal 
-                                     comConta:conta 
-                   assumirAnterioresComoPagas:parcelasAntigasPagas 
-                                    inContext:context];
-        
-    } else {
-        //
-        // Cria o novo objeto
-        //
-        if (!novaCompra) {
-            novaCompra = [NSEntityDescription insertNewObjectForEntityForName:@"Compra" inManagedObjectContext:context];
-            //NSLog(@"(!) compraComDescricao: new = %@", novaCompra.descricao);
-        }
-        novaCompra.descricao = descricao;
-        novaCompra.detalhes = detalhes;
-        novaCompra.dataDaCompra = data;
-        novaCompra.estado = estado;
-        novaCompra.valorTotal = valorTotal;
-        novaCompra.qtdeTotalDeParcelas = parcelas;
-        novaCompra.origem = conta;
-        [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:parcelasAntigasPagas inContext:context];
-        
-    }
     //
     // Cria o novo objeto
     //
-    if (!novaCompra) {
-        novaCompra = [NSEntityDescription insertNewObjectForEntityForName:@"Compra" inManagedObjectContext:context];
-        //NSLog(@"(!) compraComDescricao: new = %@", novaCompra.descricao);
-    }
+    Compra *novaCompra = nil;
+    NSError *error = nil;
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    novaCompra = [NSEntityDescription insertNewObjectForEntityForName:@"Compra" inManagedObjectContext:appDelegate.defaultContext];
+    
+    NSLog(@"(!) compraComDescricao: new = %@", novaCompra.descricao);
+    
     novaCompra.descricao = descricao;
     novaCompra.detalhes = detalhes;
     novaCompra.dataDaCompra = data;
@@ -132,9 +77,10 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     novaCompra.valorTotal = valorTotal;
     novaCompra.qtdeTotalDeParcelas = parcelas;
     novaCompra.origem = conta;
-    [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:parcelasAntigasPagas inContext:context];
+    
+    [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:parcelasAntigasPagas];
 
-    [context save:(&error)];
+    [appDelegate.defaultContext save:(&error)];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -144,11 +90,14 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     return novaCompra;
 }
 
-+(Conta *)retornaContaDefaultNoContexto:(NSManagedObjectContext *)context
++(Conta *)retornaContaDefaultNoContexto
 {
     Conta *conta = nil;
     
     //NSLog(@"(>) retornaContaDefaultNoContexto: %@", context);
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     // para a conta vamos selecionar o primeiro objeto da tabela conta
     // Query para encontrar o primeiro TipoConta e associar a conta que estamos criando
@@ -158,7 +107,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
                                [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES 
                                                               selector:@selector(localizedCaseInsensitiveCompare:)]];
     NSError *error = nil;
-    NSArray *tipos = [context executeFetchRequest:request error:&error];
+    NSArray *tipos = [appDelegate.defaultContext executeFetchRequest:request error:&error];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
@@ -268,11 +217,13 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 //
 +(NSSet *)criarParcelasDaCompra:(Compra *)compra
      assumirAnterioresComoPagas:(BOOL)parcelasAntigasPagas
-                      inContext:(NSManagedObjectContext *)context
 {
     NSMutableSet *parcelas = [[ NSMutableSet alloc] initWithCapacity:[compra.qtdeTotalDeParcelas intValue]];
     
     NSError *error = nil;
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
 
     //NSLog(@"(>) criarParcelasDaCompra: %@, %@, %@", compra.descricao, (parcelasAntigasPagas ? @"YES" : @"NO"), context);
     
@@ -306,10 +257,9 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
                                             comEstado:estado 
                                      eNumeroDaParcela:[NSNumber numberWithInt:i+1] 
                                              comValor:valorParcela 
-                                      pertenceACompra:compra
-                                            inContext:context];
+                                      pertenceACompra:compra];
 
-        [context save:(&error)];
+        [appDelegate.defaultContext save:(&error)];
         
         // Tratamento de errors
         [VidaParceladaHelper trataErro:error];
@@ -327,12 +277,15 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 //
 // Apaga todas as parcelas da compra passada como parametro
 //
-+(void)apagarParcelasDaCompra:(Compra *)compra inContext:(NSManagedObjectContext *)context
++(void)apagarParcelasDaCompra:(Compra *)compra
 {
     //NSLog(@"(>) apagarParcelasDaCompra: %@", context);
     
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+
     for (Parcela *p in compra.parcelas) {
-        [context deleteObject:p];
+        [appDelegate.defaultContext deleteObject:p];
         //NSLog(@"(!) apagarParcelasDaCompra: deleted = %@", p.descricao);
     } 
     
@@ -340,11 +293,14 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
 
 }
 
-+(int) quantidadeDeCompras:(NSManagedObjectContext *)context comConta:(Conta *)conta
++(int) quantidadeDeComprasComConta:(Conta *)conta
 {
     //NSLog(@"(>) quantidadeDeCompras: %@, %@", context, (conta ? conta.descricao : nil));
 
     int count = 0;
+    
+    // Delegate com o defaultContext e defaultDatabase
+    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
     // Query no banco de dados
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
@@ -355,7 +311,7 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     }
 
     NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
+    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
