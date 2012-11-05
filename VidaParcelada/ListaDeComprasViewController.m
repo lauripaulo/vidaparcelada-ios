@@ -244,7 +244,7 @@
     NSString *data = [self.dateFormatter stringFromDate:compra.dataDaCompra];
     NSString *valor = [self.valorFormatter stringFromNumber:compra.valorTotal];
     
-    NSString *subTitulo = [NSString stringWithFormat:@"%@   %@ parcelas   %@", data, compra.qtdeTotalDeParcelas, valor];
+    NSString *subTitulo = [NSString stringWithFormat:@"%@ - %@x - %@", data, compra.qtdeTotalDeParcelas, valor];
 
     cell.textLabel.text = compra.descricao;
     cell.detailTextLabel.text = subTitulo;

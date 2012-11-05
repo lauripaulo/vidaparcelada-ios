@@ -100,12 +100,14 @@
 
 - (UIActionSheet *)actionSheetVencimento
 {
+    NSString *cancel = NSLocalizedString(@"cadastro.compra.parcelas.pagas", @"Parcelas já pagas");
+    NSString *destructive = NSLocalizedString(@"cadastro.compra.parcelas.pendentes", @"Pendente pagamento");
     if (_actionSheetVencimento == nil) {
         NSString *titulo = NSLocalizedString(@"cadastro.compra.marcar.parcelas", @"Marcar parcelas como");
         _actionSheetVencimento = [[UIActionSheet alloc] initWithTitle:titulo
                                                              delegate:self
-                                                    cancelButtonTitle:@"Parcelas já pagas"
-                                               destructiveButtonTitle:@"Pendente pagamento"
+                                                    cancelButtonTitle:cancel
+                                               destructiveButtonTitle:destructive
                                                     otherButtonTitles:nil];
     }
     return _actionSheetVencimento;
@@ -113,12 +115,14 @@
 
 - (UIActionSheet *)actionSheetApagarParcelas
 {
+    NSString *cancel = NSLocalizedString(@"cadastro.compra.parcelas.cancel", @"Cancelar atualização");
+    NSString *destructive = NSLocalizedString(@"cadastro.compra.parcelas.recreate", @"Recriar parcelas");
     if (_actionSheetApagarParcelas == nil) {
         NSString *titulo = NSLocalizedString(@"cadastro.compra.apagar.parcelas", @"Ação ao apagar parcelas");
         _actionSheetApagarParcelas = [[UIActionSheet alloc] initWithTitle:titulo
                                                                  delegate:self
-                                                        cancelButtonTitle:@"Cancelar atualização"
-                                                   destructiveButtonTitle:@"Recriar parcelas"
+                                                        cancelButtonTitle:cancel
+                                                   destructiveButtonTitle:destructive
                                                         otherButtonTitles:nil];
     }
     return _actionSheetApagarParcelas;
@@ -232,12 +236,9 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        
     // Se o controller receber uma conta selecionada temos que atualizar os campos
     // com os dados dessa conta.
-    self.listaDeContas = [Conta contasCadastradasUsandoContext:appDelegate.defaultContext];
+    self.listaDeContas = [Conta contasCadastradas];
     if (self.compraSelecionada) {
         //self.topBar.rightBarButtonItem = nil;
         [self atualizarCamposNaTela];
@@ -424,11 +425,14 @@
             self.considerarParcelasAnterioresPagas = NO;
         
             // Mudamos a mensagem então
+            NSString *cancel = NSLocalizedString(@"cadastro.compra.parcelas.cancel", @"Cancelar atualização");
+            NSString *destructive = NSLocalizedString(@"cadastro.compra.parcelas.recreate", @"Recriar parcelas");
+
             NSString *titulo = NSLocalizedString(@"cadastro.compra.apagar.parcelaspendente", @"Ação ao apagar parcelas pendentes");
             _actionSheetApagarParcelas = [[UIActionSheet alloc] initWithTitle:titulo
                                                                      delegate:self
-                                                            cancelButtonTitle:@"Cancelar atualização"
-                                                       destructiveButtonTitle:@"Recriar parcelas"
+                                                            cancelButtonTitle:cancel
+                                                       destructiveButtonTitle:destructive
                                                             otherButtonTitles:nil];
 
         } else if (buttonIndex == [actionSheet cancelButtonIndex]) {

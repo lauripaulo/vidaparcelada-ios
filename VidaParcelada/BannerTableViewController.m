@@ -31,7 +31,6 @@
         } else {
             // Regular user
             [self createDefaultBanner];
-            [self getBannerFromAdMob];
         }
     } else {
         NSLog (@"No Ads will be displayed for the %@ view controller.", self);
@@ -48,28 +47,18 @@
 -(void)adViewDidReceiveAd:(GADBannerView *)bannerView
 {
     NSLog (@"adViewDidReceiveAd");
-    
-    // resize
-//    [UIView beginAnimations:@"resize" context:nil];
-//    [UIView setAnimationDuration:0.2];
-//    [UIView setAnimationDelay:1.0];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-    
-    // Move banner
+
     CGRect bannerFrame = bannerView.frame;
     CGFloat screenSize = self.navigationController.view.frame.size.height;
     CGFloat tabBarSize = self.tabBarController.tabBar.frame.size.height;
     CGFloat bannerOrigin = screenSize - tabBarSize;
-    //NSLog (@"bannerOrigin: %f", bannerOrigin);
     bannerFrame.origin.y = bannerOrigin;
     bannerView.frame = bannerFrame;
     
     CGRect tableFrame = self.navigationController.visibleViewController.view.frame;
     tableFrame.size.height = tableFrame.size.height - GAD_SIZE_320x50.height;
     self.navigationController.visibleViewController.view.frame = tableFrame;
-    
-//    [UIView commitAnimations];
-    
+
     self.bannerWasDisplayed = YES;
 }
 
@@ -124,14 +113,10 @@
     // Put the banner into play
     self.banner.rootViewController = self;
     [self.tabBarController.view addSubview:self.banner];
-}
-
--(void)getBannerFromAdMob
-{
-    NSLog (@"getBannerFromAdMob");
 
     // Iniciar uma solicitação genérica para carregá-la com um anúncio.
-    [self.banner loadRequest:[GADRequest request]];
+    [self.banner loadRequest:request];
 }
+
 
 @end

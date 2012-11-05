@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "VidaParcelada/PagarFaturaViewController.m"
-         timestampString = "373088541.725163"
+         timestampString = "373693394.491195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "287"
-         endingLineNumber = "287"
+         startingLineNumber = "284"
+         endingLineNumber = "284"
          landmarkName = "-contaEscolhida:"
          landmarkType = "5">
       </FileBreakpoint>

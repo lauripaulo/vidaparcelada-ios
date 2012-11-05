@@ -172,7 +172,7 @@
     NSString *mes = [dateFormatter stringFromDate:data];
     mes = [mes stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[mes substringToIndex:1] uppercaseString]];
     [dateFormatter setDateFormat:@"yyyy"];
-    retorno = [NSString stringWithFormat:@"Previsão para %@ de %@", mes, [dateFormatter stringFromDate:data]];
+    retorno = [NSString stringWithFormat:@"%@, %@", mes, [dateFormatter stringFromDate:data]];
     
     //NSLog (@"(<) retornaMesAtualFormatado: return = %@", retorno);
 

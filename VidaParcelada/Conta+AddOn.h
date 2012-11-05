@@ -24,7 +24,7 @@
 
 // Retorna todas as contas atualmente cadastradas para usar em
 // um UIPickerView, por exemplo.
-+ (NSArray *)contasCadastradasUsandoContext:(NSManagedObjectContext *)context;
++ (NSArray *)contasCadastradas;
 
 // Retorna a quantidade de compras cadastradas nesse momento
 // na base de dados

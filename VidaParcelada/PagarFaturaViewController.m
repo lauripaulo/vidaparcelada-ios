@@ -250,11 +250,8 @@
     //NSLog (@"(>) escolheContaParaPagamento: ");
         
     if (!self.contaSelecionada) {
-        // Delegate com o defaultContext e defaultDatabase
-        VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        
         // vamos listar todas as contas, independente se tem ou não parcelas.
-        NSArray * listaDeContas = [Conta contasCadastradasUsandoContext:appDelegate.defaultContext];
+        NSArray * listaDeContas = [Conta contasCadastradas];
         
         // iterando nas contas e pesquisando cada uma por parcelas pendentes para o mes atual
         // se a conta tiver, para o processo e inicia o processo de pagamento
@@ -356,8 +353,8 @@
             self.cellCartao.detailTextLabel.text = self.contaSelecionada.tipo.descricao;
         }
     } else {
-        self.cellCartao.textLabel.text = @"Nenhuma conta";
-        self.cellCartao.detailTextLabel.text = @"Sem parcelas pendentes.";
+        self.cellCartao.textLabel.text = NSLocalizedString(@"pagamento.info.cartao.semconta", @"Nenhuma conta");
+        self.cellCartao.detailTextLabel.text = NSLocalizedString(@"pagamento.info.cartao.semparcelaspendentes", @"Sem parcelas pendentes.");
     }
     
     self.cellDiferenca.detailTextLabel.text = [self.valorFormatter stringFromNumber:self.diferencaDeValor];
@@ -451,7 +448,7 @@
     NSString *textoValJuros = [self.valorFormatter stringFromNumber:[self.valorJuros decimalNumberBySubtracting:self.diferencaDeValor]];
     NSString *textoJuros = [NSString stringWithFormat:@"Valor: %@, Juros: %@", [self.valorFormatter stringFromNumber:self.diferencaDeValor], textoValJuros];
     
-    [Compra compraComDescricao:@"Juros do cartão" comDetalhes:textoJuros dataDaCompra:self.hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:numParcelas valorTotal:self.valorJuros comConta:self.contaSelecionada assumirAnterioresComoPagas:YES];
+    [Compra compraComDescricao:NSLocalizedString(@"pagamento.cartao.juros.proxmes", @"Juros do cartão") comDetalhes:textoJuros dataDaCompra:self.hoje comEstado:COMPRA_PENDENTE_PAGAMENTO qtdeDeParcelas:numParcelas valorTotal:self.valorJuros comConta:self.contaSelecionada assumirAnterioresComoPagas:YES];
     
     //NSLog(@"Ajuste = %@", ajuste);
 }

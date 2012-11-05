@@ -135,7 +135,7 @@
 
 }
 
-+ (NSArray *)contasCadastradasUsandoContext
++ (NSArray *)contasCadastradas
 {    
     //NSLog(@"(>) contasCadastradasUsandoContext: %@", context);
     
@@ -217,9 +217,6 @@
 {
     //NSLog(@"(>) verificaDataRetornandoContas - %@, %@, %@, %@", data, context, (vencimento ? @"YES" : @"NO"), (melhorDia ? @"YES" : @"NO"));
     
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
     NSMutableArray *result = [[NSMutableArray alloc] init];
     
     // Para transformar a data em dia/string
@@ -237,7 +234,7 @@
     //NSLog(@"(!) verificaDataRetornandoContas - diaParam = %@", diaParam);
    
     // precisamos listar todas as contas
-    NSArray *contas = [Conta contasCadastradasUsandoContext:appDelegate.defaultContext];
+    NSArray *contas = [Conta contasCadastradas];
     
     // Iterar e descobrir se alguma delas tem a data de vencimento
     // igual a passada.

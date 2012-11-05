@@ -29,10 +29,7 @@
 // YES if AdMob already gave the app a banner
 @property BOOL bannerWasDisplayed;
 
-// Creates a banner
+// Creates a banner and asks for it in a request
 -(void)createDefaultBanner;
-
-// Call AdMob and ask for a new banner
--(void)getBannerFromAdMob;
 
 @end

@@ -127,7 +127,7 @@
     // Delegate com o defaultContext e defaultDatabase
     VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
-    //[NSFetchedResultsController deleteCacheWithName:@"VisaoMensalCache"];
+    [NSFetchedResultsController deleteCacheWithName:@"VisaoMensalCache"];
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request 
                                                                         managedObjectContext:appDelegate.defaultContext
@@ -150,10 +150,7 @@
     
     NSString *valor = [self.valorFormatter stringFromNumber:parcela.valor];
     
-//    NSString *vencimento = [self.dateFormatter stringFromDate:parcela.dataVencimento];    
-//    NSString *detail = [NSString stringWithFormat:@"%@ - %@ - %@", vencimento, parcela.descricao, valor];
-    
-    NSString *detail = [NSString stringWithFormat:@"%@ - Parcela: %@/%@ - %@", valor, parcela.numeroDaParcela, parcela.compra.qtdeTotalDeParcelas, parcela.compra.origem.descricao];
+    NSString *detail = [NSString stringWithFormat:@"%@ - %@/%@ - %@", valor, parcela.numeroDaParcela, parcela.compra.qtdeTotalDeParcelas, parcela.compra.origem.descricao];
     
     cell.textLabel.text = parcela.compra.descricao;
     cell.detailTextLabel.text = detail;
@@ -178,11 +175,11 @@
             valorMes = [valorMes decimalNumberByAdding:p.valor];
         }
     }
-    NSString *descricaoDaParcela = @"parcela";
+    NSString *descricaoDaParcela = NSLocalizedString (@"lista.previsao.texto.parcela", @"parcela");
     NSString *valor = [self.valorFormatter stringFromNumber:valorMes];
     int qtdeDeParcelas = [sectionInfo numberOfObjects];
     if (qtdeDeParcelas > 1) {
-        descricaoDaParcela = @"parcelas";
+        descricaoDaParcela = NSLocalizedString (@"lista.previsao.texto.parcelas", @"parcelas");
     }
     NSString *textoInformativo = NSLocalizedString(@"lista.previsao.texto.informativo", @"Compras no periodo");
     NSString *noTotal = NSLocalizedString(@"lista.previsao.texto.nototalde", @"no total de");
@@ -315,13 +312,6 @@
     self.objetivoMensal = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
     [[self tableView] reloadData];
     
-    // Delegate com o defaultContext e defaultDatabase
-    VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-
-    if (appDelegate.defaultDatabase) {
-        [self verificaVencimentos];
-    }
-
     //
     // Chamada a primeira vez que a aba é exibida passando o nome da própria
     // classe, retorna YES se em algum momento esse aviso já foi exibido.
