@@ -39,6 +39,11 @@
 		79702CF6159D37F60010CE10 /* contas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CEE159D37F60010CE10 /* contas@2x.png */; };
 		79702CF8159D37F60010CE10 /* opcao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CF0159D37F60010CE10 /* opcao@2x.png */; };
 		79702CFA159D37F60010CE10 /* previsao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79702CF2159D37F60010CE10 /* previsao@2x.png */; };
+		797C1AD916591E4600F90C21 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 797C1AD816591E4600F90C21 /* Default-Portrait~ipad.png */; };
+		797C1ADB16591E5100F90C21 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 797C1ADA16591E5100F90C21 /* Default-Landscape~ipad.png */; };
+		797C1ADD16591E5700F90C21 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 797C1ADC16591E5700F90C21 /* Default-Portrait@2x~ipad.png */; };
+		797C1ADF16591E5E00F90C21 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 797C1ADE16591E5E00F90C21 /* Default-Landscape@2x~ipad.png */; };
+		797C1AE21659208900F90C21 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797C1AE41659208900F90C21 /* iPad.storyboard */; };
 		797D9D3115463C9000D3B067 /* Compra+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D3015463C9000D3B067 /* Compra+AddOn.m */; };
 		797D9D341546458800D3B067 /* Parcela+AddOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D9D331546458800D3B067 /* Parcela+AddOn.m */; };
 		797E23C216473611002AD31C /* WaitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 797E23C416473611002AD31C /* WaitView.xib */; };
@@ -134,6 +139,12 @@
 		79702CEE159D37F60010CE10 /* contas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contas@2x.png"; sourceTree = "<group>"; };
 		79702CF0159D37F60010CE10 /* opcao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opcao@2x.png"; sourceTree = "<group>"; };
 		79702CF2159D37F60010CE10 /* previsao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "previsao@2x.png"; sourceTree = "<group>"; };
+		797C1AD816591E4600F90C21 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		797C1ADA16591E5100F90C21 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		797C1ADC16591E5700F90C21 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "../Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		797C1ADE16591E5E00F90C21 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x~ipad.png"; path = "../Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		797C1AE31659208900F90C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPad.storyboard; sourceTree = "<group>"; };
+		797C1AE51659208C00F90C21 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = pt; path = pt.lproj/iPad.storyboard; sourceTree = "<group>"; };
 		797D9D2F15463C9000D3B067 /* Compra+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Compra+AddOn.h"; sourceTree = "<group>"; };
 		797D9D3015463C9000D3B067 /* Compra+AddOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Compra+AddOn.m"; sourceTree = "<group>"; };
 		797D9D321546458800D3B067 /* Parcela+AddOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Parcela+AddOn.h"; sourceTree = "<group>"; };
@@ -288,6 +299,10 @@
 		79702CFF159D397A0010CE10 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				797C1ADE16591E5E00F90C21 /* Default-Landscape@2x~ipad.png */,
+				797C1ADC16591E5700F90C21 /* Default-Portrait@2x~ipad.png */,
+				797C1ADA16591E5100F90C21 /* Default-Landscape~ipad.png */,
+				797C1AD816591E4600F90C21 /* Default-Portrait~ipad.png */,
 				790827FC1604061A00CB4233 /* Default-568h@2x.png */,
 				79C9331C159EBE1000651DDB /* Default.png */,
 				79C9331D159EBE1000651DDB /* Default@2x.png */,
@@ -410,6 +425,7 @@
 				7908F9131646170D00C4E8E0 /* Localizable.strings */,
 				798FF4201533B61F00385C5E /* DataModel.xcdatamodeld */,
 				79DBA40215CCBDBA008BF96B /* iPhone.storyboard */,
+				797C1AE41659208900F90C21 /* iPad.storyboard */,
 			);
 			name = "Storyboards/Data Model";
 			sourceTree = "<group>";
@@ -537,6 +553,11 @@
 				79A4933F1618EAD800053833 /* MKStoreKitConfigs.plist in Resources */,
 				79A493411618EAD800053833 /* README.mdown in Resources */,
 				791FF3A41638A549007AEF03 /* README.txt in Resources */,
+				797C1AD916591E4600F90C21 /* Default-Portrait~ipad.png in Resources */,
+				797C1ADB16591E5100F90C21 /* Default-Landscape~ipad.png in Resources */,
+				797C1ADD16591E5700F90C21 /* Default-Portrait@2x~ipad.png in Resources */,
+				797C1ADF16591E5E00F90C21 /* Default-Landscape@2x~ipad.png in Resources */,
+				797C1AE21659208900F90C21 /* iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,6 +614,15 @@
 				7908F9141646171300C4E8E0 /* pt */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		797C1AE41659208900F90C21 /* iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				797C1AE31659208900F90C21 /* en */,
+				797C1AE51659208C00F90C21 /* pt */,
+			);
+			name = iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		797E23C416473611002AD31C /* WaitView.xib */ = {
@@ -668,7 +698,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VidaParcelada/VidaParcelada-Prefix.pch";
 				INFOPLIST_FILE = "VidaParcelada/VidaParcelada-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -689,7 +719,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VidaParcelada/VidaParcelada-Prefix.pch";
 				INFOPLIST_FILE = "VidaParcelada/VidaParcelada-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
