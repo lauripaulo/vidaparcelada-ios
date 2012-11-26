@@ -51,60 +51,23 @@ NSString * const PARCELA_VENCIDA = @"Vencida";
     // Delegate com o defaultContext e defaultDatabase
     VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
-    // Query no banco de dados
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Parcela"];
-    request.predicate = [NSPredicate predicateWithFormat:@"descricao = %@ AND dataVencimento = %@ AND valor = %@", descricao, dataDeVencimento, valor];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES];
-    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    
     NSError *error = nil;
-    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
-    // Tratamento de errors
-    [VidaParceladaHelper trataErro:error];
     
     //NSLog(@"(!) novaParcelaComDescricao: [matches count] = %d", [matches count]);
     
-    // Se o objeto existir carrega o objeto para edição
-    if (matches && [matches count] == 1) {
-        novaParcela = [matches objectAtIndex:0];
-        //NSLog(@"(!) novaParcelaComDescricao: loaded = %@", novaParcela.descricao);
+    //
+    // Cria o novo objeto
+    //
+    if (!novaParcela) {
+        novaParcela = [NSEntityDescription insertNewObjectForEntityForName:@"Parcela" inManagedObjectContext:appDelegate.defaultContext];
+        //NSLog(@"(!) novaParcelaComDescricao: new = %@", novaParcela.descricao);
     }
-    
-    // Se existir mais de 1 objeto é uma situação de excessão e
-    // devemos apagar os existentes e criar um novo
-    if (matches && ([matches count] > 1)) {
-        //
-        // Apaga todos os itens errados...
-        //
-        for (Parcela *parcela in matches) {
-            [appDelegate.defaultContext deleteObject:parcela];
-            //NSLog(@"(!) novaParcelaComDescricao: deleted = %@", parcela.descricao);
-        }
-        
-        // ...e chama novamente de forma recursiva
-        // este metodo de criação.
-        novaParcela = [self novaParcelaComDescricao:descricao 
-                                  eDataDeVencimento:dataDeVencimento 
-                                          comEstado:estado 
-                                   eNumeroDaParcela:numeroDaParcela 
-                                           comValor:valor 
-                                    pertenceACompra:compra];
-        
-    } else {
-        //
-        // Cria o novo objeto
-        //
-        if (!novaParcela) {
-            novaParcela = [NSEntityDescription insertNewObjectForEntityForName:@"Parcela" inManagedObjectContext:appDelegate.defaultContext];
-            //NSLog(@"(!) novaParcelaComDescricao: new = %@", novaParcela.descricao);
-        }
-        novaParcela.descricao = descricao;
-        novaParcela.dataVencimento = dataDeVencimento;
-        novaParcela.estado = estado;
-        novaParcela.numeroDaParcela = numeroDaParcela;
-        novaParcela.compra = compra;
-        novaParcela.valor = valor;
-    }
+    novaParcela.descricao = descricao;
+    novaParcela.dataVencimento = dataDeVencimento;
+    novaParcela.estado = estado;
+    novaParcela.numeroDaParcela = numeroDaParcela;
+    novaParcela.compra = compra;
+    novaParcela.valor = valor;
     
     [appDelegate.defaultContext save:(&error)];
     

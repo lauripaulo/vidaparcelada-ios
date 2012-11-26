@@ -152,7 +152,7 @@
     //NSLog(@"(>) viewWillAppear: %@, View = %@", (animated ? @"YES" : @"NO"), self);
     
     // Display banners
-    self.displayAds = YES;
+    self.displayAds = NO;
     [super viewWillAppear: animated];
     
     //NSLog(@"(<) viewWillAppear: ");

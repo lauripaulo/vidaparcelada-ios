@@ -78,14 +78,14 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
     novaCompra.qtdeTotalDeParcelas = parcelas;
     novaCompra.origem = conta;
     
-    [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:parcelasAntigasPagas];
-
     [appDelegate.defaultContext save:(&error)];
     
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
-    //NSLog(@"(<) compraComDescricao: return = %@", novaCompra.descricao);
+    [self criarParcelasDaCompra:novaCompra assumirAnterioresComoPagas:parcelasAntigasPagas];
+    
+    NSLog(@"(<) compraComDescricao: return = %@", novaCompra.descricao);
 
     return novaCompra;
 }
@@ -250,9 +250,13 @@ NSString * const COMPRA_PAGAMENTO_EFETUADO = @"Pago";
             }
         }
         
+        NSString *descricao = NSLocalizedString(@"parcela.nova.descricao", @"Parcela ");
+        NSString *separador = NSLocalizedString(@"parcela.nova.separador", @"de");
+        
+        NSString *descricaoParcela = [descricao stringByAppendingFormat:@" %i %@ %i", i+1, separador, [compra.qtdeTotalDeParcelas intValue]];
+        
         // Vamos criar a parcela
-        NSString *descricaoParcela = [@"Parcela " stringByAppendingFormat:@" %i de %i", i+1, [compra.qtdeTotalDeParcelas intValue]];
-        Parcela *p = [Parcela novaParcelaComDescricao:descricaoParcela 
+        Parcela *p = [Parcela novaParcelaComDescricao:descricaoParcela
                                     eDataDeVencimento:vencimento 
                                             comEstado:estado 
                                      eNumeroDaParcela:[NSNumber numberWithInt:i+1] 

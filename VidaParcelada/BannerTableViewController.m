@@ -18,6 +18,7 @@
 @synthesize banner = _banner;
 @synthesize displayAds = _displayAds;
 @synthesize bannerWasDisplayed = _bannerWasDisplayed;
+@synthesize bannerId = _bannerId;
 
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -85,7 +86,7 @@
 
 -(void)createDefaultBanner
 {
-    NSLog (@"adViewWillPresentScreen");
+    NSLog (@"adViewWillPresentScreen for banner: %@", self.bannerId);
     
     // Criar uma visualização do tamanho padrão na parte inferior da tela, escondido.
     self.banner = [[GADBannerView alloc]
@@ -96,7 +97,11 @@
     self.banner.delegate = self;
     
     // Especificar o "identificador do bloco de anúncios". Este é seu ID de editor da AdMob.
-    self.banner.adUnitID = @"a1506257e9c0f7c";
+    if (!self.bannerId || [self.bannerId length] == 0) {
+        self.banner.adUnitID = @"a150a94c821b339"; // antigo == @"a1506257e9c0f7c";
+    } else {
+        self.banner.adUnitID = self.bannerId;
+    }
     
     // Permitir que o tempo de execução saiba qual UIViewController deve ser restaurado depois de levar
     // o usuário para onde quer que o anúncio vá e adicioná-lo à hierarquia de visualização.

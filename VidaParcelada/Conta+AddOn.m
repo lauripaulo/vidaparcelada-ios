@@ -30,76 +30,32 @@
     // Delegate com o defaultContext e defaultDatabase
     VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
-    // Query no banco de dados
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Conta"];
-    request.predicate = [NSPredicate predicateWithFormat:@"descricao = %@ AND empresa = %@", descricao, empresa];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"descricao" ascending:YES];
-    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    
     NSError *error = nil;
-    NSArray *matches = [appDelegate.defaultContext executeFetchRequest:request error:&error];
-    
-    // Tratamento de errors
-    [VidaParceladaHelper trataErro:error];
-
-    //NSLog(@"(!) contaComDescricao: [matches count] = %d", [matches count]);
-    
-    // Se o objeto existir carrega o objeto para edição
-    if (matches && [matches count] == 1) {
-        novaConta = [matches objectAtIndex:0];
-        //NSLog(@"(!) contaComDescricao: loaded = %@", novaConta.descricao);
+    //
+    // Cria o novo objeto
+    //
+    if (!novaConta) {
+        novaConta = [NSEntityDescription insertNewObjectForEntityForName:@"Conta" inManagedObjectContext:appDelegate.defaultContext];
+        novaConta.compras = nil; // conta nova não tem compras...
+        //NSLog(@"(!) contaComDescricao: new = %@", novaConta.descricao);
     }
-    
-    // Se existir mais de 1 objeto é uma situação de excessão e
-    // devemos apagar os existentes e criar um novo
-    if (matches && ([matches count] > 1)) {
-        //
-        // Apaga todos os itens errados...
-        //
-        for (Conta *conta in matches) {
-            [appDelegate.defaultContext deleteObject:conta];
-            //NSLog(@"(!) contaComDescricao: deleted = %@", conta.descricao);
-        }
-    
-        // ...e chama novamente de forma recursiva
-        // este metodo de criação.
-        novaConta = [self contaComDescricao:descricao
-                              daEmpresa:empresa 
-                     comVencimentoNoDia:diaDeVencimento 
-                              eJurosMes:jurosMes 
-                         comLimiteTotal:limite 
-                   comMelhorDiaDeCompra:melhorDiaDeCompra 
-                     cartaoPreferencial:preferencial
-                           comTipoConta:tipoConta];
-    
-    } else  {
-        //
-        // Cria o novo objeto
-        //
-        if (!novaConta) {
-            novaConta = [NSEntityDescription insertNewObjectForEntityForName:@"Conta" inManagedObjectContext:appDelegate.defaultContext];
-            novaConta.compras = nil; // conta nova não tem compras...
-            //NSLog(@"(!) contaComDescricao: new = %@", novaConta.descricao);
-        }
-        novaConta.tipo = tipoConta;
-        novaConta.descricao = descricao;
-        novaConta.empresa = empresa;
-        novaConta.diaDeVencimento = diaDeVencimento;
-        novaConta.jurosMes = jurosMes;
-        novaConta.limite = limite;
-        novaConta.melhorDiaDeCompra = melhorDiaDeCompra;
-        // maneira de colocar BOOLs no coredata
-        novaConta.preferencial = [NSNumber numberWithBool:preferencial];
-        
- }
+    novaConta.tipo = tipoConta;
+    novaConta.descricao = descricao;
+    novaConta.empresa = empresa;
+    novaConta.diaDeVencimento = diaDeVencimento;
+    novaConta.jurosMes = jurosMes;
+    novaConta.limite = limite;
+    novaConta.melhorDiaDeCompra = melhorDiaDeCompra;
+    // maneira de colocar BOOLs no coredata
+    novaConta.preferencial = [NSNumber numberWithBool:preferencial];
     
     [appDelegate.defaultContext save:(&error)];
-
+    
     // Tratamento de errors
     [VidaParceladaHelper trataErro:error];
     
     //NSLog(@"(<) contaComDescricao: return = %@", novaConta.descricao);
-
+    
     return novaConta;
 }
 

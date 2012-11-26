@@ -16,6 +16,19 @@
          landmarkName = "-contaEscolhida:"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "VidaParcelada/Compra+AddOn.m"
+         timestampString = "375565147.52959"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "+compraComDescricao:comDetalhes:dataDaCompra:comEstado:qtdeDeParcelas:valorTotal:comConta:assumirAnterioresComoPagas:"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint

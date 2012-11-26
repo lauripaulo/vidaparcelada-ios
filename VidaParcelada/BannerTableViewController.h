@@ -29,6 +29,9 @@
 // YES if AdMob already gave the app a banner
 @property BOOL bannerWasDisplayed;
 
+// The banner ID
+@property NSString *bannerId;
+
 // Creates a banner and asks for it in a request
 -(void)createDefaultBanner;
 

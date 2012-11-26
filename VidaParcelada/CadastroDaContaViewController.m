@@ -206,6 +206,7 @@
     
     // Display banners
     self.displayAds = YES;
+    self.bannerId = @"a150a94bd55dcbb";
     [super viewWillAppear: animated];
 
     //

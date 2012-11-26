@@ -307,6 +307,7 @@
 
     // Display banners
     self.displayAds = YES;
+    self.bannerId = @"a150a8fe7e026a9";
     [super viewWillAppear:animated];
     
     self.objetivoMensal = [VidaParceladaHelper retornaLimiteDeGastoGlobal];
