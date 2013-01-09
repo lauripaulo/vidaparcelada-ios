@@ -108,6 +108,7 @@
     [super viewWillAppear:animated];
     
     // Ja comprei a versão premium? Altera botão de compra.
+    [MKStoreManager sharedManager];
     if ([MKStoreManager isFeaturePurchased:@"VPPREMIUM"]) {
         [self updatePremiumCell];
     }
@@ -172,7 +173,7 @@
     if (cell == self.cellMostrarTutorialNovamente) {
         [VidaParceladaHelper resetaTodosOsEstadosApresentacaoInicialAba];
     } else if (cell == self.cellComprarPremium) {
-
+        [MKStoreManager sharedManager];
         // Ja comprei? Ignora compra
         if ([MKStoreManager isFeaturePurchased:@"VPPREMIUM"]) {
             UIAlertView *alertView;

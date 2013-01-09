@@ -15,6 +15,7 @@
 #import "ListaDeContasViewController.h"
 #import "OptionsTableViewController.h"
 #import "VidaParceladaHelper.h"
+#import "MKStoreManager.h"
 
 @interface RootTabBarController ()
 
@@ -182,6 +183,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [MKStoreManager sharedManager];
 
     // Delegate com o defaultContext e defaultDatabase
     VidaParceladaAppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -198,6 +200,13 @@
         
         // inicializando o DB
         appDelegate.defaultDatabase = [[UIManagedDocument alloc] initWithFileURL:url];
+        
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+        
+        appDelegate.defaultDatabase.persistentStoreOptions = options;
+        
     }
     [self openDatabase];
 

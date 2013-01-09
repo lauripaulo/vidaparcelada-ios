@@ -66,6 +66,7 @@
 		79A493491618EAF000053833 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A493471618EAF000053833 /* SFHFKeychainUtils.m */; };
 		79A4934B1618EB0300053833 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79A4934A1618EB0300053833 /* Security.framework */; };
 		79A56C5D154486E9005B94C2 /* CadastroDeCompraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */; };
+		79ACEE74169DF37100FD6A5E /* VidaParcelada.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 79ACEE73169DF37100FD6A5E /* VidaParcelada.entitlements */; };
 		79C256C615AA095F0085F3F1 /* EscolherContaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C256C515AA095F0085F3F1 /* EscolherContaViewController.m */; };
 		79C9331E159EBE1000651DDB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 79C9331C159EBE1000651DDB /* Default.png */; };
 		79C9331F159EBE1000651DDB /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 79C9331D159EBE1000651DDB /* Default@2x.png */; };
@@ -181,9 +182,9 @@
 		79A493461618EAF000053833 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		79A493471618EAF000053833 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		79A4934A1618EB0300053833 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		79A4935016190E0400053833 /* VidaParcelada.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VidaParcelada.entitlements; sourceTree = "<group>"; };
 		79A56C5B154486E9005B94C2 /* CadastroDeCompraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroDeCompraViewController.h; sourceTree = "<group>"; };
 		79A56C5C154486E9005B94C2 /* CadastroDeCompraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CadastroDeCompraViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		79ACEE73169DF37100FD6A5E /* VidaParcelada.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = VidaParcelada.entitlements; sourceTree = "<group>"; };
 		79C256C415AA095F0085F3F1 /* EscolherContaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EscolherContaViewController.h; sourceTree = "<group>"; };
 		79C256C515AA095F0085F3F1 /* EscolherContaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EscolherContaViewController.m; sourceTree = "<group>"; };
 		79C9331C159EBE1000651DDB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -374,8 +375,8 @@
 				79702CFE159D39640010CE10 /* TabIcons */,
 				79702CFF159D397A0010CE10 /* Images */,
 				798FF4091533B4B200385C5E /* VidaParcelada-Info.plist */,
+				79ACEE73169DF37100FD6A5E /* VidaParcelada.entitlements */,
 				798FF40D1533B4B200385C5E /* main.m */,
-				79A4935016190E0400053833 /* VidaParcelada.entitlements */,
 				798FF40F1533B4B200385C5E /* VidaParcelada-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -558,6 +559,7 @@
 				797C1ADD16591E5700F90C21 /* Default-Portrait@2x~ipad.png in Resources */,
 				797C1ADF16591E5E00F90C21 /* Default-Landscape@2x~ipad.png in Resources */,
 				797C1AE21659208900F90C21 /* iPad.storyboard in Resources */,
+				79ACEE74169DF37100FD6A5E /* VidaParcelada.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,7 +654,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lauri Laux Jr (3PZ856KCPU)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -677,7 +680,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lauri Laux Jr (3PZ856KCPU)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -695,10 +699,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = VidaParcelada/VidaParcelada.entitlements;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lauri Laux Jr (3PZ856KCPU)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VidaParcelada/VidaParcelada-Prefix.pch";
 				INFOPLIST_FILE = "VidaParcelada/VidaParcelada-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -716,10 +722,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = VidaParcelada/VidaParcelada.entitlements;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lauri Laux Jr (3PZ856KCPU)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VidaParcelada/VidaParcelada-Prefix.pch";
 				INFOPLIST_FILE = "VidaParcelada/VidaParcelada-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

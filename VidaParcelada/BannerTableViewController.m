@@ -27,6 +27,7 @@
     // Do we have to create and call a banner?
     if (self.displayAds) {
         // Check to see if we have a premium user
+        [MKStoreManager sharedManager];
         if ([MKStoreManager isFeaturePurchased:@"VPPREMIUM"]) {
             NSLog (@"VidaParcelada PREMIUM user.");
         } else {
